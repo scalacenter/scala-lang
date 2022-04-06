@@ -11,10 +11,6 @@
     color: rgb(134,161,166);
   }
 
-  .wrap {
-    margin-bottom: 4em;
-  }
-
   h2 {
     margin-top: 2em;
   }
@@ -90,8 +86,15 @@
             @include shift(0);
         }
 
+        .recommended-install {
+            .tabsection {
+                background: $gray-lighter;
+            }
+        }
+
         h2 {
             margin-top: 0;
+            margin-bottom: 20px;
             font-size: 1.75rem;
         }
 

@@ -8,4 +8,13 @@
     section:first-child {
         padding: 10px 50px;
     }
+    section.scala-in-action + section {
+        padding: 20px 50px;
+    }
+    section.nutshell + section {
+        padding: 30px 50px;
+    }
+    section.scala-ecosystem+section {
+        padding: 10px 50px;
+    }
 }

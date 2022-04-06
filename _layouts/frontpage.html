@@ -34,18 +34,13 @@
         </nav>
         <!-- Inner Text -->
         <div class="inner-text">
-          <h1>{{page.headerTitle}}</h1>
-          <p>{{page.headerSubtitle}}</p>
-          <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a>
-        </div>
-        <div id="position-marker" class="marker">
-          <div class="info-marker">
-              <span class="arrow">
-              <img src="/resources/img/frontpage/arrow.png" alt="pushpin">
-              </span>
-            {{site.data.common.texts.frontpageMarker}}
+          <h1 class="tagline">{{page.headerTitle}}</h1>
+          <!-- <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a> -->
+          <div class="why-scala-button">
+            <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a>
           </div>
         </div>
+
       </div>
     </div>
     <!-- Scala Main Resources -->
@@ -91,60 +86,10 @@
 
 <main id="site-main">
 
-<!-- Scala in a Nutshell -->
-<section class="nutshell">
+<!-- Scala in a Nutshell - TODO: merge with "Why Scala?"-->
+<section class="scala-in-action">
   <div class="wrap">
-    <div class="heading-line">
-      <h2><span>Scala in a Nutshell</span></h2>
-      <div class="call-to-action action-medium">
-        <p>Click the buttons to see Scala in action,
-          or visit the <a href="/documentation/">Scala Documentation</a> to learn more.</p>
-      </div>
-    </div>
-  </div>
-  <div class="scala-items-list">
-    <div class="items-menu">
-      {% for scalaItem in site.scala_items %}
-        {% assign loopIndexMod = forloop.index | minus: 1 | modulo: 3 %}
-
-        {% if loopIndexMod == 0 %}
-          {% assign codeSnippets = '' | split: ',' %}
-          <div class="wrap">
-        {% endif %}
-        {% assign codeSnippets = codeSnippets | push: scalaItem.content %}
-        <div class="scala-item">
-          <h3>{{scalaItem.shortTitle}}</h3>
-          <p>{{scalaItem.shortDescription}}</p>
-          <div class="button">More...</div>
-        </div>
-        {% if loopIndexMod == 2 or forloop.last %}
-          </div>
-          <div class="items-content">
-            {% for snippet in codeSnippets %}
-              <div class="items-code">{{snippet}}</div>
-            {% endfor %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- Scala backends -->
-<section class="runs">
-  <div class="wrap">
-    <h2>{{site.data.common.texts.scalaBackendsTitle}}</h2>
-    <ul>
-      {% for backend in page.scalaBackends %}
-      <li class="masterTooltip" title="{{backend.description}}">
-        <span>
-          <a href="{{backend.link}}"><img src="{{backend.icon}}" alt="{{backend.description}}"></a>
-        </span>
-        {% if backend.beta == 1 %}<span class="beta">beta</span>{% endif %}
-      </li>
-      {% unless forloop.last %}<li></li>{% endunless %}
-      {% endfor %}
-    </ul>
+    {% include tabsection.html category='see-scala-in-action' collection=site.why_scala_items %}
   </div>
 </section>
 
@@ -181,6 +126,24 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Scala backends -->
+<section class="runs">
+  <div class="wrap">
+    <h2>{{site.data.common.texts.scalaBackendsTitle}}</h2>
+    <ul>
+      {% for backend in page.scalaBackends %}
+      <li class="masterTooltip" title="{{backend.description}}">
+        <span>
+          <a href="{{backend.link}}"><img src="{{backend.icon}}" alt="{{backend.description}}"></a>
+        </span>
+        {% if backend.beta == 1 %}<span class="beta">beta</span>{% endif %}
+      </li>
+      {% unless forloop.last %}<li></li>{% endunless %}
+      {% endfor %}
+    </ul>
   </div>
 </section>
 

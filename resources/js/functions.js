@@ -178,6 +178,29 @@ var toggleStickyToc = function() {
     }
 }
 
+const toggleElement = (_, elemId) => {
+  const elem = document.getElementById(elemId);
+  if (elem.style.display === "none") {
+    elem.style.display = "block";
+  } else {
+    elem.style.display = "none";
+  }
+}
+
+$(document).ready(() => {
+  $('.alt-details-toggle').click();
+});
+
+// smooth-scroll (https://stackoverflow.com/a/7717572)
+var $rootHtmlBody = $('html, body');
+$(document).on('click', 'a[href^="#"]', function (event) {
+  event.preventDefault();
+
+  $rootHtmlBody.animate({
+    scrollTop: $($.attr(this, 'href')).offset().top
+  }, 500);
+});
+
 // Blog search
 $(document).ready(function() {
   if ($("#blog-search-bar").length) {
@@ -259,9 +282,11 @@ function getOS() {
 
 $(document).ready(function() {
     if ($(".main-download").length) {
-        var os = getOS();
-        var stepOneContent = $("#stepOne-" + os).html();
-        $("#download-step-one").html(stepOneContent);
+        let os = getOS();
+        if (os === 'unix') {
+          os = 'linux';
+        }
+        $("#get-started-tab-" + os).click();
     }
 });
 
@@ -299,6 +324,40 @@ $(document).ready(function() {
   $("#users-os").text(os);
 });
 
+function copySnippet(evt) {
+  const snippet = evt.target.closest('.snippet').querySelector('.snippet-code');
+  const code = snippet.querySelector('code').innerText;
+  window.navigator.clipboard.writeText(code)
+}
+
+$(document).ready(function () {
+  if ($(".main-download").length) {
+    var os = getOS();
+    var stepOneContent = $("#stepOne-" + os).html();
+    $("#download-step-one").html(stepOneContent);
+  }
+});
+
+function openTab(evt, category, tabName) {
+  // Get all elements with class="tabcontent" and hide them
+  $('.tabcontent-' + category + '.tabcontent').css('display', 'none');
+
+  const queried = evt.target;
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  $('.tablinks-' + category + '.tablinks').removeClass('active');
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(category + '-' + tabName).style.display = "block";
+  queried.className += " active";
+}
+
+$(document).ready(() => {
+  const defaultTabs = document.getElementsByClassName('default-tab');
+  for (i = 0; i < defaultTabs.length; i++) {
+    defaultTabs[i].click();
+  }
+});
 
 var image = { width: 1680, height: 1100 };
 var target = { x: 1028, y: 290 };

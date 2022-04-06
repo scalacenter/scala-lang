@@ -2,13 +2,19 @@
 //------------------------------------------------
 //------------------------------------------------
 .inner-text {
-  position: relative;
-    h1 {
+    position: relative;
+    // margin-bottom: 120px;
+
+    .why-scala-button {
+        margin-bottom: -50px;
+    }
+
+    h1.tagline {
         font-family: $base-font-family;
-        font-size: 2.813rem;
+        font-size: 2.2rem;
         font-weight: $font-black;
         color: #fff;
-        margin: $padding-medium 0 ($padding-medium / 2) 0;
+        margin-bottom: $padding-small;
     }
 
     p {
@@ -16,12 +22,12 @@
         color: #fff;
         margin-bottom: $padding-medium;
     }
-    @include span-columns(8);
+    @include span-columns(6);
     @include bp(large) {
-         @include span-columns(12);
+        @include span-columns(12);
 
         h1 {
-            font-size: 2.213rem;
+            font-size: 1.8rem;
             margin: 0 0 ($padding-medium / 2) 0;
         }
     }
