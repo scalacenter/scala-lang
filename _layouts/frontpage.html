@@ -34,18 +34,23 @@
         </nav>
         <!-- Inner Text -->
         <div class="inner-text">
-          <h1>{{page.headerTitle}}</h1>
-          <p>{{page.headerSubtitle}}</p>
+          <h1 class="tagline">{{page.headerTitle}}</h1>
+          <!-- <p>{{page.headerSubtitle}}</p> -->
           <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a>
         </div>
-        <div id="position-marker" class="marker">
+        <div class="inner-text">
+          <!-- <h1 class="tagline">{{page.headerTitle}}</h1> -->
+          <p>{{page.headerSubtitle}}</p>
+          <!-- <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a> -->
+        </div>
+        <!-- <div id="position-marker" class="marker">
           <div class="info-marker">
               <span class="arrow">
               <img src="/resources/img/frontpage/arrow.png" alt="pushpin">
               </span>
             {{site.data.common.texts.frontpageMarker}}
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- Scala Main Resources -->

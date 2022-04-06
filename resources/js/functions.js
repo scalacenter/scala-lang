@@ -178,6 +178,17 @@ var toggleStickyToc = function() {
     }
 }
 
+
+// smooth-scroll (https://stackoverflow.com/a/7717572)
+var $rootHtmlBody = $('html, body');
+$(document).on('click', 'a[href^="#"]', function (event) {
+  event.preventDefault();
+
+  $rootHtmlBody.animate({
+    scrollTop: $($.attr(this, 'href')).offset().top
+  }, 500);
+});
+
 // Blog search
 $(document).ready(function() {
   if ($("#blog-search-bar").length) {
