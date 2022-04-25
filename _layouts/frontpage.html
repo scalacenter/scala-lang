@@ -35,33 +35,12 @@
         <!-- Inner Text -->
         <div class="inner-text">
           <h1 class="tagline">{{page.headerTitle}}</h1>
-          <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a>
+          <!-- <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a> -->
+          <div class="why-scala-button">
+            <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a>
+          </div>
         </div>
-        <div class="inner-text">
-          <!-- Tab links -->
-          <div class="tab">
-            <button id="defaultOpen" class="tablinks active" onclick="openCity(event, 'London')">London</button>
-            <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-            <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-          </div>
 
-          <!-- Tab content -->
-          <div id="London" class="tabcontent" style="display: block;">
-            <h3>London</h3>
-            <p>London is the capital city of England.</p>
-          </div>
-
-          <div id="Paris" class="tabcontent" style="display: none;">
-            <h3>Paris</h3>
-            <p>Paris is the capital of France.</p>
-          </div>
-
-          <div id="Tokyo" class="tabcontent" style="display: none;">
-            <h3>Tokyo</h3>
-            <p>Tokyo is the capital of Japan.</p>
-          </div>
-          <!-- <p>{{page.headerSubtitle}}</p> -->
-        </div>
       </div>
     </div>
     <!-- Scala Main Resources -->
@@ -107,60 +86,76 @@
 
 <main id="site-main">
 
-<!-- Scala in a Nutshell -->
-<section class="nutshell">
+<!-- Scala in a Nutshell - TODO: merge with "Why Scala?"-->
+<section class="scala-in-action">
   <div class="wrap">
-    <div class="heading-line">
-      <h2><span>Scala in a Nutshell</span></h2>
-      <div class="call-to-action action-medium">
-        <p>Click the buttons to see Scala in action,
-          or visit the <a href="/documentation/">Scala Documentation</a> to learn more.</p>
+    <!-- Tab links -->
+    <div class="tab">
+      <button class="tablinks default-tab" onclick="openTab(event, 'Hello')">Say Hello</button>
+      <button class="tablinks" onclick="openTab(event, 'Readable')">Readable Code</button>
+      <button class="tablinks" onclick="openTab(event, 'Productivity')">Get Productive</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="Hello" class="tabcontent">
+
+      <div class="scala-in-action-content">
+        <div class="scala-in-action-code">
+          <div class="wrap">
+            <div class="scala-code">
+              <div class="code-element">
+                <div class="bar-code"><span>hello.scala</span></div>
+                <pre><code>@main def hello = println("Hello, World!")</code></pre>
+              </div>
+            </div>
+            <div class="scala-text">
+              <p>With Scala, a program can be written on one line.</p>
+              <p>You can run it from the terminal with <code>scala hello.scala</code>.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="scala-items-list">
-    <div class="items-menu">
-      {% for scalaItem in site.scala_items %}
-        {% assign loopIndexMod = forloop.index | minus: 1 | modulo: 3 %}
 
-        {% if loopIndexMod == 0 %}
-          {% assign codeSnippets = '' | split: ',' %}
+    <div id="Readable" class="tabcontent">
+      <div class="scala-in-action-content">
+        <div class="scala-in-action-code">
           <div class="wrap">
-        {% endif %}
-        {% assign codeSnippets = codeSnippets | push: scalaItem.content %}
-        <div class="scala-item">
-          <h3>{{scalaItem.shortTitle}}</h3>
-          <p>{{scalaItem.shortDescription}}</p>
-          <div class="button">More...</div>
-        </div>
-        {% if loopIndexMod == 2 or forloop.last %}
-          </div>
-          <div class="items-content">
-            {% for snippet in codeSnippets %}
-              <div class="items-code">{{snippet}}</div>
-            {% endfor %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
+            <div class="scala-code">
+              <div class="code-element">
+                <div class="bar-code"><span>remove-boilerplate.scala</span></div>
+                <pre><code>enum Employee derives Codec:
+  case Basic(id: Id, name: Name)
+  case WithAge(id: Id, name: Name, age: Age)
 
-<!-- Scala backends -->
-<section class="runs">
-  <div class="wrap">
-    <h2>{{site.data.common.texts.scalaBackendsTitle}}</h2>
-    <ul>
-      {% for backend in page.scalaBackends %}
-      <li class="masterTooltip" title="{{backend.description}}">
-        <span>
-          <a href="{{backend.link}}"><img src="{{backend.icon}}" alt="{{backend.description}}"></a>
-        </span>
-        {% if backend.beta == 1 %}<span class="beta">beta</span>{% endif %}
-      </li>
-      {% unless forloop.last %}<li></li>{% endunless %}
-      {% endfor %}
-    </ul>
+val json = employee.encode</code></pre>
+              </div>
+            </div>
+            <div class="scala-text">
+              <p>Declare data structures without boilerplate</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="Productivity" class="tabcontent">
+      <div class="scala-in-action-content">
+        <div class="scala-in-action-code">
+          <div class="wrap">
+            <div class="scala-code">
+              <div class="code-element">
+                <div class="bar-code"><span>get-productive.scala</span></div>
+                <pre><code></code></pre>
+              </div>
+            </div>
+            <div class="scala-text">
+              <p>Declare data structures without boilerplate</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -197,6 +192,24 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Scala backends -->
+<section class="runs">
+  <div class="wrap">
+    <h2>{{site.data.common.texts.scalaBackendsTitle}}</h2>
+    <ul>
+      {% for backend in page.scalaBackends %}
+      <li class="masterTooltip" title="{{backend.description}}">
+        <span>
+          <a href="{{backend.link}}"><img src="{{backend.icon}}" alt="{{backend.description}}"></a>
+        </span>
+        {% if backend.beta == 1 %}<span class="beta">beta</span>{% endif %}
+      </li>
+      {% unless forloop.last %}<li></li>{% endunless %}
+      {% endfor %}
+    </ul>
   </div>
 </section>
 

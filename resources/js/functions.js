@@ -310,7 +310,7 @@ $(document).ready(function() {
   $("#users-os").text(os);
 });
 
-function openCity(evt, cityName) {
+function openTab(evt, tabName) {
   // Declare all variables
   var i, tabcontent, tablinks;
 
@@ -320,6 +320,8 @@ function openCity(evt, cityName) {
     tabcontent[i].style.display = "none";
   }
 
+  const queried = evt.target;
+
   // Get all elements with class="tablinks" and remove the class "active"
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
@@ -327,10 +329,16 @@ function openCity(evt, cityName) {
   }
 
   // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+  document.getElementById(tabName).style.display = "block";
+  queried.className += " active";
 }
 
+$(document).ready(() => {
+  const defaultTabs = document.getElementsByClassName('default-tab');
+  for (i = 0; i < defaultTabs.length; i++) {
+    defaultTabs[i].click();
+  }
+});
 
 var image = { width: 1680, height: 1100 };
 var target = { x: 1028, y: 290 };
