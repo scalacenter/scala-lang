@@ -35,22 +35,33 @@
         <!-- Inner Text -->
         <div class="inner-text">
           <h1 class="tagline">{{page.headerTitle}}</h1>
-          <!-- <p>{{page.headerSubtitle}}</p> -->
           <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a>
         </div>
         <div class="inner-text">
-          <!-- <h1 class="tagline">{{page.headerTitle}}</h1> -->
-          <p>{{page.headerSubtitle}}</p>
-          <!-- <a href="{{page.headerButtonUrl}}" class="button">{{page.headerButtonTitle | upcase}}</a> -->
-        </div>
-        <!-- <div id="position-marker" class="marker">
-          <div class="info-marker">
-              <span class="arrow">
-              <img src="/resources/img/frontpage/arrow.png" alt="pushpin">
-              </span>
-            {{site.data.common.texts.frontpageMarker}}
+          <!-- Tab links -->
+          <div class="tab">
+            <button id="defaultOpen" class="tablinks active" onclick="openCity(event, 'London')">London</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+            <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
           </div>
-        </div> -->
+
+          <!-- Tab content -->
+          <div id="London" class="tabcontent" style="display: block;">
+            <h3>London</h3>
+            <p>London is the capital city of England.</p>
+          </div>
+
+          <div id="Paris" class="tabcontent" style="display: none;">
+            <h3>Paris</h3>
+            <p>Paris is the capital of France.</p>
+          </div>
+
+          <div id="Tokyo" class="tabcontent" style="display: none;">
+            <h3>Tokyo</h3>
+            <p>Tokyo is the capital of Japan.</p>
+          </div>
+          <!-- <p>{{page.headerSubtitle}}</p> -->
+        </div>
       </div>
     </div>
     <!-- Scala Main Resources -->
