@@ -36,6 +36,8 @@ defaults:
 collections:
   why_scala_items:
     output: false
+  install_tabs:
+    output: false
   scala_items:
     output: false
   online_courses:

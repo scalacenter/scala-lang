@@ -3,7 +3,7 @@
 //------------------------------------------------
 
 .scala-in-action {
-    background: $gray;
+    background: $gray-light;
 
     /* Style the tab */
     .tab {
@@ -16,10 +16,11 @@
         font-family: $heading-font-family;
         font-size: $font-size-medium;
         font-weight: $font-bold;
-        color: lighten($gray, 55%);
+        color: lighten($gray, 25%);
         background-color: inherit;
         float: left;
         border: none;
+        border-radius: 30px;
         outline: none;
         cursor: pointer;
         padding: 14px 16px;
@@ -44,15 +45,59 @@
         display: none;
         padding: 0px 2px;
         border-top: none;
+        transition: all .5s linear;
 
         .scala-in-action-content {
-            background: $gray-dark;
+            // background: $gray-dark;
             transition: $base-transition;
 
             .scala-in-action-code {
                 // display: none;
-                background: $gray-dark;
+                // background: $gray-dark;
                 padding: 20px 0;
+
+                .wrap {
+                    margin-bottom: 0px;
+                }
+
+                .snippet {
+                    position: relative;
+                    margin: 10px 0px;
+                    cursor: default;
+
+                    &:hover {
+                        .buttons {
+                            opacity: 0.95;
+                            &:active {
+                                opacity: 0.3;
+                            }
+                        }
+                    }
+
+                    .buttons {
+                        position: absolute;
+                        right: 4px;
+                        top: 5px;
+                        transition: all .2s ease;
+                        display: flex;
+                        opacity: 0;
+                        flex-direction: row-reverse;
+                        justify-content: flex-start;
+
+                        button {
+                            outline: none;
+                            background: #fff;
+                            border: none;
+                            font-size: $font-size-medium;
+                            color: rgba($gray, .6);
+                            cursor: pointer;
+
+                            i {
+                                font-weight: $font-bold;
+                            }
+                        }
+                    }
+                }
 
                 .scala-code {
 
@@ -65,11 +110,18 @@
 
                 .scala-text {
                     code {
-                        background: $gray-darker;
+                        // background: $gray-darker;
                         padding: 2px 8px;
                         color: #859900;
                         border-radius: 2px;
                         margin: 0 3px;
+                    }
+
+                    pre.snippet-code {
+                        margin: 0px;
+                        code {
+                            border: 2px solid $gray-light;
+                        }
                     }
 
                     @include span-columns(5);
@@ -85,12 +137,11 @@
                     }
 
                     p {
-                        color: $base-font-color-inverse;
+                        color: $base-font-color;
                     }
 
                     &.scala-text-large {
                         @include span-columns(12);
-                        margin-bottom: 30px;
                     }
                 }
             }
@@ -106,59 +157,5 @@
         .call-to-action.action-medium {
             margin-top: 0px;
         }
-    }
-
-    .scala-items-list {
-        .items-menu {
-            .scala-item {
-                @include span-columns(4);
-                @include omega(3n);
-                padding: $padding-small;
-                text-align: center;
-                transition: $base-transition;
-                @include bp(medium) {
-                     @include span-columns(12);
-                }
-
-                min-height: 165px;
-
-                .button {
-                    margin-top: 10px;
-                    font-size: 0.6rem;
-                    padding: 5px;
-                }
-
-                h3 {
-                    color: #fff;
-                    font-size: $font-size-h3;
-                    text-transform: uppercase;
-                    font-family: $base-font-family;
-                    margin-bottom: 10px;
-                }
-
-                p {
-                    color: $base-font-color-inverse;
-                    font-size: $font-size-large;
-                }
-
-
-                &:active,
-                &:focus,
-                &:hover {
-                    cursor: pointer;
-                    background: $gray-dark;
-                }
-
-                &.active {
-                    background: $gray-dark;
-                }
-            }
-        }
-    }
-
-    .scala-item-expanded {
-        display: none;
-        height: 400px;
-        background: $gray-dark;
     }
 }

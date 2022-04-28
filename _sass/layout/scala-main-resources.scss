@@ -3,8 +3,8 @@
 //------------------------------------------------
 
 .scala-main-resources {
-    height: 100px;
-    background: $gray;
+    height: 110px;
+    background: $gray-darker;
     position: relative;
 
     .resources {
@@ -115,8 +115,8 @@
             left: 50%;
             top: -128px;
             margin-left: -140px;
-            background: rgba($gray-darker, 0.4);
-            border-radius: 100%;
+            // background: rgba($gray-darker, 0);
+            // border-radius: 100%;
             position: absolute;
             z-index: 60;
             @include display(flex);
@@ -124,7 +124,7 @@
             @include justify-content(center);
 
             .circle-solid {
-                background: $gray;
+                background: $gray-darker;
                 width: 182px;
                 height: 182px;
                 border-radius: 100%;

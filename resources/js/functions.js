@@ -270,9 +270,11 @@ function getOS() {
 
 $(document).ready(function() {
     if ($(".main-download").length) {
-        var os = getOS();
-        var stepOneContent = $("#stepOne-" + os).html();
-        $("#download-step-one").html(stepOneContent);
+        let os = getOS();
+        if (os === 'unix') {
+          os = 'linux';
+        }
+        $("#get-started-tab-" + os).click();
     }
 });
 
@@ -310,26 +312,31 @@ $(document).ready(function() {
   $("#users-os").text(os);
 });
 
-function openTab(evt, tabName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
+function copySnippet(evt) {
+  const snippet = evt.target.closest('.snippet').querySelector('.snippet-code');
+  const code = snippet.querySelector('code').innerText;
+  window.navigator.clipboard.writeText(code)
+}
 
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
+$(document).ready(function () {
+  if ($(".main-download").length) {
+    var os = getOS();
+    var stepOneContent = $("#stepOne-" + os).html();
+    $("#download-step-one").html(stepOneContent);
   }
+});
+
+function openTab(evt, category, tabName) {
+  // Get all elements with class="tabcontent" and hide them
+  $('.tabcontent-' + category + '.tabcontent').css('display', 'none');
 
   const queried = evt.target;
 
   // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
+  $('.tablinks-' + category + '.tablinks').removeClass('active');
 
   // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tabName).style.display = "block";
+  document.getElementById(category + '-' + tabName).style.display = "block";
   queried.className += " active";
 }
 
