@@ -8,6 +8,7 @@ tabLabel: Linux
       <div class="scala-text scala-text-large">
         <p>Run the following one-line command in your terminal:</p>
         {% include code-snippet.html codeSnippet=site.data.setup-scala.linux %}
+        <p>Be sure to remove the <code>cs</code> script after checking your installation.</p>
       </div>
     </div>
   </div>

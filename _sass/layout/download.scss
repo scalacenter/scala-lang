@@ -86,8 +86,15 @@
             @include shift(0);
         }
 
+        .recommended-install {
+            .tabsection {
+                background: $gray-lighter;
+            }
+        }
+
         h2 {
             margin-top: 0;
+            margin-bottom: 20px;
             font-size: 1.75rem;
         }
 

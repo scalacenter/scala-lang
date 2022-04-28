@@ -20,51 +20,67 @@
   <div class="wrap">
     <div class="inner-box download">
       <div class="main-download">
-        <h2>Install or Upgrade Scala</h2>
-
-        {% include tabsection.html extraClasses='scala-in-action' category='get-started' collection=site.install_tabs %}
-
         <div class="install-steps">
           <div class="download-options">
-            <div class="download-left">
-              <span class="or">or</span>
-              <div class="description">
-                <img src="/resources/img/download/arrow-left.png" alt="">
-                <p>Recommended method for all Scala users.</p>
+            <div class="recommended-install">
+              <h2>Install Scala with <span style="font-weight: bold;">cs setup</span> (recommended)</h2>
+              <p>To install Scala, it is recommended to use <span style="font-weight: bold;">cs setup</span>, the Scala installer powered by Coursier:</p>
+
+              {% include tabsection.html extraClasses='inline-tabs scala-in-action' category='get-started'
+              collection=site.install_tabs %}
+
+              <p><span style="font-weight: bold;">cs setup</span> installs everything necessary to use Scala from a
+                command line. To test your setup, or if you are just beginning your journey with Scala,
+                we recommend that you read our getting started guide:</p>
+              <br/>
+              <div class="wrap">
+                <a href="https://docs.scala-lang.org/getting-started.html" class="btn-download scala3">
+                  <i class="fa fa-download"></i>
+                  <span>Get Started with Scala</span>
+                </a>
               </div>
-              <a href="https://docs.scala-lang.org/getting-started.html" class="btn-download scala3">
-                <i class="fa fa-download"></i>
-                <span>Get Started with Scala</span>
-              </a>
-              <ul>
-                {% for tutorial in page.newcomertutorials %}
-                  <li><a href="{{tutorial.url}}"><i class="fa fa-file-text-o"></i>{{tutorial.title}}</a></li>
-                {% endfor %}
-              </ul>
             </div>
-            <div class="download-right">
-              <div class="description">
-                <img src="/resources/img/download/arrow-right.png" alt="">
-                <p>Best if you have an advanced use case.</p>
-              </div>
+            <h2>Other ways to install Scala</h2>
+            <div class="wrap">
               <a href="{{ site.baseurl }}/download/all.html" class="btn-download dl-find-all">
                 <i class="fa fa-list-ul"></i>
                 <span>Pick a Specific Release</span>
               </a>
+            </div>
+            <p>Each Scala release has its own page listing alternative installation methods. Click the button above to
+            see the full list of Scala releases, or pick from the most recent releases below.</p>
+
+            <div class="download-left">
+              <h3>Current releases</h3><br/>
               <ul>
-                {% for tutorial in page.advancedtutorials %}
-                  <li><a href="{{tutorial.url}}"><i class="fa fa-file-text-o"></i>{{tutorial.title}}</a></li>
+                {% for release in site.data.scala-releases %}
+                {% if release.category == "current_version" %}
+                <li>
+                  <a href="/download/{{ release.version }}.html">
+                    {{ release.title }}: <b>{{ release.version }}</b><br />Released on {{ release.release_date }}
+                  </a>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="download-right">
+              <h3>Maintenance releases</h3>
+              <br/>
+              <ul>
+                {% for release in site.data.scala-releases %}
+                {% if release.category == "maintenance_version" %}
+                <li>
+                  <a href="/download/{{ release.version }}.html">
+                    {{ release.title }}: <b>{{ release.version }}</b><br />Released on {{ release.release_date }}
+                  </a>
+                </li>
+                {% endif %}
                 {% endfor %}
               </ul>
             </div>
           </div>
         </div>
-
-
-				<h3>What's new in Scala 3?</h3>
-				<p>
-					For a summary of important changes in Scala 3, see <a href="https://docs.scala-lang.org/scala3/new-in-scala3.html">this page</a>.
-				</p>
       </div>
     </div>
   </div>

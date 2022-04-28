@@ -178,6 +178,18 @@ var toggleStickyToc = function() {
     }
 }
 
+const toggleElement = (_, elemId) => {
+  const elem = document.getElementById(elemId);
+  if (elem.style.display === "none") {
+    elem.style.display = "block";
+  } else {
+    elem.style.display = "none";
+  }
+}
+
+$(document).ready(() => {
+  $('.alt-details-toggle').click();
+});
 
 // smooth-scroll (https://stackoverflow.com/a/7717572)
 var $rootHtmlBody = $('html, body');
