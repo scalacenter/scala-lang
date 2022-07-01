@@ -1,3 +1,8 @@
+- name: Bartosz Balis
+  institution: AGH University of Science and Technology, Poland
+  location:
+    longitude: 19.9136192
+    latitude: 50.0668858
 - name: Björn Regnell
   institution: Lund University, Sweden
   location:
@@ -50,6 +55,11 @@
   location:
     longitude: 6.5600475
     latitude: 46.5185825
+- name: Michał Kowalczkiwicz
+  institution: University of Wrocław, Poland
+  location:
+    longitude: 17.0322743
+    latitude: 51.1140086
 - name: Michel Schinz
   institution: École Polytechnique Fédérale de Lausanne, Switzerland
   location:
@@ -67,6 +77,11 @@
     latitude: 59.3498706
 #  - name: Pierre-André Mudry
 #    institution: HES-SO Valais-Wallis, Switzerland
+- name: Roman Debski
+  institution: AGH University of Science and Technology, Poland
+  location:
+    longitude: 19.9149496
+    latitude: 50.0689793
 - name: Sukyoung Ryu
   institution: Korea Advanced Institute of Science and Technology, South Korea
   location:
