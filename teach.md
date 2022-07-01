@@ -17,13 +17,31 @@ Read over to learn good reasons to use Scala to teach programming, to know
 where in the world Scala is taught, and to discover teaching tools and materials
 used at various levels (from high-school to university).
 
+> “Scala is a fantastic teaching language as it is less prone to wear down the
+> grit of my students compared to other programming languages that I have used
+> for teaching introductory computer science, such as Java and Python.”
+> 
+> Björn Regnell, Lund University, Sweden.
+
 ## Why Teach Scala
 
 ### Multiple Paradigms
 
-Scala has great support for imperative programming, object-oriented programing,
-and functional programming. This brings a wider perspective of computational
-thinking.
+While we learn new concepts we compare and contrast different but similar
+concept and relate to what we already know. This is a very important learning
+principle and many pedagogical strategies build on contrasting and comparing
+while exploring similarities and differences between concepts and ideas. Scala
+is an excellent language in supporting this pedagogical principle as it
+includes a pragmatic mix of concepts and ideas, ranging from simple to
+advanced, that can be contrasted and compared, step by step.
+
+> “One example I use in my teaching is contrasting different ways of solving the
+> configuration problem: early on we contrast a global mutable variable versus
+> default arguments and later when we get more advanced we contrast default
+> arguments with context parameters. This way we can get deep into the more
+> general discussion of the tradeoff between flexibility and complexity.”
+> 
+> Björn Regnell, Lund University, Sweden.
 
 ### Expressive
 
@@ -35,10 +53,40 @@ program in Scala:
 @main def run() = println("Hello, World!")
 ~~~
 
+> “Scala is a fantastic teaching language for illustrating solutions with
+> different tradeoffs between the least complex concepts that does the job,
+> that might have lower flexibility or is less performant, compared to other
+> solutions that may be more difficult to read and maintain.”
+> 
+> Björn Regnell, Lund University, Sweden.
+
 ### Safe
 
 Scala has a static type system that prevents entire classes of bugs from
-happening.
+happening. The compiler helps the students to find bugs before runtime.
+If a student had too many difficult-to-hunt-down runtime bugs, this could take
+away the joy of learning and cause fatigue so badly that a student may give up
+prematurely and get a feeling of bad self-efficacy and loose motivation.
+
+> “In my experience with Scala, the dialog with the compiler about static
+> errors strongly supports conceptual learning and strengthens self-efficacy:
+> 'I can do this and I’m getting a grip of it!’.”
+> 
+> Björn Regnell, Lund University, Sweden.
+
+### Regularity and Principled Constructs
+
+Scala has done away with many of the quirks from C-like languages that still
+remain in e.g. Java and C#. There are, for instance, no surprising restrictions
+on what can be nested inside what, and no irregular semantic difference between
+primitive non-objects and “real” objects.
+
+> “The level of regularity and generality of principled concepts in Scala is
+> the best I have seen so far in a multi-paradigm language. Every strange
+> irregularity and tricky exception wear down the grit of students and take
+> up time in teaching that can be much better spent.”
+> 
+> Björn Regnell, Lund University, Sweden.
 
 ### Best Practices Are the Norm
 
