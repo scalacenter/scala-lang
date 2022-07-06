@@ -13,15 +13,21 @@ the most basic ones to the most advanced ones. It is suitable to teach
 programming to beginners, as well as to teach advanced software engineering 
 courses. The scalable language also scales for teaching!
 
-Read over to learn good reasons to use Scala to teach programming, to know
-where in the world Scala is taught, and to discover teaching tools and materials
-used at various levels (from high-school to university).
-
 > “Scala is a fantastic teaching language as it is less prone to wear down the
 > grit of my students compared to other programming languages that I have used
 > for teaching introductory computer science, such as Java and Python.”
 > 
 > Björn Regnell, Lund University, Sweden.
+
+> “Scala can be taught as a statically typed scripting language. The language
+> works really well for programming in the small in CS1 without all the
+> drawbacks I feel exist with dynamically typed languages.”
+> 
+> Mark Lewis, Trinity University, USA.
+
+Read over to learn good reasons to use Scala to teach programming, to know
+where in the world Scala is taught, and to discover teaching tools and materials
+used at various levels (from high-school to university).
 
 ## Why Teach Scala
 
@@ -43,6 +49,12 @@ advanced, that can be contrasted and compared, step by step.
 > 
 > Björn Regnell, Lund University, Sweden.
 
+> “We teach how to implement basic interpreters and type checkers. For this
+> purpose, algebraic data types with pattern matching and immutable data
+> structures, provided by functional languages, are essential.”
+> 
+> Jaemin Hong, KAIST, South Korea.
+
 ### Expressive
 
 Scala has a concise syntax that allows developers to focus on the intent of a
@@ -59,6 +71,11 @@ program in Scala:
 > solutions that may be more difficult to read and maintain.”
 > 
 > Björn Regnell, Lund University, Sweden.
+
+> “Scala allows us to focus only on interesting domain concepts without dealing
+> with tedious low-level implementation issues.”
+> 
+> Jaemin Hong, KAIST, South Korea.
 
 ### Safe
 
@@ -110,13 +127,23 @@ and frontends (running in the browser).
 
 ### Ecosystem
 
-Scala has thousands of libraries, and it has access to the whole Java ecosystem
-as well as the JavaScript ecosystem.
+Scala has [thousands of libraries](https://index.scala-lang.org/awesome), and
+it has access to the whole Java ecosystem as well as the JavaScript ecosystem.
+
+> “Full access to Java libraries as well as a large environment of Scala
+> libraries means that I can give interesting assignments.”
+> 
+> Mark Lewis, Trinity University, USA.
 
 ### Versatile
 
 Scala has been successfully used in domains such as distributed services, 
 parallel programming, big data analysis, HTTP servers.
+
+> “In CS2, I’ve had students do a project that involves graphics, networking,
+> and multithreading and Scala makes that possible with limited overhead.”
+> 
+> Mark Lewis, Trinity University, USA.
 
 ## Who Is Teaching Scala
 
