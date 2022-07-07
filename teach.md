@@ -25,6 +25,16 @@ courses. The scalable language also scales for teaching!
 > 
 > Mark Lewis, Trinity University, USA.
 
+> “Scala offers a wide variety of programming language constructs. By
+> integrating both OOP and functional aspects into one language, it is a great
+> tool to teach both paradigms and compare solutions within the same language.
+> At the same time, Scala is a great tool to teach software design: it includes
+> a whole spectrum of features ranging from basic constructs to advanced program
+> structuring techniques. This allows us to use the same language to discuss
+> various strategies to decompose a software into modules.”
+> 
+> Jonathan Brachthäuser, University of Tübingen, Germany.
+
 Read over to learn good reasons to use Scala to teach programming, to know
 where in the world Scala is taught, and to discover teaching tools and materials
 used at various levels (from high-school to university).
