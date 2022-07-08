@@ -25,16 +25,6 @@ courses. The scalable language also scales for teaching!
 > 
 > Mark Lewis, Trinity University, USA.
 
-> “Scala offers a wide variety of programming language constructs. By
-> integrating both OOP and functional aspects into one language, it is a great
-> tool to teach both paradigms and compare solutions within the same language.
-> At the same time, Scala is a great tool to teach software design: it includes
-> a whole spectrum of features ranging from basic constructs to advanced program
-> structuring techniques. This allows us to use the same language to discuss
-> various strategies to decompose a software into modules.”
-> 
-> Jonathan Brachthäuser, University of Tübingen, Germany.
-
 Read over to learn good reasons to use Scala to teach programming, to know
 where in the world Scala is taught, and to discover teaching tools and materials
 used at various levels (from high-school to university).
@@ -65,6 +55,16 @@ advanced, that can be contrasted and compared, step by step.
 > 
 > Jaemin Hong, KAIST, South Korea.
 
+> “Scala offers a wide variety of programming language constructs. By
+> integrating both OOP and functional aspects into one language, it is a great
+> tool to teach both paradigms and compare solutions within the same language.
+> At the same time, Scala is a great tool to teach software design: it includes
+> a whole spectrum of features ranging from basic constructs to advanced program
+> structuring techniques. This allows us to use the same language to discuss
+> various strategies to decompose a software into modules.”
+> 
+> Jonathan Brachthäuser, University of Tübingen, Germany.
+
 ### Expressive
 
 Scala has a concise syntax that allows developers to focus on the intent of a
@@ -90,8 +90,8 @@ program in Scala:
 ### Safe
 
 Scala has a static type system that prevents entire classes of bugs from
-happening. The compiler helps the students to find bugs before runtime.
-If a student had too many difficult-to-hunt-down runtime bugs, this could take
+happening. The compiler helps the students to find bugs before run-time.
+If a student had too many difficult-to-hunt-down run-time bugs, this could take
 away the joy of learning and cause fatigue so badly that a student may give up
 prematurely and get a feeling of bad self-efficacy and loose motivation.
 

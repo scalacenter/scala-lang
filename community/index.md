@@ -33,7 +33,7 @@ participation in all of these efforts is strongly encouraged.
 
 ## Forums
 
-The Scala Center operates two Discourse forums:
+The Scala Center operates the following Discourse forums:
 
  * **[users.scala-lang.org](https://users.scala-lang.org)**: The main forum for questions, discussions, and announcements about programming in Scala. Beginner questions are very welcome. Any question can and should receive a courteous and insightful answer.  (Replaces the old scala-user and scala-announce groups.)
 
