@@ -25,6 +25,10 @@ courses. The scalable language also scales for teaching!
 > 
 > Mark Lewis, Trinity University, USA.
 
+> “The familiar yet flexible expression-oriented syntax, advanced support for pattern-matching, extensive collections library, powerful type system, and general no-nonsense approach to essential programming constructs are all game changers.”
+> 
+> Lionel Parreaux, Hong Kong University of Science and Technology, Hong Kong.
+
 Read over to learn good reasons to use Scala to teach programming, to know
 where in the world Scala is taught, and to discover teaching tools and materials
 used at various levels (from high-school to university).
@@ -108,6 +112,11 @@ remain in e.g. Java and C#. There are, for instance, no surprising restrictions
 on what can be nested inside what, and no irregular semantic difference between
 primitive non-objects and “real” objects.
 
+Practices recognized by experts as best practices (e.g.,
+[avoiding the usage of `null`](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/),
+[manipulating immutable values](https://www.infoq.com/articles/data-oriented-programming-java/))
+have been the norm since the inception of Scala.
+
 > “The level of regularity and generality of principled concepts in Scala is
 > the best I have seen so far in a multi-paradigm language. Every strange
 > irregularity and tricky exception wear down the grit of students and take
@@ -115,12 +124,11 @@ primitive non-objects and “real” objects.
 > 
 > Björn Regnell, Lund University, Sweden.
 
-### Best Practices Are the Norm
-
-Practices recognized by experts as best practices (e.g.,
-[avoiding the usage of `null`](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/),
-[manipulating immutable values](https://www.infoq.com/articles/data-oriented-programming-java/))
-have been the norm since the inception of Scala.
+> “ After learning Scala, many students don’t want to ever go back to more
+> primitive and ad-hoc languages like Java and C++, unless forced by the
+> curriculum!”
+> 
+> Lionel Parreaux, Hong Kong University of Science and Technology, Hong Kong.
 
 ### Adoption in the Industry
 
