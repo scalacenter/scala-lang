@@ -8,13 +8,13 @@ shortDescription: "Scala is ideal for teaching programming to beginners as well 
     <h3>Concise, Readable, and Polyvalent</h3>
     <p>
       Most of the concepts involved in software design directly map
-      into Scala constructs. The concise syntax of Scala allow the teachers
+      into Scala constructs. The concise syntax of Scala allows the teachers
       and the learners to focus on those interesting concepts without dealing
       with tedious low-level implementation issues.
     </p>
     <p>
       The example in file <code>HelloWorld.scala</code> below shows how a “hello
-      world” looks like in Scala. In <code>Modeling.scala</code>, we show an
+      world” program looks like in Scala. In <code>Modeling.scala</code>, we show an
       example of structuring the information of a problem domain in Scala. In
       <code>Modules.scala</code>, we show how to use classes to implement
       software modules. Last, in <code>Algorithms.scala</code>, we show how the
