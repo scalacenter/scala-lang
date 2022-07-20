@@ -5,7 +5,7 @@ shortDescription: "Scala is ideal for teaching programming to beginners as well 
 
 <div class="wrap">
   <div class="scala-text scala-text-large">
-    <h3>Concise, Readable, and Polyvalent</h3>
+    <h3>Readable and Polyvalent</h3>
     <p>
       Most of the concepts involved in software design directly map
       into Scala constructs. The concise syntax of Scala allows the teachers
