@@ -10,7 +10,11 @@ It is also a great tool for teaching programming!
 
 We are happy to announce that we have published a [new page][teach] on the
 website to explain the benefits of using Scala to teach programming, and to
-show a map of the universities who use Scala around the world.
+show a map of the universities who use Scala around the world (also shown below).
+
+{% include teachers-map.html %}
+
+*Teachers who use Scala in their course.*
 
 ## Motivation
 
