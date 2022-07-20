@@ -8,18 +8,6 @@
   location:
     longitude: 13.203493
     latitude: 55.7119483
-#  - name: Brian Howard
-#    institution: DePauw University, United States
-#  - name: Chris Okasaki
-#    institution: West Point, United States
-#  - name: Delphine Demange
-#    institution: ISTIC, France
-#  - name: Dragana Milovancevic
-#    institution: École Polytechnique Fédérale de Lausanne, Switzerland
-#  - name: George Thiruvathukal
-#    institution: Loyola University, United States
-#  - name: Guido Salvaneschi
-#    institution: University of St Gallen, Switzerland
 - name: Jim Newton
   institution: EPITA, France
   location:
@@ -75,8 +63,6 @@
   location:
     longitude: 18.0680626
     latitude: 59.3498706
-#  - name: Pierre-André Mudry
-#    institution: HES-SO Valais-Wallis, Switzerland
 - name: Roman Debski
   institution: AGH University of Science and Technology, Poland
   location:
@@ -87,5 +73,3 @@
   location:
     longitude: 127.358196
     latitude: 36.3721427
-#  - name: Thomas Genet
-#    institution: ISTIC, France
