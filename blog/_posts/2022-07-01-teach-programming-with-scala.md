@@ -29,10 +29,10 @@ developers.
 In the new [“Teach”][teach] page, we explain why we think Scala is a great tool
 for teaching programming, with evidence from several teachers around the world:
 
-- Scala supports multiple programming paradigms, which help compare and contrast
-  solutions to programming problems,
-- Scala is expressive, students can focus on the intent of their program without
-  being distracted by low-level concerns, or syntactic noise,
+- Scala supports multiple programming paradigms, which helps compare and contrast
+  different solutions to programming problems,
+- Scala is expressive: students can focus on the intent of their program without
+  being distracted by low-level concerns or syntactic noise,
 - Thanks to its type system, the Scala compiler helps the students to find bugs
   before run-time,
 - Scala’s constructs are regular and principled,
@@ -54,7 +54,7 @@ We welcome all the teachers who use Scala to [contribute] to this page by:
   why you like using Scala to teach, or a sentence about a specific aspect
   of the language that works well for you.
 
-Last, but not least, we have set up a [community of teachers] where you can
+Last but not least, we have set up a [community of teachers] where you can
 exchange best practices and work together on tools to improve your experience
 as teachers.
 

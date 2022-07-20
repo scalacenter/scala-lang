@@ -31,14 +31,14 @@ courses. The scalable language also scales for teaching!
 
 Read over to learn good reasons to use Scala to teach programming, to know
 where in the world Scala is taught, and to discover teaching tools and materials
-used at various levels (from high-school to university).
+used at various levels (from high school to university).
 
 ## Why Teach Scala
 
 ### Multiple Paradigms
 
-While we learn new concepts we compare and contrast different but similar
-concept and relate to what we already know. This is a very important learning
+While we learn new concepts, we compare and contrast different but similar
+concepts and relate them to what we already know. This is a very important learning
 principle and many pedagogical strategies build on contrasting and comparing
 while exploring similarities and differences between concepts and ideas. Scala
 is an excellent language in supporting this pedagogical principle as it
@@ -80,7 +80,7 @@ program in Scala:
 ~~~
 
 > “Scala is a fantastic teaching language for illustrating solutions with
-> different tradeoffs between the least complex concepts that does the job,
+> different tradeoffs between the least complex concept that does the job,
 > that might have lower flexibility or is less performant, compared to other
 > solutions that may be more difficult to read and maintain.”
 > 
@@ -96,7 +96,7 @@ program in Scala:
 Scala has a static type system that prevents entire classes of bugs from
 happening. The compiler helps the students to find bugs before run-time.
 If a student had too many difficult-to-hunt-down run-time bugs, this could take
-away the joy of learning and cause fatigue so badly that a student may give up
+away the joy of learning and cause fatigue such that a student may give up
 prematurely and get a feeling of bad self-efficacy and loose motivation.
 
 > “In my experience with Scala, the dialog with the compiler about static
@@ -108,11 +108,11 @@ prematurely and get a feeling of bad self-efficacy and loose motivation.
 ### Regularity and Principled Constructs
 
 Scala has done away with many of the quirks from C-like languages that still
-remain in e.g. Java and C#. There are, for instance, no surprising restrictions
+remain in, for example, Java and C#. There are, for instance, no surprising restrictions
 on what can be nested inside what, and no irregular semantic difference between
 primitive non-objects and “real” objects.
 
-Practices recognized by experts as best practices (e.g.,
+Best practices recognized by experts (e.g.,
 [avoiding the usage of `null`](https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/),
 [manipulating immutable values](https://www.infoq.com/articles/data-oriented-programming-java/))
 have been the norm since the inception of Scala.
@@ -124,7 +124,7 @@ have been the norm since the inception of Scala.
 > 
 > Björn Regnell, Lund University, Sweden.
 
-> “ After learning Scala, many students don’t want to ever go back to more
+> “After learning Scala, many students don’t want to ever go back to more
 > primitive and ad-hoc languages like Java and C++, unless forced by the
 > curriculum!”
 > 
@@ -135,7 +135,7 @@ have been the norm since the inception of Scala.
 Scala is used by companies such as Twitter, Netflix, AirBnB, NASA, Lego, 
 Spotify (to name a few).
 
-It is one of the highest-ranked languages in the [Redmonk Programming Language
+Scala is highly ranked in the [Redmonk Programming Language
 Ranking](https://redmonk.com/data/).
 
 ### Multiplatform
@@ -171,7 +171,7 @@ following map:
 {% include teachers-map.html %}
 
 Want to add yourself to the map? Add your name
-[here](https://github.com/scala/docs.scala-lang/edit/main/_data/teachers.yml).
+[here](https://github.com/scala/scala-lang/edit/main/_data/teachers.yml).
 
 ### Teachers Community
 

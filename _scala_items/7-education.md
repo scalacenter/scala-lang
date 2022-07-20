@@ -72,10 +72,10 @@ def contactsByAge(people: Seq[Person]): Map[Int, Double] =
     )(
       person => person.contacts.size
     )
-    .map((age, contacts) =>
-      val averageContacts =
-        contacts.sum.toDouble / contacts.size
-      (age, averageContacts)
+    .map((age, contactCounts) =>
+      val averageContactCount =
+        contactCounts.sum.toDouble / contactCounts.size
+      (age, averageContactCount)
     )</code></pre>
     </div>
 
