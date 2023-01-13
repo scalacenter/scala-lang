@@ -2,38 +2,58 @@
 //------------------------------------------------
 //------------------------------------------------
 
-.col-lg-6 {
-    @include span-columns(6);
+.hero-font {
+    font-family: $hero-font-family;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+}
 
-    @include bp(large) {
-        @include span-columns(12);
-        padding-bottom: 8px;
+.with-hero-logo {
+    &:before {
+        content: '';
+        background-image: url('/resources/img/frontpage/scala-logo-solo-white.svg');
+        background-size: cover;
+        width: 65px;
+        height: 100px;
+        position: relative;
+        display: inline-block;
+        top: 22px;
+        right: 4px;
     }
 }
 
-.inner-text {
-    h1 {
-        font-family: $base-font-family;
-        font-size: min(2.85vw, 2.21rem);
-        font-weight: $font-black;
-        color: #fff;
-        margin: $padding-small 20px $padding-small 0;
-    }
-
-    p {
-        font-size: 1.25rem;
-        color: #fff;
-        margin-bottom: $padding-medium;
-    }
-
-    @include bp(large) {
-        .button {
-            margin-bottom: 3px;
-        }
+.col-lg-6 {
+    .inner-text {
 
         h1 {
-            font-size: 2.5rem;
-            margin: ($padding-medium / 2) 0;
+            margin-bottom: 20px;
+            font-size: 5.2rem;
+        }
+
+        h2 {
+            font-family: $base-font-family;
+            font-size: min(max(1.6vw, 1.2rem), 1.31rem);
+            line-height: min(max(1.5vw, 2rem), 2.15rem);
+            color: #fff;
+            margin-bottom: $padding-medium;
+        }
+
+        @include bp(large) {
+            .button {
+                margin-bottom: 3px;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
         }
     }
+}
+
+.frontpage-hero-logo {
+    width: 220px;
+    margin-right: 10px;
+    cursor: pointer;
+    margin-bottom: $padding-medium;
 }
