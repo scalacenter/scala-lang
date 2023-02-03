@@ -5,20 +5,29 @@
 // Color
 //------------------------------------------------
 $brand-primary: #DC322F;
-$brand-secondary: #5c7a81;
+// $brand-secondary: #5c7a81;
+$brand-secondary: #3698af;
 $brand-tertiary: #5CC6E4;
 $brand-tertiary-dotty: #E45C77;
 
 //-------------------------------------------------
+$gray-darkest: #002B36;
 $gray-darker: #002B36;
 $gray-dark: #073642;
 $gray: #15414C;
+$gray-nutshell: #075357;
+$gray-nutshell2: #731a41;
 $gray-li: #244E58;
 $gray-light: #E5EAEA;
 $gray-lighter: #F0F3F3;
 $apple-blue: #6dccf5;
 $std-link: #23aad1;
 $gray-heading: rgb(134, 161, 166);
+
+// $header-bg: #266270;
+$header-bg: $gray;
+$banner-notice-bg: #2c6e5c;
+$banner-bg: #0c3540;
 
 //-------------------------------------------------
 $code-bg-color-dark: #22272e; // taken from github-dark-dimmed hljs theme
@@ -64,7 +73,7 @@ $font-size-small: 0.875rem; // 14px
 $font-size-xsmall:  0.75rem; // 12px
 
 $font-size-h2: 1.375rem; // 22px
-$font-size-h3: 1.2rem;
+$font-size-h3: 1.275rem;
 
 //------------------------------------------------
 $base-line-height: 1.6;
