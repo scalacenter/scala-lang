@@ -68,18 +68,6 @@
                     color: $base-font-color-inverse;
                     font-size: $font-size-large;
                 }
-
-
-                &:active,
-                &:focus,
-                &:hover {
-                    cursor: pointer;
-                    background: $gray-dark;
-                }
-
-                &.active {
-                    background: $gray-dark;
-                }
             }
 
             .items-content {

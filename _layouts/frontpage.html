@@ -125,7 +125,7 @@
             <h3>{{scalaItem.shortTitle}}</h3>
             <p>{{scalaItem.shortDescription}}</p>
           </div>
-          <div class="button button_expand-info">{{scalaItem.expandText | default: 'See More...' }}</div>
+          <a href="{{scalaItem.link}}" class="button button_expand-info">{{scalaItem.expandText | default: 'See More...' }}</a>
         </div>
         {% if loopIndexMod == 2 or forloop.last %}
       </div>
@@ -140,64 +140,12 @@
   </div>
 </section>
 
-<!-- Scala in a Nutshell -->
-<section class="nutshell">
-  <div class="wrap">
-    <div class="heading-line">
-      <h2><span>Scala in a Nutshell</span></h2>
-      <div class="call-to-action action-medium">
-        <p>Click the buttons to see Scala in action,
-          or visit the <a href="/documentation/">Scala Documentation</a> to learn more.</p>
-      </div>
-    </div>
-  </div>
-  <div class="scala-items-list">
-    <div class="items-menu">
-      {% for scalaItem in site.scala_items %}
-        {% assign loopIndexMod = forloop.index | minus: 1 | modulo: 3 %}
-
-        {% if loopIndexMod == 0 %}
-          {% assign codeSnippets = '' | split: ',' %}
-          <div class="wrap scala-item-row">
-        {% endif %}
-        {% assign codeSnippets = codeSnippets | push: scalaItem.content %}
-        <div class="scala-item">
-          <div class="scala-item_content">
-            <h3>{{scalaItem.shortTitle}}</h3>
-            <p>{{scalaItem.shortDescription}}</p>
-          </div>
-          <div class="button">More...</div>
-        </div>
-        {% if loopIndexMod == 2 or forloop.last %}
-          </div>
-          <div class="items-content">
-            {% for snippet in codeSnippets %}
-              <div class="items-code">{{snippet}}</div>
-            {% endfor %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- Scala backends -->
-<section class="runs">
-  <div class="wrap">
-    <h2>{{site.data.common.texts.scalaBackendsTitle}}</h2>
-    <ul>
-      {% for backend in page.scalaBackends %}
-      <li class="masterTooltip" title="{{backend.description}}">
-        <span>
-          <a href="{{backend.link}}"><img src="{{backend.icon}}" alt="{{backend.description}}"></a>
-        </span>
-        {% if backend.beta == 1 %}<span class="beta">beta</span>{% endif %}
-      </li>
-      {% unless forloop.last %}<li></li>{% endunless %}
-      {% endfor %}
-    </ul>
-  </div>
-</section>
+<!-- Scala expressive -->
+<div id="scala-is-expressive"></div>
+<!-- Scala use cases -->
+<div id="scala-is-scalable"></div>
+<!-- Scala safety -->
+<div id="scala-is-safe"></div>
 
 <!-- Scala Ecosystem -->
 <section class="scala-ecosystem">
