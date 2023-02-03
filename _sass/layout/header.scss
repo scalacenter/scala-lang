@@ -44,7 +44,7 @@
     &.header-home {
         background: none;
         .header-background {
-            background: linear-gradient($brand-secondary, 40%, $gray-darker);
+            background: rgb(150, 45, 151); //linear-gradient($brand-secondary, 40%, $gray-darker);
             position: relative;
             padding-bottom: 120px;
         }
