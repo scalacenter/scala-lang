@@ -5,12 +5,519 @@
   <link type="application/atom+xml" href="https://www.scala-lang.org/feed/blog.xml" rel="self"/>
   <link type="text/html" href="https://www.scala-lang.org/blog/" rel="alternate"/>
 
-  <updated>2023-04-21T12:41:28+02:00</updated>
+  <updated>2023-06-29T10:44:43+02:00</updated>
   <author>
     <name>École Polytechnique Fédérale de Lausanne</name>
   </author>
   <rights>Copyright (c) 2002-2023 École Polytechnique Fédérale de Lausanne (EPFL), Lausanne, Switzerland</rights>
 
+  
+  <entry>
+    <title>The Scala Toolkit</title>
+    <link href="https://www.scala-lang.org/blog/2023/06/20/toolkit.html"/>
+    <updated>2023-06-20T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/blog/2023/06/20/toolkit</id>
+    <content type="html">&lt;p&gt;The Scala organization is pleased to announce the release of the Scala Toolkit and its series of tutorials in &lt;a href=&quot;https://docs.scala-lang.org/toolkit/introduction.html&quot;&gt;docs.scala-lang.org/toolkit&lt;/a&gt;.
+The current version is 0.2.0. We call it an early release because it is not 1.0.0 yet (see below in the FAQ for more details).&lt;/p&gt;
+
+&lt;p&gt;The Toolkit is a bundle of libraries from the ecosystem that work well together to perform common programming tasks.
+It is a good fit for trying out Scala, writing a script, prototyping, or bootstrapping a new application.
+It can also be used in larger applications.&lt;/p&gt;
+
+&lt;p&gt;In this initial release, the Toolkit includes OS-Lib for working with files and processes, UPickle for parsing JSON, sttp for sending HTTP requests, and MUnit for unit testing.&lt;/p&gt;
+
+&lt;p&gt;You can try out the Toolkit using Scala CLI:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;In the REPL
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ scala-cli --toolkit latest
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In a Scala script or file
+    &lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//&amp;gt; using toolkit latest&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This blog post outlines the motivation and design of the Toolkit.
+It illustrates how to use it, including setup instructions for tools such as Scala CLI, sbt, Mill, and Maven.
+Finally, a FAQ section contains answers to commonly asked questions.&lt;/p&gt;
+
+&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
+
+&lt;p&gt;We would like to express our gratitude and appreciation to the authors and maintainers of &lt;a href=&quot;https://github.com/com-lihaoyi/os-lib&quot;&gt;com-lihaoyi/os-lib&lt;/a&gt;, &lt;a href=&quot;https://github.com/com-lihaoyi/upickle&quot;&gt;com-lihaoyi/upickle&lt;/a&gt;, &lt;a href=&quot;https://github.com/softwaremill/sttp&quot;&gt;softwaremill/sttp&lt;/a&gt; and &lt;a href=&quot;https://github.com/scalameta/munit&quot;&gt;scalameta/munit&lt;/a&gt;.
+Their collaborative efforts and dedication have been crucial in the successful creation of the Toolkit.
+We are looking forward to continued collaboration in the future.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-the-toolkit&quot;&gt;Why the Toolkit?&lt;/h2&gt;
+
+&lt;p&gt;The Toolkit project is a significant step in our ongoing effort to make Scala more accessible, lightweight, and fun to use.
+In particular, we aim at lowering the onboarding barrier for newcomers from different programming backgrounds.&lt;/p&gt;
+
+&lt;p&gt;Scala’s library ecosystem offers multiple choices for doing almost anything.
+The ecosystem’s richness is a great strength of the language, but can also be confusing and intimidating.
+The Toolkit aims to offer default choices for coders who aren’t in a position to evaluate competing libraries and just want to get something done.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-the-toolkit&quot;&gt;What is the Toolkit?&lt;/h2&gt;
+
+&lt;p&gt;The Toolkit gathers a number of pre-existing libraries of the ecosystem that focus on concrete, recurring software engineering problems, such as working with files and processes, parsing JSON, and sending HTTP requests.&lt;/p&gt;
+
+&lt;p&gt;Its documentation can be found at &lt;a href=&quot;https://docs.scala-lang.org/toolkit/introduction.html&quot;&gt;docs.scala-lang.org/toolkit&lt;/a&gt;.
+It comprises a collection of concise tutorials, including short code examples, that aim at being self-contained.
+They not only explain how to use each library individually, but also how to combine them in meaningful ways.&lt;/p&gt;
+
+&lt;p&gt;The Toolkit aims at being approachable.
+It does not require extended knowledge of the more advanced features of Scala (higher-kinded types, macros, etc) nor of the more advanced concepts of the ecosystem (asynchronous, pure-functional, reactive, actor-based).&lt;/p&gt;
+
+&lt;p&gt;The Toolkit favors libraries that provide a user-friendly getting-started experience.
+They enable the developer to explore the API with auto-completion and integrated documentation (scaladoc), and discover the functionalities as they write their code.
+Additionally, they prioritize clear and informative types, signatures and error messages, rather than abstraction and flexibility.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-can-you-do-with-the-toolkit&quot;&gt;What can you do with the Toolkit?&lt;/h2&gt;
+
+&lt;p&gt;Here is an example of what you can do with the Toolkit:&lt;/p&gt;
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//&amp;gt; using toolkit 0.2.0&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sttp.client4.quick.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ujson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;Obj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;location&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;hometown&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;bio&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Scala programmer&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;GITHUB_TOKEN&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;quickRequest&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;patch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;uri&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://api.github.com/user&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;bearer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-Type&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;application/json&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ujson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// prints: 200&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This short program sends an HTTP request to the &lt;a href=&quot;https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#update-the-authenticated-user&quot;&gt;Github REST API&lt;/a&gt;, to update the profile of the authenticated users.
+In a few lines, it shows:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;how to construct a JSON object, with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ujson.Obj&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;how to read an environment variable, with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sys.env&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;how to create an HTTP request, with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;quickRequest&lt;/code&gt; builder in sttp&lt;/li&gt;
+  &lt;li&gt;how to authenticate the request with a token&lt;/li&gt;
+  &lt;li&gt;how to add a JSON body and a header&lt;/li&gt;
+  &lt;li&gt;how to send the request and receive a response&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;More examples can be found in &lt;a href=&quot;https://docs.scala-lang.org/toolkit/introduction.html&quot;&gt;docs.scala-lang.org/toolkit&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;when-to-use-the-toolkit&quot;&gt;When to use the Toolkit?&lt;/h2&gt;
+
+&lt;p&gt;The Toolkit is a good fit for trying out Scala, writing a script, prototyping, or bootstrapping a new application.
+It can also be used in larger applications.&lt;/p&gt;
+
+&lt;h3 id=&quot;trying-out-scala&quot;&gt;Trying out Scala&lt;/h3&gt;
+
+&lt;p&gt;The Toolkit offers accessible APIs that should feel familiar to programmers coming from different backgrounds, such as Java or Python.
+It is a good resource for learning or teaching how to use Scala in real-world applications, giving newcomers the opportunity to be productive early in their Scala learning journey.&lt;/p&gt;
+
+&lt;h3 id=&quot;scripting-and-prototyping&quot;&gt;Scripting and prototyping&lt;/h3&gt;
+
+&lt;p&gt;The Toolkit tutorials encourage synchronous code that throws exceptions instead of returning errors as values.
+This is particularly well-suited for scripting and prototyping purposes, where you want to obtain results quickly, without caring much about safety or performance.&lt;/p&gt;
+
+&lt;p&gt;Toolkit libraries do have the capability to handle errors as values and support asynchronous operations, but these features are optional and can be enabled when required.&lt;/p&gt;
+
+&lt;h3 id=&quot;bootstrapping-an-application&quot;&gt;Bootstrapping an application&lt;/h3&gt;
+
+&lt;p&gt;When bootstrapping an application, selecting libraries from the available ecosystems, familiarizing yourself with them, and configuring them appropriately is challenging and time consuming.&lt;/p&gt;
+
+&lt;p&gt;The toolkit aims at reducing this overhead, by offering a comprehensive set of pre-packaged libraries that cater to many of your needs.
+These features are documented in a centralized location, allowing for easy reference.&lt;/p&gt;
+
+&lt;p&gt;Additionally, the Toolkit minimizes transitive dependencies, to help you steer clear of &lt;a href=&quot;https://en.wikipedia.org/wiki/Dependency_hell&quot;&gt;dependency hell&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-get-the-toolkit&quot;&gt;How to get the Toolkit?&lt;/h2&gt;
+
+&lt;h3 id=&quot;using-scala-cli&quot;&gt;Using Scala CLI&lt;/h3&gt;
+
+&lt;p&gt;In a terminal, you can start the REPL with the Toolkit on the classpath.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ scala-cli --toolkit 0.2.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you can get it in a Scala script or file.&lt;/p&gt;
+
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//&amp;gt; using toolkit 0.2.0&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;json&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ujson&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;{&quot;message&quot;: &quot;Hello, World!&quot;}&quot;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;message&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// prints: Hello, World!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;in-build-tools&quot;&gt;In build tools&lt;/h3&gt;
+
+&lt;p&gt;The toolkit has two artifacts: one for the main target and another for the tests.&lt;/p&gt;
+
+&lt;div class=&quot;place-inline&quot;&gt;
+  &lt;div id=&quot;build-tools&quot; class=&quot;tabsection&quot;&gt;
+    
+      &lt;input type=&quot;radio&quot; name=&quot;build-tools_tabs&quot; id=&quot;build-tools_sbt_description&quot; data-target=&quot;sbt&quot; hidden=&quot;&quot; aria-hidden=&quot;true&quot; checked=&quot;&quot; /&gt;
+    
+      &lt;input type=&quot;radio&quot; name=&quot;build-tools_tabs&quot; id=&quot;build-tools_mill_description&quot; data-target=&quot;mill&quot; hidden=&quot;&quot; aria-hidden=&quot;true&quot; /&gt;
+    
+      &lt;input type=&quot;radio&quot; name=&quot;build-tools_tabs&quot; id=&quot;build-tools_maven_description&quot; data-target=&quot;maven&quot; hidden=&quot;&quot; aria-hidden=&quot;true&quot; /&gt;
+    
+    &lt;ul hidden=&quot;&quot; aria-hidden=&quot;true&quot; class=&quot;nav-tab&quot;&gt;
+      
+        &lt;li class=&quot;item-tab&quot;&gt;
+          &lt;label class=&quot;item-tab-link&quot; for=&quot;build-tools_sbt_description&quot;&gt;sbt&lt;/label&gt;
+        &lt;/li&gt;
+      
+        &lt;li class=&quot;item-tab&quot;&gt;
+          &lt;label class=&quot;item-tab-link&quot; for=&quot;build-tools_mill_description&quot;&gt;Mill&lt;/label&gt;
+        &lt;/li&gt;
+      
+        &lt;li class=&quot;item-tab&quot;&gt;
+          &lt;label class=&quot;item-tab-link&quot; for=&quot;build-tools_maven_description&quot;&gt;Maven&lt;/label&gt;
+        &lt;/li&gt;
+      
+    &lt;/ul&gt;
+    &lt;div class=&quot;tabcontent&quot;&gt;
+      
+        &lt;section id=&quot;sbt_content&quot;&gt;
+          &lt;div class=&quot;wrap-tab&quot;&gt;
+            
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;libraryDependencies&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Seq&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;org.scala-lang&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;toolkit&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;0.2.0&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;org.scala-lang&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;toolkit-test&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;0.2.0&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Test&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+          &lt;/div&gt;
+        &lt;/section&gt;
+      
+        &lt;section id=&quot;mill_content&quot;&gt;
+          &lt;div class=&quot;wrap-tab&quot;&gt;
+            
+&lt;p&gt;In the main module:&lt;/p&gt;
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ivyDeps&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;nc&quot;&gt;Agg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ivy&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.scala-lang::toolkit:0.2.0&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;In the test module:&lt;/p&gt;
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ivyDeps&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;nc&quot;&gt;Agg&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ivy&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;org.scala-lang::toolkit-test:0.2.0&quot;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+          &lt;/div&gt;
+        &lt;/section&gt;
+      
+        &lt;section id=&quot;maven_content&quot;&gt;
+          &lt;div class=&quot;wrap-tab&quot;&gt;
+            
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.scala-lang&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;toolkit&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.2.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.scala-lang&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;toolkit-test&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;0.2.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;scope&amp;gt;&lt;/span&gt;test&lt;span class=&quot;nt&quot;&gt;&amp;lt;/scope&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+          &lt;/div&gt;
+        &lt;/section&gt;
+      
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;faq&quot;&gt;FAQ&lt;/h2&gt;
+
+&lt;h3 id=&quot;what-is-the-difference-between-the-standard-library-and-the-toolkit&quot;&gt;What is the difference between the Standard Library and the Toolkit?&lt;/h3&gt;
+
+&lt;p&gt;The Scala Standard Library contains the most essential building blocks to build and run Scala programs, such as collections.
+It also contains the Scala runtime, without which you cannot run any Scala program.&lt;/p&gt;
+
+&lt;p&gt;The Toolkit, in turn, relies on the Standard Library as a dependency and expands upon it by addressing specific use cases.
+When developing a Scala program, you have the flexibility to choose between utilizing the Toolkit or leveraging other libraries.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-are-the-libraries-selected&quot;&gt;How are the libraries selected?&lt;/h3&gt;
+
+&lt;p&gt;To select the libraries of the Toolkit we used the following criterion:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;API Usability: Consistency, abstraction level, visibility, language level etc.&lt;/li&gt;
+  &lt;li&gt;Responsiveness and availability of the maintainers&lt;/li&gt;
+  &lt;li&gt;Documentation&lt;/li&gt;
+  &lt;li&gt;Popularity&lt;/li&gt;
+  &lt;li&gt;Dependencies&lt;/li&gt;
+  &lt;li&gt;Support for Scala.js and Scala Native&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;who-owns-the-toolkit-libraries&quot;&gt;Who owns the Toolkit libraries?&lt;/h3&gt;
+
+&lt;p&gt;The Toolkit is composed of pre-existing libraries from the ecosystem, created by different organizations and individuals.&lt;/p&gt;
+
+&lt;p&gt;Those libraries are owned by their respective authors and maintainers.
+The Scala organization takes on the responsibility of curating the libraries, releasing the Toolkit artifacts and regularly updating the tutorials in &lt;a href=&quot;https://docs.scala-lang.org/toolkit/introduction.html&quot;&gt;docs.scala-lang.org/toolkit&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The Scala organization can provide some guidance or temporary help to ensure smooth integration and compatibility of the Toolkit libraries.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-does-early-mean-in-early-release&quot;&gt;What does &lt;em&gt;early&lt;/em&gt; mean in early release?&lt;/h3&gt;
+
+&lt;p&gt;The Toolkit version is said to be early as long as it begins with 0.x, as in 0.2.0.
+It allows for the API of the Toolkit to evolve and change without any restriction.
+This is in part due to the fact it depends on milestone versions of sttp, and MUnit.&lt;/p&gt;
+
+&lt;p&gt;Once the Toolkit reaches its first stable version, it will be labeled as 1.0.0.
+Only stable versions of libraries will be included.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-the-versionning-scheme-of-the-toolkit&quot;&gt;What is the versionning scheme of the Toolkit?&lt;/h3&gt;
+
+&lt;p&gt;The Scala Toolkit follows the &lt;a href=&quot;https://semver.org&quot;&gt;semantic versioning scheme&lt;/a&gt;, provided that the underlying libraries also adhere to the semantic versioning scheme.&lt;/p&gt;
+
+&lt;p&gt;A new patch version of the Toolkit signifies that there have been only patch bumps of the underlying libraries.
+A new minor version of the Toolkit includes minor bumps of the underlying libraries, but avoids any major bump.
+A new major version of the Toolkit includes at least one major bump of an underlying library.&lt;/p&gt;
+
+&lt;h3 id=&quot;does-it-support-scala-2-and-scala-3&quot;&gt;Does it support Scala 2 and Scala 3?&lt;/h3&gt;
+
+&lt;p&gt;You can use the Toolkit with Scala 2.13 and Scala 3.x.&lt;/p&gt;
+
+&lt;h3 id=&quot;does-it-support-scalajs-and-scala-native&quot;&gt;Does it support Scala.js and Scala Native?&lt;/h3&gt;
+
+&lt;p&gt;All the versions of the Toolkit will support Scala.js and Scala Native, with some differences in the provided functionalities.&lt;/p&gt;
+
+&lt;p&gt;At the moment, there is no support for files and processes in Scala.js, mainly because such functionalities would heavily depend on your JavaScript runtime.&lt;/p&gt;
+
+&lt;p&gt;You should be able to develop your script using the JVM toolchain, but then you can switch to Scala Native to get instant startup, or to Scala.js to deploy and run your script in web browsers.&lt;/p&gt;
+
+&lt;h3 id=&quot;can-there-be-other-toolkits&quot;&gt;Can there be other Toolkits?&lt;/h3&gt;
+
+&lt;p&gt;Yes, there is room in the Scala ecosystem for other “toolkits” besides the Scala Toolkit.
+For example, the &lt;a href=&quot;https://typelevel.org/toolkit/&quot;&gt;Typelevel Toolkit&lt;/a&gt; is the toolkit of the Typelevel organization.&lt;/p&gt;
+
+&lt;p&gt;Typelevel is an open-source organization that builds and maintains a purely functional stack of libraries in Scala, based on &lt;a href=&quot;https://typelevel.org/cats/&quot;&gt;cats&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Their toolkit is composed of Typelevel libraries and fully supports JVM, Node.js, and Native.
+You can try it out in Scala CLI:&lt;/p&gt;
+
+&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//&amp;gt; using toolkit typelevel:latest&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cats.effect.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;IOApp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;Simple&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, world!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Whether you should use the Scala Toolkit or the Typelevel Toolkit depends on your preference and familiarity with pure functional programming.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-share-feedback&quot;&gt;How to share feedback?&lt;/h3&gt;
+
+&lt;p&gt;To share general feedback about the Toolkit you can read and comment on this &lt;a href=&quot;https://users.scala-lang.org/t/scala-toolkit-0-2-0-is-out-discussion/9355&quot;&gt;thread&lt;/a&gt; in the Scala Users forum.&lt;/p&gt;
+
+&lt;p&gt;To report an issue you can go to the issue tracker in the &lt;a href=&quot;https://github.com/scala/toolkit/issues&quot;&gt;scala/toolkit&lt;/a&gt; repository.&lt;/p&gt;
+
+&lt;h2 id=&quot;plans-for-the-future&quot;&gt;Plans for the future&lt;/h2&gt;
+
+&lt;p&gt;We are focused on stabilizing the initial release of the Toolkit, to ensure the first set of features is functioning seamlessly.&lt;/p&gt;
+
+&lt;p&gt;Simultaneously, we are laying the ground for future versions, in which we will expand the Toolkit’s capabilities.
+Among the functionalities under consideration, we are exploring manipulation of CSV files, SQL database querying, HTTP servers, and logging.&lt;/p&gt;
+
+&lt;p&gt;Our goal is to create a versatile Toolkit that caters to a wide range of software engineering needs, with a particular emphasis on supporting newcomers, scripting, and prototyping.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Scala 3.3.0 released!</title>
+    <link href="https://www.scala-lang.org/blog/2023/05/30/scala-3.3.0-released.html"/>
+    <updated>2023-05-30T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/blog/2023/05/30/scala-3.3.0-released</id>
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/scala-lang/resources/img/scala-3.3_LTS-launch.png&quot; alt=&quot;Scala 3.3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We are thrilled to announce that after long months of work and careful testing, we have released Scala 3.3.0, the first release in the new 3.3.x LTS series.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-does-lts-mean&quot;&gt;What does “LTS” mean?&lt;/h2&gt;
+
+&lt;p&gt;Scala 3.3.x is the first Long Term Support (LTS) release series. That means that it will be actively maintained for a period of at least three years. We have adopted a release model similar to the one that Java has successfully used for a long time.&lt;/p&gt;
+
+&lt;p&gt;In the following years, there will be new minor releases (3.4, 3.5, and so on) that can bring new backward-compatible features. We are calling them Scala Next; they are equivalent to Java’s feature releases. Bug fixes and usability improvements from those releases will be back-ported and released as 3.3.x patches. Apart from those forward and backward-compatible changes, LTS will be feature frozen.&lt;/p&gt;
+
+&lt;p&gt;The LTS model doesn’t change anything in our compatibility guarantees. Projects built with all future releases will be able to depend on any library compiled with Scala 3.3.x. This is just our standard guarantee that the newer compiler can always consume the output of the older version.&lt;/p&gt;
+
+&lt;p&gt;LTS might be a great choice for library authors who can now receive constant bug fixes and developer experience improvements without forcing the users of the library to update the compiler version in their project.&lt;/p&gt;
+
+&lt;p&gt;You can read more about our compatibility guarantees in &lt;a href=&quot;https://virtuslab.com/blog/the-scala-3-compatibility-story/&quot;&gt;the recent blog post&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-new-in-scala-330&quot;&gt;What’s new in Scala 3.3.0&lt;/h2&gt;
+
+&lt;h3 id=&quot;linting&quot;&gt;Linting&lt;/h3&gt;
+
+&lt;p&gt;Scala 3.3.0 brings back linting to the Scala compiler.  Right now, you can enable checking for unused symbols and discarded values. More linting options will come soon in the following Scala 3.3.x releases.&lt;/p&gt;
+
+&lt;h4 id=&quot;checking-for-unused-values&quot;&gt;Checking for unused values&lt;/h4&gt;
+
+&lt;p&gt;There is an entire family of compiler options added in 3.3.0 for checking and reporting different kinds of unused symbols:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Wunused:imports&lt;/code&gt; - for unused imports&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Wunused:privates&lt;/code&gt; - for unused local definitions&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Wunused:locals&lt;/code&gt;  - for unused local definitions&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Wunused:explicits&lt;/code&gt; - for unused explicit parameters&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Wunused:implicits&lt;/code&gt; - for unused implicit parameters (parameters in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;using&lt;/code&gt; clauses)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Wunused:params&lt;/code&gt; - for all unused method parameters&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Wunused:all&lt;/code&gt; - for enabling all of the above lints&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;checking-for-discarded-values&quot;&gt;Checking for discarded values&lt;/h4&gt;
+
+&lt;p&gt;Discarding non-unit values is usually the symptom of subtle mistakes. The compiler can now warn you about all discarded values saving you from bugs resulting from those hard-to-spot mistakes.&lt;/p&gt;
+
+&lt;p&gt;In the following simplified example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Scala&quot;&gt;def failure: Either[String, Nothing] = Left(&quot;something broke&quot;)
+
+def failedComputation: Either[String, Unit] =
+  Right(()).map(_ =&amp;gt; failure)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;the programmer, by mistake, used the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;map&lt;/code&gt; method instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flatMap&lt;/code&gt;. The code still compiles, but due to value discarding, behaves unexpectedly, returning &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Right(())&lt;/code&gt; from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;failedComputation&lt;/code&gt; method. If the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Wvalue-discard&lt;/code&gt; flag is enabled, the compiler will report the warning, saving the user from a potential bug.&lt;/p&gt;
+
+&lt;h3 id=&quot;more-consistent-braceless-syntax&quot;&gt;More consistent braceless syntax&lt;/h3&gt;
+
+&lt;p&gt;Braces around method parameters can now be replaced with a colon. This can lead to cleaner, shorter, and often more readable code in places like configuration DSLs or test case definitions.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Scala&quot;&gt;def canFail(input: String): Try[List[String]] = Try:
+  someComputation(input).flatMap: res =&amp;gt;
+    val partial = moreComputation(res)
+    andEvenMore(partial)
+
+class TestSuite extends munit.FunSuite:
+  test(&quot;the job doesn&apos;t fail&quot;):
+    val job = canFail(&quot;some data&quot;)
+    assert(job.isSuccess)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For the record, the braceless syntax has been introduced in Scala 3.0.0. However, braces were still needed to pass function arguments. Martin Odersky proposed to address this point in the proposal &lt;a href=&quot;https://docs.scala-lang.org/sips/fewer-braces.html&quot;&gt;SIP-44 - Fewer braces&lt;/a&gt;, which was accepted by the SIP Committee in &lt;a href=&quot;https://docs.scala-lang.org/sips/results/2022-08-26-meeting.html&quot;&gt;August 2022&lt;/a&gt;. The final implementation was released as an experimental feature in &lt;a href=&quot;https://github.com/lampepfl/dotty/releases/tag/3.2.0&quot;&gt;Scala 3.2.0&lt;/a&gt; in September. Finally, in &lt;a href=&quot;https://docs.scala-lang.org/sips/results/2022-10-21-meeting.html&quot;&gt;October&lt;/a&gt;, the SIP Committee voted to promote it to a stable feature.&lt;/p&gt;
+
+&lt;h3 id=&quot;boundary-and-break&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boundary&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;break&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;Two new methods were added to the standard library: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boundary&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;break&lt;/code&gt;. They are safer and more expressive replacements for non-local returns, which were deprecated recently.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;break&lt;/code&gt; allows for a type-safe early escape from anywhere inside the block delimited by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boundary&lt;/code&gt; to its end, returning the passed value from the entire block.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Scala&quot;&gt;import util.boundary, boundary.break
+
+def sumOfRoots(numbers: List[Double]): Option[Double] = boundary:
+  val roots = numbers.map: n =&amp;gt;
+    println(s&quot; * calculating square root for $n*&quot;)
+    if n &amp;gt;= 0 then Math.sqrt(n) else break(None)
+  Some(roots.sum)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When you run the above method, you will notice that it returns &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;None&lt;/code&gt; when any of the input elements is negative. Moreover, thanks to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boundary&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;break&lt;/code&gt;, you can see from the console output that it stops iterating after encountering the first negative element.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;break&lt;/code&gt; can jump out of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;boundary&lt;/code&gt; in the function deeper on the stack. To make it safe, only functions with a matching &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Label&lt;/code&gt; in their using clauses can break. This can be used to create isolated parts of an application with streamlined error handling. Library authors can abstract over &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;break&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Label&lt;/code&gt;, creating a nice API for error handling or dealing with uncertain data.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-new-default-implementation-of-lazy-vals&quot;&gt;The new default implementation of lazy vals&lt;/h3&gt;
+
+&lt;p&gt;Last but not least, we have changed the default implementation of lazy vals. The new implementation has better performance and is safer under parallel access. This may result in improvements in the performance of effect systems.&lt;/p&gt;
+
+&lt;h2 id=&quot;should-i-update-to-scala-330&quot;&gt;Should I update to Scala 3.3.0?&lt;/h2&gt;
+
+&lt;p&gt;If you are maintaining a standalone Scala 3 project without external projects depending on it, feel free to switch to Scala 3.3.0 at any moment. You will enjoy all the improvements in the newest version of the compiler.&lt;/p&gt;
+
+&lt;p&gt;If you are a library author following semantic versioning, we advise you to update to Scala 3.3.0 in the next minor release of your project. Users of your library would also need to bump their compiler version to use the newest version of your library. If you have already published a minor version on 3.3.0 but learned about a critical vulnerability in your library, you should release a new patch release for the previous minor version of your library using the Scala version you had used before the bump (e.g. 3.2.2 or older). This patch can be consumed by all the users of previous versions of the library, no matter if they have already switched to 3.3.0 or not.&lt;/p&gt;
+
+&lt;h3 id=&quot;known-incompatibility-stability-of-inline-parameters&quot;&gt;Known incompatibility: Stability of inline parameters&lt;/h3&gt;
+
+&lt;p&gt;In Scala, only stable paths can be used as prefix in path-dependent types.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Scala&quot;&gt;class Outer:
+  type Inner
+
+val a = new Outer
+val aInner: a.Inner = ???     // ok
+
+var b = new Outer
+// val bInner: b.Inner = ???  // error
+
+def c = new Outer
+// val cInner: c.Inner = ???  // error
+
+def method(param: Outer): param.Inner = ???  // ok
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There was a bug that resulted in the compiler assuming that all inline parameters are stable references. This could have led to unsound code being accepted by the compiler and potential runtime crashes.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-Scala&quot;&gt;inline def method(inline param: Outer): param.Inner // error in Scala 3.3.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Such pieces of code are now rejected by the compiler. The migration for that change is simple, as it only requires removing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inline&lt;/code&gt; modifier &lt;strong&gt;from the parameter&lt;/strong&gt;. If the path-dependent type was used, it is safe to say that the intended behavior was to inline the method without inlining the parameter.&lt;/p&gt;
+
+&lt;h2 id=&quot;contributors&quot;&gt;Contributors&lt;/h2&gt;
+
+&lt;p&gt;Thank you to all the contributors who made the release of 3.3.0 possible&lt;/p&gt;
+
+&lt;p&gt;According to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git shortlog -sn --no-merges 3.2.2..3.3.0&lt;/code&gt; these are:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   226 Martin Odersky
+   106 Szymon Rodziewicz
+    81 Dale Wijnand
+    56 Nicolas Stucki
+    52 Paul Coral
+    48 Kamil Szewczyk
+    45 Paweł Marks
+    28 Florian3k
+    28 Yichen Xu
+    15 Guillaume Martres
+    10 Michał Pałka
+     9 Kacper Korban
+     8 Fengyun Liu
+     7 Chris Birchall
+     7 rochala
+     6 Sébastien Doeraene
+     6 jdudrak
+     5 Seth Tisue
+     5 Som Snytt
+     5 nizhikov
+     4 Filip Zybała
+     4 Jan Chyb
+     4 Michael Pollmeier
+     4 Natsu Kagami
+     3 Anatolii Kmetiuk
+     3 Jamie Thompson
+     2 Adrien Piquerez
+     2 Alex
+     2 Dmitrii Naumenko
+     2 Lukas Rytz
+     2 Michael Pilquist
+     2 Vasil Vasilev
+     2 adampauls
+     2 yoshinorin
+     1 Alexander Slesarenko
+     1 Chris Kipp
+     1 Guillaume Raffin
+     1 Jakub Kozłowski
+     1 Jan-Pieter van den Heuvel
+     1 Julien Richard-Foy
+     1 Kenji Yoshida
+     1 Matt Bovel
+     1 Mohammad Yousuf Minhaj Zia
+     1 Philippus
+     1 Szymon R
+     1 Tim Spence
+     1 s.bazarsadaev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+  </entry>
   
   <entry>
     <title>sbt Plugins Community Repository</title>
@@ -20,6 +527,8 @@
     <content type="html">&lt;p&gt;On the 7th of April 2023, many Scala builds stopped working because an outage affected the sbt community repository.
 In this blog post, we describe the sbt community repository, report on the incident, and outline
 actions taken so far. There will be more action in the future and a followup blog post.&lt;/p&gt;
+
+&lt;p&gt;Update: we have announced our action plan on the &lt;a href=&quot;https://contributors.scala-lang.org/t/roadmap-for-the-sbt-community-repository/6195&quot;&gt;Contributors Forum&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-incident&quot;&gt;The Incident&lt;/h2&gt;
 
@@ -258,7 +767,7 @@ It shows step by step how to integrate Vite, Scala.js, Laminar and ScalablyTyped
     <link href="https://www.scala-lang.org/blog/2023/04/11/march-2023-scala-tooling-summit.html"/>
     <updated>2023-04-11T00:00:00+02:00</updated>
     <id>https://www.scala-lang.org/blog/2023/04/11/march-2023-scala-tooling-summit</id>
-    <content type="html">&lt;p&gt;&lt;img style=&quot;max-height: 350px; display: block; margin: auto; width: auto;&quot; src=&quot;/resources/img/march-2023-tooling-summit-stairs.jpg&quot; alt=&quot;Scala stairs with people standing on the stairs&quot; /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img style=&quot;max-height: 350px; display: block; margin: auto; width: auto;&quot; src=&quot;/scala-lang/resources/img/march-2023-tooling-summit-stairs.jpg&quot; alt=&quot;Scala stairs with people standing on the stairs&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Tooling is a pivotal part of the developer experience. Often when someone asks
 about a new language or how another developer enjoys working in a certain
@@ -1361,7 +1870,7 @@ Work experience, hackathons, local user groups, youtube tutorials, internal comp
     <link href="https://www.scala-lang.org/blog/2022/09/29/scala-survey-2022-announcement.html"/>
     <updated>2022-09-29T00:00:00+02:00</updated>
     <id>https://www.scala-lang.org/blog/2022/09/29/scala-survey-2022-announcement</id>
-    <content type="html">&lt;p&gt;&lt;img src=&quot;/resources/img/scala-survey-2022-announcement.png&quot; alt=&quot;Scala Survey 2022 Announcement&quot; /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/scala-lang/resources/img/scala-survey-2022-announcement.png&quot; alt=&quot;Scala Survey 2022 Announcement&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;the-scala-team-wants-to-hear-from-you&quot;&gt;The Scala Team wants to hear from you!&lt;/h2&gt;
 
@@ -1394,7 +1903,7 @@ Work experience, hackathons, local user groups, youtube tutorials, internal comp
     <link href="https://www.scala-lang.org/blog/2022/09/05/scala-3.2.0-released.html"/>
     <updated>2022-09-05T00:00:00+02:00</updated>
     <id>https://www.scala-lang.org/blog/2022/09/05/scala-3.2.0-released</id>
-    <content type="html">&lt;p&gt;&lt;img src=&quot;/resources/img/scala-3.2-launch.png&quot; alt=&quot;Scala 3.2&quot; /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/scala-lang/resources/img/scala-3.2-launch.png&quot; alt=&quot;Scala 3.2&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We are happy to announce the release of Scala 3.2.0. This new minor release allowed us to deliver some significant improvements.&lt;/p&gt;
 
@@ -1545,7 +2054,7 @@ Work experience, hackathons, local user groups, youtube tutorials, internal comp
 
 &lt;p&gt;If you are a library author, you also need to consider that bumping the compiler version in your library will also force all downstream users to use the new compiler the next time they bump the version of your library. For this reason, we encourage you that if you are following the semantic versioning, you bump the compiler version in the next minor release of your library.&lt;/p&gt;
 
-&lt;p&gt;You can read more about our compatibility guarantees and future plans regarding this aspect in &lt;a href=&quot;/blog/2022/08/17/long-term-compatibility-plans.html&quot;&gt;the previous blog post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can read more about our compatibility guarantees and future plans regarding this aspect in &lt;a href=&quot;/scala-lang/blog/2022/08/17/long-term-compatibility-plans.html&quot;&gt;the previous blog post&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;known-incompatibilities&quot;&gt;Known incompatibilities&lt;/h3&gt;
 
@@ -1713,7 +2222,7 @@ The three main criteria we were using to examine potential solutions were:&lt;/p
 
 &lt;h3 id=&quot;configurable-output-version&quot;&gt;Configurable output version&lt;/h3&gt;
 
-&lt;p&gt;This was the solution that we invested the most into. It was discussed in detail in &lt;a href=&quot;/blog/2022/04/12/scala-3.1.2-released.html#configurable-scala-output-version&quot;&gt;the previous blog post&lt;/a&gt;. To summarize: in 3.1.2, we have shipped a new experimental compiler flag that allowed developers to make the compiler generate output that is usable by older versions of the compiler. While this would allow all projects to receive important fixes, it would probably result in a strange state where all the libraries are released with output version 3.1, similar to how nearly all java libraries are still released with output version 8, even though Java 8 is eight years old.&lt;/p&gt;
+&lt;p&gt;This was the solution that we invested the most into. It was discussed in detail in &lt;a href=&quot;/scala-lang/blog/2022/04/12/scala-3.1.2-released.html#configurable-scala-output-version&quot;&gt;the previous blog post&lt;/a&gt;. To summarize: in 3.1.2, we have shipped a new experimental compiler flag that allowed developers to make the compiler generate output that is usable by older versions of the compiler. While this would allow all projects to receive important fixes, it would probably result in a strange state where all the libraries are released with output version 3.1, similar to how nearly all java libraries are still released with output version 8, even though Java 8 is eight years old.&lt;/p&gt;
 
 &lt;p&gt;More importantly, during work on 3.2, we realized that maintaining this flag may be more challenging than anticipated. With time, it will be increasingly harder to be sure that our handling of it is correct. &lt;strong&gt;Thus, we have decided to remove the possibility of configuring the output version altogether in Scala 3.2.&lt;/strong&gt;&lt;/p&gt;
 
@@ -1727,7 +2236,7 @@ The three main criteria we were using to examine potential solutions were:&lt;/p
 
 &lt;p&gt;We think this will allow projects to retain a more conservative approach to updating the compiler versions and still receive the bug fixes and some improvements.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/resources/img/scala3-lts-roadmap.svg&quot; alt=&quot;Scala LTS Roadmap&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/scala-lang/resources/img/scala3-lts-roadmap.svg&quot; alt=&quot;Scala LTS Roadmap&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;the-compatibility-guarantees-in-the-new-model&quot;&gt;The compatibility guarantees in the new model&lt;/h3&gt;
 
@@ -2375,11 +2884,11 @@ Give it a try and report any bug at &lt;a href=&quot;https://github.com/scalacen
 
 &lt;p&gt;will now report a compilation error looking like this&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/resources/img/inline-error-after.png&quot; alt=&quot;the new error&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/scala-lang/resources/img/inline-error-after.png&quot; alt=&quot;the new error&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;instead of previously&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/resources/img/inline-error-before.png&quot; alt=&quot;the old error&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/scala-lang/resources/img/inline-error-before.png&quot; alt=&quot;the old error&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;possibility-to-generate-arbitrary-class-implementations-in-macros&quot;&gt;Possibility to generate arbitrary class implementations in macros&lt;/h3&gt;
 
@@ -2468,203 +2977,6 @@ Give it a try and report any bug at &lt;a href=&quot;https://github.com/scalacen
      1  ghostbuster91
      1  som-snytt
      1  Łukasz Wroński
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</content>
-  </entry>
-  
-  <entry>
-    <title>Learn Scala Online at the EPFL Extension School</title>
-    <link href="https://www.scala-lang.org/blog/2022/06/08/learn-scala-at-epfl-extension-school.html"/>
-    <updated>2022-06-08T00:00:00+02:00</updated>
-    <id>https://www.scala-lang.org/blog/2022/06/08/learn-scala-at-epfl-extension-school</id>
-    <content type="html">&lt;p&gt;We are very excited to announce that our MOOC “Effective Programming in 
-Scala” is now also available on the Extension School platform!&lt;/p&gt;
-
-&lt;h2 id=&quot;the-extension-school-platform&quot;&gt;The Extension School Platform&lt;/h2&gt;
-
-&lt;p&gt;Currently, &lt;a href=&quot;https://docs.scala-lang.org/online-courses.html&quot;&gt;our MOOCs&lt;/a&gt; are published on Coursera or edX. Every year, 
-tens of thousands of programmers take our courses! We are very proud to teach 
-Scala at such a scale, but we also feel some challenges in teaching online. 
-Indeed, for some people, learning alone behind a computer does not work well. 
-When the learners see a test that does not pass, or a compiler error message, they 
-have to figure out what’s wrong almost exclusively on their own.&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://extensionschool.ch&quot;&gt;Extension School&lt;/a&gt; is an online learning platform that addresses 
-this issue. At the Extension School, the learners get &lt;strong&gt;individual support&lt;/strong&gt; 
-from course instructors. They have access to regular live sessions where 
-they can ask specific questions to the course instructors, and their work is 
-reviewed by Scala experts (not only by an automated grader).&lt;/p&gt;
-
-&lt;p&gt;We believe that both types of platforms are complementary and target 
-different needs, this is why we decided to publish the course Effective 
-Programming in Scala on both Coursera and the Extension School.&lt;/p&gt;
-
-&lt;h2 id=&quot;effective-programming-in-scala&quot;&gt;Effective Programming in Scala&lt;/h2&gt;
-
-&lt;p&gt;The course &lt;a href=&quot;https://extensionschool.ch/learn/effective-programming-in-scala?utm_source=scala_lang&amp;amp;utm_medium=blog&amp;amp;utm_campaign=announcement&quot;&gt;Effective Programming in Scala&lt;/a&gt; is the first of our MOOCs to be 
-published to the Extension School. This course teaches programmers with no 
-experience in Scala everything they need to be ready to work in Scala. It’s 
-a good choice for companies that need to train new hires, or for individuals 
-willing to apply for a Scala job.&lt;/p&gt;
-
-&lt;p&gt;The content of the course is the same as on Coursera: it contains video 
-lectures, quizzes, and auto-graded homeworks. The course is self-paced: you 
-start whenever you are available, and you progress at your own pace. 
-Additionally, every week you have access to 30 minutes of live sessions with 
-instructors, and your final project will be reviewed by Scala experts.&lt;/p&gt;
-
-&lt;p&gt;We are looking forward to seeing you online!&lt;/p&gt;
-
-</content>
-  </entry>
-  
-  <entry>
-    <title>Scala 3.1.2 released!</title>
-    <link href="https://www.scala-lang.org/blog/2022/04/12/scala-3.1.2-released.html"/>
-    <updated>2022-04-12T00:00:00+02:00</updated>
-    <id>https://www.scala-lang.org/blog/2022/04/12/scala-3.1.2-released</id>
-    <content type="html">&lt;p&gt;We are happy to announce the release of Scala 3.1.2. This new release brings a few significant improvements awaited by the community.&lt;/p&gt;
-
-&lt;h2 id=&quot;configurable-scala-output-version&quot;&gt;Configurable Scala output version&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;August 2022 Update:&lt;/strong&gt; configurable Scala output version turned out to be really hard to maintain and is not solving some of problems it was intended to solve. We have decided to drop it in 3.2 and propose long term support versions instead. You can read more in &lt;a href=&quot;/blog/2022/08/17/long-term-compatibility-plans.html&quot;&gt;the dedicated post&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;First and foremost, after months of brainstorming and testing, we are bringing an experimental possibility to configure the Scala output version. This means that the compiler can now generate TASTy files and classfiles in a format used by an older minor version of Scala (which can currently be only 3.0.x) effectively specifying the minimum version of the compiler that is able to read your compiled code.&lt;/p&gt;
-
-&lt;p&gt;If you are a library maintainer, you may have faced a dilemma, should you update the Scala version to 3.1 or stay on 3.0. On the one hand, updating would bring you all bug fixes and enhancements from the newest version of the compiler. On the other, all new releases of your library would be unusable for all the users that are, for some reason, stuck on Scala 3.0.&lt;/p&gt;
-
-&lt;p&gt;Now, this tradeoff is no more. When compiling your library with Scala 3.1.2, you can set your output version to Scala 3.0. Then your library can be used by code compiled with Scala 3.0, 3.1, or any future version. All produced TASTy files will be compatible with Scala 3.0 and newer.&lt;/p&gt;
-
-&lt;p&gt;While the compiler setting itself is not explicitly marked as experimental (its corresponding flag doesn’t have a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-X&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Y&lt;/code&gt; prefix in its name), its role in the broader ecosystem of Scala libraries is yet to be determined. We are eagerly awaiting feedback from the maintainers of libraries. Hearing your opinions will allow us to choose the right strategy for supporting code compiled for previous Scala versions so that we can find a balance between compatibility and a possibility for the language to evolve.&lt;/p&gt;
-
-&lt;h3 id=&quot;current-support&quot;&gt;Current support&lt;/h3&gt;
-
-&lt;p&gt;You can set the Scala output version by using a new compiler flag named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-scala-output-version&lt;/code&gt; with a minor release version as an argument. You may remember this flag as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-scala-target&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Xscala-release&lt;/code&gt; in design discussions and unstable builds. Those names are not supported in the stable release.&lt;/p&gt;
-
-&lt;p&gt;Sbt, starting from version 1.7.0-M1, has a setting &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scalaOutputVersion&lt;/code&gt; that not only sets the compiler flag mentioned above but also determines which version of the standard library will be specified as a dependency of your project. For example, adding&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;ThisBuild&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scalaVersion&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3.1.2&quot;&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;ThisBuild&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scalaOutputVersion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3.0.2&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;to your build definition will make your project be compiled using the latest currently available version of the compiler but it will be available as a dependency for other projects compiled with both 3.1.x and 3.0.x. Also the standard library from Scala 3.0.2 will be used at runtime when you use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbt run&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sbt test&lt;/code&gt;. This should help you find possible runtime issues earlier when you intend your library to be compatible with earlier compilers.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scalaOutputVersion&lt;/code&gt; was designed to work smoothly also in cases when you’re still forced to cross-compile anyway (e.g. if your project contains macros but you want to support both Scala 2 and 3). In such situation you should only make sure that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scalaOutputVersion&lt;/code&gt; is set to the same value as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scalaVersion&lt;/code&gt; (which is equivalent to leaving &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scalaOutputVersion&lt;/code&gt; undefined) if the compiler in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scalaVersion&lt;/code&gt; doesn’t yet support the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-scala-output-version&lt;/code&gt; flag. E.g.&lt;/p&gt;
-
-&lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;ThisBuild&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scalaVersion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3.1.2&quot;&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;ThisBuild&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;crossScalaVersions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2.13.8&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3.1.2&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nc&quot;&gt;ThisBuild&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scalaOutputVersion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nv&quot;&gt;CrossVersion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;partialVersion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;scalaVersion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Some&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;3.0.2&quot;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;scalaVersion&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;value&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;changes-to-other-compatibility-flags&quot;&gt;Changes to other compatibility flags&lt;/h3&gt;
-
-&lt;p&gt;We realized that there is some confusion about current output compatibility flags, and adding a new one would only make it worse. So, we have decided to rename existing flags. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-release&lt;/code&gt; is now &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-java-output-version&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Xtarget&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Xunchecked-java-output-version&lt;/code&gt;. The old names are left as aliases for the sake of compatibility.&lt;/p&gt;
-
-&lt;h2 id=&quot;other-improvements&quot;&gt;Other improvements&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;You can now pass &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Xmacro-settings&lt;/code&gt; flag during the compilation to customize the behavior of macros in your code. This feature is still experimental.
-For example, you can compile following code with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-Xmacro-settings:present,key=value&lt;/code&gt;:&lt;/p&gt;
-
-    &lt;div class=&quot;language-scala highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//&amp;gt; using options &quot;-Xmacro-settings:present,key=value&quot;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;scala.quoted.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;inline&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;customizable&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;customizableImpl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;customizableImpl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Quotes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;quotes.reflect.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;settings&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CompilationInfo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;XmacroSettings&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;present&lt;/span&gt;    &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;present&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;notPresent&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;not-present&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// false&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;withValue&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;settings&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;collectFirst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// Some(&quot;value&quot;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;key=$value&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;o&quot;&gt;???&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Do something fancy with your settings&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;You can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scala&lt;/code&gt; command with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-e&lt;/code&gt; flag to quickly execute a Scala statement from the command line.&lt;/p&gt;
-
-    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  scala &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;println(22*38)&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;will print &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;836&lt;/code&gt; on standard output and exit the Scala process.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;There are new optimizations in the typer that may results in significant speedups in some cases. You can find more information and benchmark results in &lt;a href=&quot;https://github.com/lampepfl/dotty/pull/13637&quot;&gt;the related pull request&lt;/a&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;contributors&quot;&gt;Contributors&lt;/h2&gt;
-
-&lt;p&gt;Thank you to all the contributors who made this release possible.&lt;/p&gt;
-
-&lt;p&gt;According to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git shortlog -sn --no-merges 3.1.1..3.1.2&lt;/code&gt; these are:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  57  Martin Odersky
-  44  Nicolas Stucki
-  28  Dale Wijnand
-  20  Paweł Marks
-  18  Jamie Thompson
-  16  Andrzej Ratajczak
-  16  Filip Zybała
-  16  Guillaume Martres
-  15  Michał Pałka
-  10  Olivier Blanvillain
-   9  Som Snytt
-   8  Matt Bovel
-   7  Fengyun Liu
-   7  Tomasz Godzik
-   6  danicheg
-   6  Sébastien Doeraene
-   6  Gagandeep Kalra
-   6  oronpo
-   5  Seth Tisue
-   5  Arman Bilge
-   4  Stephane MICHELOUD
-   4  noti0na1
-   3  Phil
-   3  adampauls
-   3  ghostbuster91
-   3  Eric Torreborre
-   2  Matthieu Bovel
-   2  philwalk
-   2  Kacper Korban
-   2  Ruslan Shevchenko
-   2  Oron Port
-   2  Chris Kipp
-   1  Andrzej Ressel
-   1  Anatolii Kmetiuk
-   1  Arthur Sengileyev
-   1  Cédric Chantepie
-   1  Denis Zolkin
-   1  Georgi Krastev
-   1  Hugo van Rijswijk
-   1  Jakob Odersky
-   1  Julien Richard-Foy
-   1  Kien Dang
-   1  Natsu Kagami
-   1  Ondrej Lhotak
-   1  Ondřej Lhoták
-   1  Rikito Taniguchi
-   1  SDSR
-   1  Tom Grigg
-   1  Yang, Bo
-   1  comcx
-   1  kenji yoshida
-   1  mzcu
-   1  soronpo
-   1  Łukasz Wroński
-   1  Adrien Piquerez
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </content>
   </entry>
