@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>SPLASH Amsterdam and Higher-kinded Types | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="SPLASH Amsterdam and Higher-kinded Types"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2016/11/17/splash.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>SPLASH Amsterdam and Higher-kinded Types</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Thursday 17 November 2016</p>
+						<p>Martin Odersky</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2016/11/17/splash.html">SPLASH Amsterdam and Higher-kinded Types</a></h2> -->
+					<p>Two weeks ago I was in Amsterdam, where we had the Scala Symposium as
+part of the SPLASH conference. I gave a talk at the symposium and then
+later on a keynote at the main conference. I had a great time, staying
+in a hotel on one of Amsterdam’s lovely canals and commuting by bike
+to the conference center. Amsterdam is a fantastic city for
+biking. Each day I picked another route along a different canal, and
+the route generally could not be long enough for me (I missed a couple
+of talks because of that). I noted that it’s important to always stick
+to the traffic rules, for instance to give way to traffic coming from
+the right, or you would get into an accident between two bicycles;
+there are so many of them around.</p>
+
+<p>SPLASH is a set of conferences running together (OOPSLA being one of
+the main ones), so you get exposed to a variety of topics and get to
+talk to people from many different areas. One talk that stood out for
+me was Simon Peyton Jones speaking about how they are reforming the UK
+curriculum to teach computational thinking to kids from primary school
+on. It’s been Simon’s main “other” occupation besides Haskell and he
+gave a fascinating talk that conveyed his great enthusiasm for the
+cause of teaching computing the right way to every kid. His message
+was that we have to act now, when things are waiting to be defined. A
+quote: “We know we have failed if, 10 years from now, the outcome is
+just that every kid can code Java”.</p>
+
+<p>At the Scala Symposium I spoke about how we implemented
+higher-kinded types in Dotty. This was a long and often painful
+journey. In total we tried four different approaches. Each of them was
+an effort of many weeks – sometimes several months – to implement
+the new scheme, debug it, and then finally discard it because we found
+out it was too hard to get right, or did not otherwise live up to
+expectations.</p>
+
+<p>The original reason for trying so many different avenues had to do
+with DOT, which is intended to be the foundation of future Scala. DOT
+as-is has no provision for higher-kinded types, but it turns out
+that a restricted version of higher-kinded types can be
+straightforwardly encoded in it.  That issue is not just academic
+because the <em>dotty</em> compiler uses DOT’s constructs as its core data
+structures. So what is hard to do in DOT tends to be hard to implement in
+the compiler as well.</p>
+
+<p>Originally, we played with the idea to restrict higher-kinded types to
+just the kind of partial applications that can be conveniently
+encoded in DOT or <em>dotty</em>. The main problem was that this would have
+forced us to restrict the Scala language. More advanced idioms, such
+as type classes for <code class="language-plaintext highlighter-rouge">Monad</code> and <code class="language-plaintext highlighter-rouge">Functor</code> would have required rewrites
+and would not be as convenient to use. The boundary between what was
+expressible and what was illegal was also not very intuitive. For instance,
+one could define an abstract polymorphic subtype of <code class="language-plaintext highlighter-rouge">Map</code>s in the usual way:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type M[K, V] &lt;: Map[K, V]
+</code></pre></div></div>
+
+<p>But one could not define a type where the parameters were reversed. I.e.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type M[V, K] &lt;: Map[K, V]
+</code></pre></div></div>
+
+<p>would have been illegal.</p>
+
+<p>To address these limitations, we then played with two more complicated
+encodings of higher-kinded types in <em>dotty</em>’s core types. Neither of
+these worked out very well so in the end we settled for the “brute
+force” approach of adding higher-kinded types without trying to re-use
+most of the core. All these attempts are described in the paper
+<a href="https://infoscience.epfl.ch/record/222780/files/p51-odersky.pdf">Implementing Higher-Kinded Types in
+Dotty</a>.
+The talk was not recorded but I have uploaded the
+<a href="https://www.slideshare.net/Odersky/implementing-higherkinded-types-in-dotty">slides</a>.</p>
+
+<p>Another interesting development was that after the talk I got together
+with Sandro Stucki and Guillaume Martres and we hashed out a slight
+extension of DOT, which would make it much more convenient for more
+advanced dependent type programming and, as a side effect, would make
+it quite suitable to express higher-kinded types as well. If this
+works out it would be a case where compiler hacking influenced the way
+we do theory. It’s usually more efficient to do theory first and
+implement it systematically once it’s done, but sometimes going from
+practice to theory is the only route available.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-11-17-splash.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

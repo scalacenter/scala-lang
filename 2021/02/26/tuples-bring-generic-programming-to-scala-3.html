@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Tuples bring generic programming to Scala 3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Tuples bring generic programming to Scala 3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/2021/02/26/tuples-bring-generic-programming-to-scala-3.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Tuples bring generic programming to Scala 3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Friday 26 February 2021</p>
+						<p>Vincenzo Bazzucchi, Scala Center</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/2021/02/26/tuples-bring-generic-programming-to-scala-3.html">Tuples bring generic programming to Scala 3</a></h2> -->
+					<p>Tuples allow developers to create new types by associating existing types. In
+doing so, they are very similar to case classes but unlike them they retain
+only the structure of the types (e.g., which type is in which order) rather
+than giving each element a name.  A tuple can also be seen as a <em>sequence</em> and
+therefore a collection of objects, however, whereas <em>homogeneous</em> collections
+such as <code class="language-plaintext highlighter-rouge">List[A]</code> or <code class="language-plaintext highlighter-rouge">Set[A]</code> accumulate elements retaining only one type
+(<code class="language-plaintext highlighter-rouge">A</code>), tuples are capable of storing data of different types while preserving
+the type of each entry.</p>
+
+<p>In Scala 3, tuples gain power thanks to new operations, additional type safety
+and fewer restrictions, pointing in the direction of a construct called
+<strong>Heterogeneous Lists</strong> (HLists), one of the core data structures in generic
+programming.</p>
+
+<p>In this post I will take you on a tour of the new Tuple API before looking at
+how a new language feature, dependent match types, allows to implement such
+API.  I hope that through the two proposed examples, you will develop an
+intuition about the usage and power of a few new exciting features of Scala 3.</p>
+
+<h1 id="why-generic-programming">Why generic programming?</h1>
+
+<p>HLists and case classes can both be used to define products of types. However
+HLists do not require the developer to declare class or field names.  This
+makes them more convenient in some scenarios, for example in return types.  If
+we consider <code class="language-plaintext highlighter-rouge">List</code>, you can see that <code class="language-plaintext highlighter-rouge">def splitAt(n: Int)</code> produces a
+<code class="language-plaintext highlighter-rouge">(List[A], List[A])</code> and not a <code class="language-plaintext highlighter-rouge">case class SplitResult(left: List[A], right:
+List[A])</code> because of the cognitive cost of introducing new names
+(<code class="language-plaintext highlighter-rouge">SplitResult</code>, <code class="language-plaintext highlighter-rouge">left</code> and <code class="language-plaintext highlighter-rouge">right</code>).</p>
+
+<p>Moreover, there are infinitely many case classes which share a common
+structure, which means that they have the same number and type of fields. We
+might want to apply the same transformations to them, so that such
+transformations can be defined only once.  <a href="https://underscore.io/books/shapeless-guide/">The Type Astronaut’s Guide to
+Shapeless</a> proposes the following
+simple example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">Employee</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">number</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">manager</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">IceCream</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">numCherries</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">inCone</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>If you are implementing an operation such as serializing instances of these
+types to CSV or JSON, you will realize that the logic is exactly the same and
+you will want to implement it only once. This is equivalent to defining the
+serialization algorithm for the <code class="language-plaintext highlighter-rouge">(String, Int, Boolean)</code> HList, assuming that
+you can map both case classes to it.</p>
+
+<h1 id="a-simple-csv-encoder">A simple CSV encoder</h1>
+
+<p>Let’s consider a simple CSV encoder for our <code class="language-plaintext highlighter-rouge">Employee</code> and <code class="language-plaintext highlighter-rouge">IceCream</code> case classes.
+Each record, or line, of a CSV file is a sequence of values separated by a
+delimiter, usually a comma or a semicolon. In Scala we can represent each value
+as text, using the <code class="language-plaintext highlighter-rouge">String</code> type, and thus each record can be a list of values,
+with type <code class="language-plaintext highlighter-rouge">List[String]</code>. Therefore, in order to encode case classes to CSV, we
+need to extract each field of the case class and to turn it into a <code class="language-plaintext highlighter-rouge">String</code>,
+and then collect all the fields in a list.  In this setting, <code class="language-plaintext highlighter-rouge">Employee</code> and
+<code class="language-plaintext highlighter-rouge">IceCream</code> could be treated in the same way, because they can be simply be seen
+as a <code class="language-plaintext highlighter-rouge">(String, Int, Boolean)</code> which needs to be transformed into a
+<code class="language-plaintext highlighter-rouge">List[String]</code>.  We will first see how to handle this simple scenario before
+briefly looking at how to obtain a tuple from a case class.</p>
+
+<p>Assuming that we know how to transform each element of a tuple into a
+<code class="language-plaintext highlighter-rouge">List[String]</code>, can we transform any tuple into a <code class="language-plaintext highlighter-rouge">List[String]</code>?</p>
+
+<p>The answer is yes, and this is possible because Scala 3 introduces types <code class="language-plaintext highlighter-rouge">*:</code>,
+<code class="language-plaintext highlighter-rouge">EmptyTuple</code> and <code class="language-plaintext highlighter-rouge">NonEmptyTuple</code> but also methods <code class="language-plaintext highlighter-rouge">head</code> and <code class="language-plaintext highlighter-rouge">tail</code> which allow
+us to define recursive operations on tuples.</p>
+
+<h2 id="set-up">Set up</h2>
+
+<p>Let’s define the <code class="language-plaintext highlighter-rouge">RowEncoder[A]</code> type-class, which describes the capability of
+values of type <code class="language-plaintext highlighter-rouge">A</code> to be converted into <code class="language-plaintext highlighter-rouge">Row</code>. To encode a type to <code class="language-plaintext highlighter-rouge">Row</code>, we
+first need to convert each field of the type into a <code class="language-plaintext highlighter-rouge">String</code>: this capability
+is defined by the <code class="language-plaintext highlighter-rouge">FieldEncoder</code> type-class.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">FieldEncoder</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="nc">:</span>
+  <span class="k">def</span> <span class="nf">encodeField</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+
+<span class="k">type</span> <span class="kt">Row</span> <span class="o">=</span> <span class="nc">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
+
+<span class="k">trait</span> <span class="nc">RowEncoder</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="nc">:</span>
+  <span class="k">def</span> <span class="nf">encodeRow</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">Row</span>
+</code></pre></div></div>
+
+<p>We can then add some instances for our base types:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">BaseEncoders</span><span class="k">:</span>
+  <span class="kt">given</span> <span class="kt">FieldEncoder</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">with</span>
+    <span class="k">def</span> <span class="nf">encodeField</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="nv">x</span><span class="o">.</span><span class="py">toString</span>
+
+  <span class="n">given</span> <span class="nc">FieldEncoder</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">]</span> <span class="k">with</span>
+    <span class="k">def</span> <span class="nf">encodeField</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Boolean</span><span class="o">)</span> <span class="k">=</span> <span class="k">if</span> <span class="n">x</span> <span class="n">then</span> <span class="s">"true"</span> <span class="k">else</span> <span class="s">"false"</span>
+
+  <span class="n">given</span> <span class="nc">FieldEncoder</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">with</span>
+    <span class="k">def</span> <span class="nf">encodeField</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=</span> <span class="n">x</span> <span class="c1">// Ideally, we should also escape commas and double quotes</span>
+<span class="n">end</span> <span class="nc">BaseEncoders</span>
+</code></pre></div></div>
+
+<h2 id="recursion">Recursion!</h2>
+
+<p>Now that all these tools are in place, let’s focus on the hard part:
+implementing the transformation of a tuple with an arbitrary number of elements
+into a <code class="language-plaintext highlighter-rouge">Row</code>. Similarly to how you may be used to recurse on lists, on
+tuples we need to manage two scenarios: the base case (<code class="language-plaintext highlighter-rouge">EmptyTuple</code>) and the
+inductive case (<code class="language-plaintext highlighter-rouge">NonEmptyTuple</code>).</p>
+
+<p>In the following snippet, I prefer to use the <a href="https://dotty.epfl.ch/docs/reference/contextual/context-bounds.html">context bound
+syntax</a>
+even if I need a handle for the instances because it concentrates all the
+constraints in the type parameter list (and I do not need to come up with any
+name). After this personal preference disclaimer, let’s see the two cases:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">TupleEncoders</span><span class="k">:</span>
+  <span class="c1">// Base case</span>
+  <span class="n">given</span> <span class="nc">RowEncoder</span><span class="o">[</span><span class="kt">EmptyTuple</span><span class="o">]</span> <span class="k">with</span>
+    <span class="k">def</span> <span class="nf">encodeRow</span><span class="o">(</span><span class="n">empty</span><span class="k">:</span> <span class="kt">EmptyTuple</span><span class="o">)</span> <span class="k">=</span>
+      <span class="nv">List</span><span class="o">.</span><span class="py">empty</span>
+
+  <span class="c1">// Inductive case</span>
+  <span class="n">given</span> <span class="o">[</span><span class="kt">H:</span> <span class="kt">FieldEncoder</span>, <span class="kt">T</span> <span class="k">&lt;:</span> <span class="kt">Tuple:</span> <span class="kt">RowEncoder</span><span class="o">]</span><span class="k">:</span> <span class="kt">RowEncoder</span><span class="o">[</span><span class="kt">H</span> <span class="kt">*:</span> <span class="kt">T</span><span class="o">]</span> <span class="k">with</span>
+    <span class="k">def</span> <span class="nf">encodeRow</span><span class="o">(</span><span class="n">tuple</span><span class="k">:</span> <span class="kt">H</span> <span class="kt">*:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=</span>
+      <span class="n">summon</span><span class="o">[</span><span class="kt">FieldEncoder</span><span class="o">[</span><span class="kt">H</span><span class="o">]].</span><span class="py">encodeField</span><span class="o">(</span><span class="nv">tuple</span><span class="o">.</span><span class="py">head</span><span class="o">)</span> <span class="o">::</span> <span class="n">summon</span><span class="o">[</span><span class="kt">RowEncoder</span><span class="o">[</span><span class="kt">T</span><span class="o">]].</span><span class="py">encodeRow</span><span class="o">(</span><span class="nv">tuple</span><span class="o">.</span><span class="py">tail</span><span class="o">)</span>
+<span class="n">end</span> <span class="nc">TupleEncoders</span>
+</code></pre></div></div>
+
+<p>If the tuple is empty, we produce an empty list. To encode a non-empty tuple we
+invoke the encoder for the first element and we prepend the result to the <code class="language-plaintext highlighter-rouge">Row</code>
+created by the encoder of the tail of the tuple.</p>
+
+<p>We can create an entrypoint function and test this implementation:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tupleToCsv</span><span class="o">[</span><span class="kt">X</span> <span class="k">&lt;:</span> <span class="kt">Tuple</span> <span class="kt">:</span> <span class="kt">RowEncoder</span><span class="o">](</span><span class="n">tuple</span><span class="k">:</span> <span class="kt">X</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
+  <span class="n">summon</span><span class="o">[</span><span class="kt">RowEncoder</span><span class="o">[</span><span class="kt">X</span><span class="o">]].</span><span class="py">encodeRow</span><span class="o">(</span><span class="n">tuple</span><span class="o">)</span>
+
+<span class="nf">tupleToCsv</span><span class="o">((</span><span class="s">"Bob"</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="kc">false</span><span class="o">))</span> <span class="c1">// List("Bob", "42", "false")</span>
+</code></pre></div></div>
+
+<h2 id="how-to-obtain-a-tuple-from-a-case-class">How to obtain a tuple from a case class?</h2>
+
+<p>Scala 3 introduces the
+<a href="https://dotty.epfl.ch/docs/reference/contextual/derivation.html"><code class="language-plaintext highlighter-rouge">Mirror</code></a>
+type-class which provides type-level information about the components and
+labels of types. <a href="https://dotty.epfl.ch/docs/reference/contextual/derivation.html#types-supporting-derives-clauses">A paragraph from that
+documentation</a>
+is particularly interesting for our use case:</p>
+
+<blockquote>
+  <p>The compiler automatically generates instances of <code class="language-plaintext highlighter-rouge">Mirror</code> for <code class="language-plaintext highlighter-rouge">enum</code>s and
+their cases, <strong>case classes</strong> and case objects, sealed classes or traits
+having only case classes and case objects as children.</p>
+</blockquote>
+
+<p>That’s why we can obtain a tuple from a case class using:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">bob</span><span class="k">:</span> <span class="kt">Employee</span> <span class="o">=</span> <span class="nc">Employee</span><span class="o">(</span><span class="s">"Bob"</span><span class="o">,</span> <span class="mi">42</span><span class="o">,</span> <span class="kc">false</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">bobTuple</span><span class="k">:</span> <span class="o">(</span><span class="kt">String</span><span class="o">,</span> <span class="kt">Int</span><span class="o">,</span> <span class="nc">Boolean</span><span class="o">)</span> <span class="k">=</span> <span class="nv">Tuple</span><span class="o">.</span><span class="py">fromProductTyped</span><span class="o">(</span><span class="n">bob</span><span class="o">)</span>
+</code></pre></div></div>
+<p>But that is also why we can revert the operation:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">bobAgain</span><span class="k">:</span> <span class="kt">Employee</span> <span class="o">=</span> <span class="n">summon</span><span class="o">[</span><span class="kt">Mirror.Of</span><span class="o">[</span><span class="kt">Employee</span><span class="o">]].</span><span class="py">fromProduct</span><span class="o">(</span><span class="n">bobTuple</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h1 id="new-tuples-operations">New tuples operations</h1>
+<p>In the previous example, we saw that we can use <code class="language-plaintext highlighter-rouge">.head</code> and <code class="language-plaintext highlighter-rouge">.tail</code> on tuples,
+but Scala 3 introduces many other operations, here is a quick overview:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Example</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">size</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2, 3).size</code></td>
+      <td><code class="language-plaintext highlighter-rouge">3</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">head</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(3 *: 4 *: 5 *: EmptyTuple).head</code></td>
+      <td><code class="language-plaintext highlighter-rouge">3</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">tail</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(3 *: 4 *: 5 *: EmptyTuple).tail</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(4, 5)</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">*:</code></td>
+      <td><code class="language-plaintext highlighter-rouge">3 *: 4 *: 5 *: 6 *: EmptyTuple</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(3, 4, 5, 6)</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">++</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2, 3) ++ (4, 5, 6)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2, 3, 4, 5, 6)</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">drop</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2, 3).drop(2)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(3)</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">take</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2, 3).take(2)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2)</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">apply</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2, 3)(2)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">3</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">splitAt</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2, 3, 4, 5).splitAt(2)</code></td>
+      <td><code class="language-plaintext highlighter-rouge">((1, 2), (3, 4, 5))</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">zip</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 2, 3).zip(('a', 'b'))</code></td>
+      <td><code class="language-plaintext highlighter-rouge">((1 'a'), (2, 'b'))</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">toList</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 'a', 2).toList</code></td>
+      <td><code class="language-plaintext highlighter-rouge">List(1, 'a', 2) : List[Int | Char]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">toArray</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 'a', 2).toArray</code></td>
+      <td><code class="language-plaintext highlighter-rouge">Array(1, '1', 2) : Array[AnyRef]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">toIArray</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 'a', 2).toIArray</code></td>
+      <td><code class="language-plaintext highlighter-rouge">IArray(1, '1', 2) : IArray[AnyRef]</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">map</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(1, 'a').map[[X] =&gt;&gt; Option[X]]([T] =&gt; (t: T) =&gt; Some(t))</code></td>
+      <td><code class="language-plaintext highlighter-rouge">(Some(1), Some('a')) : (Option[Int], Option[Char])</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="under-the-hood-scala-3-introduces-match-types">Under the hood: Scala 3 introduces match types</h1>
+
+<p>All the operations in the above table use very precise types. For example, the
+compiler ensures that <code class="language-plaintext highlighter-rouge">3 *: (4, 5, 6)</code> is a <code class="language-plaintext highlighter-rouge">(Int, Int, Int, Int)</code> or that the
+index provided to <code class="language-plaintext highlighter-rouge">apply</code> is strictly inferior to the size of the tuple.</p>
+
+<p>How is this possible?</p>
+
+<p>The core new feature that allows such a flexible implementation of tuples are
+<strong>match types</strong>.  I invite you to read more about them
+<a href="http://dotty.epfl.ch/docs/reference/new-types/match-types.html">here</a>.</p>
+
+<p>Let’s see how we can implement the <code class="language-plaintext highlighter-rouge">++</code> operator using this powerful construct.
+We will call our naive version <code class="language-plaintext highlighter-rouge">concat</code>.</p>
+
+<h2 id="defining-tuples">Defining tuples</h2>
+
+<p>First let’s define our own tuple:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">enum</span> <span class="nc">Tup</span><span class="k">:</span>
+  <span class="kt">case</span> <span class="kt">EmpT</span>
+  <span class="k">case</span> <span class="nc">TCons</span><span class="o">[</span><span class="kt">H</span>, <span class="kt">T</span> <span class="k">&lt;:</span> <span class="kt">Tup</span><span class="o">](</span><span class="n">head</span><span class="k">:</span> <span class="kt">H</span><span class="o">,</span> <span class="n">tail</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>That is a tuple is either empty, or an element <code class="language-plaintext highlighter-rouge">head</code> which precedes another
+tuple. Using this recursive definition we can create a tuple in the following
+way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">Tup.</span><span class="o">*</span>
+
+<span class="k">val</span> <span class="nv">myTup</span> <span class="k">=</span> <span class="nc">TCons</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">TCons</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span>  <span class="nc">EmpT</span><span class="o">))</span>
+</code></pre></div></div>
+<p>It is not very pretty, but it can be easily adapted to provide the same ease of
+use as the previous examples.  To do so we can use another Scala 3 feature:
+<a href="http://dotty.epfl.ch/docs/reference/contextual/extension-methods.html">extension
+methods</a></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">Tup.</span><span class="o">*</span>
+
+<span class="n">extension</span> <span class="o">[</span><span class="kt">A</span>, <span class="kt">T</span> <span class="k">&lt;:</span> <span class="kt">Tup</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span> <span class="k">def</span> <span class="nf">*:</span> <span class="o">(</span><span class="n">t</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">TCons</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">T</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nc">TCons</span><span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">t</span><span class="o">)</span>
+</code></pre></div></div>
+<p>So that we can write:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">1</span> <span class="o">*:</span> <span class="s">"2"</span> <span class="o">*:</span> <span class="nc">EmpT</span>
+</code></pre></div></div>
+
+<h2 id="concatenating-tuples">Concatenating tuples</h2>
+
+<p>Now let’s focus on <code class="language-plaintext highlighter-rouge">concat</code>, which could look like this:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">Tup.</span><span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">concat</span><span class="o">[</span><span class="kt">L</span> <span class="k">&lt;:</span> <span class="kt">Tup</span>, <span class="kt">R</span> <span class="k">&lt;:</span> <span class="kt">Tup</span><span class="o">](</span><span class="n">left</span><span class="k">:</span> <span class="kt">L</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">R</span><span class="o">)</span><span class="k">:</span> <span class="kt">Tup</span> <span class="o">=</span>
+  <span class="n">left</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="nc">EmpT</span> <span class="k">=&gt;</span> <span class="n">right</span>
+    <span class="k">case</span> <span class="nc">TCons</span><span class="o">(</span><span class="n">head</span><span class="o">,</span> <span class="n">tail</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">TCons</span><span class="o">(</span><span class="n">head</span><span class="o">,</span> <span class="nf">concat</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">right</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>Let’s analyze the algorithm line by line: <code class="language-plaintext highlighter-rouge">L</code> and <code class="language-plaintext highlighter-rouge">R</code> are the type of the left
+and right tuple. We require them to be a subtype of <code class="language-plaintext highlighter-rouge">Tup</code> because we want to
+concatenate tuples.  Then we proceed recursively by case: if the left tuple is
+empty, the result of the concatenation is just the right tuple.  Otherwise the
+result is the current head followed by the result of concatenating the tail
+with the other tuple.</p>
+
+<p>If we test the function, it seems to work:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">left</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">*:</span> <span class="mi">2</span> <span class="o">*:</span> <span class="nc">EmpT</span>
+<span class="k">val</span> <span class="nv">right</span> <span class="k">=</span> <span class="mi">3</span> <span class="o">*:</span> <span class="mi">4</span> <span class="o">*:</span> <span class="nc">EmpT</span>
+
+<span class="nf">concat</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">)</span> <span class="c1">// TCons(1,TCons(2,TCons(3, TCons(4,EmpT))))</span>
+</code></pre></div></div>
+
+<p>So everything seems good. However we can ask the compiler to verify that the
+function behaves as expected.  For instance the following code type-checks:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">concat</span><span class="o">[</span><span class="kt">L</span> <span class="k">&lt;:</span> <span class="kt">Tup</span>, <span class="kt">R</span> <span class="k">&lt;:</span> <span class="kt">Tup</span><span class="o">](</span><span class="n">left</span><span class="k">:</span> <span class="kt">L</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">R</span><span class="o">)</span><span class="k">:</span> <span class="kt">Tup</span> <span class="o">=</span> <span class="n">left</span>
+</code></pre></div></div>
+
+<p>More problematic is the fact that this signature prevents us from using a more
+specific type for our variables or methods:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This does not compile</span>
+<span class="k">val</span> <span class="nv">res</span><span class="k">:</span> <span class="kt">TCons</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">TCons</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">TCons</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">TCons</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">EmpT.</span><span class="k">type</span><span class="o">]]]]</span> <span class="k">=</span> <span class="nf">concat</span><span class="o">(</span><span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Because the returned type is just a tuple, we do not check anything else.  This
+means that the function can return an arbitrary tuple, the compiler cannot
+check that returned value consists of the concatenation of the two tuples. In
+other words, we need a type to indicate that the return of this function is all
+the types of <code class="language-plaintext highlighter-rouge">left</code> followed by all the types of the elements of <code class="language-plaintext highlighter-rouge">right</code>.</p>
+
+<p>Can we make it so that the compiler verifies that we are indeed returning a
+tuple consisting of the correct elements?</p>
+
+<p>In Scala 3 it is now possible, without requiring external libraries!</p>
+
+<h2 id="a-new-type-for-the-result-of-concat">A new type for the result of <code class="language-plaintext highlighter-rouge">concat</code></h2>
+
+<p>We know that we need to focus on the return type. We can define it exactly as
+we have just described it.  Let’s call this type <code class="language-plaintext highlighter-rouge">Concat</code> to mirror the name of
+the function.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">type</span> <span class="kt">Concat</span><span class="o">[</span><span class="kt">L</span> <span class="k">&lt;:</span> <span class="kt">Tup</span>, <span class="kt">R</span> <span class="k">&lt;:</span> <span class="kt">Tup</span><span class="o">]</span> <span class="k">&lt;:</span> <span class="nc">Tup</span> <span class="k">=</span> <span class="n">L</span> <span class="k">match</span>
+  <span class="k">case</span> <span class="nv">EmpT</span><span class="o">.</span><span class="py">type</span> <span class="k">=&gt;</span> <span class="n">R</span>
+  <span class="k">case</span> <span class="nc">TCons</span><span class="o">[</span><span class="kt">headType</span>, <span class="kt">tailType</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">TCons</span><span class="o">[</span><span class="kt">headType</span>, <span class="kt">Concat</span><span class="o">[</span><span class="kt">tailType</span>, <span class="kt">R</span><span class="o">]]</span>
+</code></pre></div></div>
+
+<p>You can see that the implementation closely follows the one above for the
+method. The syntax can be read in the following way: the <code class="language-plaintext highlighter-rouge">Concat</code> type is a
+subtype of <code class="language-plaintext highlighter-rouge">Tup</code> and is obtained by combining types <code class="language-plaintext highlighter-rouge">L</code> and <code class="language-plaintext highlighter-rouge">R</code> which are both
+subtypes of <code class="language-plaintext highlighter-rouge">Tup</code>.  To use it we need to massage a bit the method
+implementation and to change its return type:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">concat</span><span class="o">[</span><span class="kt">L</span> <span class="k">&lt;:</span> <span class="kt">Tup</span>, <span class="kt">R</span> <span class="k">&lt;:</span> <span class="kt">Tup</span><span class="o">](</span><span class="n">left</span><span class="k">:</span> <span class="kt">L</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">R</span><span class="o">)</span><span class="k">:</span> <span class="kt">Concat</span><span class="o">[</span><span class="kt">L</span>, <span class="kt">R</span><span class="o">]</span> <span class="k">=</span>
+  <span class="n">left</span> <span class="k">match</span>
+    <span class="k">case</span> <span class="k">_:</span> <span class="kt">EmpT.</span><span class="k">type</span> <span class="o">=&gt;</span> <span class="n">right</span>
+    <span class="k">case</span> <span class="n">cons</span><span class="k">:</span> <span class="kt">TCons</span><span class="o">[</span><span class="k">_</span>, <span class="k">_</span><span class="o">]</span> <span class="k">=&gt;</span> <span class="nc">TCons</span><span class="o">(</span><span class="nv">cons</span><span class="o">.</span><span class="py">head</span><span class="o">,</span> <span class="nf">concat</span><span class="o">(</span><span class="nv">cons</span><span class="o">.</span><span class="py">tail</span><span class="o">,</span> <span class="n">right</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>We use here a combination of match types and a form of dependent types called
+<em>dependent match types</em> (docs
+<a href="http://dotty.epfl.ch/docs/reference/new-types/match-types.html">here</a> and
+<a href="http://dotty.epfl.ch/docs/reference/new-types/dependent-function-types.html">here</a>).
+There are some quirks to it as you might have noticed: using lower case types
+means using type variables and we cannot use pattern matching on the object. I
+think however that this implementation is extremely concise and readable.</p>
+
+<p>Now the compiler will prevent us from making the above mistake:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">wrong</span><span class="o">[</span><span class="kt">L</span> <span class="k">&lt;:</span> <span class="kt">Tup</span>, <span class="kt">R</span> <span class="k">&lt;:</span> <span class="kt">Tup</span><span class="o">](</span><span class="n">left</span><span class="k">:</span> <span class="kt">L</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">R</span><span class="o">)</span><span class="k">:</span> <span class="kt">Concat</span><span class="o">[</span><span class="kt">L</span>, <span class="kt">R</span><span class="o">]</span> <span class="k">=</span> <span class="n">left</span>
+<span class="c1">// This does not compile!</span>
+</code></pre></div></div>
+
+<p>We can use an extension method to allow users to write <code class="language-plaintext highlighter-rouge">(1, 2) ++ (3, 4)</code>
+instead of <code class="language-plaintext highlighter-rouge">concat((1, 2), (3, 4))</code>, similarly to how we implemented <code class="language-plaintext highlighter-rouge">*:</code>.</p>
+
+<p>We can use the same approach for other functions on tuples, I invite you to
+have a look at the <a href="https://github.com/lampepfl/dotty/blob/87102a0b182849c71f61a6febe631f767bcc72c3/library/src-bootstrapped/scala/Tuple.scala">source code of the standard
+library</a>
+to see how the other operators are implemented.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2021-02-26-tuples-bring-generic-programming-to-scala-3.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

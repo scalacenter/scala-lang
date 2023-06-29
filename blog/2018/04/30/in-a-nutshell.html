@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Macros: the Plan for Scala 3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Macros: the Plan for Scala 3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2018/04/30/in-a-nutshell.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Macros: the Plan for Scala 3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 30 April 2018</p>
+						<p>Martin Odersky and Nicolas Stucki</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2018/04/30/in-a-nutshell.html">Macros: the Plan for Scala 3</a></h2> -->
+					<h2 id="or-scala-in-a-tasty-nutshell">Or: Scala in a (Tasty) Nutshell</h2>
+
+<p>One of the biggest open questions for migrating to <a href="https://www.scala-lang.org/blog/2018/04/19/scala-3.html">Scala 3</a> is what to
+do about macros. In this blog post we give our current thoughts. The
+gist is that we are trying to achieve full alignment between macros
+and Tasty.</p>
+
+<h2 id="what-is-tasty">What is Tasty?</h2>
+
+<p>Tasty is the high-level interchange format for Scala 3. It is based on
+<i>t</i>yped <i>a</i>bstract <i>s</i>yntax <i>t</i>rees. These trees
+contain in a sense all the information present in a Scala
+program. They represent the syntactic structure of programs and also
+contain the complete information about types and positions. The Tasty
+“snapshot” of a code file is taken after type checking (so that all
+types are present and all implicits are elaborated) but before any
+transformations (so that no information is lost or changed). The file
+representation of these trees is heavily optimized for compactness,
+which means that we can generate full Tasty trees on every compiler
+run and rely on nothing else for supporting separate compilation.</p>
+
+<p>The information present in Tasty trees can be used for many purposes.</p>
+
+<ul>
+  <li>The compiler uses it to support separate compilation.</li>
+  <li>Our LSP-based language server uses it to support hyperlinking, command completion, documentation,
+and also for global operations such as find-references and renaming.</li>
+  <li>A build tool can use it to cross-build on different platforms and migrate code from one binary
+version to another.</li>
+  <li>Optimizers and analyzers can use it for deep code analysis and advanced code generation</li>
+</ul>
+
+<p>Among these use cases, the first two work today. The other two are
+very interesting possibilities to pursue in the future.</p>
+
+<p>OK, but what is Tasty <em>exactly</em>? An up-to-date version of the Tasty
+file format is described in file
+<a href="https://github.com/lampepfl/dotty/blob/master/tasty/src/dotty/tools/tasty/TastyFormat.scala">TastyFormat.scala</a>
+of the <code class="language-plaintext highlighter-rouge">dotc</code> compiler for Scala 3.</p>
+
+<h2 id="what-does-tasty-have-to-do-with-macros">What Does Tasty Have to Do with Macros?</h2>
+
+<p>It turns out that Tasty also makes an excellent foundation for a new
+generation of reflection-based macros, with the potential to solve
+many of the problems in the current version.</p>
+
+<p>The first problem with the current <a href="https://docs.scala-lang.org/overviews/macros/overview.html">Def Macros</a> is that they
+are completely dependent on the current Scala compiler (internally
+named <code class="language-plaintext highlighter-rouge">nsc</code>). In fact, def macros are nothing but a thin
+veneer on top of <code class="language-plaintext highlighter-rouge">nsc</code> internals. This makes them very powerful but
+also fragile and hard to use. Because of this, they have had
+“experimental” status for their whole lifetime. Since Scala 3 uses a
+different compiler (<code class="language-plaintext highlighter-rouge">dotc</code>), the old reflect-based macro system cannot
+be ported to it, so we need something different, and hopefully better.</p>
+
+<p>Another criticism of the current macros is that they
+lack <em>foundations</em>. Scala 3 has already a meta
+programming facility, with particularly well explored foundations. <a href="https://dotty.epfl.ch/docs/reference/metaprogramming/macros.html">Quotes and
+Splices</a>
+is a way to support <em>staging</em> (in the sense of runtime code-generation)
+by adding just two operators to the
+language: Quote (<code class="language-plaintext highlighter-rouge">'</code>) to represent code expressions, and splice (<code class="language-plaintext highlighter-rouge">~</code>)
+to insert one piece of code in another. The inspiration for our
+approach <a href="https://dl.acm.org/citation.cfm?id=3011069">comes from temporal logic</a>.  A
+somewhat related system is used for staging in
+<a href="http://okmij.org/ftp/ML/MetaOCaml.html">MetaOCaml</a>.  We obtain a very
+high level <em>macro system</em> by combining the two temporal operators <code class="language-plaintext highlighter-rouge">'</code>
+and <code class="language-plaintext highlighter-rouge">~</code> with Scala 3’s <code class="language-plaintext highlighter-rouge">inline</code> feature. In a nutshell:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">inline</code> copies code from definition site to call site</li>
+  <li><code class="language-plaintext highlighter-rouge">(')</code> turns code into syntax trees</li>
+  <li><code class="language-plaintext highlighter-rouge">(~)</code> embeds syntax trees in other code.</li>
+</ul>
+
+<p>This approach to macros is very elegant, and has surprising expressive
+power. But it might be a little bit too principled. There are still
+many bread and butter tasks one cannot do with it. In particular:</p>
+
+<ul>
+  <li>Syntax trees are opaque, we are missing a way to decompose them and analyze their structure and contents.</li>
+  <li>We can only quote and splice expressions, but not other program structures such as definitions or parameters.</li>
+</ul>
+
+<p>We were looking for a long time for ways to augment principled meta
+programming by ways to decompose and flexibly reconstruct trees. The
+main problem here is choice paralysis - there is basically an infinite
+number of ways to expose the underlying structure. Quasi-quotes or
+syntax trees? Which constructs should be exposed exactly? What are the
+auxiliary types and operations?</p>
+
+<p>If we make some choice here, how do we know that this will be the
+right choice for users today? How to guarantee stability of the APIs
+in the future? This embarrassment of riches was essentially what
+plagued def macros. To solve this dilemma, we plan to go
+“bottom-up” instead of “top-down”. We establish the following
+principle:</p>
+
+<p><em>The reflective layer of macros will be isomorphic to Tasty.</em></p>
+
+<p>This has several benefits:</p>
+
+<ul>
+  <li><strong>Completeness</strong>. Tasty is Scala 3’s interchange format, so basing the reflection API on it means no information is lost.</li>
+  <li><strong>Stability</strong>. As an interchange format, Tasty will be kept stable. Its evolution will be carefully managed with a strict versioning system. So the reflection API can be evolved in a controlled way.</li>
+  <li><strong>Compiler Independence</strong>. Tasty is designed to be independent of the actual Scala compilers supporting it. Besides the Dotty implementation there is now also a proof-of-concept system that shows that <code class="language-plaintext highlighter-rouge">scalac</code> can generate Tasty trees, and it is even conceivable to generate them from Java. This means that the reflection API can be easily ported to new compilers. If a compiler supports Tasty as the interchange format, it can be made to support the reflection API at the same time.</li>
+</ul>
+
+<h2 id="scala-in-a-nutshell">Scala in a Nutshell</h2>
+
+<p>As a first step towards this goal, we are working on a representation
+of Tasty in terms of a suite of compiler-independent data
+structures. The current
+status
+gives high-level data structures for all aspects of a Tasty file. With
+currently about 200 lines of data definitions it reflects every piece of
+information that is contained in a Scala program after type
+checking. 200 lines is larger than a definition of mini-Lisp, but
+much, much smaller than the 30’000 lines or so of a full-blown
+compiler frontend!</p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>The next step, <a href="https://github.com/lampepfl/dotty/pull/4279">currently under way</a>, is to connect these definitions to the Tasty file format. We do this by rewriting them as
+<a href="https://docs.scala-lang.org/tour/extractor-objects.html">extractors</a>
+that implement each data type in terms of the data structures used by
+the <code class="language-plaintext highlighter-rouge">dotc</code> compiler which are then pickled and unpickled in the Tasty
+file format. An interesting alternative would be to write Tasty
+picklers and unpicklers that work directly with reflect trees.</p>
+
+<p>Once this is done, we need to define and implement semantic operations such as</p>
+
+<ul>
+  <li>what are the members that can be selected on this expression?</li>
+  <li>which subclasses are defined for a sealed trait?</li>
+  <li>does this expression conform to some expected type?</li>
+</ul>
+
+<p>Finally, we need to connect the new lower-level reflection layer to the existing
+principled macro system based on quotes and splices. This looks not very difficult. In essence, we
+need to define a pair of mappings between high level trees of type
+<code class="language-plaintext highlighter-rouge">scala.quoted.Expr[T]</code> and lower-level Tasty trees of type
+<code class="language-plaintext highlighter-rouge">tasty.Term</code>. Mapping a high-level tree to a low-level one simply
+means exposing its structure. Mapping a a low-level tree to a
+high-level tree of type <code class="language-plaintext highlighter-rouge">scala.quoted.Expr[T]</code> means checking that the
+low-level tree has indeed the given type <code class="language-plaintext highlighter-rouge">T</code>. That should be all.</p>
+
+<h2 id="future-macros">Future Macros</h2>
+
+<p>If this scheme is adopted, it determines to a large degree what Scala 3 macros will
+look like. Most importantly, they will run after the typechecking phase is
+finished because that is when Tasty trees are generated and
+consumed. Running macro-expansion after typechecking has many advantages</p>
+
+<ul>
+  <li>it is safer and more robust, since everything is fully typed,</li>
+  <li>it does not affect IDEs, which only run the compiler until typechecking is done,</li>
+  <li>it offers more potential for incremental compilation and parallelization.</li>
+</ul>
+
+<p>But the scheme also restricts the kind of macros that can be expressed:
+macros will be <a href="https://docs.scala-lang.org/overviews/macros/blackbox-whitebox.html">blackbox</a>.
+This means that a macro expansion
+cannot influence the type of the expanded expression as seen from the
+typechecker. As long as that constraint is satisfied, we should be able
+to support both classical def macros and macro annotations.</p>
+
+<p>For instance, one will be able to define a macro annotation <code class="language-plaintext highlighter-rouge">@json</code> that adds a
+JSON serializer to a type. The difference with respect to
+today’s <a href="https://docs.scala-lang.org/overviews/macros/paradise.html">macro paradise</a>
+<a href="https://docs.scala-lang.org/overviews/macros/annotations.html">annotation macros</a>
+(which are currently not part of the official Scala distribution) is that in Scala 3
+the generated serializers can be seen only in downstream projects, because the expansion
+driven by the annotation happens after type checking.</p>
+
+<p>We believe the lack of whitebox macros can be alleviated to some degree by having
+more expressive forms of computed types. A sketch of such as system is outlined
+in <a href="https://github.com/lampepfl/dotty/pull/3844">Dotty PR 3844</a>.</p>
+
+<p>The Scala 3 language will also directly incorporate some constructs
+that so far required advanced macro code to define. In particular:</p>
+
+<ul>
+  <li>
+    <p>We model lazy implicits directly using
+<a href="https://dotty.epfl.ch/docs/reference/contextual/by-name-context-parameters.html">by-name parameters</a> instead of through a macro.</p>
+  </li>
+  <li>
+    <p>Native <a href="https://dotty.epfl.ch/docs/reference/new-types/type-lambdas.html">type lambdas</a> reduce the need for <a href="https://github.com/non/kind-projector">kind projector</a>.</p>
+  </li>
+  <li>
+    <p>There will be a way to do typeclass derivation a la <a href="https://github.com/milessabin/kittens">Kittens</a>, <a href="https://github.com/propensive/magnolia">Magnolia</a>, or <a href="https://gitlab.com/fommil/scalaz-deriving">scalaz-deriving</a> that does not need macros. We are currently evaluating the alternatives. The primary goal is to develop a scheme that is easy to use and that performs well at both compile- and run-time. A second goal is generality, as long as it does not conflict with the primary goal.</p>
+  </li>
+</ul>
+
+<h2 id="meta-programming-in-the-large">Meta Programming in the Large</h2>
+
+<p>The future Scala 3 macro design is intended to replace the existing def macros and the <code class="language-plaintext highlighter-rouge">scala.reflect</code> infrastructure. But there is another meta programming system that is quite complementary to it: <a href="https://scalameta.org/">Scalameta</a> provides high-quality syntactic and semantic analysis and code generation tools which are separate from the Scala compiler. As the name implies, Scalameta is run at the meta level, that is, it takes programs as input and produces syntactic or semantic information or rewritten programs as output. A macro system, by contrast, is integrated in the language and expands programs as they are compiled. There are potential synergies between the two projects. To name but two possibilities:</p>
+
+<ul>
+  <li>Scalameta or projects derived from it such as <a href="https://github.com/scalameta/scalameta/blob/master/semanticdb/semanticdb3/semanticdb3.md">SemanticDB</a> could obtain type information directly from Tasty, which would make them independent from specific compilers.</li>
+  <li>IDEs could use Tasty for single projects but refer to SemanticDB for more complicated multi-project and multi-language builds.</li>
+</ul>
+
+<h2 id="please-give-us-your-feedback">Please Give Us Your Feedback!</h2>
+
+<p>What do you think of the macro roadmap? To discuss, there’s a <a href="https://contributors.scala-lang.org/t/what-kinds-of-macros-should-scala-3-support/1850">thread</a> on
+<a href="https://contributors.scala-lang.org">Scala Contributors</a>. Your feedback
+there will be very valuable. There is also lots of scope to shape the
+future by contributing to the development in the <a href="https://github.com/lampepfl/dotty">Dotty</a> repo.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2018-04-30-in-a-nutshell.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Roadmap towards non-experimental macros | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Roadmap towards non-experimental macros"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/10/09/scalamacros.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Roadmap towards non-experimental macros</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 9 October 2017</p>
+						<p>Ólafur Páll Geirsson</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2017/10/09/scalamacros.html">Roadmap towards non-experimental macros</a></h2> -->
+					<p>This week, the Scala Center joins the multi-year efforts of Eugene Burmako and
+his collaborators to establish a non-experimental and portable macro system for
+Scala.
+With Eugene’s blessing, I will be taking the lead on behalf of the Scala Center
+to develop this project in close collaboration with the Scala community, the
+Dotty team at EPFL, Scala compiler team at Lightbend and the IntelliJ Scala
+Plugin team at Jetbrains.
+This initiative follows <a href="https://scala.epfl.ch/minutes/2017/09/12/september-12-2017.html#scp-014-production-ready-scalamacrosscalamacros">SCP-014</a>, a proposal that was approved two weeks ago
+with an overwhelming majority of the Scala Center Advisory Board.</p>
+
+<h2 id="brief-history">Brief history</h2>
+<p>Before diving into the roadmap of this new exciting development, I’d like to
+briefly summarize and recognize the efforts that have been made so far towards
+establishing a standard, non-experimental macro system for Scala.
+I’ll try to keep it short here, for a more comprehensive coverage please refer
+to the list of <a href="https://infoscience.epfl.ch/search?ln=en&amp;p=Burmako%2C+Eugene&amp;jrec=1&amp;f=author">papers written by Eugene Burmako</a>, the founder of Scala
+Macros, in particular his PhD thesis <a href="https://infoscience.epfl.ch/record/226166/files/EPFL_TH7159.pdf">Unification of Compile-Time and Runtime
+Metaprogramming in Scala</a>.</p>
+
+<p>If you want the TL;DR, see <a href="#next-steps">next steps</a>.</p>
+
+<h3 id="v1-scalareflect">v1: scala.reflect</h3>
+
+<p>Scala.reflect-based macros shipped with Scala 2.10 and have since then become
+an integral part of the Scala 2.x ecosystem.
+Well-known libraries like ScalaTest, Sbt, Spark, Circe, Slick, Shapeless,
+Spire and others use scala.reflect macros to achieve previously unreachable
+standards of expressiveness, type safety and performance.</p>
+
+<p>Unfortunately, scala.reflect-based macros have also gained notoriety as an
+arcane and brittle technology.
+The scala.reflect API is based on Scala 2.x compiler internals, meaning that
+scala.reflect in its current form cannot be supported on other compilers such
+as Dotty or the IntelliJ Scala Plugin.
+Even five years after their introduction, scala.reflect macros still can’t
+expand in IntelliJ, leading to proliferation of spurious red squiggles -
+sometimes in pretty simple code.</p>
+
+<p>Quoting Eugene Burmako, the author of Scala macros, in <a href="https://github.com/scala/docs.scala-lang/pull/57#issuecomment-239210760">SIP-16</a> on
+self-cleaning macros</p>
+
+<blockquote>
+  <p>While trying to fix these problems via evolutionary changes to the current
+macro system, we have realized that most of them are caused by the decision
+to use scala.reflect as the underlying metaprogramming API. Modelled after
+compiler internals, scala.reflect inherits many of its peculiar design
+choices. Extensive use of desugarings and existence of multiple independent
+program representations may have worked well for compiler development, but
+they turned out to be inadequate for a public API.</p>
+</blockquote>
+
+<p>As a result of these known limitations, the <a href="https://github.com/scala/docs.scala-lang/pull/57#issuecomment-239210760">language committee has decided to
+retire the scala.reflect-based macro system</a>.
+Another justification for retiring the scala.reflect-based macro system was
+that a new macro system based on Scalameta was “just around the corner”.</p>
+
+<h3 id="v2-scalameta">v2: scala.meta</h3>
+
+<p>The <a href="https://infoscience.epfl.ch/search?ln=en&amp;p=Burmako%2C+Eugene&amp;jrec=1&amp;f=author">Scalameta</a> project was founded to become a better macro system for Scala,
+with the vision to replace scala.reflect as the de-facto metaprogramming
+toolkit for Scala.</p>
+
+<p>With Scalameta, we managed to support a different flavor of macros: annotation macros.
+These macros are used to implement <a href="https://docs.scala-lang.org/overviews/macros/typeproviders.html#public-type-providers">public type providers</a>, which makes it possible
+to generate publicly visible classes and methods.
+Note that annotation macros have never been officially supported in Scala 2.x,
+and have always required an external compiler plugin.</p>
+
+<p>Scalameta annotation macros are the first macros to be supported on multiple
+compilers:
+<a href="https://scalameta.org/paradise/">Scala 2.x</a>,
+<a href="https://blog.jetbrains.com/scala/2016/11/11/intellij-idea-2016-3-rc-scala-js-scala-meta-and-more/">IntelliJ Scala Plugin</a>
+and
+<a href="https://github.com/liufengyun/eden">Dotty</a>.
+The novelty with Scalameta macros was that they used a “converter-based” approach.
+This approach involves converting compiler-specific ASTs into the <a href="https://github.com/scalacenter/macros/blob/v0.0.1/core/src/main/scala/scala/macros/trees/Trees.scala">Scalameta
+AST</a>, which is a large collection of “dumb” data containers that leak no
+implementation details from the compiler.
+The details of this approach are explained in more detail in <a href="https://github.com/scala/improvement-proposals/pull/28">SIP-29</a>, a
+proposal to use Scalameta as the foundation for building macros in Scala.</p>
+
+<p>For my personal project Scalafmt, I use Scalameta annotation macros to abstract
+over boilerplate to read
+<a href="https://scalameta.org/scalafmt/#Configuration">~90 different configuration options</a>
+into a single case class</p>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">New style &quot;inline/meta&quot; macro merged into scalafmt, Dotty-ready macros are happening and they are amazing! <a href="https://twitter.com/hashtag/scala?src=hash">#scala</a> <a href="https://github.com/scalameta/scalafmt/pull/459">scalameta/scalafmt#459</a> <a href="https://t.co/ZvjdWE0Gp3">pic.twitter.com/ZvjdWE0Gp3</a></p>&mdash; Ólafur Páll Geirsson (@olafurpg) <a href="https://twitter.com/olafurpg/status/779372897198637057">September 23, 2016</a></blockquote>
+
+<p>Many other OSS Scala libraries also use Scalameta annotation macros to
+to maximize type safety, expressiveness and performance:</p>
+<ul>
+  <li><a href="http://frees.io/">Freestyle</a>:  <code class="language-plaintext highlighter-rouge">@free</code>/<code class="language-plaintext highlighter-rouge">@module</code> annotation macros to
+support a cohesive &amp; pragmatic framework of FP centric Scala libraries</li>
+  <li><a href="https://vovapolu.github.io/stalagmite/2017/09/02/stalagmite-performance.html">Stalagmite</a>:
+<code class="language-plaintext highlighter-rouge">@data</code> annotation macros to generate effective and customizable replacement
+of conventional case classes with convenient optimizations</li>
+  <li><a href="https://github.com/vitorsvieira/dilate">Dilate</a> /
+<a href="https://github.com/alexknvl/newtypes">Newtypes</a>: <code class="language-plaintext highlighter-rouge">@valueclass</code>/<code class="language-plaintext highlighter-rouge">@newtype</code>
+annotation macros to generate better value classes for Scala</li>
+  <li><a href="https://static.javadoc.io/com.thoughtworks.example/unidoc_2.12/2.0.0/com/thoughtworks/example.html">Example.scala</a>:
+<code class="language-plaintext highlighter-rouge">@example</code> annotation macro to generate unit tests from Scaladoc code listings</li>
+</ul>
+
+<p>The Scala community is indeed creative and eager to explore new metaprogramming
+facilities.</p>
+
+<p>Scalameta annotation macros are far from perfect, they suffer from integration
+problems with, e.g., Scaladoc, Scala IDE/presentation compiler, Scala REPL and
+Scoverage.
+Most importantly however, we discovered several drawbacks with the converter-based
+approach while adding support for def macros with access to the semantic API.
+The issues we encountered are documented in more detail in section 3 of the
+technical report <a href="https://www.dropbox.com/s/2xzcczr3q77veg1/gestalt.pdf">“Two Approaches to Portable Macros”</a>.</p>
+
+<p>Nevertheless, we learned a few important lessons</p>
+
+<ul>
+  <li>Users and macro authors care a lot about IDE support, in particular IntelliJ
+support.</li>
+  <li>Building a portable macro system with ASTs that don’t leak compiler
+implementation details is possible.</li>
+  <li>Eagerly converting between the compiler and scalameta ASTs introduces
+a lot of problems that can be avoided by implementing macros in terms of
+extractor/constructor methods on <em>abstract syntax</em>.</li>
+</ul>
+
+<p>With these lessons learned, we decided to retire our efforts to build a macro
+system on top of Scalameta.
+From now on, Scalameta’s primary focus is to support building developer tools
+such as Scalafmt, Scalafix and Metadoc.</p>
+
+<h3 id="v3-scalamacros">v3: scala.macros</h3>
+
+<p>In winter and spring 2017, Eugene Burmako at Twitter and Liu Fengyun at EPFL
+worked on a new macro system to address the limitations of scala.reflect-based (v1)
+and scala.meta-based (v2) macros.
+This third iteration of Scala Macros builds on top of the strengths of the
+scala-reflect API with the following distinction, it’s</p>
+
+<ul>
+  <li>smaller, the API exposes as little as possible from the compiler
+while still being able to support most interesting macro applications.</li>
+  <li>more robust, common pitfalls in scala.reflect-based macros are guarded by
+the type system with separation of typed and untyped trees.</li>
+</ul>
+
+<p>The design of this approach is explained in more detail in
+section 4 “The Syntax-Based approach” of the technical report
+<a href="https://www.dropbox.com/s/2xzcczr3q77veg1/gestalt.pdf">“Two approaches to portable macros”</a>.
+The latest implementation of this design is hosted at <a href="https://github.com/scalamacros/scalamacros">scalacenter/macros</a>.
+I want to thank Twitter for allowing Eugene Burmako to share this
+implementation, that he created during work-hours, under a BSD 3 license.
+This repository has a working prototype that we can base our future work on.</p>
+
+<p>One pain point in macros v1 that macros v3 does not address is the separate
+compilation restriction.
+Macro definitions must still be compiled in a separate project from where they
+are used.
+Nevertheless, we believe that v3 represents a significant enough improvement to
+forgive this restriction, which is admittedly an inconvenience for macro authors
+but arguably not a blocker for adoption.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>As the history above shows, establishing a stable macro system for Scala is a
+large undertaking.
+It has taken many years to reach where we are today, involving a collaboration
+between many different parties.
+We still have a long way to go to reach the level of expressiveness, robustness
+and simplicity that we seek in a stable macro system.</p>
+
+<p>Here below is a rough estimated roadmap for macros v3</p>
+
+<ul>
+  <li>in Scala 2.12, we experiment with compiler plugins</li>
+  <li>in Dotty, Liu Fengyun at EPFL will work on adding support in the compiler</li>
+  <li>in IntelliJ, Mikhail Mutcianko from the Scala Plugin team at Jetbrains will
+work on adding support to expand macros from the IntelliJ editor</li>
+  <li>in Scala 2.13, we continue to experiment via compiler plugins and compiler
+feature flags in later minor releases</li>
+  <li>in Scala 2.14 macros v3 become no longer “experimental” and scala.reflect is
+deprecated</li>
+</ul>
+
+<p>Following the recommendation of the Scala Center Advisory Board, the work on
+macros v3 will be an iterative processes between</p>
+
+<ul>
+  <li>implementing macro features that have been approved for inclusion into
+macros v3</li>
+  <li>gathering feedback from the community on what macro features merit inclusion
+in macros v3</li>
+</ul>
+
+<p>As for the first part, we have immediately begin development to support a limited
+subset of blackbox def macros.</p>
+
+<h3 id="blackbox-def-macros">Blackbox def macros</h3>
+
+<p>Blackbox def macros have non-controversially proven themselves to be invaluable
+for the Scala community.
+Examples of blackbox def macros include: <code class="language-plaintext highlighter-rouge">CaseClass.fieldNames</code> above,
+ScalaTest <code class="language-plaintext highlighter-rouge">assert</code> and Play/Circe JSON automatic readers/writers.
+Blackbox def macros share the following attributes:</p>
+
+<ul>
+  <li>they’re invoked at compile-time instead of runtime</li>
+  <li>they can query the compiler for semantic information such as types and symbols.</li>
+  <li>they faithfully respect their declared type signatures, making their
+implementation irrelevant to understand their behavior. From the end user’s
+perspective, they look and behave much like regular Scala methods excluding
+the ability to emit compiler errors/warnings</li>
+</ul>
+
+<p>These attributes of blackbox def macros enable them to mix naturally into
+Scala codebases and make them prime for inclusion in the Scala Language
+Specification.</p>
+
+<h3 id="sip-proposal">SIP proposal</h3>
+
+<p>Alongside prototyping preliminary support for a limited set of blackbox def
+macros, we will immediately begin preparing a SIP proposal to include macros
+v3 into the Scala Language Specification.
+We plan to address the valuable reviews made to <a href="https://github.com/scala/improvement-proposals/pull/28">SIP-29</a> on inline/meta in a
+new proposal, so that SIP-29 can be rejected.
+In addition, we will document how we aim to solve hygiene using an
+innovation discovered by the collaboration of Liu Fengyun and Eugene Burmako.</p>
+
+<h3 id="documentation">Documentation</h3>
+
+<p>Currently, there is no official guide for exploring the wide landscape of
+metaprogramming facilities that are available to Scala developers.
+While discussing macros with members of the OSS community and industry,
+I repeatedly receive questions such as:
+should I use def macros, annotations, shapeless, a compiler plugin or scripted
+code generation?
+There is no silver bullet, each solution comes with a set of trade-offs.</p>
+
+<p>We plan to document the trade-offs of these different metaprogramming
+solutions.
+Especially, we want to document which use-cases macros are suitable for, and
+which use-cases they’re either overkill, or insufficient.
+Macros should in general be used as a last resort.
+We care deeply to know what you’d like to see covered in this documentation
+effort.
+Please share your thoughts.</p>
+
+<h3 id="share-your-thoughts">Share your thoughts</h3>
+<p>The current set of approved features in macros v3 does not reach feature parity
+with the scala.reflect-based macro system.
+Some scala.reflect macros rely on advanced capabilities beyond what
+blackbox macros support.</p>
+
+<p>By not supporting these advanced features, we put ourselves a fragile situation
+where we risk forcing Scala users to remain on old versions of the compiler.
+Such a situation is undesirable for both Scala users and those who wish to
+evolve the language.
+We must debate together as a community whether these advanced features
+merit inclusion in the language specification or if they can be replaced
+with alternative metaprogramming techniques.</p>
+
+<p>To initiate this debate, I have started two <a href="https://contributors.scala-lang.org/">Scala Contributors</a> threads:
+one on <a href="https://contributors.scala-lang.org/t/pre-sip-whitebox-def-macros/1210">whitebox def macros</a> and another on <a href="https://contributors.scala-lang.org/t/pre-sip-annotation-macros/1211">annotation macros</a>.
+In my posts, I try to reflect on the pros and cons of each feature in
+an unbiased manner.
+I look forwards to hearing your thoughts.
+In particular, we should try to explore</p>
+
+<ul>
+  <li>towards what end do you use these advanced features?</li>
+  <li>why are the macros enabled by these features important for you and your
+users?</li>
+  <li>can you use alternative metaprogramming techniques such as
+code generation scripts or compiler plugins to achieve the same
+functionality? How would that refactoring impact your macro?</li>
+</ul>
+
+<p>We plan to include the results of these discussions in the SIP proposal for
+macros v3.
+The end result, I hope, will be a simpler Scala language with yet very capable
+metaprogramming facilities.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>I want to express my great gratitude to Eugene Burmako and his relentless
+efforts to make macros in Scala as capable and popular as they are today.
+Eugene has been a steward of macros in Scala for over 6 years.
+During both professional and personal time, he has generously worked on
+exploring new metaprogramming paradigms, mentored dozens of people (including
+myself!) and communicated his findings with the Scala community both online and
+offline.
+I am honored to take the lead from your solid guidance.
+I look forward to continuing our fruitful collaboration and I hope we, together
+as a community, can stand up to the challenge to complete this project to end.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2017-10-09-scalamacros.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

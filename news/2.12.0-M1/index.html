@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 2.12.0-M1 is now available! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 2.12.0-M1 is now available!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/news/2.12.0-M1/"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 2.12.0-M1 is now available!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 5 May 2015</p>
+						<p></p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">ANNOUNCEMENT</div>
+					<!-- <h2><a href="/news/2.12.0-M1/">Scala 2.12.0-M1 is now available!</a></h2> -->
+					<p>We are very pleased to announce the release of Scala 2.12.0-M1!</p>
+
+<ul>
+  <li>Download a distribution from <a href="https://scala-lang.org/download/2.12.0-M1.html">scala-lang.org</a></li>
+  <li>Obtain it via <a href="https://search.maven.org/?search%7Cga%7C1%7Cg%3A%22org.scala-lang%22%20AND%20v%3A%222.11.0%22#search%7Cga%7C1%7Cg%3Aorg.scala-lang%20AND%20v%3A2.12.0-M1">Maven Central</a></li>
+</ul>
+
+<p>Code that compiles on 2.11.x without deprecation warnings should compile on 2.12.x (we do not guarantee this for experimental APIs, such as reflection).
+If not, <a href="https://issues.scala-lang.org">please file an issue</a>.</p>
+
+<p>We are working with the community to ensure availability of the core projects of the Scala 2.12 eco-system.
+This release is <em>not</em> binary compatible with the 2.11.x series, to allow us to keep improving the Scala standard library.</p>
+
+<p>The Scala 2.12 series targets Java 8.
+Programs written in Scala 2.12, including the Scala 2.12 compiler, can only be executed on Java 8 or newer.
+Note that the current milestone release (2.12.0-M1) still targets Java 6.</p>
+
+<h3 id="new-features-in-the-212-series">New Features in the 2.12 Series</h3>
+
+<p>Scala 2.12 contains all of the bug fixes and improvements made in the 2.11 series.</p>
+
+<p>At the current stage in the milestone cycle, Scala 2.12 is still very similar to Scala 2.11.</p>
+
+<p>The following changes are planned for Scala 2.12:</p>
+
+<ul>
+  <li>Java 8 style closures.
+The Scala compiler will emit closure classes (lambdas) in the same manner as Java 8.
+The design notes for this feature are available in <a href="https://gist.github.com/retronym/0178c212e4bacffed568">this gist</a>.</li>
+  <li>Lambda syntax for SAM types.
+Similar to Java 8, Scala 2.12 allows instantiating any type with one single abstract method by passing a lambda.
+This feature is already avalable in Scala 2.11 using the <code class="language-plaintext highlighter-rouge">-Xexperimental</code> compiler option.
+It improves the experience of using libraries written for Java 8 in Scala.</li>
+  <li>New backend and optimizer.
+The “GenBCode” backend, which is already available in Scala 2.11 using the <code class="language-plaintext highlighter-rouge">-Ybackend:GenBCode</code> compiler option, will be enabled by default.
+Scala 2.12 will also ship with a new inliner and bytecode optimizer.
+We keep track of issues and work items for the new optimizer on the scala-opt repository issue tracker.</li>
+</ul>
+
+<p>The above list is incomplete and will be extended during the Scala 2.12 milestone cycle.</p>
+
+<p>Up the current milestone, the Scala team and contributors <a href="https://issues.scala-lang.org/browse/SI-9200?jql=project%20%3D%20SI%20and%20fixVersion%20%3E%3D%20%222.12.0-M1%22%20and%20fixVersion%20%3C%3D%20%222.12.0%22%20and%20resolution%20%3D%20fixed">fixed 47 bugs</a> that are exclusive to Scala 2.12.0.
+During the development cycle of Scala 2.12, we will continue to backport issues to 2.11 whenever feasible.
+With the release of 2.12.0, backports to 2.11 will be dialed back.</p>
+
+<!-- Notes from 2.11.0
+#### Important Changes
+
+For most cases, code that compiled under 2.10.x without deprecation warnings should not be affected. We've verified this by [compiling](https://scala-ci.typesafe.com/job/scala-2.11.x-jdk8-integrate-community-build/) a [sizeable number of open source projects](https://github.com/scala/community-build/blob/2.11.x/common.conf#L20).
+
+Changes to the reflection API may cause breakages...
+
+We've decided to fix the following more obscure deviations from specified behavior without deprecating them first.
+
+* [SI-4577](https://issues.scala-lang.org/browse/SI-4577) Compile `x match { case _ : Foo.type => }` to `Foo eq x`, as specified. It used to be `Foo == x` (without warning). If that's what you meant, write `case Foo =>`.
+* ...
+
+The following changes were made after a deprecation cycle
+
+* [SI-6809](https://issues.scala-lang.org/browse/SI-6809) Case classes without a parameter list are no longer allowed.
+* ...
+
+Finally, some notable improvements and bug fixes:
+
+* [SI-7296](https://issues.scala-lang.org/browse/SI-7296) Case classes with > 22 parameters are now allowed.
+*...
+
+
+#### Deprecations
+
+The following language "warts" have been deprecated:
+* [#3746](https://github.com/scala/scala/pull/3746) Generation of bean info classes using the `@BeanInfo` annotation.
+Deprecation is closely linked to source and binary compatibility. We say two versions are source compatible when they compile the same programs with the same results. Deprecation requires qualifying this statement: "assuming there are no deprecation warnings". This is what allows us to evolve the Scala platform and keep it healthy. We move slowly to guarantee smooth upgrades, but we want to keep improving as well!
+-->
+
+<h4 id="removed-modules">Removed Modules</h4>
+
+<p>The following modules have been removed from the Scala 2.12 distribution:</p>
+
+<ul>
+  <li>The Scala actors library is no longer released with Scala 2.12.
+We recommend that you use the <a href="https://akka.io/">Akka actors library</a> instead.</li>
+  <li>The Scala distribution archives and the <code class="language-plaintext highlighter-rouge">scala-library-all</code> maven dependency no longer inlcude Akka actors.
+To use the Akka actors library, add it to your project <a href="https://doc.akka.io/docs/akka/2.3.10/intro/getting-started.html">as a dependency</a>.</li>
+  <li>The continuations plugin is no longer shipped with the Scala 2.12 distribution.</li>
+</ul>
+
+<h4 id="contributors">Contributors</h4>
+
+<p>A big thank you to everyone who’s helped improve Scala by reporting bugs, improving our documentation, spreading kindness in mailing lists and other public fora, and submitting and reviewing pull requests!
+You are all magnificent.</p>
+
+<p>According to <code class="language-plaintext highlighter-rouge">git shortlog -sn --no-merges 2.11.x..v2.12.0-M1</code>, 33 people contributed to this major release:
+Jason Zaugg, Lukas Rytz, A. P. Marki, Rex Kerr, Kato Kazuyoshi, Max Bileschi, jxcoder, François Garillot, rubyu, Adriaan Moors, Dominik Gruntz, Evgeny Vereshchagin, Marc Siegel, Masato Sogame, Simon Ochsenreither, Todd Vierling, Viktor Klang, cchantep, Denton Cockburn, Paolo Giarrusso, Denis Rosset, Roman Hargrave, Rui Gonçalves, Shadaj, harryhuk, Steven Scott, Antoine Gourlay, Aleksandar Prokopec, Lukas Elmer, Erlend Hamnaberg, Maks Atygaev, Malte Isberner, dgruntz.
+Thank you!</p>
+
+<p>These release notes are <a href="https://github.com/scala/make-release-notes/blob/2.12.x/hand-written.md">hosted on GitHub</a> and are continuously updated during the Scala 2.12.0 release cycle.
+You are kindly invited to contribute!</p>
+
+<h3 id="reporting-bugs">Reporting Bugs</h3>
+
+<p>Please file any bugs you encounter on <a href="https://issues.scala-lang.org">our issue tracker</a>.
+If you’re unsure whether something is a bug, please contact the <a href="https://groups.google.com/forum/?fromgroups#!forum/scala-user">scala-user</a> mailing list.
+Before creating a new issue, search search the issue tracker to see if your bug has already been reported.</p>
+
+<h3 id="scala-ide-for-eclipse">Scala IDE for Eclipse</h3>
+
+<p>A release of the Scala IDE for Eclipse for Scala 2.12 will be available together with the release.</p>
+
+<p>Note that for the current milestone (2.12.0-M1), the Scala IDE is not yet available.</p>
+
+<!-- Notes from 2.11.0
+The Scala IDE with this release built in is [available from this update site](https://web.archive.org/web/20151026064959/http://download.scala-ide.org/sdk/helium/e38/scala211/stable/site/) for [Eclipse 4.2/4.3 (Juno/Kepler)](https://www.eclipse.org/downloads/packages/release/Kepler/SR2). Please have a look at the [getting started guide](http://scala-ide.org/docs/user/gettingstarted.html) for more info.
+-->
+
+<h3 id="available-projects">Available Projects</h3>
+
+<p>Please refer to the list of <a href="https://github.com/scala/make-release-notes/blob/2.12.x/projects-2.12.md">libraries and frameworks available for Scala 2.12</a>.</p>
+
+<h3 id="binary-compatibility">Binary Compatibility</h3>
+
+<p>Since Sala 2.11, minor releases of Scala are binary compatible.
+Scala 2.12 continues this tradition: every 2.12.x release will be binary compatible with 2.12.0.
+Note that milestone releases and release candidates are <strong>not</strong> binary compatible with any other release.</p>
+
+<h4 id="definition">Definition</h4>
+
+<p>When two versions of Scala are binary compatible, it is safe to compile your project on one Scala version and link against another Scala version at run time.
+Safe run-time linkage (only!) means that the JVM does not throw a (subclass of) <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/LinkageError.html"><code class="language-plaintext highlighter-rouge">LinkageError</code></a> when executing your program in the mixed scenario, assuming that none arise when compiling and running on the same version of Scala.
+Concretely, this means you may have external dependencies on your run-time classpath that use a different version of Scala than the one you’re compiling with, as long as they’re binary compatibile.
+In other words, separate compilation on different binary compatible versions does not introduce problems compared to compiling and running everything on the same version of Scala.</p>
+
+<p>We check binary compatibility automatically with <a href="https://github.com/typesafehub/migration-manager">MiMa</a>.</p>
+
+<h4 id="forwards-and-back">Forwards and Back</h4>
+
+<p>We distinguish forwards and backwards compatibility (think of these as properties of a sequence of versions, not of an individual version).
+Maintaining backwards compatibility means code compiled on an older version will link with code compiled with newer ones.
+Forwards compatibility allows you to compile on new versions and run on older ones.</p>
+
+<p>Thus, backwards compatibility precludes the removal of (non-private) methods, as older versions could call them, not knowing they would be removed, whereas forwards compatibility disallows adding new (non-private) methods, because newer programs may come to depend on them, which would prevent them from running on older versions (private methods are exempted here as well, as their definition and call sites must be in the same compilation unit).</p>
+
+<h4 id="meta">Meta</h4>
+
+<p>Note that so far we’ve only talked about the jars generated by scalac for the standard library and reflection.
+Our policies do not extend to the meta-issue: ensuring binary compatibility for bytecode generated from identical sources, by different version of scalac?
+(The same problem exists for compiling on different JDKs.)
+While we strive to achieve this, it’s not something we can test in general.
+Notable examples where we know meta-binary compatibility is hard to achieve: specialisation and the optimizer.</p>
+
+<p>In short, if binary compatibility of your library is important to you, use <a href="https://github.com/typesafehub/migration-manager">MiMa</a> to verify compatibility before releasing.
+Compiling identical sources with different versions of the Scala compiler (or on different JVM versions!) could result in binary incompatible bytecode.
+This is rare, and we try to avoid it, but we can’t guarantee it will never happen.</p>
+
+<h4 id="concretely">Concretely</h4>
+
+<p>We guarantee forwards and backwards compatibility of the <code class="language-plaintext highlighter-rouge">"org.scala-lang" % "scala-library" % "2.12.x"</code> and <code class="language-plaintext highlighter-rouge">"org.scala-lang" % "scala-reflect" % "2.12.x"</code> artifacts, except for anything under the <code class="language-plaintext highlighter-rouge">scala.reflect.internal</code> package, as scala-reflect is still experimental.
+We also strongly discourage relying on the stability of <code class="language-plaintext highlighter-rouge">scala.concurrent.impl</code> and <code class="language-plaintext highlighter-rouge">scala.reflect.runtime</code>, though we will only break compatibility for severe bugs here.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2015-05-05-release-notes-2.12.0-M1.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

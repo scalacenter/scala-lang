@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Google Summer of Code 2022: How It Was | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Google Summer of Code 2022: How It Was"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2022/11/15/gsoc-report.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Google Summer of Code 2022: How It Was</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 15 November 2022</p>
+						<p>Anatolii Kmetiuk, Scala Center</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2022/11/15/gsoc-report.html">Google Summer of Code 2022: How It Was</a></h2> -->
+					<p>We’ve recently completed another successful Google Summer of Code program. Designed to bring more beginners into programming communities, the participation in the program is a part of Scala Center’s strategy to make contributing to the Scala language more newcomer-friendly.</p>
+
+<p>This year, we welcomed four students guided by five mentors. They contributed to projects such as Scala Native, Creative Scala, Scalafix, and Metals. In this article, you can find a short summary of what was done as well as the links to find out more.</p>
+
+<h2 id="scala-native-linker-optimization">Scala Native: Linker Optimization</h2>
+<p><a href="https://scala-native.org/">Scala Native</a> is an optimizing ahead-of-time compiler and runtime for Scala. It enables the programmer to compile Scala to native code that does not require a JVM for its execution. Scala Native is great for performance-critical applications – think embedded software – that require tight memory control while allowing all the type-safety and compile-time verification advantages that come with Scala.</p>
+
+<p>During GSoC 2022, Liangyong Yu, mentored by Wojciech Mazur, was working on making Scala Native faster and more memory-efficient. He introduced incremental compilation that reduced the build time by 21% on average. Also, he developed a benchmarking infrastructure to measure the performance of Scala Native builds. Considerable work was done on the optimizer of Scala Native which resulted in decreased memory consumption.</p>
+
+<p>Overall, Liangyong’s work makes Scala Native builds even more performant time- and memory-wise, which will be especially interesting for the developers of large codebases. You can find out more in Liangyong’s <a href="https://github.com/yuly16/Scala-Native-GSoC-Report">report</a>.</p>
+
+<h2 id="doodle-explore">Doodle Explore</h2>
+<p><a href="https://github.com/creativescala/doodle">Scala Doodle</a> is a compositional graphics library for generative art in Scala that enables users to declaratively create art pieces and other visualizations. A Doodle graphic is generally parameterized by one or more variables such as stroke width and background color, or sometimes something more domain-specific like the magnitude of gravity or iterations of a fractal. In any of these cases, the creator of a graphic may want to use a GUI for changing the parameters to fine-tune the art piece or provide a means to make the graphic interactive.</p>
+
+<p>Mikail Khan, mentored by Noel Welsh, developed a domain-specific language for describing GUIs during the Summer of 2022 – have a look at this <a href="https://creativescala.github.io/doodle-explore/">documentation microsite</a> for a quick demo.</p>
+
+<p>The project will be especially interesting for Scala educators. For experienced and novice programmers alike, it’s important to quickly get feedback on what your code is doing – this is how we learn. Even more so it is important for people who have just started their journey in programming. Having a visual feedback you can play with is a great feature that can be used to teach Scala to newcomers.</p>
+
+<p>The final report for this project is available <a href="https://static.mikail-khan.com/gsoc-report/">here</a>.</p>
+
+<h2 id="towards-scala-3-support-for-scalafix-explicitresulttypes-cross-compiling-to-scala-3">Towards Scala 3 support for Scalafix <code class="language-plaintext highlighter-rouge">ExplicitResultTypes</code>: cross-compiling to Scala 3</h2>
+<p>Scalafix is a linting and rewriting tool for Scala codebases. <code class="language-plaintext highlighter-rouge">ExplicitResultTypes</code> is one of the built-in rules, which inserts type annotations for inferred public members.</p>
+
+<p>Unlike most rules that only rely on the Scalafix &amp; SemanticDB APIs, <code class="language-plaintext highlighter-rouge">ExplicitResultTypes</code> also depends on the Scala presentation compiler, requiring users to run Scalafix with the Scala binary version targeted by the source files they want to annotate. As Scalafix is currently only cross-compiled to Scala 2.11, 2.12 and 2.13, it is not trivial to interact with the Scala 3 compiler and thus <code class="language-plaintext highlighter-rouge">ExplicitResultTypes</code> cannot run on Scala 3 source files at the moment.</p>
+
+<p>Razvan Vacaru, mentored by Brice Jaglin and Meriam Lachkar made a significant progress towards the goal of supporting Scala 3 in <code class="language-plaintext highlighter-rouge">ExplicitResultTypes</code> by cross-compiling all Scalafix modules to Scala 3. You can find a detailed report <a href="https://github.com/rvacaru/GsoC-2022-Scalafix">here</a>.</p>
+
+<h2 id="semantic-highlighting-in-metals">Semantic Highlighting in Metals</h2>
+<p>Semantic Highlighting is a part of the default LSP (Language Server Protocol – what connects Metals to your favorite code editor to bring all nice developer experience to you) spec, but it is not yet supported by Metals. This would allow the highlighting of tokens (keywords etc.) based on semantic information about the code. This is especially useful with things like soft keywords in Scala 3, but not only.</p>
+
+<p>Semantic Highlighting is a long-standing <a href="https://github.com/scalameta/metals-feature-requests/issues/57">feature request</a> in Metals. Having a finer-grained, smarter code highlighting would enhance the developer experience, making Scala even more pleasant to work with across all the different editors.</p>
+
+<p>Shintaro Sasaki, mentored by Tomasz Godzik, has been working on the project during the Summer of 2022. Currently, the project is still a work-in-progress – you can follow its development at the following <a href="https://github.com/scalameta/metals/pull/4444">PR</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>The work done during GSoC 2022 makes Scala even more performant in certain areas, brings even more options for Scala educators to teach Scala, and enhances the Scala migration and development experience.</p>
+
+<p>The Scala community has gained four more contributors as a result of the program. We would like to thank the students whom we mentored this year – Liangyong Yu, Mikail Khan, Razvan Vacaru, Shintaro Sasaki – for their contribution to keeping Scala awesome.</p>
+
+<p>We would also like to thank the mentors – Brice Jaglin, Meriam Lachkar, Noel Welsh, Tomasz Godzik, Wojciech Mazur – for the time and knowledge they invested in getting the students up to speed with the projects and the community.</p>
+
+<p>Scala Center is intended to participate in GSoC 2023 as well! If you are interested in joining, either as a mentor or a student – keep an eye on our LinkedIn and Twitter for updates on the future installment of GSoC. You can also consult the <a href="https://developers.google.com/open-source/gsoc/timeline">timeline</a> for 2022 to have some idea on the timeframes of the previous installment and have some idea on when to expect things to come into motion in 2023.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2022-11-15-gsoc-report.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

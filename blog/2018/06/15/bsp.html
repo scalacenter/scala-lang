@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Announcing the Build Server Protocol v1.0.0 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Announcing the Build Server Protocol v1.0.0"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2018/06/15/bsp.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Announcing the Build Server Protocol v1.0.0</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Friday 15 June 2018</p>
+						<p>Jorge Vicente Cantero, Justin Kaeser and Ólafur Páll Geirsson</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2018/06/15/bsp.html">Announcing the Build Server Protocol v1.0.0</a></h2> -->
+					<p>The choice of an editor, IDE or build tool is personal and, therefore, asking
+you to go out of your way to learn a new tool to write Scala is not a viable
+solution. First, because changing people’s habits is difficult and takes time.
+Second, it frustrates beginners who just want to learn the language. Last, it
+distracts seasoned developers from writing good Scala code until they master
+their toolchain. In the worst case, people will give up and not learn the
+language because the “cognitive overhead” would be too high.</p>
+
+<p>Instead it is much better if we, tooling developers, can bear the burden of
+shipping tools that integrate with your existing workflow and you, as a user,
+can just install them with a quick search and a single click.</p>
+
+<p>Today, we introduce the Build Server Protocol, a project that we believe plays
+a fundamental role in bringing us closer to making this vision a reality.</p>
+
+<h2 id="any-ide-any-build-tool">Any IDE, Any Build Tool</h2>
+
+<p>Traditionally, every IDE has implemented a custom integration for each
+supported build tool in order to extract build information such as classpaths
+or source directories for every project in your build. This information is
+necessary for the IDE to present you with a workspace where you can browse,
+write and compile Scala code. Every time you “Import Project” from IntelliJ
+or Eclipse, the IDE carries out this process on the background.</p>
+
+<p>Likewise, all build tools are expected to integrate with all available IDEs.
+Most of them allow you to export their build to an external project model so
+that user adoption is not hurt by lack of official IDE support. This support
+isn’t as thorough and polished as the one provided by IDEs, but usually gets
+the job done at the expense of supported features.</p>
+
+<p>So, IDEs create their own custom build tool integrations and build tools
+provide their own custom IDE integrations. Why should you care?</p>
+
+<p>It turns out the growing number of language servers and build tools in the
+wider programming community means tooling developers spend a lot of time
+working on these integrations. This work, that needs to be duplicated on each
+side every time there is a new IDE or build tool and distracts developers
+from working on bugfixes and performance improvements, ends up affecting
+us – their end users. This is a big deal; we developers rely on build tools and
+IDEs for everything! If they are slow to evolve and maintain, then our
+developer experience takes a hit.</p>
+
+<p>The idea behind the Build Server Protocol is to standardize the protocol for
+how build tools (servers) and IDEs (clients) communicate, so a single Build
+Server can be re-used in multiple IDEs, and IDEs can support build tools with
+minimal effort.</p>
+
+<p>As a result, end users are provided with the best developer experience and
+tooling developers can improve the quality of their integrations with less
+effort and time, without locking out a part of the programming language
+community from good language support. This is especially important for the
+Scala community that has had a lot of recent activity in the build tools
+space with the increasing adoption of build tools like <a href="https://pantsbuild.org">Pants</a>, <a href="https://bazel.build">Bazel</a> or
+<a href="https://lihaoyi.com/mill">mill</a>.</p>
+
+<h3 id="relationship-with-the-language-server-protocol">Relationship with the Language Server Protocol</h3>
+
+<p>BSP is a win for both IDEs implementors, build tool vendors and their users!
+But this is, in fact, not the first time this idea is applied to tools.
+Microsoft’s <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> (LSP) applied the same concept to
+language servers and editors. What is then BSP’s relationship with LSP?</p>
+
+<p>BSP and LSP are complementary. While LSP specifies endpoints for
+communication between an <em>editor acting as a client</em> and a language server,
+BSP specifies endpoints between a <em>language server acting as a client</em> and a
+build server.</p>
+
+<p>It turns out that if we want to create language servers to support Scala in
+editors like Visual Studio Code, <code class="language-plaintext highlighter-rouge">vim</code> or Sublime, we also need to integrate
+with build tools to support features like compiler diagnostics or code
+navigation. One of the main properties of BSP is that it can be implemented
+alongside LSP.</p>
+
+<h2 id="the-build-server-protocol-v100">The Build Server Protocol v1.0.0</h2>
+
+<p>Today we have released <code class="language-plaintext highlighter-rouge">v1.0.0</code> of the Build Server Protocol. This version has
+been the result of a fruitful collaboration between the Scala Center ([Jorge
+Vicente Cantero][jvican] and <a href="https://github.com/olafurpg">Ólafur Páll Geirsson</a>) and JetBrains
+(<a href="https://github.com/jastice">Justin Kaeser</a>).</p>
+
+<p>We have spent the past months implementing a prototype of the Build Server
+Protocol between <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> (client) and <a href="https://github.com/scalacenter/bloop">Bloop</a> (server). Bloop is
+a build-tool-agnostic compilation server that integrates with build tools such
+as <a href="https://www.scala-sbt.org/">sbt</a>, <a href="https://lihaoyi.com/mill">mill</a> or <a href="https://maven.apache.org/">Maven</a> to allow you <a href="https://www.scala-lang.org/blog/2017/11/30/bloop-release.html">to compile, test and run your
+applications much faster and outside of your stock build
+tool</a>. Bloop has
+a client-server architecture, so it is the perfect project to implement BSP.</p>
+
+<p>The goal of this prototype was two-fold. On the one hand, we wanted to
+experience first-hand the challenges of implementing BSP and learn new
+insights to improve the protocol. On the other hand, we wanted to provide
+Scala developers a faster “Import Project” that would work across different
+build tools <em>now</em>, even though build tools don’t yet provide implementations
+of build servers.</p>
+
+<p><a href="https://build-server-protocol.github.io">The first version of
+BSP</a> has been
+designed to support the most basic language integration in an IDE/editor.
+IDEs can find all the modules defined in a workspace, ask for their
+dependencies, compile, test, run, and get notifications on modified build
+targets, among a few other features.</p>
+
+<p>Our IntelliJ-Bloop implementation doesn’t yet implement all these endpoints.
+Instead, it focuses on providing a faster integration than the traditional
+project import. You can now import your project, browse Scala code with full
+language support and get compiler diagnostics from the build tool in
+IntelliJ’s editor.</p>
+
+<p>The process to import project via BSP is as follows:</p>
+
+<ol>
+  <li>Export your build to Bloop. The Bloop server will immediately pick up these
+changes.</li>
+  <li>Import the build from Bloop to your IDE via BSP.</li>
+</ol>
+
+<p></p>
+<!-- To give more space between list and next paragraph. -->
+
+<p>In total, this two-step process takes up to <strong>15 seconds</strong> in a medium-sized
+build where all the dependencies have already been fetched. It is already
+available in IntelliJ EAP 2018.2 under a experimental flag. To try the
+prototype out, read <a href="https://gist.github.com/jastice/212227aa5fc29426aeea3b93280bcd8a">the full instructions to get Bloop and IntelliJ set
+up</a>.</p>
+
+<p>You can see it on this demo importing <a href="https://github.com/akka/akka/">akka/akka</a>:</p>
+
+<p><img src="/resources/img/bloop-install.gif" alt="Demo of BSP import for akka/akka" /></p>
+
+<p>The two-step process is fast, but it currently requires too much user
+intervention and needs to be repeated every time something changes in the
+build. What can we do to improve it?</p>
+
+<p>Bloop could do a better job at exporting your sbt build every time you start
+up your sbt shell or <code class="language-plaintext highlighter-rouge">reload</code> your build to pick up new changes. This would
+remove the need for the first step. But the process is still arduous for
+users; they need to still perform the manual step of reloading the project
+every time the build tool and IDE go out of sync.</p>
+
+<p>BSP has been designed to deal with this issue from the start. The fact that
+it encourages a bidirectional communication between the build tool and the
+IDE means that build tools can send notifications to IDEs whenever there is a
+change in your build. What’s most interesting is that a future release of a
+build tool supporting BSP would suffice to provide this state-of-the-art
+project import experience instantly.</p>
+
+<p>Aside from importing your build, the BSP prototype also allows you to get
+compiler diagnostics directly from your build tool instead of diagnostics
+from IntelliJ’s presentation compiler. Build tool diagnostics are always
+correct since the compilation happens in your build tool and the results
+are streamed to the IDE.</p>
+
+<p><img src="/resources/img/bloop-compile.gif" alt="Demo of BSP compile for akka/akka" /></p>
+
+<p>To learn more about the Build Server Protocol, check out the
+<a href="https://jorge.vican.me/slides/BSP.pdf">slides</a> of my talk with Justin at
+Scalasphere 2018.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>The next steps will focus on increasing adoption of the protocol and
+enhancing the availability and quality of the integrations for users.</p>
+
+<p>First, the Scala Center will keep collaborating with Jetbrains to improve
+IntelliJ’s BSP import for Bloop and other build tools. The goal is to bring
+BSP import to a production-ready level where users can benefit from a
+build-tool-agnostic import project that is both faster and more reliable.</p>
+
+<p>Second, we’d like to invest some resources in creating a better synergy
+between build tool authors and IDE implementors. The <a href="https://github.com/scalacenter/tooling-working-groups/">Scala Tooling Protocols
+Working Group</a>
+created by <a href="https://www.scala-lang.org/blog/2018/02/14/tooling.html">Jon
+Pretty</a> a few months
+ago will help us discuss and refine the protocol so that all tooling
+developers in our community can implement the protocol at scale and gain more
+experience from this process.</p>
+
+<p>Third, we’d like to collaborate more closely with developers working on Scala
+language servers like <a href="https://github.com/scalameta/metals">Metals</a> or Dotty IDE to bring Scala support to all
+editors. There is a big chunk of Scala developers that don’t use IntelliJ and
+we’d like to make sure that they benefit from a smooth developer experience
+too.</p>
+
+<p>Last but not least, we’d like to reach out to folks in other programming
+language communities to find out ways we can pull our efforts together.
+The Build Server Protocol is <strong>a language-agnostic protocol that can be
+modified to add support for any programming language</strong> and we would love to see
+other communities improving the future of the build tools and IDE
+communication.</p>
+
+<h2 id="how-to-get-involved">How to get involved</h2>
+
+<p>The best way to share your thoughts on the Build Server Protocol or to get
+involved in its development is to open an issue or pull request to
+<a href="https://github.com/scalacenter/bsp"><code class="language-plaintext highlighter-rouge">scalacenter/bsp</code></a>. Most of the features
+in the specification have tickets and review discussions elaborating on the
+design goals, like these <a href="https://github.com/scalacenter/bsp/issues/3">closed</a>
+and <a href="https://github.com/scalacenter/bsp/issues/14">open</a> tickets.</p>
+
+<p>If you want to help integrating BSP in your favorite editor or IDE, or you’d
+like to help test the integrations, join our
+<a href="https://gitter.im/scalacenter/bsp"><code class="language-plaintext highlighter-rouge">scalacenter/bsp</code></a> Gitter channel and
+let’s discuss ways we can work together.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2018-06-15-bsp.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

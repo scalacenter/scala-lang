@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 2.12.0-RC1 is now available! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 2.12.0-RC1 is now available!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/news/2.12.0-RC1/"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 2.12.0-RC1 is now available!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 6 September 2016</p>
+						<p></p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">ANNOUNCEMENT</div>
+					<!-- <h2><a href="/news/2.12.0-RC1/">Scala 2.12.0-RC1 is now available!</a></h2> -->
+					<p>We are happy to announce the availability of Scala 2.12.0-RC1!</p>
+
+<p>Note, however, that Scala 2.12.0-RC2 will follow, due to known
+regressions detailed below.</p>
+
+<p>The most notable changes since M5 are:</p>
+
+<ul>
+  <li><a href="https://github.com/scala/scala/pull/5135">#5135</a>: Either is now
+right-biased</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-4826">SI-4826</a>: Scaladoc now
+supports doc comments in Java sources</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7187">SI-7187</a>: Eta-expansion of
+zero-argument method values is now deprecated</li>
+  <li><a href="https://github.com/scala/scala/pull/5307">#5307</a>: Reduced interference
+from SAMs when inferring function types in the presence of overload</li>
+  <li><a href="https://github.com/scala/scala/pull/5141">#5141</a> /
+<a href="https://github.com/scala/scala/pull/5294">#5294</a>: Refactoring
+of <code class="language-plaintext highlighter-rouge">def</code>, <code class="language-plaintext highlighter-rouge">val</code>, and <code class="language-plaintext highlighter-rouge">lazy val</code> handling, fixing assorted corner
+cases and inconsistencies</li>
+  <li><a href="https://github.com/scala/scala/pull/5311">#5311</a>: Scala is now built with
+sbt instead of Ant (affects only contributors, not users)</li>
+</ul>
+
+<p>In total, we merged <a href="https://github.com/scala/scala/pulls?q=is%3Apr+is%3Amerged+milestone%3A2.12.0-RC1">82 pull requests</a>, of which <a href="https://github.com/scala/scala/pulls?utf8=%E2%9C%93&amp;q=is%3Apr%20is%3Amerged%20milestone%3A2.12.0-RC1%20label%3Awelcome">6 are by new contributors</a> – welcome!
+This milestone resolves <a href="https://issues.scala-lang.org/issues/?jql=project%20%3D%20SI%20AND%20status%20%3D%20CLOSED%20AND%20resolution%20%3D%20Fixed%20AND%20fixVersion%20%3D%20%22Scala%202.12.0-RC1%22%20ORDER%20BY%20component%20ASC%2C%20priority%20DESC">25 JIRA tickets</a>.</p>
+
+<p>As usual for Scala pre-releases, 2.12.0-RC1 is not binary compatible with any other Scala version, including any 2.12 milestones.</p>
+
+<h3 id="known-issues">Known issues</h3>
+
+<p>As with previous 2.12 builds, the new trait encoding may make some
+trait-based code run slower. As a result, compile times may also be
+longer in 2.12 than 2.11.  We welcome feedback from the Scala
+community helping to isolate unusual slowdowns.</p>
+
+<p>The following known regressions will be fixed in 2.12.0-RC2:</p>
+
+<ul>
+  <li><a href="https://github.com/scala/scala-dev/issues/225">SD-225</a>
+may cause drastically longer compile times for certain
+kinds of code.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-9918">SI-9918</a> may
+cause <code class="language-plaintext highlighter-rouge">scala.reflect.internal.Types$TypeError</code>s in code
+involving package objects.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-9920">SI-9920</a> may
+cause <code class="language-plaintext highlighter-rouge">java.lang.NoSuchMethodError</code>s at runtime.</li>
+  <li>A regression may cause <code class="language-plaintext highlighter-rouge">java.util.NoSuchElementException</code>s in
+<code class="language-plaintext highlighter-rouge">scala.tools.nsc.backend.jvm.BCodeSkelBuilder</code>; see
+<a href="https://github.com/scala/scala/pull/5395">#5395</a>.</li>
+</ul>
+
+<p>Because of the last-mentioned regression,
+<a href="https://github.com/milessabin/shapeless">Shapeless</a> will not be
+published for 2.12.0-RC1.</p>
+
+<p>We hope to address the following in a future 2.12.x release:</p>
+
+<ul>
+  <li><a href="https://issues.scala-lang.org/browse/SI-9824">SI-9824</a>:
+Parallel collections are prone to deadlock in the REPL and
+in object initializers.</li>
+</ul>
+
+<h2 id="scala-212">Scala 2.12</h2>
+
+<p>Scala 2.12 requires a Java 8 runtime.</p>
+
+<p>Scala 2.12 is all about making optimal use of Java 8’s new features. Traits (<a href="https://github.com/scala/scala/pull/5003">#5003</a>) and functions are compiled to their Java 8 equivalents, and we treat Single Abstract Method types and Scala’s builtin function types uniformly from type checking to the back end (<a href="https://github.com/scala/scala/pull/4971">#4971</a>). We also use <code class="language-plaintext highlighter-rouge">invokedynamic</code> for a more natural encoding of other language features (<a href="https://github.com/scala/scala/pull/4896">#4896</a>). We’ve standardized on the GenBCode back end (<a href="https://github.com/scala/scala/pull/4814">#4814</a>, <a href="https://github.com/scala/scala/pull/4838">#4838</a>) and the flat classpath implementation is now the default (<a href="https://github.com/scala/scala/pull/5057">#5057</a>). The optimizer has been completely overhauled for 2.12.</p>
+
+<p>Except for the breaking changes listed below, code that compiles on 2.11.x without deprecation warnings should compile on 2.12.x too, unless you use experimental APIs such as reflection.  If you find incompatibilities, please <a href="https://issues.scala-lang.org">file an issue</a>.</p>
+
+<h3 id="new-features">New features</h3>
+
+<p>With this release candidate, we consider 2.12.x to be feature complete.</p>
+
+<p>For 2.12.0, we will try to remain binary compatible with RC1,
+and we won’t risk regressions except for the most critical bugs.</p>
+
+<h4 id="trait-compiles-to-an-interface">Trait compiles to an interface</h4>
+
+<p>With Java 8 allowing concrete methods in interfaces, Scala 2.12 is able to compile a trait to a single interface. Before, a trait was represented as a class that held the method implementations and an interface. Note that the compiler still has quite a bit of magic to perform behind the scenes, so that care must be taken if a trait is meant to be implemented in Java. (Briefly, if a trait does any of the following its subclasses require synthetic code: defining fields, calling super, initializer statements in the body, extending a class, relying on linearization to find implementations in the right super trait.)</p>
+
+<h4 id="java-8-style-lambdas">Java 8-style lambdas</h4>
+
+<p>Scala 2.12 emits closures in the same style as Java 8, whether they target a FunctionN class from the standard library or a user-defined Single Abstract Method type. The type checker accepts a function literal as a valid expression for either kind of “function-like” type (built-in or SAM). This improves the experience of using libraries written for Java 8 in Scala.</p>
+
+<p>For each lambda the compiler generates a method containing the lambda body, and emits an <code class="language-plaintext highlighter-rouge">invokedynamic</code> that will spin up a lightweight class for this closure using the JDK’s <code class="language-plaintext highlighter-rouge">LambdaMetaFactory</code>.</p>
+
+<p>Compared to Scala 2.11, the new scheme has the advantage that, in most cases, the compiler does not need to generate an anonymous class for each closure. This leads to significantly smaller JAR files.</p>
+
+<h4 id="new-back-end">New back end</h4>
+
+<p>Scala 2.12 standardizes on the “GenBCode” back end, which emits code more quickly because it directly generates ASM bytecode from Scala compiler trees, while the previous back end used an intermediate representation called “ICode”. The old back ends (GenASM and GenIcode) have been removed (<a href="https://github.com/scala/scala/pull/4814">#4814</a>, <a href="https://github.com/scala/scala/pull/4838">#4838</a>).</p>
+
+<h4 id="new-optimizer">New optimizer</h4>
+
+<p>The GenBCode back end includes a new inliner and bytecode optimizer.
+The optimizer is enabled using <code class="language-plaintext highlighter-rouge">-opt</code> compiler option, which defaults
+to <code class="language-plaintext highlighter-rouge">-opt:l:classpath</code>.  Check <code class="language-plaintext highlighter-rouge">-opt:help</code> to see the full list of
+available options for the optimizer.</p>
+
+<p>The following optimizations are available:</p>
+
+<ul>
+  <li>Inlining final methods, including methods defined in objects and final methods defined in traits</li>
+  <li>If a closure is allocated and invoked within the same method, the closure invocation is replaced by an invocations of the corresponding lambda body method</li>
+  <li>Dead code elimination and a small number of cleanup optimizations</li>
+  <li>Box/unbox elimination <a href="https://github.com/scala/scala/pull/4858">#4858</a></li>
+</ul>
+
+<h4 id="either-is-now-right-biased">Either is now right-biased</h4>
+
+<p><code class="language-plaintext highlighter-rouge">Either</code> now supports operations like <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">contains</code>,
+<code class="language-plaintext highlighter-rouge">toOption</code>, and so forth, which operate on the right-hand side.</p>
+
+<p><code class="language-plaintext highlighter-rouge">.left</code> and <code class="language-plaintext highlighter-rouge">.right</code> are deprecated in favor of <code class="language-plaintext highlighter-rouge">.swap</code>.</p>
+
+<p>The changes are source-compatible with old code (except in the
+presence of conflicting extension methods).</p>
+
+<p>Thanks, <a href="https://github.com/soc">Simon Ochsenreither</a>, for this
+contribution.</p>
+
+<h4 id="futures-improved">Futures improved</h4>
+
+<p>This <a href="https://github.com/viktorklang/blog">blog post series</a>
+by Viktor Klang explores the diverse improvements made to
+<code class="language-plaintext highlighter-rouge">scala.concurrent.Future</code> for 2.12.</p>
+
+<h4 id="scaladoc-now-supports-doc-comments-in-java-sources">Scaladoc now supports doc comments in Java sources</h4>
+
+<p>Thanks, <a href="https://github.com/jodersky">Jakob Odersky</a>, for this fix to <a href="https://issues.scala-lang.org/browse/SI-4826">SI-4826</a>.</p>
+
+<h4 id="partial-unification-of-type-constructors-si-2712">Partial unification of type constructors (SI-2712)</h4>
+
+<p>Compiling with <code class="language-plaintext highlighter-rouge">-Ypartial-unification</code> adds partial unification of type constructors, fixing the notorious <a href="https://issues.scala-lang.org/browse/SI-2712">SI-2712</a>, thanks to <a href="https://github.com/milessabin">Miles Sabin</a>.</p>
+
+<h3 id="breaking-changes">Breaking changes</h3>
+
+<h4 id="sam-types">SAM types</h4>
+
+<p>As of <a href="https://github.com/scala/scala/pull/4971">#4971</a>, we treat Single Abstract Method types in the same way as our built-in FunctionN classes. This means overloading resolution has more contenders to choose from, making type inference less effective. Here’s an example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class C[V] {
+  def sort(cmp: java.util.Comparator[V]): C[V] = ???
+  def sort(cmp: (V, V) =&gt; Int): C[V] = sort(
+    new java.util.Comparator[V] {
+      def compare(a: V, b: V): Int = cmp(a, b)
+    })
+}
+
+(new C[Int]) sort (_ - _) // error
+(new C[Int]) sort ((_ - _): java.util.Comparator[Int]) // ok
+(new C[Int]) sort ((a: Int, b: Int) =&gt; a - b)  // ok
+</code></pre></div></div>
+
+<p>The first attempt fails because the type checker cannot infer the types for <code class="language-plaintext highlighter-rouge">_ - _</code>’s arguments anymore.
+Type inference in this scenario only works when we can narrow the overloads down to one before type checking the arguments the methods are applied to. When a function is passed as an argument to an overloaded method, we do this by considering the “shape” of the function (essentially, its arity). Now that <code class="language-plaintext highlighter-rouge">Comparator[?]</code> and <code class="language-plaintext highlighter-rouge">(?, ?) =&gt; ?</code> are both considered functions of arity two, our clever scheme breaks down and the programmer must either select an overload (second application) or make the argument types explicit (last application, which resolves to the <code class="language-plaintext highlighter-rouge">Function2</code> overload).</p>
+
+<p>Finally, implicit conversion of SAM types to Function types won’t kick in anymore, since the compiler does this conversion itself first:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait MySam { def apply(x: Int): String }
+
+implicit def unused(fun: Int =&gt; String): MySam
+  = new MySam { def apply(x: Int) = fun(x) }
+
+// uses sam conversion, not the `unused` implicit
+val sammy: MySam = _.toString
+</code></pre></div></div>
+
+<h4 id="inferred-types-for-val-and-lazy-val">Inferred types for <code class="language-plaintext highlighter-rouge">val</code> (and <code class="language-plaintext highlighter-rouge">lazy val</code>)</h4>
+
+<p><a href="https://github.com/scala/scala/pull/5141">#5141</a> and
+<a href="https://github.com/scala/scala/pull/5294">#5294</a> align type
+inference for <code class="language-plaintext highlighter-rouge">def</code>, <code class="language-plaintext highlighter-rouge">val</code>, and <code class="language-plaintext highlighter-rouge">lazy val</code>, fixing assorted
+corner cases and inconsistencies.  As a result, the inferred type
+of a <code class="language-plaintext highlighter-rouge">val</code> or <code class="language-plaintext highlighter-rouge">lazy val</code> may change.</p>
+
+<p>In particular, <code class="language-plaintext highlighter-rouge">implicit val</code>s that didn’t need explicitly declared
+types before may need them now.  (This is always good practice
+anyway.)</p>
+
+<p>You can get the old behavior with <code class="language-plaintext highlighter-rouge">-Xsource:2.11</code>.  This may be
+useful for testing whether these changes are responsible if your
+code fails to compile.</p>
+
+<h4 id="changed-syntax-trees-affects-macro-and-compiler-plugin-authors">Changed syntax trees (affects macro and compiler plugin authors)</h4>
+
+<p>PR <a href="https://github.com/scala/scala/pull/4749">#4794</a> changed the syntax trees for selections of statically accessible symbols. For example, a selection of <code class="language-plaintext highlighter-rouge">Predef</code> no longer has the shape <code class="language-plaintext highlighter-rouge">q"scala.this.Predef"</code> but simply <code class="language-plaintext highlighter-rouge">q"scala.Predef"</code>. Macros and compiler plugins matching on the old tree shape need to be adjusted.</p>
+
+<h2 id="binary-compatibility">Binary compatibility</h2>
+
+<p>Since Scala 2.11, minor releases of Scala are binary compatible with each other.
+Scala 2.12 will continue this tradition: every 2.12.x release will be binary compatible with 2.12.0.
+Milestones and release candidates, however, are <strong>not</strong> binary compatible with any other release.</p>
+
+<p>Scala 2.12 is not and will not be binary compatible with the 2.11.x series.  This allows us to keep improving the Scala compiler and standard library.  We are working with the community to ensure that core projects in the Scala eco-system become available for 2.12.  Please refer to this growing <a href="https://github.com/scala/make-release-notes/blob/2.12.x/projects-2.12.md">list of libraries and frameworks</a>.</p>
+
+<p>The <a href="https://scala-lang.org/news/2.11.1">Scala 2.11.1 release notes</a> explain in more detail on how binary compatibility works in Scala.  The same policies apply to 2.12 as well.</p>
+
+<h2 id="contributors">Contributors</h2>
+
+<p>A big thank you to everyone who’s helped improve Scala by reporting bugs, improving our documentation, spreading kindness in mailing lists and other public fora, and submitting and reviewing pull requests! You are all magnificent.</p>
+
+<p>According to <code class="language-plaintext highlighter-rouge">git shortlog -sn --no-merges v2.12.0-M5..v2.12.0-RC1</code>, the following contributors helped to realize this milestone: Adriaan Moors, Jason Zaugg, Lukas Rytz, Stefan Zeiger, A. P. Marki, Simon Ochsenreither, Seth Tisue, Jakob Odersky, Dale Wijnand, Dima Tkach, Janek Bogucki, Michał Pociecha, Christopher Davenport, Martin Olsson, tomjridge, Miles Sabin, Oscar Boykin, Raul Bache, Rex Kerr, Dmitriy Pogretskiy, Daniel Barclay, Antoine Gourlay, Steven Mitchell, Carsten Varming. Thank you!</p>
+
+<h2 id="release-notes">Release notes</h2>
+
+<p>Improvements to these release notes <a href="https://github.com/scala/make-release-notes/blob/2.12.x/hand-written.md">are welcome!</a></p>
+
+<h2 id="obtaining-scala">Obtaining Scala</h2>
+
+<ul>
+  <li>Download a distribution from <a href="https://scala-lang.org/download/2.12.0-RC1.html">scala-lang.org</a></li>
+  <li>Bump the <code class="language-plaintext highlighter-rouge">scalaVersion</code> setting in your sbt-based project</li>
+  <li>Obtain JARs via <a href="https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.scala-lang%22%20AND%20v%3A%222.12.0-M5%22">Maven Central</a></li>
+</ul>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-09-06-release-notes-2.12.0-RC1.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

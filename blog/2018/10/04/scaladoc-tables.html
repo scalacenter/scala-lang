@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Introducing Scaladoc Tables | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Introducing Scaladoc Tables"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2018/10/04/scaladoc-tables.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Introducing Scaladoc Tables</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Thursday 4 October 2018</p>
+						<p>Janek Bogucki</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2018/10/04/scaladoc-tables.html">Introducing Scaladoc Tables</a></h2> -->
+					<p>Scala 2.12.7 adds support for markdown tables in Scaladoc comments.</p>
+
+<h3 id="a-simple-example">A Simple Example</h3>
+
+<p>The markdown for tables follows <a href="https://github.github.com/gfm/">GitHub Flavored Markdown</a> with some restrictions.</p>
+
+<p>This table shows all three available table elements,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>| Trait | Implementations |
+| ---   | ---             |
+| Set   | HashSet, HashTrieSet |
+| Seq   | List, Vector, Empty  |
+| Map   | HashTrieMap, ListMap |
+</code></pre></div></div>
+
+<p>A table is comprised of,</p>
+
+<ul>
+  <li>A header row</li>
+  <li>A delimiter row</li>
+  <li>Zero or more data rows</li>
+</ul>
+
+<p>This is how the above markdown renders,</p>
+
+<p><img src="/resources/img/blog/scaladoc-tables/example-table-1.png" alt="Example Table 1" /></p>
+
+<p>On an incidental note, there is no requirement to align header and cell markdown pipes. This is done in the examples
+to make them easier to scan.</p>
+
+<h3 id="github-flavored-markdown-conformance">GitHub Flavored Markdown Conformance</h3>
+
+<p>Scaladoc tables support the <a href="https://github.github.com/gfm/#tables-extension-">GitHub Flavored Markdown Spec Table Extension</a>.</p>
+
+<p>There are some restrictions,</p>
+
+<ul>
+  <li>Every row must start and end with the pipe <code class="language-plaintext highlighter-rouge">|</code></li>
+  <li>Rows markdown must start on the left edge of the Scala comment</li>
+  <li>The final row must be followed by a blank line</li>
+</ul>
+
+<p>These restrictions do not restrict the types of tables that can be created but do have the benefit of allowing simple Scaladoc parsing code.</p>
+
+<p>Picking a popular markdown flavor brings several advantages over creating yet another table markdown variation including,</p>
+<ul>
+  <li>No need to explain a new approach</li>
+  <li>IDEs and documentation tools can take advantage of existing markdown parsing libraries</li>
+</ul>
+
+<h3 id="header-cells-data-cells">Header Cells, Data Cells</h3>
+
+<p>Cell content supports the standard inline styling syntax including bold, italic, monospace, underline, superscript, subscript and links.</p>
+
+<p>This two table example includes bold, monospace, italic, superscript and a link,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+  * | Title | ISBN | Authors |
+  * | :---:  | ---  | --- |
+  * | '''Structured Programming''' | `0-12-200550-3` | ''Dahl, Dijkstra and Hoare'' |
+  * | '''Purely functional data structures'''^1^ | `0-521-66350-4` | ''Okasaki'' |
+  *
+  * | Note | Comment |
+  * | ---: | --- |
+  * | 1 | [[https://cambridge.org Cambridge University Press]], 1998|
+*/
+trait Bibliography
+</code></pre></div></div>
+
+<p>Markdown paid, we get this reward,</p>
+
+<p><img src="/resources/img/blog/scaladoc-tables/example-table-2.png" alt="Example Table 2" /></p>
+
+<p>Breaking content over several lines is not supported in GFM tables. Use a <code class="language-plaintext highlighter-rouge">&lt;br/&gt;</code> tag or go with HTML tables if you have needs beyond the simple tables supported by GFM.</p>
+
+<h3 id="column-alignment">Column Alignment</h3>
+
+<p>Specify column alignments using hyphen and colon patterns.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Delimiter Cell Content</th>
+      <th>Alignment Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">---</code></td>
+      <td>Left</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:---</code></td>
+      <td>Left</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">---:</code></td>
+      <td>Right</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">:---:</code></td>
+      <td>Center</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="including-pipe--in-content">Including pipe (<code class="language-plaintext highlighter-rouge">|</code>) in content.</h3>
+
+<p>Scala 2.12.8 will support the <a href="https://github.com/scala/scala/pull/7247">escaping of the cell delimiter in cell content</a> with <code class="language-plaintext highlighter-rouge">\|</code>.</p>
+
+<h3 id="more-examples">More Examples</h3>
+
+<p>For a smorgasbord of examples take a look at <a href="https://janekdb.github.io/scala/PR-7247/scala/test/scaladoc/tables/code/index.html">examples</a>.</p>
+
+<h3 id="dotty-and-scala-3">Dotty and Scala 3</h3>
+
+<p>With <code class="language-plaintext highlighter-rouge">dotty</code> now boosting its share of the development horizon it’s important to place GFM into a <a href="https://docs.scala-lang.org/scala3/guides/scaladoc/">dottydoc</a> and hence Scaladoc 3 context.</p>
+
+<p>In overview <code class="language-plaintext highlighter-rouge">dottydoc</code> supports the current Scaladoc 2.12 MediaWiki flavored markdown, but it also supports more contemporary flavors of markdown.</p>
+
+<p>Within the realm of table markdown <code class="language-plaintext highlighter-rouge">dottydoc</code> supports some extensions via the <a href="https://github.com/vsch/flexmark-java/wiki/Tables-Extension">flexmark-java table extension</a>.</p>
+
+<p><a href="https://github.com/vsch/flexmark-java">flexmark-java</a> allows tables to be defined using a more expressive variant of GFM table markdown. Tables you create now will have a route to being reused for <code class="language-plaintext highlighter-rouge">dottydoc</code> API documentation.</p>
+
+<h3 id="scala-211-compatibility">Scala 2.11 Compatibility</h3>
+
+<p>Table markdown will not be interpreted by Scala 2.11 nor will it interfere with parsing.</p>
+
+<p>Content using pipes will display in the generated Scaladoc with the pipes included as literal characters. Bear this in mind if cross compiling.</p>
+
+<h3 id="how-can-i-help">How can I help?</h3>
+
+<ul>
+  <li>Use Scaladoc tables</li>
+  <li>Share your feedback on <a href="https://users.scala-lang.org/c/documentation">Discourse/Documentation</a></li>
+</ul>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2018-10-04-scaladoc-tables.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

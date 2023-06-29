@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Minutes from Oct 2015 SIP/SLIP Meeting | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Minutes from Oct 2015 SIP/SLIP Meeting"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2015/11/04/minutes-from-oct-2015.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Minutes from Oct 2015 SIP/SLIP Meeting</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 4 November 2015</p>
+						<p>Hamish Dickson</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2015/11/04/minutes-from-oct-2015.html">Minutes from Oct 2015 SIP/SLIP Meeting</a></h2> -->
+					<h2 id="sipslip-meeting-october-2015">SIP/SLIP meeting, October 2015</h2>
+
+<p>Thanks to <a href="https://github.com/hamishdickson">@hamishdickson</a> for compiling these extensive minutes.</p>
+
+<p><a href="https://www.youtube.com/watch?v=vonlAh2tmnw">A video recording of this meeting is available</a>.</p>
+
+<h2 id="welcomes-and-apologies">Welcomes and apologies</h2>
+
+<ul>
+  <li>Welcome to <a href="https://github.com/sjrd">@sjrd</a> who joins us</li>
+  <li><a href="https://github.com/odersky">@odersky</a>, <a href="https://github.com/jsuereth">@jsuereth</a>, <a href="https://github.com/dickwall">@dickwall</a> and <a href="https://github.com/SethTisue">@SethTisue</a> are all there</li>
+  <li><a href="https://github.com/dickwall">@dickwall</a> gloats about his holiday</li>
+  <li><a href="https://github.com/non">@non</a> has the flu</li>
+  <li><a href="https://github.com/heathermiller">@heathermiller</a> is “otherwise engaged”</li>
+</ul>
+
+<h2 id="1-new-google-calendar">1. New Google Calendar</h2>
+
+<p><a href="https://github.com/dickwall">@dickwall</a> has set up a google calendar for slip:</p>
+
+<ul>
+  <li>So far it only has the monthly meetings on there, but that will grow</li>
+  <li>It’s public so people can know when the next slip meeting is</li>
+  <li>The scalaslip@gmail.com calendar which you can add in google calendars under the “add a friends calendar” option</li>
+</ul>
+
+<h2 id="2-expert-groups">2. Expert groups</h2>
+
+<h3 id="21-getting-updates-from-expert-groups">2.1 Getting updates from expert groups</h3>
+<p><a href="https://github.com/dickwall">@dickwall</a> can’t email everyone for expert groups, it’s simply not a goer. One idea is to create an event
+in the new Google calendar (probably the Friday before the meeting) and ask an expert group representative
+to come to that and provide an update before the next slip meeting.</p>
+
+<h3 id="22-role-of-expert-groups">2.2 Role of expert groups</h3>
+<p><a href="https://github.com/dickwall">@dickwall</a> raises a point that was brought up on the IO overhaul discussion, where people feel they have
+been assigned to an expert group and given work to do without asking. This is entirely not what anyone
+intended and <a href="https://github.com/dickwall">@dickwall</a> is going to write a blog post about the aim of expert groups, how they are formed
+and what we would like them to do.</p>
+
+<p>Ideally, an expert group should be self-formed from people with the desire, knowledge and skills to work
+on a task, then go and do it.</p>
+
+<p>Actions:</p>
+
+<ul>
+  <li><a href="https://github.com/dickwall">@dickwall</a> to create a blog post about this issue, he will send it to the Scala elders first so they
+can voice any opinions</li>
+  <li>someone should check if misconstruisem is a word</li>
+</ul>
+
+<h2 id="3-slips-without-recent-activity">3. SLIPs without recent activity</h2>
+<p>Some SLIPs have had no activity in the last couple of months, it would be good if we can somehow track
+this. <a href="https://github.com/dickwall">@dickwall</a> suggests are create a github tag to track SLIP issues like this. His initial idea is to
+use “dormant”, but thinks this is too passive-aggressive. People agree and <a href="https://github.com/odersky">@odersky</a> suggests “hibernate”
+(which sticks).</p>
+
+<h2 id="4-october-milestone-issues">4. October milestone issues</h2>
+
+<h3 id="scala-parser-combinators-vs-fastparse">Scala Parser Combinators vs FastParse</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/24</p>
+
+<p>Notes:</p>
+
+<ul>
+  <li>Parser Combinators is not in the standard library, but is a standard module and while good, it has
+some issues.</li>
+  <li><a href="https://github.com/lihaoyi">@lihaoyi</a> has a lib called FastParse (https://github.com/lihaoyi/fastparse), fairly similar in design
+to Parser Combinators but faster and currently better maintained.</li>
+  <li><a href="https://github.com/odersky">@odersky</a> has invited <a href="https://github.com/lihaoyi">@lihaoyi</a> to submit it as a candidate for becoming a standard module</li>
+  <li>Currently waiting for <a href="https://github.com/lihaoyi">@lihaoyi</a> to decide if he wants this to happen and if so to submit a SLIP for it</li>
+  <li>Anton Gullett (I can’t find him on github) the maintainer of the Parser Combinators module, should be
+consulted to see if FastParse meets all the needs met by Parser Combinators.</li>
+  <li><a href="https://github.com/odersky">@odersky</a> points out that Parser Combinators isn’t a central module, meaning we could actually have
+both modules for a while</li>
+  <li>Note Parser Combinators are mainly community maintained, not primarily maintained by Typesafe or EPFL
+(obv retain an interest)</li>
+</ul>
+
+<p>Actions:</p>
+<ul>
+  <li>Talk to <a href="https://github.com/gourlaysama">@gourlaysama</a> about FastParse doing everything required by Parser Combinators</li>
+  <li>Invite <a href="https://github.com/lihaoyi">@lihaoyi</a> to take action if he wants to</li>
+</ul>
+
+<h3 id="slip-27">SLIP 27</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/23</p>
+
+<p>Owner: <a href="https://github.com/jsuereth">@jsuereth</a></p>
+
+<p>Notes:</p>
+
+<ul>
+  <li><a href="https://github.com/jsuereth">@jsuereth</a> spent weekend on <a href="https://github.com/odersky">@odersky</a>’s strawman proposal (as did Daniel)</li>
+  <li>there are a few comments to take care of</li>
+  <li>wants to get a fuller proposal out, comments from <a href="https://github.com/DarkDimius">@DarkDimius</a> (Dmitry)</li>
+  <li>wants to flesh out what he has, but it’s on a good path</li>
+  <li>collections - <a href="https://github.com/jsuereth">@jsuereth</a> wants to do something similar to Java’s collector which is a parallel reduction
+abstraction as the basis, on top of that have the iterator sequential base collections. <a href="https://github.com/jsuereth">@jsuereth</a> needs to
+spend more time on it, <a href="https://github.com/odersky">@odersky</a> is keen to see it</li>
+  <li>re Views, <a href="https://github.com/odersky">@odersky</a> thinks we need more data on if it should be iterator based or transducer based -
+partly why he tried an iterator base</li>
+  <li>iterator seems to be more general</li>
+  <li><a href="https://github.com/jsuereth">@jsuereth</a> figured out how to do Zip with transducers - required rhs to be an iterator</li>
+  <li><a href="https://github.com/jsuereth">@jsuereth</a>’s proposal works on existing collections is fold based, wants to get that in place so we can
+deprecate the existing set of views asap and focus on longer term collections with less restrictions for
+view <a href="https://github.com/odersky">@odersky</a> says that’s reasonable</li>
+  <li><a href="https://github.com/sjrd">@sjrd</a> points out scala-js optimization issues</li>
+</ul>
+
+<p>Actions:</p>
+
+<ul>
+  <li><a href="https://github.com/jsuereth">@jsuereth</a> and <a href="https://github.com/sjrd">@sjrd</a> to take scala-js optimization issues offline</li>
+  <li><a href="https://github.com/dickwall">@dickwall</a> to create a new issue to track optimization issue</li>
+</ul>
+
+<h3 id="slip-22---async">SLIP 22 - Async</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/22</p>
+
+<p>Owner: <a href="https://github.com/retronym">@retronym</a></p>
+
+<p>Notes:</p>
+
+<ul>
+  <li><a href="https://github.com/SethTisue">@SethTisue</a> is going to ask what <a href="https://github.com/retronym">@retronym</a> actually wanted/intended to happen with async with regards to
+the standard library, i.e. if he wanted to include it.</li>
+  <li><a href="https://github.com/dickwall">@dickwall</a> thinks he heard something about issues on Windows, but no one else knew about this.</li>
+  <li><a href="https://github.com/retronym">@retronym</a> thinks it’s not quite ready for a SLIP yet. He has a round of work planned over the next
+few months that will include technical improvements to the lib and improved documentation.</li>
+  <li>This is on hold for now, but expected to be in better shape in a few months.</li>
+</ul>
+
+<p>Actions:
+None discussed</p>
+
+<h3 id="revisit-by-name-parameters">Revisit by-name parameters</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/21</p>
+
+<p>Notes:</p>
+<ul>
+  <li><a href="https://github.com/dickwall">@dickwall</a> has had no time to look at it</li>
+  <li><a href="https://github.com/dickwall">@dickwall</a> mentions he is wary of being perceived as the SLIP manager and working on issues. Could be seen
+as a conflict of interest</li>
+</ul>
+
+<p>Actions:
+None discussed</p>
+
+<h3 id="scala-io-fixoverhaul">Scala IO fix/overhaul</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/19</p>
+
+<p>Notes:</p>
+
+<ul>
+  <li>This is a long thread. All agree that’s a good thing</li>
+  <li><a href="https://github.com/lihaoyi">@lihaoyi</a> came up with a good set of questions - first real step in getting this slip going</li>
+</ul>
+
+<p>Actions:</p>
+
+<ul>
+  <li><a href="https://github.com/dickwall">@dickwall</a> will reach out to someone and say “can you actually answer these questions?”, maybe <a href="https://github.com/lihaoyi">@lihaoyi</a>
+or someone else in the thread</li>
+  <li><a href="https://github.com/dickwall">@dickwall</a> to put all this in a blog post</li>
+</ul>
+
+<h3 id="sip-24-and-25---trait-parameters-and-repeating-by-names">SIP 24 and 25 - trait parameters and repeating by-names</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/12</p>
+
+<p>Notes:</p>
+
+<ul>
+  <li>nothing changed - on hold</li>
+</ul>
+
+<p>Actions:
+None discussed</p>
+
+<h3 id="possible-sip-for-changes-to-escapes-in-string-interpolation-double-quotes-inside-of-a-string-interpolation">Possible SIP for changes to escapes in string interpolation (double quotes inside of a string interpolation)</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/10</p>
+
+<p>Notes:</p>
+
+<ul>
+  <li>There has been little movement on this issue mainly for motivational reasons. It sounds like there
+are varying opinions about what the ideal outcome of this issue is.</li>
+  <li><a href="https://github.com/SethTisue">@SethTisue</a> pointed out that escaping quotes in string interpolation is a common newbie FAQ, so there is
+probably value in completing this SLIP, but exactly what the right change is (if any) is unknown</li>
+  <li><a href="https://github.com/jsuereth">@jsuereth</a> pointed out that perhaps we should aim to solve the new person experience rather than solve the
+whole world’s problems.</li>
+  <li>Note, there two similar issues here, one to do with quotes and another to do with backticks</li>
+</ul>
+
+<p>Actions:</p>
+
+<ul>
+  <li>Allocate hibernate tag</li>
+  <li><a href="https://github.com/jsuereth">@jsuereth</a> will reach out to <a href="https://github.com/som-snytt">@som-snytt</a> to talk about the next steps here</li>
+</ul>
+
+<h3 id="binary-literals-underscores-in-literals-sipslip-tracking">Binary Literals, Underscores in Literals SIP/SLIP tracking</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/8</p>
+
+<p>Owner: <a href="https://github.com/non">@non</a></p>
+
+<p>Notes:</p>
+
+<ul>
+  <li>General aim is to see what we can pull in from the Spire library (https://github.com/non/spire)</li>
+</ul>
+
+<p>Actions</p>
+
+<ul>
+  <li>Allocate hibernate tag</li>
+  <li>Probably an update from <a href="https://github.com/non">@non</a> would be good</li>
+</ul>
+
+<h3 id="implicits-in-for-comprehensionspattern-matches-sip-tracking">Implicits in for comprehensions/pattern matches SIP tracking</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/6</p>
+
+<p>Owner: <a href="https://github.com/haroldl">@haroldl</a></p>
+
+<p>Notes:</p>
+
+<ul>
+  <li><a href="https://github.com/haroldl">@haroldl</a> is still keen on this</li>
+  <li>nothing specific heard about progress, give the hibernate tag until more is known</li>
+</ul>
+
+<p>Actions:</p>
+
+<ul>
+  <li><a href="https://github.com/dickwall">@dickwall</a> to reach out and chat to <a href="https://github.com/haroldl">@haroldl</a> and see how things are going</li>
+</ul>
+
+<h3 id="gather-list-contact-interested-parties-for-an-eitherorxorvalidation-etc-slip-and-possible-expert-group">Gather, list, contact interested parties for an Either/Or/Xor/Validation etc SLIP and possible expert group</h3>
+<p>Link to issue: https://github.com/scala/slip/issues/5</p>
+
+<p>Notes:</p>
+
+<ul>
+  <li>Either all the way through to validation</li>
+  <li>From last meeting, the expert group had an action item of trying out each others libraries. This hasn’t
+happened due to holidays etc, carry this over</li>
+</ul>
+
+<p>Actions:</p>
+
+<ul>
+  <li>Expert group to try out each other’s libraries</li>
+</ul>
+
+<h2 id="aob">AOB</h2>
+
+<ul>
+  <li>collections doesn’t have any tracking - <a href="https://github.com/dickwall">@dickwall</a> to set something up and ping him with any links/info on
+Gitter and he will collect them and put them into an issue with some links. Expects lots of discussion</li>
+  <li><a href="https://github.com/jsuereth">@jsuereth</a> theory: things will die down or start an expert group and actively working on it</li>
+  <li>will be fun to analyse trade offs and performance</li>
+  <li>issue will have experimentation label</li>
+  <li><a href="https://github.com/jsuereth">@jsuereth</a> - call for help, for some sort of source compatibility checker for these libs where you can shove in
+these new libs and see if things still compile to give us a notion of what we’re breaking</li>
+  <li><a href="https://github.com/dickwall">@dickwall</a> - can we take existing unit tests for collections, clone them off and use them for new collection lib</li>
+  <li><a href="https://github.com/Ichoran">@Ichoran</a> (Rex Kerr) has a collection test suite for Typesafe so he’s on that - should be on expert group</li>
+</ul>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2015-11-04-minutes-from-oct-2015.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

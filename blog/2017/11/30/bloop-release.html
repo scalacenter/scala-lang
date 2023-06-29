@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Meet bloop, a fast tool to compile and test your project | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Meet bloop, a fast tool to compile and test your project"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/11/30/bloop-release.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Meet bloop, a fast tool to compile and test your project</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Thursday 30 November 2017</p>
+						<p>Jorge Vicente Cantero and Martin Duhem</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2017/11/30/bloop-release.html">Meet bloop, a fast tool to compile and test your project</a></h2> -->
+					<p>Martin Duhem and I are happy to announce <a href="https://github.com/scalacenter/bloop">Bloop</a>, a tool that Scala developers
+can use to compile and test their projects faster without being tied to their
+stock build tool.</p>
+
+<p>We started this project after the feedback we got from this tweet, in which some of you encouraged
+us to work on compiler/build performance:</p>
+
+<blockquote class="twitter-tweet" data-lang="en-gb"><p lang="en" dir="ltr">
+If the Scala Center had 1 engineer free for 1 month what is the most meaningful thing we could do to help your day-to-day Scala development?
+</p>&mdash; Scala (@scala_lang) <a href="https://twitter.com/scala_lang/status/928242963091808256">8th November 2017</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h2 id="what-is-bloop">What is bloop?</h2>
+
+<p><a href="https://github.com/scalacenter/bloop">Bloop</a> is a command-line tool for fast edit/compile/test workflows. Its primary
+goal is to give you the fastest possible experience specifically in the
+edit/compile/test loop. Bloop is not meant to replace your current build
+system. The name stands for “build loop”.</p>
+
+<h2 id="why-bloop">Why <code class="language-plaintext highlighter-rouge">bloop</code>?</h2>
+
+<p>Build tools are complex applications that need to cover a wide range of use cases, from building and
+testing your project to deploying it, integrating with external tools, resolving dependencies and
+any build-related tasks.</p>
+
+<p>Such a vast array of requirements make build tools like <code class="language-plaintext highlighter-rouge">sbt</code>, <code class="language-plaintext highlighter-rouge">Maven</code> and <code class="language-plaintext highlighter-rouge">Gradle</code> create their own
+configuration models and DSLs to be customizable, whether that is programmatically or declaratively.
+It is easy that in the process of creating a build tool, performance is sacrificed by ease of
+customization, readability or maintenance.</p>
+
+<p>On the other hand, there is also the problem that build tools move slowly and
+have a hard time upgrading to new changes upstream (for example, in compiler
+APIs). As a result, <code class="language-plaintext highlighter-rouge">Gradle</code>, <code class="language-plaintext highlighter-rouge">Maven</code>, <code class="language-plaintext highlighter-rouge">Leiningen</code>, and <code class="language-plaintext highlighter-rouge">CBT</code> have not yet been
+migrated to Zinc 1.0, <a href="https://www.scala-lang.org/blog/2017/11/03/zinc-blog-1.0.html">which offers faster incremental compilations than its
+predecessor</a>. As
+a result, users of these tools are not benefiting from the latest state of the
+art.</p>
+
+<p><code class="language-plaintext highlighter-rouge">bloop</code> aims to fix both problems:</p>
+
+<ol>
+  <li>It’s specialized on only providing as fast as possible edit/compile/test
+workflows, rather than covering all of the needs of general build tool like
+sbt.</li>
+  <li>It allows other build tools to integrate with it.</li>
+</ol>
+
+<p>You can think of <code class="language-plaintext highlighter-rouge">bloop</code> as a powered CLI for Zinc, rather than as a brand new
+build tool – <code class="language-plaintext highlighter-rouge">bloop</code> does not aim to replace your stock build tool, rather
+complement it.</p>
+
+<p>In practice, this means that when users are only going to compile and test their project, they can
+use <code class="language-plaintext highlighter-rouge">bloop</code> instead of a full-blown resource-hungry build tool; and that generic build tools can
+delegate to <code class="language-plaintext highlighter-rouge">bloop</code> to compile and test users’ projects instead of creating their own Scala and Java
+integrations, which are hard to maintain.</p>
+
+<h2 id="numbers-on-compilation-performance">Numbers on compilation performance</h2>
+
+<p>We created <code class="language-plaintext highlighter-rouge">bloop</code> because we observed that Scala compile times slow down when
+within sbt compared to isolated benchmarks. This observation was at the
+beginning just an intuition, but when we sat down to measure a prototype we did
+see a significant difference.</p>
+
+<blockquote class="twitter-tweet" data-lang="en-gb"><p lang="en" dir="ltr"> Scala Tooling has got to
+a point where people say "compiler performance" and what they really mean is "sbt performance".
+</p>&mdash; Jorge (@jvican) <a href="https://twitter.com/jvican/status/928601470232129536">9th November 2017</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Next, we introduce you some numbers that compare compilation times between
+<code class="language-plaintext highlighter-rouge">sbt</code> and <code class="language-plaintext highlighter-rouge">bloop</code> in different medium-to-large open-source projects. In all of
+them, <code class="language-plaintext highlighter-rouge">bloop</code> is significantly faster than sbt at compiling and testing your
+project.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project name</th>
+      <th>sbt (version)</th>
+      <th>bloop</th>
+      <th>speedup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>sbt/sbt</td>
+      <td>21s (1.0.4)</td>
+      <td>15s</td>
+      <td>1.17</td>
+    </tr>
+    <tr>
+      <td>guardian/frontend</td>
+      <td>37s (0.13.16)</td>
+      <td>28s</td>
+      <td>1.32</td>
+    </tr>
+    <tr>
+      <td>apache/spark</td>
+      <td>159s (0.13.16)</td>
+      <td>107s</td>
+      <td>1.4</td>
+    </tr>
+    <tr>
+      <td>scala/scala</td>
+      <td>65s (0.13.16)</td>
+      <td>50s</td>
+      <td>1.14</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>These numbers have been obtained on an isolated machine, measuring at the fifth hot clean-compile
+iteration (of all the projects and subprojects of the build without counting the tests) and with 2
+gigabytes of heap for both sbt and bloop (the shell, not the nailgun
+integration). When benchmarking sbt, we have made sure that dependency
+resolution and formatting are not measured.</p>
+
+<p>To put those numbers into context, the speedup observed in <code class="language-plaintext highlighter-rouge">apache/spark</code> is
+equal to the compilation speedup that Jason Zaugg introduced in the 2.12.x
+series. That means that when Spark developers migrate to 2.12 and use <code class="language-plaintext highlighter-rouge">bloop</code>,
+they will experience a compilation speedup close to 60% (40% from upgrading to Scala 2.12.x, 40%
+from using <code class="language-plaintext highlighter-rouge">bloop</code>).</p>
+
+<p>There are two important observations to make from these numbers:</p>
+
+<ul>
+  <li>In practice, sbt is slower than the previous numbers because dependency resolution is often
+triggered by compilation, slowing down the start of the compile.</li>
+  <li>Some of the benchmarked builds use sbt <code class="language-plaintext highlighter-rouge">0.13.16</code> instead of <code class="language-plaintext highlighter-rouge">1.0.4</code>. <code class="language-plaintext highlighter-rouge">bloop</code> would be even faster
+if these builds were migrated to <code class="language-plaintext highlighter-rouge">1.0.4</code>. The refined precision that Zinc 1.0 offers in its
+incremental mode has a price of ~3% compared to Zinc 0.13.16.</li>
+</ul>
+
+<h2 id="the-current-status">The current status</h2>
+
+<p>As of this announcement, <code class="language-plaintext highlighter-rouge">bloop</code> is capable of compiling and testing your project, and it integrates
+with <code class="language-plaintext highlighter-rouge">sbt</code>. It supports all the test frameworks sbt supports (<code class="language-plaintext highlighter-rouge">JUnit</code>, <code class="language-plaintext highlighter-rouge">Scalatest</code>, <code class="language-plaintext highlighter-rouge">Scalacheck</code>,
+<code class="language-plaintext highlighter-rouge">utest</code> and more).</p>
+
+<p><code class="language-plaintext highlighter-rouge">bloop</code> is a young project with only three weeks of life. That means that
+there’s a lot of work left before we support all different platforms and needs.
+In our next release, we want to focus on:</p>
+
+<ul>
+  <li>Stabilizing the internals of the project.</li>
+  <li>Supporting <code class="language-plaintext highlighter-rouge">console</code>, <a href="https://github.com/scalacenter/bloop/issues/61">a faster <code class="language-plaintext highlighter-rouge">testQuick</code></a>, and
+<a href="https://github.com/scalacenter/bloop/issues/7">built-in file watching</a>.</li>
+  <li>Making more performance improvements to our integration, to be even faster.</li>
+  <li>Exploring integrations with other build tools like <code class="language-plaintext highlighter-rouge">Maven</code> and <code class="language-plaintext highlighter-rouge">Gradle</code>.</li>
+  <li>Supporting Dotty and out-of-the-box cross-compilation to
+<a href="https://github.com/scala-js/scala-js/">Scala.js</a> and <a href="https://github.com/scala-native/scala-native">Scala
+Native</a>.</li>
+</ul>
+
+<h3 id="first-beta-release-01">First beta release <code class="language-plaintext highlighter-rouge">0.1</code></h3>
+
+<p>The first beta version of bloop can be used following the instructions in <a href="https://github.com/scalacenter/bloop">scalacenter/bloop</a>.</p>
+
+<h3 id="preserving-hot-compilers">Preserving hot compilers</h3>
+
+<p>An important feature of <code class="language-plaintext highlighter-rouge">bloop</code> is its <a href="https://github.com/facebook/nailgun/">nailgun</a> integration. Nailgun is a client, protocol, and
+server for running Java programs from the command line without incurring the JVM startup overhead.
+With it, <code class="language-plaintext highlighter-rouge">bloop</code> ensures that you always have a hot compiler in the background to compile your
+project. This brings significant improvements indeed: <a href="https://scala-ci.typesafe.com/grafana/dashboard/db/scala-benchmark?var-branch=2.12.x&amp;var-source=vector&amp;var-bench=HotScalacBenchmark.compile&amp;var-host=scalabench@scalabench@">a hot compiler can compile up to 18 times
+faster than a cold
+compiler</a>.</p>
+
+<p>Keeping a hot compiler in the background is crucial if one takes compilation speed and productivity
+seriously. This is often difficult and takes space of mind. For example, <code class="language-plaintext highlighter-rouge">sbt</code> throws away a hot
+compiler every time users quit (<code class="language-plaintext highlighter-rouge">Ctrl-C</code>) and restart, but also when they do <code class="language-plaintext highlighter-rouge">reload</code> after several
+executions of <code class="language-plaintext highlighter-rouge">compile</code>. By this rule, the more users modify their sbt build or
+have bad habits, the less productive they are.</p>
+
+<p>In an effort to address the problem at its root, we have preferred to add
+a built-in nailgun integration to bloop that always keeps hot compilers in the
+background.</p>
+
+<h3 id="how-does-it-work">How does it work?</h3>
+
+<p>When <code class="language-plaintext highlighter-rouge">bloop</code> starts up, it loads a build from a configuration directory passed in by the user, which
+defaults to <code class="language-plaintext highlighter-rouge">.bloop-config</code>. This directory contains a configuration file per every project, and
+every configuration file contains basic information about the project: name, base directory,
+classpath, source directories, classes directory, Scala and Java options and a few more.</p>
+
+<p><code class="language-plaintext highlighter-rouge">bloop</code> comes with an sbt plugin that allows you to generate these
+configuration files from your existing, functional sbt build. When the
+generation is done, you will have a <code class="language-plaintext highlighter-rouge">.bloop-config</code> in the base directory of
+your sbt project. With this configuration, you can close your sbt instance and
+run your build with <code class="language-plaintext highlighter-rouge">bloop</code>.</p>
+
+<p>You will need to reach out to <code class="language-plaintext highlighter-rouge">sbt</code> again in the following scenarios:</p>
+
+<ul>
+  <li>You have changed your build (a library dependency, a project name, a scalac option). In which
+case, you need to rerun the generation of configuration files.</li>
+  <li>You need to execute build tasks unrelated to compilation and test execution.</li>
+</ul>
+
+<p>This configuration file is currently a Java properties file. In the next weeks, we’d like to migrate
+from it to a more established configuration format. As this information is often required by other
+developer tools (for example, language servers, presentation compilers, linters), we would like
+the authors of these tools to agree on a configuration file that all these can understand.</p>
+
+<p>In the future, we want to explore making <code class="language-plaintext highlighter-rouge">bloop</code> a server you can ask compilation and test-related
+information from different language servers, presentation compilers and linters. We’re also
+interested in rethinking our configuration files and agree with the tooling community on a
+configuration schema that all the tools in the ecosystem (language servers, build tools,
+presentation compilers and linters) can use. We believe these initiatives can make tooling much
+easier to install and upgrade in the future.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We’re happy to announce <code class="language-plaintext highlighter-rouge">bloop</code>, a tool with which sbt users can compile their
+projects faster and execute tests without being tied to an sbt instance. Users
+of other build tools will get support for <code class="language-plaintext highlighter-rouge">bloop</code> in the upcoming weeks.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Bloop</code>’s end goal is to deliver a snappy developer experience to those
+developers writing Scala code. With this effort, the Scala Center continues its
+commitment to improve the tooling in the Scala ecosystem and help open source
+developers and companies alike be more productive.</p>
+
+<p>If you have a question or want to get involved, come to our forums and chat rooms
+to talk!</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2017-11-30-bloop-release.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

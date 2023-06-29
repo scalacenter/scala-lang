@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Long-term compatibility plans for Scala 3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Long-term compatibility plans for Scala 3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2022/08/17/long-term-compatibility-plans.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Long-term compatibility plans for Scala 3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 17 August 2022</p>
+						<p>Paweł Marks, VirtusLab</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2022/08/17/long-term-compatibility-plans.html">Long-term compatibility plans for Scala 3</a></h2> -->
+					<h2 id="key-takeaways">Key takeaways</h2>
+
+<ul>
+  <li>The Scala 3 version that you are using to compile your code should be treated the same way as any library dependency in your project. You shouldn’t be afraid of updating it. Bumping the patch version (e.g. 3.1.2 -&gt; 3.1.3) is a no-brainer. Bumping the minor version (e.g. 3.1.3 -&gt; 3.2.0) requires the same considerations as changing the minor version of any other dependency, yet is generally advisable.</li>
+  <li>You should not cross-compile between Scala 3 versions.</li>
+  <li>If you are maintaining a library, you should drop Scala 3.0. Also, you should upgrade to Scala 3.2 in your next minor release.</li>
+  <li>We are testing that the code that compiles with previous versions of the compiler will still compile in future releases, unless the fact that the code was compiling was a bug in the compiler. We are using hundreds of real-life projects to test that.</li>
+  <li>After evaluation, we have dropped the experimental <code class="language-plaintext highlighter-rouge">-scala-output-version</code> flag, as it turned out to be too hard to maintain and potentially harmful to the ecosystem.</li>
+  <li>Soon, we will start releasing Long-Term Support versions of the compiler for the users that require enhanced stability.</li>
+</ul>
+
+<h2 id="about-compatibility">About compatibility</h2>
+
+<p>Compilers, as all software really, are constantly evolving. Since the initial release of Scala 3, there have been seven stable versions of the compiler. Each has brought performance and stability enhancements, fixed bugs, improved reporting or introduced some new experimental features to the language. Nevertheless, we still treat all those versions as an implementation of the same language. What allows us to think in such a way is the compatibility guarantees.</p>
+
+<p>The term <em>compatibility</em> is often used quite vaguely. In the Scala world, the first intuition for this term could be phrased as follows: a new version of Scala is compatible with a previous version of Scala if a program that used to work with the earlier version still works with the latest version. Let us examine the term <em>compatibility</em> closer right now. For Scala 3 compiler, <em>compatibility</em> involves two concepts: source and output compatibility.</p>
+
+<p>We say that two compiler versions are source compatible if every single project that can be compiled with one version can also be compiled with the other, and the resulting programs behave the same way. We put a lot of effort into ensuring that source compatibility is preserved between patch releases, and that every infringement between minor versions is easy to fix. To enforce that, we are running builds of hundreds of open-source Scala 3 projects every night. Moreover, after every release candidate, we are testing the compiler on practically all open-source projects that were ever published for Scala 3.</p>
+
+<p>In addition, breaking source compatibility is usually not a big deal, as it can easily be detected at compile-time. In the past, fixing those problems have usually been limited to specifying explicit types in some places where the programmer relied on type inference. If your project is affected by a source-incompatible change, you often need to make only small adjustments. In the worst-case scenario, you will be locked on one version of the compiler for some time. That, however, will not affect projects depending on your code.</p>
+
+<p>Output compatibility (sometimes called <em>binary compatibility</em>, especially in Scala 2 contexts) is much more tricky and essential for our long-term plans for Scala. It can be understood as an ability of one version of the compiler to use the output (binaries and TASTy files) generated by the other version of the compiler and understand it correctly. To be more precise, we will further subdivide output compatibility to forward and backward. We say that the two versions are forward compatible when the older compiler can depend on the output of the newer one. Conversely, backward compatibility means that the newer compiler can use the output of the older version. In the rest of this post, the term <em>compatibility</em> will always refer to output compatibility.</p>
+
+<p>Scala 3 guarantees backward compatibility between all releases and forward compatibility between patch releases in the same minor line. That means that Scala <code class="language-plaintext highlighter-rouge">3.b.y</code> can consume the output of Scala <code class="language-plaintext highlighter-rouge">3.a.x</code> only if <code class="language-plaintext highlighter-rouge">b</code> is greater or equal to <code class="language-plaintext highlighter-rouge">a</code>. For example, the output of the Scala 3.0.2 compiler can be used by Scala 3.0.1 or 3.1.0. On the other hand, code compiled with Scala 3.1.0 cannot be a dependency of any project compiled with 3.0.2.</p>
+
+<h2 id="what-version-of-scala-should-i-use">What version of Scala should I use?</h2>
+
+<p>So, we know what output compatibility is and what Scala 3 guarantees. What does it mean in practice? What version of the compiler should I choose for my project? The compiler team believes that the good answer for this question is always <em>the newest one</em>.</p>
+
+<p>We believe that you should treat the compiler as one of your dependencies. If you are fine with updating the versions of your library dependencies, there should be no reason not to update the compiler version. In most cases, you wouldn’t even notice that the Scala version has changed. Meanwhile, you can get better compilation performance, improved error messages, and most importantly, you may be able to use newly stabilized features of the language and of the standard library.</p>
+
+<p>If you are a library author following the semantic versioning, we advise you to introduce new minor versions of the compiler only in minor releases of your library. New patch versions of the compiler can be introduced anytime, as they are forward and backward compatible.</p>
+
+<p>That may be surprising if you have experience developing libraries for Scala 2. For example, migrating any codebase from 2.11 to 2.12 was a huge undertaking. Since they were not output-compatible, most libraries needed to resort to cross-compilation to support both versions. Thanks to the guarantees of Scala 3, there is no longer a need for cross-compilation. For example, the migration from Scala 3.1 to Scala 3.2 for the large majority of the projects would only require changing the version in the build definition. We have tested 900 Scala libraries that were passing compilation using 3.1.3. Out of them, only 13 failed to compile with 3.2.0-RC3. That means that for 98.6% of the libraries bumping the compiler version to 3.2.0 will not require a single change in the source code.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>While this sounds good, there is one problem with intertwined ecosystems. Even though we do what we can to make the transition between minor versions of the compiler as smooth as possible, there will always be projects stuck on older versions for various reasons. That means they may be unable to update some of their dependencies if said libraries updated themselves to the newer compiler. That, in order, encourages libraries to stay on the oldest possible version of the compiler, which bars them from potentially beneficial improvements in the newer compilers.</p>
+
+<p>For example, let us consider a project that is stuck on Scala 3.1, for some reason. We depend on version 1.3.5 of a library compiled with Scala 3.1. The library publishes version 1.4.0 with the compiler updated to 3.2. We cannot update our dependency because of output incompatibility. That also means that all patches for security issues won’t be available unless the library author decides to backport them and release them as version 1.3.6. With that knowledge, the library author would be very reluctant to migrate from Scala 3.1 to 3.2.</p>
+
+<h2 id="searching-for-a-solution">Searching for a solution</h2>
+
+<p>We have been discussing and testing various potential solutions in the past few months. Today we want to tell you more about the attempts that failed and present the solution that we believe is the best for the future of Scala.
+The three main criteria we were using to examine potential solutions were:</p>
+
+<ul>
+  <li>The burden on library authors - we don’t want library maintainers and authors to feel overwhelmed by making frequent changes to the compiler that require actions on their side</li>
+  <li>The burden on the compiler maintainers - the compiler team has limited resources, so if maintaining compatibility required a considerable amount of work, we would have much less time to spend on improvements and bug fixes in the compiler</li>
+  <li>Innovativeness - some features require updating the minor version of the compiler (native image-friendly lazy vals being the latest example), and we want them delivered to the users as soon as possible. Also, we want important bug fixes to be delivered to users regardless of their update policy.</li>
+</ul>
+
+<h2 id="what-we-have-tried-so-far">What we have tried so far</h2>
+
+<h3 id="full-compatibility">Full compatibility</h3>
+
+<p>For a short time, we have considered releasing a patch version for each supported past minor line every time a new minor release of the compiler appears. That would allow every minor version of the Scala 3 compiler to accept the output of any other minor version (assuming the latest patch is used). This is something similar to what is happening in Scala 2 in terms of Scala 3 compatibility. However, applying this to all minor lines of Scala 3 would be an enormous amount of work, way beyond our capabilities.</p>
+
+<h3 id="maintaining-every-minor-release">Maintaining every minor release</h3>
+
+<p>The lighter version of the approach mentioned above was to keep our current compatibility guarantees while providing backports of important bug fixes to the previous minor versions. That would still be a massive workload for us, and it would have the additional drawback of discouraging people from updating to the new minor releases.</p>
+
+<h3 id="configurable-output-version">Configurable output version</h3>
+
+<p>This was the solution that we invested the most into. It was discussed in detail in <a href="/blog/2022/04/12/scala-3.1.2-released.html#configurable-scala-output-version">the previous blog post</a>. To summarize: in 3.1.2, we have shipped a new experimental compiler flag that allowed developers to make the compiler generate output that is usable by older versions of the compiler. While this would allow all projects to receive important fixes, it would probably result in a strange state where all the libraries are released with output version 3.1, similar to how nearly all java libraries are still released with output version 8, even though Java 8 is eight years old.</p>
+
+<p>More importantly, during work on 3.2, we realized that maintaining this flag may be more challenging than anticipated. With time, it will be increasingly harder to be sure that our handling of it is correct. <strong>Thus, we have decided to remove the possibility of configuring the output version altogether in Scala 3.2.</strong></p>
+
+<h2 id="our-solution-scala-lts--scala-next">Our solution: Scala LTS &amp; Scala Next</h2>
+
+<p>Finally, we have agreed that the best course of action would be to split Scala development into two lines, called <em>Scala LTS</em> and <em>Scala Next</em>. Both would live as separate branches in the compiler repository. Both will have separate but possibly synchronized releases. Porting changes from one to the other should be easy and common.</p>
+
+<p>Scala Next will be the line on which the language development is taking place. It will receive frequent minor updates, and all experimental language features will live there.</p>
+
+<p>Scala LTS, on the other hand, will be the stable long-term support line. An LTS version will only receive patch updates, which means that all releases of the same LTS line will be forward and backward compatible in terms of output. The only changes between releases will be bug fixes, non-language changes (doctool, semanticDB, reporting), and minor quality-of-life enhancements (only if we are sure we are not breaking any compatibility guarantees). After more than two years, we may decide to nominate one of the releases from the Next line as the new LTS. After that, we guarantee that the compiler team will support the previous LTS for at least one additional year. That means the support time for each LTS release is at least three years.</p>
+
+<p>We think this will allow projects to retain a more conservative approach to updating the compiler versions and still receive the bug fixes and some improvements.</p>
+
+<p><img src="/resources/img/scala3-lts-roadmap.svg" alt="Scala LTS Roadmap" /></p>
+
+<h3 id="the-compatibility-guarantees-in-the-new-model">The compatibility guarantees in the new model</h3>
+
+<p>The new model doesn’t change our compatibility guarantees. We keep forward and backward compatibility within a single minor version and backward compatibility across different minor versions. That means that the code compiled with Scala LTS can be used as a dependency by all Scala Next versions newer than said LTS, but not the other way around.</p>
+
+<h2 id="the-future-best-practices">The (future) best practices</h2>
+
+<p>Once the LTS &amp; Next model is in place, we suggest the following practices for different groups of users:</p>
+
+<h3 id="owners-of-commercial-projects">Owners of commercial projects</h3>
+
+<p>We suggest you stick to the LTS version. It will give you the best tooling support and a stable compiler. If you are migrating a bigger project from Scala 2, you should migrate it straight to the newest LTS.</p>
+
+<p>You may also choose to be up to date with the latest minor version. That will allow you to use new features as soon as they are added to the language. However, you will need to be ready for frequent compiler updates. Otherwise, your project may end up with an unsupported language version.</p>
+
+<h3 id="library-maintainers">Library maintainers</h3>
+
+<p>Unless your library is built around some new language feature available only on Next, you should stick to the latest LTS version to have the broadest possible user base. If your library contains multiple modules, some of them may require Scala Next. It is perfectly fine as long as you keep in mind that modules compiled with Scala LTS cannot depend on them (the other way around is fine). Also, users using your library from Scala LTS won’t be able to access modules built with Next.</p>
+
+<p>Remember that when you bump the minor version of the compiler (e.g., moving from the previous Scala LTS line to the next), you also need to bump the minor version of your library.</p>
+
+<h3 id="authors-of-hobby-or-standalone-research-projects">Authors of hobby or standalone research projects</h3>
+
+<p>Feel free to use Scala Next. Then you will be able to use all libraries, both those for Scala LTS and Scala Next. You also will be able to test the newest and experimental features of the language.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2022-08-17-long-term-compatibility-plans.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Teach | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Teach"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/teach.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Teach</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<h1 id="scala-is-a-great-tool-to-teach-programming">Scala is a great tool to teach programming</h1>
+
+<p>Since Scala embraces several programming paradigms, it can be used to 
+introduce many important concepts involved in computational thinking, from 
+the most basic ones to the most advanced ones. Its lean syntax makes it
+straightforward to map those concepts into code. It is suitable to teach 
+programming to beginners, as well as to teach advanced software engineering 
+courses. The scalable language also scales for teaching!</p>
+
+<blockquote>
+  <p>“Scala is a fantastic teaching language as it is less prone to wear down the
+grit of my students compared to other programming languages that I have used
+for teaching introductory computer science.”</p>
+
+  <p>Björn Regnell, Lund University, Sweden.</p>
+</blockquote>
+
+<blockquote>
+  <p>“Scala can be taught as a statically typed scripting language. The language
+works really well for programming in the small in CS1 without all the
+drawbacks I feel exist with dynamically typed languages.”</p>
+
+  <p>Mark Lewis, Trinity University, USA.</p>
+</blockquote>
+
+<blockquote>
+  <p>“The familiar yet flexible expression-oriented syntax, advanced support for pattern-matching, extensive collections library, powerful type system, and general no-nonsense approach to essential programming constructs are all game changers.”</p>
+
+  <p>Lionel Parreaux, Hong Kong University of Science and Technology, Hong Kong.</p>
+</blockquote>
+
+<p>Read over to learn good reasons to use Scala to teach programming, to know
+where in the world Scala is taught, and to discover teaching tools and materials
+used at various levels (from high school to university).</p>
+
+<h2 id="why-teach-scala">Why Teach Scala</h2>
+
+<h3 id="multiple-paradigms">Multiple Paradigms</h3>
+
+<p>While we learn new concepts, we compare and contrast different but similar
+concepts and relate them to what we already know. This is a very important learning
+principle and many pedagogical strategies build on contrasting and comparing
+while exploring similarities and differences between concepts and ideas. Scala
+is an excellent language in supporting this pedagogical principle as it
+includes a pragmatic mix of concepts and ideas, ranging from simple to
+advanced, that can be contrasted and compared, step by step.</p>
+
+<blockquote>
+  <p>“One example I use in my teaching is contrasting different ways of solving the
+configuration problem: early on we contrast a global mutable variable versus
+default arguments and later when we get more advanced we contrast default
+arguments with context parameters. This way we can get deep into the more
+general discussion of the tradeoff between flexibility and complexity.”</p>
+
+  <p>Björn Regnell, Lund University, Sweden.</p>
+</blockquote>
+
+<blockquote>
+  <p>“We teach how to implement basic interpreters and type checkers. For this
+purpose, algebraic data types with pattern matching and immutable data
+structures, provided by functional languages, are essential.”</p>
+
+  <p>Jaemin Hong, KAIST, South Korea.</p>
+</blockquote>
+
+<blockquote>
+  <p>“Scala offers a wide variety of programming language constructs. By
+integrating both OOP and functional aspects into one language, it is a great
+tool to teach both paradigms and compare solutions within the same language.
+At the same time, Scala is a great tool to teach software design: it includes
+a whole spectrum of features ranging from basic constructs to advanced program
+structuring techniques. This allows us to use the same language to discuss
+various strategies to decompose a software into modules.”</p>
+
+  <p>Jonathan Brachthäuser, University of Tübingen, Germany.</p>
+</blockquote>
+
+<h3 id="expressive">Expressive</h3>
+
+<p>Scala has a concise syntax that allows developers to focus on the intent of a
+program without being distracted by syntactic noise. Here is a “Hello world”
+program in Scala:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@main def run() = println("Hello, World!")
+</code></pre></div></div>
+
+<blockquote>
+  <p>“Scala is a fantastic teaching language for illustrating solutions with
+different tradeoffs between the least complex concept that does the job,
+that might have lower flexibility or is less performant, compared to other
+solutions that may be more difficult to read and maintain.”</p>
+
+  <p>Björn Regnell, Lund University, Sweden.</p>
+</blockquote>
+
+<blockquote>
+  <p>“Scala allows us to focus only on interesting domain concepts without dealing
+with tedious low-level implementation issues.”</p>
+
+  <p>Jaemin Hong, KAIST, South Korea.</p>
+</blockquote>
+
+<h3 id="safe">Safe</h3>
+
+<p>Scala has a static type system that prevents entire classes of bugs from
+happening. The compiler helps the students to find bugs before run-time.
+If a student had too many difficult-to-hunt-down run-time bugs, this could take
+away the joy of learning and cause fatigue such that a student may give up
+prematurely and get a feeling of bad self-efficacy and loose motivation.</p>
+
+<blockquote>
+  <p>“In my experience with Scala, the dialog with the compiler about static
+errors strongly supports conceptual learning and strengthens self-efficacy:
+‘I can do this and I’m getting a grip of it!’.”</p>
+
+  <p>Björn Regnell, Lund University, Sweden.</p>
+</blockquote>
+
+<h3 id="regularity-and-principled-constructs">Regularity and Principled Constructs</h3>
+
+<p>Scala has done away with many of the quirks from C-like languages that still
+remain in, for example, Java and C#. There are, for instance, no surprising restrictions
+on what can be nested inside what, and no irregular semantic difference between
+primitive non-objects and “real” objects.</p>
+
+<p>Best practices recognized by experts (e.g.,
+<a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare/">avoiding the usage of <code class="language-plaintext highlighter-rouge">null</code></a>,
+<a href="https://www.infoq.com/articles/data-oriented-programming-java/">manipulating immutable values</a>)
+have been the norm since the inception of Scala.</p>
+
+<blockquote>
+  <p>“The level of regularity and generality of principled concepts in Scala is
+the best I have seen so far in a multi-paradigm language. Every strange
+irregularity and tricky exception wear down the grit of students and take
+up time in teaching that can be much better spent.”</p>
+
+  <p>Björn Regnell, Lund University, Sweden.</p>
+</blockquote>
+
+<blockquote>
+  <p>“After learning Scala, many students don’t want to ever go back to more
+primitive and ad-hoc languages like Java and C++, unless forced by the
+curriculum!”</p>
+
+  <p>Lionel Parreaux, Hong Kong University of Science and Technology, Hong Kong.</p>
+</blockquote>
+
+<h3 id="adoption-in-the-industry">Adoption in the Industry</h3>
+
+<p>Scala is used by companies such as Twitter, Netflix, AirBnB, NASA, Lego, 
+Spotify (to name a few).</p>
+
+<p>Scala is highly ranked in the <a href="https://redmonk.com/data/">Redmonk Programming Language
+Ranking</a>.</p>
+
+<h3 id="multiplatform">Multiplatform</h3>
+
+<p>Scala has been successfully used to implement both backends (running on a JVM)
+and frontends (running in the browser).</p>
+
+<h3 id="ecosystem">Ecosystem</h3>
+
+<p>Scala has <a href="https://index.scala-lang.org/awesome">thousands of libraries</a>, and
+it has access to the whole Java ecosystem as well as the JavaScript ecosystem.</p>
+
+<blockquote>
+  <p>“Full access to Java libraries as well as a large environment of Scala
+libraries means that I can give interesting assignments.”</p>
+
+  <p>Mark Lewis, Trinity University, USA.</p>
+</blockquote>
+
+<h3 id="versatile">Versatile</h3>
+
+<p>Scala has been successfully used in domains such as distributed services, 
+parallel programming, big data analysis, HTTP servers.</p>
+
+<blockquote>
+  <p>“In CS2, I’ve had students do a project that involves graphics, networking,
+and multithreading and Scala makes that possible with limited overhead.”</p>
+
+  <p>Mark Lewis, Trinity University, USA.</p>
+</blockquote>
+
+<h2 id="who-is-teaching-scala">Who Is Teaching Scala</h2>
+
+<p>Several universities use Scala to teach programming. Discover them on the
+following map:</p>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+
+<div id="teachers-map" style="height: 400px"></div>
+
+<script>
+  const map = L.map('teachers-map').setView([0, 0], 1);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+  L.geoJSON([
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [24.8254933, 60.1866719]
+        },
+        "properties": {
+          "popupContent": "Otto Seppälä and Juha Sorva at Aalto University, Finland."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [19.9149496, 50.0689793]
+        },
+        "properties": {
+          "popupContent": "Roman Debski and Bartosz Balis at AGH University of Science and Technology, Poland."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-86.8635, 39.6394]
+        },
+        "properties": {
+          "popupContent": "Brian Howard at DePauw University, United States."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [6.5600475, 46.5185825]
+        },
+        "properties": {
+          "popupContent": "Martin Odersky and Michel Schinz at École Polytechnique Fédérale de Lausanne, Switzerland."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [2.3551565, 48.7979973]
+        },
+        "properties": {
+          "popupContent": "Jim Newton at EPITA, France."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [6.6571205, 46.7792436]
+        },
+        "properties": {
+          "popupContent": "Nastaran Fatemi at Haute École d’Ingénierie et de Gestion du canton de Vaud, Switzerland."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [114.2632715, 22.3363998]
+        },
+        "properties": {
+          "popupContent": "Lionel Parreaux at Hong Kong University of Science and Technology, Hong Kong."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [36.2264517, 50.0150941]
+        },
+        "properties": {
+          "popupContent": "Vyacheslav Grebenyuk at Kharkiv National University of Radio Electronics, Ukraine."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-0.1181857, 51.5114897]
+        },
+        "properties": {
+          "popupContent": "Christian Urban at King’s College London, United Kingdom."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [77.9469233, 30.3254097]
+        },
+        "properties": {
+          "popupContent": "Lalit Pant at Kogics, India."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [127.358196, 36.3721427]
+        },
+        "properties": {
+          "popupContent": "Sukyoung Ryu at Korea Advanced Institute of Science and Technology, South Korea."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [18.0680626, 59.3498706]
+        },
+        "properties": {
+          "popupContent": "Philipp Haller at KTH Royal Institute of Technology, Sweden."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [13.203493, 55.7119483]
+        },
+        "properties": {
+          "popupContent": "Björn Regnell at Lund University, Sweden."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-98.4855322, 29.4618769]
+        },
+        "properties": {
+          "popupContent": "Mark Lewis at Trinity University, United States."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [9.04158, 48.5294782]
+        },
+        "properties": {
+          "popupContent": "Jonathan Brächthaeuser at Tübingen University, Germany."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-73.9571, 41.3889]
+        },
+        "properties": {
+          "popupContent": "Chris Okasaki, Ryan Dougherty, Tom Cook, and Maria Ebling at United States Military Academy at West Point, United States."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [6.1429217, 46.199444]
+        },
+        "properties": {
+          "popupContent": "Laurent Moccozet at Université de Genève, Switzerland."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [151.643, -30.487]
+        },
+        "properties": {
+          "popupContent": "William Billingsley at University of New England, Australia."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [17.0322743, 51.1140086]
+        },
+        "properties": {
+          "popupContent": "Michał Kowalczykiewicz at University of Wrocław, Poland."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-3.877161467041959, 40.33560214407111]
+        },
+        "properties": {
+          "popupContent": "Juan M. Serrano at University Rey Juan Carlos, Spain."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [7.35559, 46.22739]
+        },
+        "properties": {
+          "popupContent": "Pierre-André Mudry at Haute Ecole d'Ingénierie, Filière ISC, Switzerland."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [2.5876883468165737, 48.84274497346383]
+        },
+        "properties": {
+          "popupContent": "François Sarradin at Université Gustave Eiffel, France."
+        }
+      },
+    
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [2.34003, 48.95888]
+        },
+        "properties": {
+          "popupContent": "Pierre Boudes at Université Sorbonne Paris Nord, France."
+        }
+      },
+    
+  ], {
+    onEachFeature: function (feature, layer) {
+      if (feature.properties && feature.properties.popupContent) {
+        layer.bindPopup(feature.properties.popupContent);
+      }
+    }
+  }).addTo(map);
+</script>
+
+<p>Want to add yourself to the map? Add your name
+<a href="https://github.com/scala/scala-lang/edit/main/_data/teachers.yml">here</a>.</p>
+
+<h3 id="teachers-community">Teachers Community</h3>
+
+<p><a href="https://teachers.scala-lang.org">Join the community of teachers</a> and start
+a discussion about your teaching setup or your teaching material.</p>
+
+<h2 id="educational-material">Educational Material</h2>
+
+<p>This section lists popular tools or courses used for teaching programming in
+Scala.</p>
+
+<h3 id="kojo">Kojo</h3>
+
+<div style="text-align: center">
+    <img src="/resources/img/kojo.png" alt="Kojo Logo" style="max-width: 15em" />
+    <p>Image credits: Aditya Pant.</p>
+</div>
+
+<p><a href="https://kojo.in">Kojo</a> is a coding app for kids. Kojo is written in Scala, and
+kids do their coding in Scala within the app.</p>
+
+<p>Kojo is in the coding curriculum in one state in India.</p>
+
+<p>You can check out examples of Kojo creations <a href="https://codex.kogics.net">here</a>.</p>
+
+<h3 id="scala-bridge">Scala Bridge</h3>
+
+<div style="text-align: center">
+    <img src="/resources/img/scalabridge.png" alt="Scala Bridge Logo" style="max-width: 5em" />
+</div>
+
+<p><a href="https://scalabridge.org/">Scala Bridge</a> builds an inclusive Scala community
+with introductory programming workshops for underrepresented groups.</p>
+
+<h3 id="scala-center-online-courses">Scala Center Online Courses</h3>
+
+<p>The <a href="https://scala.epfl.ch">Scala Center</a> produces
+<a href="https://docs.scala-lang.org/online-courses.html">online courses</a> to learn Scala.
+These courses target people with some (non-Scala) programming background.</p>
+
+<h3 id="other-online-resources">Other Online Resources</h3>
+
+<p>See <a href="https://docs.scala-lang.org/learn.html">the other online resources</a>.</p>
+
+			</div>
+		</div>
+		
+		<!-- TOC -->
+		
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/teach.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+	</div>
+</section>
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

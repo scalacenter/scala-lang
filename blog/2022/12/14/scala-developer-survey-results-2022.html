@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala Developer Survey 2022 Results | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala Developer Survey 2022 Results"/>
+    
+    
+    <meta name="description" content="A glance at the results of the 2022 Scala Developer Survey. We'll dive into how we collected the data, briefly look at some takeaways, and share some interesting statistics."/>
+    <meta property="og:description" content="A glance at the results of the 2022 Scala Developer Survey. We'll dive into how we collected the data, briefly look at some takeaways, and share some interesting statistics."/>
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2022/12/14/scala-developer-survey-results-2022.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala Developer Survey 2022 Results</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 14 December 2022</p>
+						<p>Scala Center team</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2022/12/14/scala-developer-survey-results-2022.html">Scala Developer Survey 2022 Results</a></h2> -->
+					<p>The Scala Developer Survey 2022 was launched in October, and in ten days it attracted over 2200 responses. Today we are pleased to share the results with you.</p>
+
+<h2 id="context">Context</h2>
+
+<p>Scala 3 was released in May 2021, and we captured the community’s expectations at the time in the <a href="/2021/03/08/scala-3-developers-preview-survey-results.html">“Scala Developer’s Preview Survey”</a>. For the Scala team, the last year and a half was quite dynamic - figuring out the long-term compatibility (<a href="/blog/2022/08/17/long-term-compatibility-plans.html">blog</a>), restarting the Scala Improvement Process (<a href="/blog/2022/07/13/scala-improvement-process-reloaded.html">blog</a>), and releasing many new versions, most recently Scala 3.2.1 (<a href="/blog/2022/11/07/scala-3.2.1-released.html">blog</a>). All this work has influenced the Scala ecosystem, from tooling to education and more - but in which ways?</p>
+
+<p>This year’s State of Scala Survey is one of the sources that will inform the Scala team, answer that question, and help decide which should be its priorities in 2023.</p>
+
+<h2 id="at-glance-main-take-aways">At glance: main take-aways</h2>
+
+<p>Looking between 2019 and today, it is exciting to see the shift in adoption of each major Scala release. 2.13 has traded places with 2.12 to become the majority Scala version (<strong>80%</strong> as reported in the survey) and 2.12 (<strong>35%</strong>) has swapped with 2.11, such that 2.11 is now a significant minority (<strong>7%</strong>).</p>
+
+<p>It is also great news to see such high adoption (<strong>40%</strong>) of Scala 3. In May 2021, the Scala community anticipated the release of Scala 3.0.0. There were many concerns about if the ecosystem could catch up, and if migration would be difficult. We hope that confidence to adopt was boosted thanks to our collaboration with library maintainers; support in tools such as <a href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-classpath.html#the-scala-213-tasty-reader">Scala 2.13-3.x forward compatibility</a>; and migration assistants such as the <a href="https://docs.scala-lang.org/scala3/guides/migration/compatibility-intro.html">migration guide</a> and the <a href="https://index.scala-lang.org/scalacenter/scala3-migrate">scala3-migrate</a> tool.</p>
+
+<p>Most recently, we have even seen established community-lead projects, such as Lichess, adopt Scala 3. Which after a minor setback, is now smoothly running Scala 3 in production (see their <a href="https://lichess.org/@/thibault/blog/lichess--scala-3/y1sbYzJX">blog post</a>).</p>
+
+<p>What else? The survey has given us a great overview of the libraries used in the ecosystem, and respondents’ confidence in them (read the <a href="https://virtuslab.com/blog/scala-survey-2022"><strong>VirtusLab blog post</strong></a> for an analysis of this). Further, we invite you to try <a href="https://index.scala-lang.org/awesome">Scaladex</a> to discover all the awesome Scala libraries that are available.</p>
+
+<p>We are also excited to see that <strong>20.6%</strong> of respondents are looking forward to further development in Scala Native, which we are actively developing - that will also address concerns such as memory usage (<strong>25%</strong> reported) and cloud services support (<strong>9%</strong> reported).</p>
+
+<p>In the next two sections we will share more:</p>
+
+<ol>
+  <li>About the survey
+    <ul>
+      <li>contains all information about creating the survey and collecting data.</li>
+    </ul>
+  </li>
+  <li>Presenting the data
+    <ul>
+      <li>highlighting five questions in this blog post, while the rest can be downloaded as a PDF file.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>We encourage you to read on to learn how the survey was constructed and see the results, this way you can draw your own conclusions.</p>
+
+<p><a class="button" href="/resources/img/blog/survey-2022-results/scala_survey_2022_results.pdf" download=""><i class="fa fa-download"></i> Download the results PDF</a></p>
+
+<h2 id="survey-details-and-results">Survey details and results</h2>
+
+<p>Thank you each and everyone who participated, we value your time and input! Read further to see the results and learn more about the state of Scala in 2022.</p>
+
+<h3 id="about-the-survey">About the Survey</h3>
+
+<p>The survey was open between October 10th and October 21st 2022, and we received a total of 2236 responses. The format of the survey was as follows:</p>
+
+<ul>
+  <li>35 closed questions, non-mandatory</li>
+  <li>3 question formats:
+    <ul>
+      <li>Multiple choice to a prompt (often with &gt;1 choice allowed)</li>
+      <li>Rating:
+        <ul>
+          <li>How often you use a Scala language feature or paradigm (0-5)</li>
+          <li>Familiarity and likelihood to try or reuse a tool/library</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>This format was inspired by surveys in other language ecosystems, most notably the popular “State of JavaScript” survey. We chose this format for several reasons:</p>
+
+<ul>
+  <li>Short: we wanted the participants to be able to answer as quickly as possible to each question, to get as many answers as possible.</li>
+  <li>Closed questions to allow our teams to quantify the answers.</li>
+  <li>Non-mandatory: If a question is not relevant, allow the respondent to skip, rather than receive low-quality responses.</li>
+  <li>Reusable year-over-year: in order to study the evolution of our ecosystem over the years, we used questions that are repeatable.</li>
+</ul>
+
+<p>There are of course threats to the validity of our approach:</p>
+<ul>
+  <li>Only closed questions: since we did not propose any “Other” free-form edits, it is possible that we missed some high quality libraries or tools.</li>
+  <li>The binary choice between “would use again” and “would not use again” cannot express nuances, such as “will use again because I have no choice, but would rather not”.</li>
+  <li>Sample: we used as many distribution methods as we had at our disposal, but there is always a possibility that certain groups of users were under-represented.</li>
+</ul>
+
+<h3 id="presenting-the-data">Presenting the Data</h3>
+
+<p>In the following section, we present a selection of 5 from 35 questions that we found particularly interesting, with analysis. The rest of the result data can be found in the <strong>results PDF (see above)</strong>. We have not processed any of the results before aggregation.</p>
+
+<p>The majority of respondents self-reported as being Scala developers (<strong>88.5%</strong>). Out of all participants of the survey, <strong>40.8%</strong> work primarily in projects with 10k to 100k lines of code and <strong>22.9%</strong> work in companies with 101 to 1000 employees. The top 5 countries of respondents (representing <strong>50.1%</strong> of the total) were the United States (<strong>19.1%</strong>), the United Kingdom (<strong>8.9%</strong>), Poland (<strong>8.1%</strong>), Germany (<strong>7.7%</strong>) and France (<strong>6.8%</strong>).</p>
+
+<h4 id="scala-versions-in-use">Scala Versions in use</h4>
+
+<p><img src="/resources/img/blog/survey-2022-results/major-versions-results.svg" alt="" /></p>
+
+<p>We asked participants the question “<em>What major versions of Scala are you using?</em>”, the results of which are in the above chart. It was answered by all 2236 participants. Please note that participants could give more than one answer.</p>
+
+<p>We can see from the given responses that <strong>79.9%</strong> used “Scala 2.13”, this is an increase from <a href="https://scalacenter.github.io/scala-developer-survey-2019/"><strong>56%</strong> in the 2019 survey</a>. <strong>40.1%</strong> used “Scala 3.x”, an increase from <a href="https://scalacenter.github.io/scala-developer-survey-2019/"><strong>6%</strong> in the 2019 survey</a>. <strong>34.8%</strong> were using “Scala 2.12”, this is a decrease from <a href="https://scalacenter.github.io/scala-developer-survey-2019/"><strong>78%</strong> in the 2019 survey</a>. <strong>6.8%</strong> were using “Scala 2.11”, this is a decrease from <a href="https://scalacenter.github.io/scala-developer-survey-2019/"><strong>33%</strong> in the 2019 survey</a>. <strong>1.1%</strong> were using “Scala 2.10”, this is a decrease from <a href="https://scalacenter.github.io/scala-developer-survey-2019/"><strong>5%</strong> in the 2019 survey</a>. The “other” option received <strong>0.18%</strong> of responses, these were answered by participants who report not using Scala at all.</p>
+
+<p>In appears that since 2019, the majority of respondents have switched from 2.12 to 2.13, and that Scala 2.11 usage has significantly decreased. However historically usage of old Scala versions has been hard to quantify due to the reach of of the survey and the places where these old Scala versions are often used.</p>
+
+<p>The drop in Scala 2.11 usage matches our expectations, as many community projects are publicly discussing whether support should be dropped, such as Scala.js and Scala Native.</p>
+
+<p>We can see that a large number of respondents (<strong>40%</strong>) report using Scala 3.x. From this survey it is unclear if this is “in production” usage, or just personal testing, the question should be more precise next time. We can however identify confidence from the community in migrating to Scala 3 in production, e.g. <a href="https://lichess.org/@/thibault/blog/lichess--scala-3/y1sbYzJX">the recent Lichess migration</a>.</p>
+
+<h4 id="scala-platforms-in-use">Scala Platforms in use</h4>
+
+<p><img src="/resources/img/blog/survey-2022-results/platforms-results.svg" alt="" /></p>
+
+<p>We asked respondents the question “<em>What platforms do you target?</em>” seen in the above chart.
+Again, respondents could pick more than one option. This was answered by 2234 out of 2236 participants.</p>
+
+<p>We see that <strong>99.7%</strong> use “Scala on JVM”; <strong>17.6%</strong> use “Scala.js”, an increase from <a href="https://scalacenter.github.io/scala-developer-survey-2019/"><strong>13%</strong> in the 2019 survey</a>; and <strong>6.9%</strong> use “Scala Native”, an increase from <a href="https://scalacenter.github.io/scala-developer-survey-2019/"><strong>5.6%</strong> in the 2019 survey</a>. The “other” option received <strong>0.6%</strong> of responses, some of the responders listed as follows, in no particular order:</p>
+
+<p>GraalVM Native Image, Cardano Plutus, Android.</p>
+
+<p>In general it appears that JVM usage remains stable, but that more participants are trying Scala.js and Scala Native. Again it is hard to know the common use cases associated with each platform, which could be useful to ask next time.</p>
+
+<h4 id="aspects-of-scala-development-to-improve">Aspects of Scala development to improve</h4>
+
+<p><img src="/resources/img/blog/survey-2022-results/which-aspects-to-improve-results.svg" alt="" /></p>
+
+<p>We asked participants “<em>Let’s say that you are given the power to choose which parts of the Scala ecosystem are being improved. Please select up to 3 of the following aspects of working with Scala, you would like to see improved</em>”.
+The results of which are presented above. 2189 out of 2236 (<strong>98%</strong>) participants answered, and were allowed to select 3 options.</p>
+
+<p>The top 5 options selected were “compile/build speed” with <strong>57.1%</strong> of responses; “tooling” with <strong>50.9%</strong> of responses; “memory usage” with <strong>25.0%</strong> of responses; “dependency management” with <strong>21.2%</strong> of responses; and “Scala Native” with <strong>20.7%</strong> of responses.</p>
+
+<p>We see respondents are also concerned about “CPU usage”, “educational materials”, “binary compatibility”, and having “more out of the box utilities (batteries included)”.</p>
+
+<p>Less concern is given to issues such as “Scala.js”. This is likely due to the relatively low adoption of the Scala.js platform. However, the  “Scala Native” option is significantly greater, despite having the lowest adoption as a platform. Perhaps this indicates that many Scala JVM users anticipate switching to Scala Native when the platform matures.</p>
+
+<p>Also of less concern were “Java interop”, “security” and “linters”: this could indicate that these are successful aspects, supported by high usage of Scala on JVM and in Web services. This could however also mean that build times, memory usage, etc. are that much more of a priority.</p>
+
+<h4 id="domains-that-scala-is-used-in">Domains that Scala is used in</h4>
+
+<p><img src="/resources/img/blog/survey-2022-results/types-programs-results.svg" alt="" /></p>
+
+<p>We asked respondents “<em>What types of programs do you use Scala most often for</em>”, answered by 2208 out of 2236 (<strong>99%</strong>) of respondents. More than one option could be selected.</p>
+
+<p>The top 6 options selected were “web/API/RPC services” with <strong>88.0%</strong> of responses; “data processing” with <strong>59.2%</strong> of responses, “libraries/frameworks” with <strong>50.1%</strong> of responses; “CLI programs” with <strong>18.8%</strong> of responses; “Automation/Scripting” with <strong>18.2%</strong> of responses; and “web frontend” with <strong>13.4%</strong> of responses.</p>
+
+<p>Under the field “other”, receiving <strong>1.9%</strong> of responses, some of the responders listed as follows, in no particular order:  Blockchain, backend, compiler, mathematical optimisation.</p>
+
+<h4 id="learning-resources-for-scala">Learning resources for Scala</h4>
+
+<p><img src="/resources/img/blog/survey-2022-results/resources-learn-scala-results.svg" alt="" /></p>
+
+<p>We asked respondents “<em>Which types of resources did you use to learn Scala?</em>”, answered by 2206 out of 2236 (<strong>99%</strong>) of participants. Again this question allowed multiple options to be selected.</p>
+
+<p>We see that <strong>78.1%</strong> of respondents chose “books”; <strong>77.5%</strong> chose the <a href="https://docs.scala-lang.org">official documentation</a>; <strong>77.21%</strong> chose “online courses”; <strong>8.43%</strong> chose “university courses”; <strong>3.72%</strong> chose “bootcamps”.</p>
+
+<p><strong>16.7%</strong> of respondents chose “other” which is significantly more compared to the rest of the  questions in the survey with the same field. Here’s what came up, in no particular order:
+Work experience, hackathons, local user groups, youtube tutorials, internal company training, blogs, Stackoverflow, and more.</p>
+
+<p>Going forward it would be useful to reinclude some of the “other” options in the main questions, and further determine which books/docs/courses were useful.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2022-12-14-scala-developer-survey-results-2022.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 3.0.1 and 3.0.2-RC1 are here! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 3.0.1 and 3.0.2-RC1 are here!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2021/07/21/scala-3.0.2RC1-is-here.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 3.0.1 and 3.0.2-RC1 are here!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 21 July 2021</p>
+						<p>Michał Pałka, VirtusLab</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2021/07/21/scala-3.0.2RC1-is-here.html">Scala 3.0.1 and 3.0.2-RC1 are here!</a></h2> -->
+					<p>Greetings from the Scala 3 team! We are glad to announce that Scala 3.0.1 and 3.0.2-RC1 are now officially out.</p>
+
+<p>As no critical bugs have been found in the previously released Scala 3.0.1-RC2, it has been promoted to 3.0.1. It is the first stable release after 3.0.0 and it incorporates the changes described in detail in the articles for its pre-releases: <a href="https://dotty.epfl.ch/blog/2021/06/07/scala3.0.1-rc1-release.html">3.0.1-RC1</a> and <a href="https://dotty.epfl.ch/blog/2021/06/25/scala301-rc2.html">3.0.1-RC2</a>. The unified changelog can be found <a href="https://github.com/lampepfl/dotty/releases/tag/3.0.1">here</a>.</p>
+
+<p>Scala 3.0.2-RC1, in turn, incorporates new language improvements and bug fixes described below.</p>
+
+<p>You can expect the release of stable 3.0.2 and a release candidate for a the next version in 6 weeks from now (1st September).</p>
+
+<h2 id="improved-insertion-of-semicolons-in-logical-conditions">Improved insertion of semicolons in logical conditions</h2>
+
+<p>Scala 3’s indentation based syntax is aimed at making your code more concise and readable. As it gets broader adoption, we consistently improve its specification to eliminate corner cases which might lead to ambiguities or counterintuitive behaviours.</p>
+
+<p>Thanks to <a href="https://github.com/lampepfl/dotty/pull/12801">#12801</a> it is now allowed for a logical expression in an <code class="language-plaintext highlighter-rouge">if</code> statement or expression to continue in the following line if it starts in the same line as the <code class="language-plaintext highlighter-rouge">if</code> keyword, e.g.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nf">foo</span>
+  <span class="o">(</span><span class="n">bar</span><span class="o">)</span>
+<span class="n">then</span> <span class="c1">//...</span>
+</code></pre></div></div>
+
+<p>can now be used instead of</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nf">foo</span><span class="o">(</span><span class="n">bar</span><span class="o">)</span>
+<span class="n">then</span> <span class="c1">//...</span>
+</code></pre></div></div>
+
+<p>If your intention is to have a block of code evaluating into a single condition you should add a new line and indentation directly after <code class="language-plaintext highlighter-rouge">if</code>, e.g.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span>
+  <span class="k">val</span> <span class="nv">cond</span> <span class="k">=</span> <span class="nf">foo</span><span class="o">(</span><span class="n">bar</span><span class="o">)</span>
+  <span class="n">cond</span>
+<span class="n">then</span> <span class="c1">//...</span>
+</code></pre></div></div>
+
+<p>so code like below would NOT be valid</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="k">val</span> <span class="nv">cond</span> <span class="k">=</span> <span class="nf">foo</span><span class="o">(</span><span class="n">bar</span><span class="o">)</span>
+  <span class="n">cond</span>
+<span class="n">then</span> <span class="c1">//...</span>
+</code></pre></div></div>
+
+<h2 id="towards-better-null-safety-in-the-type-system">Towards better null safety in the type system</h2>
+
+<p>The compiler option <code class="language-plaintext highlighter-rouge">-Yexplicit-nulls</code> modifies Scala’s standard type hierarchy to allow easier tracing of nullable values by performing strict checks directly on the level of the type system rather than just relying on conventions (e.g. this prevents you from writing code like <code class="language-plaintext highlighter-rouge">val foo: Option[String] = Some(null)</code>, which would be otherwise valid Scala although very likely to cause a <code class="language-plaintext highlighter-rouge">NullPointerException</code> at some further point).</p>
+
+<p>After the recently introduced changes with this option enabled the <code class="language-plaintext highlighter-rouge">Null</code> type becomes a subtype of <code class="language-plaintext highlighter-rouge">Matchable</code> instead of inheriting directly from <code class="language-plaintext highlighter-rouge">Any</code>, making the code below compile (this used to compile before only without strict nullability checking).</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">foo</span><span class="o">[</span><span class="kt">T</span> <span class="k">&lt;:</span> <span class="kt">Matchable</span><span class="o">](</span><span class="n">t</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span> <span class="k">=</span> <span class="n">t</span> <span class="k">match</span> <span class="o">{</span> <span class="k">case</span> <span class="kc">null</span> <span class="k">=&gt;</span> <span class="o">()</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="method-search-by-type-signature">Method search by type signature</h2>
+
+<p>You can now browse the documentation of Scala’s API not only by names of methods but also by their type in a <a href="https://hoogle.haskell.org">Hoogle</a>-like manner (but with Scala syntax) thanks to integration with <a href="https://github.com/VirtusLab/Inkuire">Inkuire</a> brought up by <a href="https://github.com/lampepfl/dotty/pull/12375">#12375</a>.</p>
+
+<p>To find methods with the desired signature simply write in scaladoc’s searchbar the type you would expect them to have after eta-expansion (as if they were functions rather than methods).</p>
+
+<p><img src="https://user-images.githubusercontent.com/39772805/117478350-53f12a80-af5f-11eb-82ab-930ba565dacb.gif" alt="image url &quot;image Title&quot;" /></p>
+
+<h2 id="typing-escape-hatch-for-structural-types">Typing escape hatch for structural types</h2>
+
+<p>Structural types may come in handy in many situations, e.g. when one wants to achieve a compromise between safety of static typing and ease of use when dealing with dynamically changing schemas of domain data structures. They have however some limitations. Among others structural typing doesn’t normally play well with method overloading because some types of reflective dispatch algorithms (inlcuding JVM reflection) might not be able to choose the overloaded method alternative with the right signature without knowing upfront the exact types of the parameters after erasure. Consider the following snippet.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Sink</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span> <span class="k">def</span> <span class="nf">put</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{}</span> <span class="o">}</span>
+<span class="k">val</span> <span class="nv">a</span> <span class="k">=</span> <span class="nc">Sink</span><span class="o">[</span><span class="kt">String</span><span class="o">]()</span>
+<span class="k">val</span> <span class="nv">b</span><span class="k">:</span> <span class="o">{</span> <span class="kt">def</span> <span class="kt">put</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">String</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span> <span class="o">}</span> <span class="o">=</span> <span class="n">a</span>
+</code></pre></div></div>
+
+<p>This code won’t compile. This is because when <code class="language-plaintext highlighter-rouge">Sink[String]</code> gets erased to <code class="language-plaintext highlighter-rouge">Sink[Object]</code> (as it’s seen from JVM’s perspective) the method’s signature becomes <code class="language-plaintext highlighter-rouge">put(x: Object): Unit</code> while for the structural type it remains unchanged as <code class="language-plaintext highlighter-rouge">put(x: String): Unit</code> and they wouldn’t match in runtime therefore <code class="language-plaintext highlighter-rouge">Sink[String]</code> cannot be treated as a subtype of <code class="language-plaintext highlighter-rouge">{ def put(x: String): Unit }</code>.</p>
+
+<p>We might however try to write a better method dispatch algorithm ourselves instead of relying on the JVM’s default one to make this work. To assure the compiler that we know what we’re doing we’ll need to use the new <code class="language-plaintext highlighter-rouge">Selectable.WithoutPreciseParameterTypes</code> marker trait. Currently it’s an experimental feature (introduced by <a href="https://github.com/lampepfl/dotty/pull/12268">#12268</a>) so you’ll be able to use it only with a snapshot or nightly version of the compiler and you’ll need to annotate all subtypes of this trait with <code class="language-plaintext highlighter-rouge">@experimental</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">annotation.experimental</span>
+
+<span class="nd">@experimental</span> <span class="k">trait</span> <span class="nc">MultiMethodSelectable</span> <span class="k">extends</span> <span class="nv">Selectable</span><span class="o">.</span><span class="py">WithoutPreciseParameterTypes</span><span class="k">:</span>
+  <span class="c1">// smartly choose the right method implementation to call</span>
+  <span class="k">def</span> <span class="nf">applyDynamic</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">paramTypes</span><span class="k">:</span> <span class="kt">Class</span><span class="o">[</span><span class="k">_</span><span class="o">]*)(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Any*</span><span class="o">)</span><span class="k">:</span> <span class="kt">Any</span> <span class="o">=</span> <span class="o">???</span>
+
+<span class="nd">@experimental</span> <span class="k">class</span> <span class="nc">Sink</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">MultiMethodSelectable</span><span class="k">:</span>
+  <span class="kt">def</span> <span class="kt">put</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">A</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{}</span>
+
+<span class="k">val</span> <span class="nv">a</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Sink</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span>
+<span class="k">val</span> <span class="nv">b</span><span class="k">:</span> <span class="kt">MultiMethodSelectable</span> <span class="o">{</span> <span class="kt">def</span> <span class="kt">put</span><span class="o">(</span><span class="kt">x:</span> <span class="kt">String</span><span class="o">)</span><span class="kt">:</span> <span class="kt">Unit</span> <span class="o">}</span> <span class="o">=</span> <span class="n">a</span>
+</code></pre></div></div>
+
+<p>This snippet will compile as the compiler won’t perform the precise signature check for <code class="language-plaintext highlighter-rouge">b</code> anymore.</p>
+
+<p><a href="https://dotty.epfl.ch/docs/reference/changed-features/structural-types-spec.html#limitations-of-structural-types">More details</a></p>
+
+<h2 id="metaprogramming">Metaprogramming</h2>
+
+<p>Keeping in mind how important metaprogramming has become to Scala developers (especially creators of libraries) we continue to make it more reliable by fixing reported bugs and more powerful by repealing formerly introduced limitations. If you’re curious how it was done look at the PRs below:</p>
+
+<ul>
+  <li>Map opaque types in arguments of inlined calls to proxies <a href="https://github.com/lampepfl/dotty/pull/12922">#12922</a></li>
+  <li>Don’t forget side effects in prefixes of inlined function calls <a href="https://github.com/lampepfl/dotty/pull/12842">#12842</a></li>
+  <li>Drop “no inlines with opaques” implementation restriction <a href="https://github.com/lampepfl/dotty/pull/12815">#12815</a></li>
+  <li>Detect abstract inline method calls after inlining <a href="https://github.com/lampepfl/dotty/pull/12777">#12777</a></li>
+  <li>Fix implicit ValueOf synthesis <a href="https://github.com/lampepfl/dotty/pull/12615">#12615</a></li>
+</ul>
+
+<h2 id="other-notable-improvements">Other notable improvements</h2>
+
+<ul>
+  <li>Add Scala 3 batch commands for Windows <a href="https://github.com/lampepfl/dotty/pull/13006">#13006</a></li>
+  <li>Fix <a href="https://github.com/lampepfl/dotty/issues/12981">#12981</a>: show diagnostics levels (warn | error) in REPL <a href="https://github.com/lampepfl/dotty/pull/13000">#13000</a></li>
+  <li>Add no links warning setting to scaladoc <a href="https://github.com/lampepfl/dotty/pull/12936">#12936</a></li>
+  <li>Use WeakHashSet instead of HashSet for hash-consing types <a href="https://github.com/lampepfl/dotty/pull/12935">#12935</a></li>
+  <li>Balance And/Or types when forming lubs and glbs <a href="https://github.com/lampepfl/dotty/pull/12928">#12928</a></li>
+  <li>Restricts isInstanceOf[Null] checks <a href="https://github.com/lampepfl/dotty/pull/12905">#12905</a></li>
+  <li>Add support for shallow capture sets <a href="https://github.com/lampepfl/dotty/pull/12875">#12875</a></li>
+  <li>Drop implementation restriction for polymorphic functions <a href="https://github.com/lampepfl/dotty/pull/12863">#12863</a></li>
+  <li>Preserve hard unions in more situations <a href="https://github.com/lampepfl/dotty/pull/12654">#12654</a></li>
+  <li>Better support type-heavy pattern matches <a href="https://github.com/lampepfl/dotty/pull/12549">#12549</a></li>
+</ul>
+
+<h2 id="other-notable-bug-fixes">Other notable bug fixes</h2>
+
+<ul>
+  <li>Fix <a href="https://github.com/lampepfl/dotty/issues/13046">#13046</a>: override is a valid identifier in Java, not a keyword <a href="https://github.com/lampepfl/dotty/pull/13048">#13048</a></li>
+  <li>Don’t emit Java generic signatures for constructors <a href="https://github.com/lampepfl/dotty/pull/13047">#13047</a></li>
+  <li>Exhaustivity warnings on nested case classes <a href="https://github.com/lampepfl/dotty/pull/13030">#13030</a></li>
+  <li>Refine overriding pairs in RefChecks <a href="https://github.com/lampepfl/dotty/pull/12982">#12982</a></li>
+  <li>Let annotations on parameters see preceding type parameters <a href="https://github.com/lampepfl/dotty/pull/12980">#12980</a></li>
+  <li>Retain transparent flag on exports <a href="https://github.com/lampepfl/dotty/pull/12978">#12978</a></li>
+  <li>Widen unions before finding members <a href="https://github.com/lampepfl/dotty/pull/12925">#12925</a></li>
+  <li>ProtoTypes#normalizedCompatible: keep more constraints <a href="https://github.com/lampepfl/dotty/pull/12924">#12924</a></li>
+  <li>Detect provisional superclasses and recompute them in Typer <a href="https://github.com/lampepfl/dotty/pull/12912">#12912</a></li>
+  <li>Properly handle self-types in reflection member lookup <a href="https://github.com/lampepfl/dotty/pull/12893">#12893</a></li>
+  <li>Use Java rules for member lookup in .java sources <a href="https://github.com/lampepfl/dotty/pull/12884">#12884</a></li>
+  <li>Hide problematic static forwarders <a href="https://github.com/lampepfl/dotty/pull/12860">#12860</a></li>
+  <li>When checking tp1 &lt;:&lt; tycon2[args2], widen tp1 to reveal application <a href="https://github.com/lampepfl/dotty/pull/12846">#12846</a></li>
+  <li>Skip contexts for implicit search when resolving imports <a href="https://github.com/lampepfl/dotty/pull/12816">#12816</a></li>
+  <li>Insert conversions also on selections wrapped in type applications <a href="https://github.com/lampepfl/dotty/pull/12719">#12719</a></li>
+  <li>Emit generic signature for static forwarders to nullary methods <a href="https://github.com/lampepfl/dotty/pull/12710">#12710</a></li>
+  <li>Add Matchable to the parents of Null in explicit nulls <a href="https://github.com/lampepfl/dotty/pull/12697">#12697</a></li>
+  <li>Always generate a partial function from a lambda <a href="https://github.com/lampepfl/dotty/pull/12670">#12670</a></li>
+  <li>Fix <a href="https://github.com/lampepfl/dotty/issues/12572">#12572</a>: Ignore default accessor bridges in non-native JS classes. <a href="https://github.com/lampepfl/dotty/pull/12657">#12657</a></li>
+</ul>
+
+<h2 id="contributors">Contributors</h2>
+<p>Thank you to all the contributors who made this release possible 🎉</p>
+
+<p>According to <code class="language-plaintext highlighter-rouge">git shortlog -sn --no-merges 3.0.1-RC2..3.0.2-RC1</code> these are:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    85	Martin Odersky
+    60	Liu Fengyun
+    47	Kacper Korban
+    28	Filip Zybała
+    17	Andrzej Ratajczak
+    16	Guillaume Martres
+    15	Jamie Thompson
+    10	bjornregnell
+     9	tanishiking
+     8	Dylan Halperin
+     8	Anatolii Kmetiuk
+     7	Tom Grigg
+     5	Som Snytt
+     5	changvvb
+     4	Nicolas Stucki
+     4	Aleksander Boruch-Gruszecki
+     4	Sébastien Doeraene
+     4	Michał Pałka
+     3	Magnolia.K
+     3	Phil
+     3	Krzysztof Romanowski
+     3	Paweł Marks
+     2	xuwei-k
+     2	Ben Plommer
+     2	Florian Schmaus
+     2	Lukas Rytz
+     2	Maciej Gorywoda
+     2	Markus Sutter
+     2	Roman Kotelnikov
+     2	Stéphane Micheloud
+     2	noti0na1
+     2	vincenzobaz
+     1	Ondrej Lhotak
+     1	KazuyaMiayshita
+     1	odersky
+     1	Julian Mendez
+     1	Anton Sviridov
+     1	GavinRay97
+     1	EnzeXing
+     1	Tomas Mikula
+     1	Tomasz Godzik
+     1	Vaastav Arora
+     1	Vadim Chelyshov
+     1	Will Sargent
+     1	Zofia Bartyzel
+     1	Dale Wijnand
+     1	Bjorn Regnell
+     1	dmitrii.naumenko
+     1	Adrien Piquerez
+     1	Meriam Lachkar
+     1	Martin
+     1	Olivier Blanvillain
+     1	Lorenzo Gabriele
+</code></pre></div></div>
+
+<h2 id="library-authors-join-our-community-build">Library authors: Join our community build</h2>
+
+<p>Scala 3 now has a set of widely-used community libraries that are built against every nightly Scala 3 snapshot.
+Join our <a href="https://github.com/lampepfl/dotty/tree/master/community-build">community build</a>
+to make sure that our regression suite includes your library.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2021-07-21-scala-3.0.2RC1-is-here.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

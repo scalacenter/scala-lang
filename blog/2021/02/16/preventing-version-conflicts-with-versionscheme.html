@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Preventing Version Conflicts with versionScheme | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Preventing Version Conflicts with versionScheme"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2021/02/16/preventing-version-conflicts-with-versionscheme.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Preventing Version Conflicts with versionScheme</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 16 February 2021</p>
+						<p>Eugene Yokota, Julien Richard-Foy</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2021/02/16/preventing-version-conflicts-with-versionscheme.html">Preventing Version Conflicts with versionScheme</a></h2> -->
+					<p>One of the things that makes Scala powerful and fun to use is its library ecosystem — spanning across the Maven ecosystem for JVM, and npm for Scala.js. We can use libraries to do operations like download files from the web, or we can use it to adopt different programming paradigms. The library ecosystem allows us to write more useful programs with less effort.</p>
+
+<p>However, the library ecosystem is not without problems. A library that you pulled could depend on other libraries, and the transitive dependencies could cause version conflicts. Here’s a quick example of a Scala project that uses Akka HTTP, a Postgres database, and JSON. Its build declares two library dependencies, <code class="language-plaintext highlighter-rouge">akka-http-circe</code> and <code class="language-plaintext highlighter-rouge">doobie-postgres-circe</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libraryDependencies ++= Seq(
+  "de.heikoseeberger" %% "akka-http-circe"       % "1.26.0",
+  "org.tpolecat"      %% "doobie-postgres-circe" % "0.10.0"
+)
+</code></pre></div></div>
+
+<p>Note that both libraries use Circe for working with JSON.</p>
+
+<p>sbt loads the project build, the project compiles successfully, but when you try to run it, you may get a <code class="language-plaintext highlighter-rouge">NoSuchMethodError</code> exception at run-time!</p>
+
+<p>What happens here is that one of the transitive dependencies of <code class="language-plaintext highlighter-rouge">akka-http-circe</code> depends on <code class="language-plaintext highlighter-rouge">circe-core</code> version 0.11.1, and another transitive dependency of <code class="language-plaintext highlighter-rouge">doobie-postgres-circe</code> depends on <code class="language-plaintext highlighter-rouge">circe-core</code> version 0.13.0. Here’s an excerpt of the output of sbt’s <code class="language-plaintext highlighter-rouge">dependencyTree</code> task:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[info]   +-de.heikoseeberger:akka-http-circe_2.12:1.26.0 [S]
+[info]   | +-io.circe:circe-core_2.12:0.11.1 (evicted by: 0.13.0)
+[info]   |     
+[info]   +-org.tpolecat:doobie-postgres-circe_2.12:0.10.0 [S]
+[info]     +-io.circe:circe-core_2.12:0.13.0 [S]
+</code></pre></div></div>
+
+<p>Unfortunately, these two versions of Circe are not binary compatible. Such version conflicts are common in a dependency graph of any practical size. The problem is that we carefully program our code using a statically checked type system, but when it comes to production code we accept swapping out the JAR file with something that our dependency resolver like Coursier and Apache Ivy selected on a whim.</p>
+
+<p>The Scala Center, Alexandre Archambault (author of Coursier), and Eugene Yokota have been working on a solution to reliably detect such conflicts at compilation time.</p>
+
+<p>In the next section, we will explain the mechanism that was in place so far in sbt to address this issue, and we will discuss its limits. Then, we will introduce a new solution, which requires library authors to declare the versioning scheme of their libraries with a new sbt key, <code class="language-plaintext highlighter-rouge">versionScheme</code>.</p>
+
+<h2 id="eviction-warnings">Eviction warnings</h2>
+
+<p>Actually this is not the first time we have thought of this issue. In 2014, we added <a href="https://github.com/sbt/sbt/pull/147">eviction warning</a> feature to sbt 0.13.6. When you have two candidate versions 0.11.1 and 0.13.0, and when it picks 0.13.0, 0.11.1 is said to be “evicted”.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt:killer-app&gt; evicted
+[warn] Found version conflict(s) in library dependencies; some are suspected to be binary incompatible:
+[warn]  * io.circe:circe-core_2.12:0.13.0 is selected over 0.11.1
+[warn]      +- org.tpolecat:doobie-postgres-circe_2.12:0.10.0     (depends on 0.13.0)
+[warn]      +- de.heikoseeberger:akka-http-circe_2.12:1.26.0      (depends on 0.11.1)
+[success] Total time: 1 s, completed Feb 1, 2021, 2:59:56 PM
+</code></pre></div></div>
+
+<p>Here, we see that sbt successfully detected the conflict for circe-core.</p>
+
+<p>This was a step in the right direction, but it did not work well in reality because we had no way to tell whether two versions of a library would be binary compatible or not. In 2014 what we did was guess that a Java library would adopt <a href="https://semver.org/">Semantic Versioning</a>, and a Scala library would adopt <a href="https://pvp.haskell.org/">PVP</a>. (Apparently, the versioning scheme “epoch.major.minor” has a name, and it is Haskell Package Versioning Policy, or PVP for short).</p>
+
+<p>Unfortunately, the reality was different and while some Scala libraries use PVP (e.g., Play framework, the standard library, …), some others do use Semantic Versioning (e.g., <code class="language-plaintext highlighter-rouge">scala-collection-compat</code>, <code class="language-plaintext highlighter-rouge">cats</code>, …). This makes eviction warnings less reliable since many of these warnings are false positive, and, in practice, <a href="https://github.com/sbt/sbt/issues/5976">they are ignored by developers</a>.</p>
+
+<h2 id="early-semver-and-sbt-version-policy">Early SemVer and sbt-version-policy</h2>
+
+<p>If you are maintaining a library, the first thing you could do to help is picking a version scheme. Our recommendation for libraries going forward is adopting <strong>Early Semver</strong> as described in the documentation page <a href="https://docs.scala-lang.org/overviews/core/binary-compatibility-for-library-authors.html#versioning-scheme---communicating-compatibility-breakages">Binary Compatibility for Library Authors</a>. Please read the linked post by Jacob Wang for more details on binary compatibility and source compatibility.</p>
+
+<p>Given a version number <code class="language-plaintext highlighter-rouge">major.minor.patch</code>, you MUST increment the:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">major</code> version if backward <strong>binary compatibility</strong> is broken,</li>
+  <li><code class="language-plaintext highlighter-rouge">minor</code> version if backward <strong>source compatibility</strong> is broken, and</li>
+  <li><code class="language-plaintext highlighter-rouge">patch</code> version to signal neither binary nor source incompatibility.</li>
+</ol>
+
+<ul>
+  <li>When the <code class="language-plaintext highlighter-rouge">major</code> version is <code class="language-plaintext highlighter-rouge">0</code>, a minor version increment MAY contain <strong>both source and binary breakages</strong>, but a patch version increment MUST remain <strong>binary compatible</strong>.</li>
+</ul>
+
+<p>We call this “Early” SemVer, because according to the <a href="https://semver.org/">Semantic Versioning Spec</a> there are no guarantees between any versions when the major version is <code class="language-plaintext highlighter-rouge">0</code>. In the Scala library ecosystem, though, we often start guaranteeing binary compatibility for <code class="language-plaintext highlighter-rouge">0.y.z</code> like sbt 0.13 and Scala.js 0.6.</p>
+
+<p>Unfortunately, it is not an easy task to know whether a change on public API broke source or binary compatibility. The Scala Center contracted Alexandre Archambault to create <a href="https://github.com/scalacenter/sbt-version-policy">sbt-version-policy</a>. This plugin helps library authors to self-check a version scheme. To use this, add the following to your <code class="language-plaintext highlighter-rouge">project/plugins.sbt</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>addSbtPlugin("ch.epfl.scala" % "sbt-version-policy" % "1.0.0-RC5")
+</code></pre></div></div>
+
+<p>And declare your compatibility intention regarding the next release, in your <code class="language-plaintext highlighter-rouge">build.sbt</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// The next release must be binary and source compatible with the previous release (it will be a patch release)
+ThisBuild / versionPolicyIntention := Compatibility.BinaryAndSourceCompatible
+</code></pre></div></div>
+
+<p>This plugin provides a task called <code class="language-plaintext highlighter-rouge">versionPolicyCheck</code>, which you can call in the continuous integration server.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; versionPolicyCheck
+</code></pre></div></div>
+
+<p>The task checks that the current state of the project is binary compatible with the previous release, and fails otherwise, so that you can prevent incompatibilities to be introduced in your project.</p>
+
+<p>We think Early SemVer gives better flexibility to both library authors and library users since it gives more information about what would be in minor upgrades (we often call this feature release) vs patch. For example, sbt 1 ships bug fixes as 1.3.x patch releases without going through RC cycle, so bug fixes are released quickly.</p>
+
+<p>During the minor upgrade (feature release), we aggressively add new features, while maintaining binary compatibility for the plugin ecosystem. These only come out once a year, and it goes through the RC cycle.</p>
+
+<h2 id="versionscheme-librarydependencyschemes-and-sbt-150">versionScheme, libraryDependencySchemes, and sbt 1.5.0</h2>
+
+<p>As mentioned earlier, sbt contains a built-in eviction warning feature, but there are too many false positives right now because it needs to guess.</p>
+
+<p>Since sbt 1.4.0, there is a new setting <code class="language-plaintext highlighter-rouge">versionScheme</code>, which can be used by library authors
+to declare the versioning scheme they use:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ThisBuild / versionScheme := Some("early-semver")
+</code></pre></div></div>
+
+<p>sbt 1.4.0 includes this information into <code class="language-plaintext highlighter-rouge">pom.xml</code> and <code class="language-plaintext highlighter-rouge">ivy.xml</code> as a property. In addition, sbt uses the information to take the guessing out of eviction warning when this information is available.</p>
+
+<p>In sbt 1.5.0, eviction warnings will be replaced with <a href="https://github.com/sbt/sbt/pull/6221">eviction errors</a>. Since it can now reliably detect whether two dependencies with different versions are compatible, or if they conflict, the build will fail if an incompatibility is detected in your dependencies. This is of course possible only if the libraries provide their <code class="language-plaintext highlighter-rouge">versionScheme</code>, otherwise sbt will keep issuing eviction warnings.</p>
+
+<p>It might take a few years for the <code class="language-plaintext highlighter-rouge">versionScheme</code> information to become prevalent in the ecosystem. In the meantime, as a user of libraries you can manually configure the versioning scheme used by your libraries by using a new setting, <code class="language-plaintext highlighter-rouge">libraryDependencySchemes</code>. For instance, here is how you can tell sbt that the <code class="language-plaintext highlighter-rouge">circe-core</code> artifact follows the Early SemVer scheme:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ThisBuild / libraryDependencySchemes += "io.circe" %% "circe-core" % "early-semver"
+</code></pre></div></div>
+
+<p>With this setting, the warning caused by the conflicting versions of circe-core
+becomes an error because the version number 0.13.0 is not binary compatible
+with the version number 0.11.1 according to the Early SemVer scheme:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt:killer-app&gt; update
+[error] stack trace is suppressed; run last update for the full output
+[error] (update) found version conflict(s) in library dependencies; some are suspected to be binary incompatible:
+[error] 
+[error]         * io.circe:circe-core_2.12:0.13.0 (early-semver) is selected over 0.11.1
+[error]             +- org.tpolecat:doobie-postgres-circe_2.12:0.10.0     (depends on 0.13.0)
+[error]             +- de.heikoseeberger:akka-http-circe_2.12:1.26.0      (depends on 0.11.1)
+[error] 
+[error] 
+[error] this can be overridden using libraryDependencySchemes or evictionErrorLevel
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>If you are a library author, set <code class="language-plaintext highlighter-rouge">ThisBuild / versionScheme</code> to declare the versioning scheme
+used by your library, so that build tools can reliably detect conflicting versions pulled by
+transitive dependencies.</p>
+
+<p>You might also want to have a look at the plugin <a href="https://github.com/scalacenter/sbt-version-policy">sbt-version-policy</a>, which helps you
+to implement the versioning scheme that you declare in your build, by detecting the binary
+and source incompatibilities introduced between releases.</p>
+
+<p>As a library user, starting from sbt 1.5.0 you should configure your
+<code class="language-plaintext highlighter-rouge">libraryDependencySchemes</code> to get accurate eviction errors for libraries that don’t (yet) provide their <code class="language-plaintext highlighter-rouge">versionScheme</code>.</p>
+
+<p><em><a href="https://twitter.com/eed3si9n">Eugene Yokota</a> is the lead developer of sbt. <a href="https://twitter.com/julienrf">Julien Richard-Foy</a> makes MOOCs at the Scala Center</em>.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2021-02-16-preventing-version-conflicts-with-versionscheme.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

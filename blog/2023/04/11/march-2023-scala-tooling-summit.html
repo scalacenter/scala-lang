@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>March 2023 - Scala Tooling Summit | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="March 2023 - Scala Tooling Summit"/>
+    
+    
+    <meta name="description" content="A recap of the recent Scala Tooling Summit in Lausanne, Switzerland."/>
+    <meta property="og:description" content="A recap of the recent Scala Tooling Summit in Lausanne, Switzerland."/>
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2023/04/11/march-2023-scala-tooling-summit.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>March 2023 - Scala Tooling Summit</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 11 April 2023</p>
+						<p>Chris Kipp and the Scala Center team</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2023/04/11/march-2023-scala-tooling-summit.html">March 2023 - Scala Tooling Summit</a></h2> -->
+					<p><img style="max-height: 350px; display: block; margin: auto; width: auto;" src="/resources/img/march-2023-tooling-summit-stairs.jpg" alt="Scala stairs with people standing on the stairs" /></p>
+
+<p>Tooling is a pivotal part of the developer experience. Often when someone asks
+about a new language or how another developer enjoys working in a certain
+language, it’s not long before the topic of tooling comes up. Questions like
+“what’s the build tool like?” and “how’s the editor support?” are often some of
+the first questions asked, after talking about language features.</p>
+
+<p>Earlier this year when the Center published the <a href="https://scala-lang.org/blog/2023/01/31/scala-center-2023-roadmap.html">2023 Scala Center
+Roadmap</a>
+we mentioned our plans for a tooling summit this year. In the last few years a
+global pandemic prohibited us from meeting in person and an all-consuming Scala
+3 release effort that required extra effort on tooling identified a deep need
+for something like this summit — to touch base, to map out current issues and
+opportunities in the tooling ecosystem, and to re-lay the groundwork for ongoing
+collaboration.</p>
+
+<p>With all this in mind, we’d like to share some updates from the recent summit
+hosted by the <a href="https://scala.epfl.ch/">Scala Center</a> at
+<a href="https://scala.epfl.ch/">EPFL</a> in Lausanne, Switzerland.</p>
+
+<h2 id="who-was-there">Who was there</h2>
+
+<p>What originally started out as a plan to better sync between those working on
+the compiler and core tools at the Scala Center with those working on <a href="https://www.jetbrains.com/idea/">IntelliJ
+IDEA</a> at JetBrains eventually blossomed into an
+event with over 40 attendees from around the world representing all sorts of
+companies and organization actively involved in the development and maintenance
+of core tooling in the Scala ecosystem. Below you will find a list of some of
+those companies and orgs:</p>
+
+<ul>
+  <li><a href="https://github.com/com-lihaoyi">com-lihaoyi</a></li>
+  <li><a href="https://www.epfl.ch/en/">EPFL</a></li>
+  <li><a href="https://gradle.org/">Gradle</a></li>
+  <li><a href="https://www.jetbrains.com/">JetBrains</a></li>
+  <li><a href="https://lightbend.com">Lightbend</a></li>
+  <li><a href="https://lunatech.com/">Lunatech</a></li>
+  <li><a href="https://netflix.com/">Netflix (Netflix Algorithms Engineering)</a></li>
+  <li><a href="https://www.scala-sbt.org/">sbt</a></li>
+  <li><a href="https://scala.epfl.ch/">Scala Center</a></li>
+  <li><a href="https://github.com/scalameta/">Scalameta</a></li>
+  <li><a href="https://virtuslab.com/">VirtusLab</a></li>
+  <li><a href="https://www.47deg.com/">Xebia Functional</a></li>
+</ul>
+
+<h2 id="what-we-talked-about">What we talked about</h2>
+
+<p>The Tooling Summit was spread over three full days of sessions around teamwork,
+de-duplication efforts, stabilization, and discussing the future of Scala
+tooling. Much of this time was spent brainstorming, discussing, and even hacking
+on various ideas that originated from a set of topics scheduled throughout the
+summit. You can find a list of these topics below:</p>
+
+<ul>
+  <li>Ensure tooling can use structured diagnostics</li>
+  <li>JetBrains / Scala Center education collaboration</li>
+  <li>Scope and syntax of scala-cli using directives</li>
+  <li>Debugging in Scala 3</li>
+  <li>Bazel and Scala</li>
+  <li>Standardizing Scala worksheet implementations</li>
+  <li>The state of editor support for scala-cli</li>
+  <li>A discussion around BSP</li>
+  <li>Making tooling more robust</li>
+  <li>Limiting the ways to import a project into your IDE</li>
+  <li>Porting Scalameta to Scala 3</li>
+  <li>IDE support in “polyglot” projects that contain Scala</li>
+  <li>Tasty Query and its use-cases</li>
+  <li>Planning for sbt 2</li>
+  <li>Bringing the Compiler Academy format to tooling</li>
+  <li>Shared publishing implementations for build tools</li>
+  <li>Merge Bloop mainline and scala-cli’s fork of Bloop</li>
+</ul>
+
+<p>Many of these topics resulted in issues being created, PRs being started, and
+new discussions and ideas popping up all around GitHub. Here’s a small overview
+and summary of the topics and their outcomes:</p>
+
+<h3 id="ensure-tooling-can-use-structured-diagnostics">Ensure tooling can use structured diagnostics</h3>
+
+<p>We had a session on ensuring that the tooling around the ecosystem could
+properly consume and utilize structured diagnostics that come straight from the
+compiler. There was a talk on this subject during the past <a href="https://scala.io/">ScalaIO
+conference</a> by Chris Kipp called <a href="https://youtu.be/ttJ58l-SVAk">The Journey of a Dotty
+diagnostic</a>. While
+<a href="https://scala-cli.virtuslab.org/">scala-cli</a> already has some actionable
+diagnostics that allow you to update an outdated using directive, during the
+summit we talked about various “quick fixes” that the compiler could produce and
+even had a rough prototype to illustrate this using IntelliJ by the end of the
+summit!</p>
+
+<p>The idea would be that fixes like this can come directly from the compiler
+ensuring that all tooling that interacts with it can benefit. You can follow the
+progress on this work in <a href="https://github.com/lampepfl/dotty/issues/14904">this Dotty mega issue on structured
+diagnostics</a>.</p>
+
+<h3 id="jetbrains--scala-center-education-collaboration">JetBrains / Scala Center education collaboration</h3>
+
+<p>Both the Scala Center and JetBrains have educational efforts around helping
+newcomers to Scala get familiar with the language and the ecosystem. They’re not
+alone in this effort as multiple other companies like <a href="https://www.47deg.com/technologies/scala/">Xebia
+Functional</a> also have courses and
+exercises to that end. As a result of this conversation there is a more concrete
+focus on communicating around the ecosystem about educational initiatives and
+also efforts to look more into utilizing tools like the <a href="https://plugins.jetbrains.com/plugin/10081-jetbrains-academy">JetBrains Educations
+Plugin</a>.</p>
+
+<h3 id="scope-and-syntax-of-scala-cli-using-directives">Scope and syntax of scala-cli using directives</h3>
+
+<p>As scala-cli has is well on it’s way to becoming the new <a href="https://contributors.scala-lang.org/t/sip-46-scala-cli-as-default-scala-command/5996/53">default
+<code class="language-plaintext highlighter-rouge">scala</code>command</a>,
+discussions around using directives continually come up. Questions such as what
+should or shouldn’t be allowed, what format they should take, and what their
+scope is are commonplace.  Here’s some links that were referenced around this
+topic and some that were a result of this discussion:</p>
+
+<ul>
+  <li><a href="https://contributors.scala-lang.org/t/sip-46-scala-cli-as-default-scala-command/5996/1">SIP 46 scala-cli as the default Scala command</a></li>
+  <li><a href="https://github.com/VirtusLab/using_directives">The using_directives library</a></li>
+  <li><a href="https://github.com/VirtusLab/scala-cli/issues/1954">Syntax issue around quoted strings</a></li>
+  <li><a href="https://github.com/VirtusLab/scala-cli/issues/1958">Camel case issue</a></li>
+  <li><a href="https://github.com/VirtusLab/scala-cli/issues/1959">Target directive renaming issue</a></li>
+</ul>
+
+<h3 id="debugging-in-scala-3">Debugging in Scala 3</h3>
+
+<p>Debugging in Scala is a complex domain. This makes it all the more important to
+ensure we’re de-duplicating efforts where we can. The emergence of the
+<a href="https://github.com/scalacenter/scala-debug-adapter">scala-debug-adapter</a> is a
+great example of de-duplicating the efforts around debugging for various tools.
+As a result of this conversation there will be more work towards utilizing the
+scala-debug-adapter in other tools that aren’t yet using it and also potentially
+<a href="https://github.com/scalacenter/scala-debug-adapter/issues/396">inlining</a> things
+like the Scala 3 expression evaluator right into the Dotty codebase. Here are a
+handful of other items that either came out of the discussion t the summit or
+were referenced:</p>
+
+<ul>
+  <li><a href="https://github.com/scalacenter/scala-debug-adapter/issues/395">Better expose and publish the Scala 3 step filter</a></li>
+  <li><a href="https://github.com/scalacenter/student-projects/issues/9">Explore an interpreting evaluator</a></li>
+  <li><a href="https://github.com/scalameta/metals/issues/4445">Start the debugger in Metals instead of the build server</a></li>
+  <li><a href="https://github.com/scalacenter/scala-debug-adapter/issues/397">A collection formatter</a></li>
+  <li><a href="https://github.com/scalacenter/scala-debug-adapter/issues/398">goto definition for functions</a></li>
+</ul>
+
+<h3 id="bazel-and-scala">Bazel and Scala</h3>
+
+<p>Many larger companies that use Scala are increasing their usage of
+<a href="https://bazel.build/">Bazel</a> for their polyglot mono-repo codebases. Many of
+these companies have specific needs unique to very large codebases that often
+result in bespoke solutions. The goal of this sessions was to discuss a few
+different aspects of this by focusing on the following areas:</p>
+
+<ul>
+  <li>Why use Bazel?</li>
+  <li>Competing implementations of rules_scala
+    <ul>
+      <li>https://github.com/bazelbuild/rules_scala</li>
+      <li>https://github.com/higherkindness/rules_scala</li>
+    </ul>
+  </li>
+  <li>Difficult IDE support compared to other tools like sbt or Gradle</li>
+  <li>Deployment strategies</li>
+</ul>
+
+<p>While no concrete action has been taken yet, the conversation has started and
+will be sure to continue moving forward.</p>
+
+<h3 id="standardizing-scala-worksheet-implementations">Standardizing Scala worksheet implementations</h3>
+
+<p>Currently in the Scala ecosystem we have 3 different approaches to worksheets:</p>
+
+<ul>
+  <li>IntelliJ worksheets (plain and interactive mode) which re-use functionality from the Scala REPL</li>
+  <li>Metals worksheets using <a href="https://scalameta.org/mdoc/">mdoc</a> as an engine</li>
+  <li>Scastie which uses a custom macro implementation</li>
+</ul>
+
+<p>This presents another great opportunity to de-duplicate the efforts here and
+provide a solution that is closer to the compiler that can be re-used by other
+tools. Here are a few outputs of the discussion:</p>
+
+<ul>
+  <li>A thread on
+<a href="https://youtrack.jetbrains.com/issue/SCL-21099/Modern-worksheets">youtrack</a>
+has been created about modern worksheets in IntelliJ.</li>
+  <li>There will also be some research going into what a shared interface or
+worksheets could look like inside of the Scala 3 compiler.</li>
+  <li>There will be some work to try and unify the way dependencies and scala
+options are included in worksheets to better align with using directives <a href="https://github.com/scalameta/metals-feature-requests/issues/308">for
+example</a>.</li>
+  <li>The <a href="https://code.visualstudio.com/api/extension-guides/notebook">VS Code Notebook
+API</a> will be
+explored to see if it can produce better output than the current Metals
+implementation with VS Code.</li>
+</ul>
+
+<h3 id="the-state-of-editor-support-for-scala-cli">The state of editor support for scala-cli</h3>
+
+<p>Since <a href="https://scala-cli.virtuslab.org/">scala-cli</a> is still quite new, much of
+the conversation during this topic was getting all parties involved on the same
+page about how scala-cli works, what limitations currently exist, and how we can
+collectively tackle them. Here are a few action items and links from the
+discussion:</p>
+
+<ul>
+  <li><a href="https://youtrack.jetbrains.com/issue/SCL-19718">scala-cli support in IntelliJ Scala
+Plugin</a></li>
+  <li>We’d like to ensure syntax highlighting works for using directives in all the
+normal places you’d expect them to</li>
+  <li>We’d like to ensure there is solid single-file support in various editors when
+using scala-cli. This is being looked into both in IntelliJ and Metals</li>
+</ul>
+
+<h3 id="a-discussion-around-bsp">A discussion around BSP</h3>
+
+<p>The <a href="https://build-server-protocol.github.io/">Build Server Protocol (BSP)</a> was
+envisioned as a unified way to compile, run, test, etc your code in a way that
+doesn’t make build clients or servers re-implement integrations for every tool
+similar to how the Language Server Protocol
+<a href="https://microsoft.github.io/language-server-protocol/">(LSP)</a> works with language
+servers and your favorite text editor. While this started small with a single
+client (IntelliJ) and server (Bloop), we now have multiple client and server
+implementations for sbt, Mill, Bazel, Bloop, and more even extending to other
+languages outside of the JVM. In order to ensure a healthy future for BSP we’ve
+gone ahead and formalized the <a href="https://github.com/build-server-protocol/build-server-protocol/pull/465">team
+structure</a>
+a bit, are in the process of migrating to a
+<a href="https://smithy.io/2.0/index.html">Smithy</a> as a <a href="https://github.com/build-server-protocol/build-server-protocol/pull/426">source of
+truth</a>,
+and are actively exploring a smoother <a href="https://build-server-protocol.github.io/docs/overview/server-discovery">BSP
+Discovery</a>
+process.</p>
+
+<h3 id="making-tooling-more-robust">Making tooling more robust</h3>
+
+<p>Having your tooling not work as expected is frustrating. Not knowing why it’s
+not working is even more frustrating. This conversation surrounds ideas and
+topics like:</p>
+
+<ul>
+  <li>Better logging</li>
+  <li>Telemetry</li>
+  <li>Fault tolerance</li>
+  <li>Stress testing</li>
+</ul>
+
+<p>As a result of these conversations the Metals team will be exploring usage of
+<a href="https://sentry.io/welcome/">Sentry</a> to better track when things are going
+wrong. The idea here would be to provide an experience similar to IntelliJ’s
+<a href="https://blog.jetbrains.com/yole/archives/000072.html">Exception Analyzer</a>.
+<a href="https://microsoft.github.io/language-server-protocol/">LSP</a> also has a
+<a href="https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#telemetry_event">telemetry</a>
+event that could be utilized, but more research needs to be done here.</p>
+
+<h3 id="limiting-the-ways-to-import-a-project-into-your-ide">Limiting the ways to import a project into your IDE</h3>
+
+<p>Both Metals and IntelliJ users have multiple ways to import projects. This could
+be simply choosing your build server in Metals, or choosing to use BSP at all in
+IntelliJ. There are ongoing discussions and work going on in both of these tools
+to make the getting started experience on a project more seamless no matter the
+tool or project. For example you can see the discussion choosing a default build
+server for metals
+<a href="https://github.com/scalameta/metals/discussions/4505#discussioncomment-4571546">here</a>.</p>
+
+<h3 id="porting-scalameta-to-scala-3">Porting Scalameta to Scala 3</h3>
+
+<p><a href="https://scalameta.org/">Scalameta</a> is a core part of the tooling ecosystem
+being utilized by tools like Metals, Scalafmt, Scalafix, and mdoc. While
+Scalameta can handle parsing Scala 3 code, it can’t be used as a library in
+Scala 3 projects. The main hiccup in this effort is the extensive use of macros,
+which aren’t easily migrated. The main outcome of this discussion was simply
+better understanding the challenges involved, so that if someone is willing to
+put in the time here, we have a <a href="https://github.com/scalameta/scalameta/issues/2485">starting
+point</a> and some research
+done.</p>
+
+<h3 id="ide-support-in-polyglot-projects-that-contain-scala">IDE support in “polyglot” projects that contain Scala</h3>
+
+<p>Traditionally IntelliJ has been the leader in this front offering great support
+for mixed JVM-language projects. However this is made trickier with tools that
+may not always be well-supported in this context like sbt or Mill. There is a
+new upcoming BSP plugin for IntelliJ this may offer a better level of support
+for using Mill or sbt server for multi-language projects. On the Metals side,
+this is made even more trickier as LSP isn’t traditionally used for mixed
+multi-language projects. There will be some more research on seeing if it’s
+possible to better integrate with the Java language servers. There is an ongoing
+thread about this that can be followed
+<a href="https://github.com/scalameta/metals-feature-requests/issues/5">here</a>.</p>
+
+<h3 id="tasty-query-and-its-use-cases">Tasty Query and its use-cases</h3>
+
+<p><a href="https://github.com/scalacenter/tasty-query">Tasty Query</a> is a newer tool in the
+ecosystem that is a compiler-independent way to semantically analyze TASTy
+files. Some concrete actions items that came out of this session to be worked on
+are below:</p>
+
+<ul>
+  <li><a href="https://github.com/scalacenter/tasty-query/issues/272">Add a way to render trees and types as Scala code</a></li>
+  <li><a href="https://github.com/scalacenter/tasty-query/issues/273">Identify/document which APIs are safe to use without a full classpath</a></li>
+</ul>
+
+<h3 id="planning-for-sbt-2">Planning for sbt 2</h3>
+
+<p><a href="https://www.scala-sbt.org/">sbt</a> is the most widely used build tool for Scala,
+spanning small to giant projects. Many Scala developers daily interact with this
+tool and its plethora of plugins. Due to this, a lot of effort has been going
+into ensuring a smooth transition to sbt 2 which will boast a handful of new
+features focused on simplicity, interactivity, and stability. <a href="https://eed3si9n.com/">Eugene
+Yokota</a> has put a ton of effort into this so far, so
+here’s a dump of relevant blogs and discussion around this that may interest
+you.</p>
+
+<ul>
+  <li><a href="https://eed3si9n.com/sbt-2.0-ideas">sbt 2.0 ideas blog post</a></li>
+  <li><a href="https://github.com/sbt/sbt/discussions/7174">sbt 2.0 ideas discussion</a></li>
+  <li><a href="https://eed3si9n.com/sbt-cache-ideas/">RFC-1: sbt cache ideas blog post</a></li>
+  <li><a href="https://github.com/sbt/sbt/discussions/7180">sbt cache ideas discussion</a></li>
+  <li><a href="https://eed3si9n.com/sbt-2.0-rfc-process">RFC-2: sbt 2.0 RFC process blog post</a></li>
+  <li><a href="https://github.com/sbt/sbt/discussions/7188">RFC process discussion</a></li>
+  <li><a href="https://eed3si9n.com/sbt-drop-custom-config/">RFC-3: drop custom config blog post</a></li>
+  <li><a href="https://github.com/sbt/sbt/discussions/7189">drop custom config discussion</a></li>
+</ul>
+
+<h3 id="bringing-the-compiler-academy-format-to-tooling">Bringing the Compiler Academy format to tooling</h3>
+
+<p>The <a href="https://compileracademy.carrd.co/">Compiler Academy</a> has been an ongoing
+effort to help onboard new contributors to the Scala 3 compiler. While the
+format has been a success, it’s been difficult to get the amount of compiler
+maintainers necessary to participate in the sprees. The discussion at the summit
+focused on how to continue the effort to get more active participants in the
+Scala 3 compiler development and also to look into taking the same format and
+applying it to other tools in the Scala ecosystem.</p>
+
+<h3 id="shared-publishing-implementations-for-build-tools">Shared publishing implementations for build tools</h3>
+
+<p>Across the ecosystem many tools have their own implementation to publish an
+artifact. For example, sbt, Mill, and scala-cli all use their own
+implementations. During this topic
+<a href="https://github.com/coursier/publish">coursier/publish</a> was mentioned as a
+possible library that could be utilized across the ecosystem. There were
+multiple questions that would need to be answered first about the reality of
+this possibility that are being tracked
+<a href="https://github.com/coursier/publish/issues/14">here</a>.</p>
+
+<h3 id="merge-bloop-mainline-and-scala-clis-fork-of-bloop">Merge Bloop mainline and scala-cli’s fork of Bloop</h3>
+
+<p>For most users <a href="https://scalacenter.github.io/bloop/">Bloop</a> should just be an
+implementation detail. However, in the ecosystem we’ve frequently seen questions
+and comments about how it works, and questions about why it works a certain way.
+Some of the answers to these questions has led scala-cli to fork Bloop resulting
+in 2 bloop servers often running on a user’s machine if they are a Metals user.
+In order to combat this and provide a smoother Bloop experience for all users,
+we discussed what would need to happen in order to merge the fork of Bloop back
+inline. You can follow a thread on this effort
+<a href="https://github.com/VirtusLab/scala-cli/issues/1971">here</a>.</p>
+
+<h2 id="what-comes-next">What comes next?</h2>
+
+<p>Overall, we consider the summit a success. With positive feedback from
+participants and movement already visible on the topics above, we feel confident
+that these efforts will result in a more stable, feature-rich, and unified
+tooling ecosystem. The Scala Center will be continuing to facilitate and plan
+further collaboration related to these topics and efforts.</p>
+
+<p>We’re also looking ahead to another summit that will coincide with the upcoming
+<a href="https://scaladays.org/">Scala Days</a> in Madrid. We’ll follow up on the
+discussion topics above and also dive into new ones.</p>
+
+<p>There will be a discussion surrounding the content of this post on the
+<a href="https://contributors.scala-lang.org/">contributors forum</a>, so please engage
+with questions or comments.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2023-04-11-march-2023-scala-tooling-summit.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>What's happening with macros? | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="What's happening with macros?"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/11/27/macros.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>What's happening with macros?</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 27 November 2017</p>
+						<p>Ólafur Páll Geirsson</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2017/11/27/macros.html">What's happening with macros?</a></h2> -->
+					<p>In September, we posted a
+<a href="https://www.scala-lang.org/blog/2017/10/09/scalamacros.html">“Roadmap towards non-experimental macros”</a>.
+It’s been two months since then and I’d like to share an update on
+what’s been happening.</p>
+
+<h2 id="a-diverse-ecosystem">A diverse ecosystem</h2>
+
+<p>When starting this project, we wanted to first get an idea of how macros are
+used in the community.
+Not surprisingly, we discovered that macros are used in a variety of ways.
+Here are some popular use-cases we found</p>
+
+<ul>
+  <li><strong>code generation</strong>: to avoid writing boilerplate by hand, which is
+both error-prone and cumbersome. This is used by <a href="https://www.playframework.com/documentation/2.6.x/ScalaJsonAutomated">Play JSON</a> and <a href="https://spark.apache.org/sql/">Spark</a>.</li>
+  <li><strong>embedded DSLs</strong>: to attach new semantics to existing language syntax.
+This includes a wide range of applications from database query
+libraries like <a href="https://getquill.io/">Quill</a>, to hardware construction frameworks like <a href="https://chisel.eecs.berkeley.edu/">Chisel</a> and
+build tools like <a href="https://www.scala-sbt.org/1.x/docs/Scope-Delegation.html">sbt</a>.</li>
+  <li><strong>optimizations</strong>: to avoid expensive runtime allocations and method calls.
+This includes libraries like <a href="https://github.com/non/spire/">spire</a> and <a href="https://github.com/Log4s/log4s">log4s</a>.</li>
+  <li><strong>developer ergonomics</strong>: to surface source context information like variable
+names, file names and line numbers. This includes libraries like 
+<a href="https://www.scalatest.org/">ScalaTest</a> and <a href="https://github.com/lihaoyi/sourcecode">sourcecode</a>.</li>
+  <li><strong>improved type-safety</strong>: to increase the static guarantees of your programs
+beyond what the Scala language can provide. This includes libraries like <a href="https://github.com/fthomas/refined">Refined</a>.</li>
+</ul>
+
+<p>The current scala-reflect macro system has in fact done a phenomenal job
+at accommodating these diverse use-cases under a unified API.
+The Scala ecosystem is rich as it is thanks to this wide range of applications
+that are enabled by scala-reflect macros.</p>
+
+<p>To get a better feel for how common each use-case is,
+we performed an analysis on a corpus of 20,906 source files containing ~2
+million lines of code derived from the Scala compiler community build.
+The corpus includes sources for a diverse set of libraries such as
+Akka, Cats, Scalaz, Monocle, twitter/util, Spire, Scrooge, Blaze, Algebra, fastparse,
+Scanamo as well as applications like ornicar/lila (<a href="https://lichess.org">https://lichess.org</a>) and
+guardian/frontend (<a href="https://www.theguardian.com/">https://www.theguardian.com/</a>).
+Our analysis tracks the number of call-sites to each def macro and groups them by
+whether the call-site comes from test or main sources.
+Here are the top results:</p>
+
+<p><strong>Main sources</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>442: org.scalactic.source.Position.here()Lorg/scalactic/source/Position;.
+345: org.parboiled2.Parser#rule(Lorg/parboiled2/Rule;)Lorg/parboiled2/Rule;.
+287: akka.parboiled2.Parser#rule(Lakka/parboiled2/Rule;)Lakka/parboiled2/Rule;.
+242: spire.syntax.CforSyntax#cfor(Ljava/lang/Object;Lscala/Function1;Lscala/Function1;Lscala/Function1;)V.
+173: spire.syntax.EqOps#`===`(Ljava/lang/Object;Lscala/Predef/$eq$colon$eq;)Z.
+170: slick.util.MacroSupportInterpolation#b(Lscala/collection/Seq;)V.
+156: reactivemongo.bson.Macros.handler()Lreactivemongo/bson/BSONDocumentReader;.
+149: spire.syntax.CforSyntax#cforRange(Lscala/collection/immutable/Range;Lscala/Function1;)V.
+141: spire.syntax.MultiplicativeSemigroupOps#`*`(Ljava/lang/Object;)Ljava/lang/Object;.
+128: spire.syntax.AdditiveSemigroupOps#`+`(Ljava/lang/Object;)Ljava/lang/Object;.
+123: scalaxy.debug.package.require(ZLjava/lang/String;)V.
+108: play.api.libs.json.Json.format()Lplay/api/libs/json/OFormat;.
+103: scala.StringContext#f(Lscala/collection/Seq;)Ljava/lang/String;.
+102: play.api.libs.json.Json.writes()Lplay/api/libs/json/Writes;.
+ 97: scala.reflect.api.Universe#reify(Ljava/lang/Object;)Lscala/reflect/api/Exprs/Expr;.
+ 71: play.api.libs.json.Json.reads()Lplay/api/libs/json/Reads;.
+ 56: spire.syntax.MultiplicativeGroupOps#`/`(Ljava/lang/Object;)Ljava/lang/Object;.
+ 49: spire.syntax.AdditiveGroupOps#`unary_-`()Ljava/lang/Object;.
+ 46: org.log4s.Logger#error(Ljava/lang/Throwable;Ljava/lang/String;)V.
+ 41: spire.syntax.AdditiveGroupOps#`-`(Ljava/lang/Object;)Ljava/lang/Object;.
+ 36: spire.syntax.OrderOps#compare(Ljava/lang/Object;)I.
+ 31: com.typesafe.scalalogging.Logger#info(Ljava/lang/String;)V.
+ 31: spire.syntax.PartialOrderOps#`&lt;`(Ljava/lang/Object;)Z.
+ 30: spire.syntax.PartialOrderOps#`&lt;=`(Ljava/lang/Object;)Z.
+ 30: scalaxy.debug.package.require(Z)V.
+ 28: spire.syntax.ModuleOps#`*:`(Ljava/lang/Object;Lspire/algebra/Module;)Ljava/lang/Object;.
+ 26: spire.syntax.SemiringOps#pow(I)Ljava/lang/Object;.
+     ... truncated
+</code></pre></div></div>
+
+<p><strong>Test sources</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8969: org.scalatest.Assertions#assert(ZLorg/scalactic/Prettifier;Lorg/scalactic/source/Position;)Lorg/scalatest/compatible/Assertion;.
+7070: org.scalactic.source.Position.here()Lorg/scalactic/source/Position;.
+1263: minitest.api.Asserts#assertEquals(Ljava/lang/Object;Ljava/lang/Object;)V.
+ 386: utest.asserts.Asserts#assert(Lscala/collection/Seq;)V.
+ 271: minitest.api.Asserts#assert(Z)V.
+ 270: org.scalatest.Assertions#assert(ZLjava/lang/Object;Lorg/scalactic/Prettifier;Lorg/scalactic/source/Position;)Lorg/scalatest/compatible/Assertion;.
+ 265: org.specs2.specification.create.S2StringContextCreation#specificationInStringContext#s2(Lscala/collection/Seq;)Lorg/specs2/specification/core/Fragments;.
+ 264: minitest.api.Asserts#assert(ZLjava/lang/String;)V.
+ 217: scodec.bits.package.HexStringSyntax#hex(Lscala/collection/Seq;)Lscodec/bits/ByteVector;.
+ 206: records.Rec.applyDynamic(Ljava/lang/String;Lscala/collection/Seq;)Lrecords/Rec;.
+ 179: spire.syntax.EqOps#`===`(Ljava/lang/Object;Lscala/Predef/$eq$colon$eq;)Z.
+ 143: org.parboiled2.Parser#rule(Lorg/parboiled2/Rule;)Lorg/parboiled2/Rule;.
+ 135: spire.syntax.Literals#r()Lspire/math/Rational;.
+ 115: scala.async.internal.AsyncId.async(Lscala/Function0;)Ljava/lang/Object;.
+  93: spire.syntax.Literals#b()B.
+  86: org.scalatest.Matchers#AnyShouldWrapper#shouldBe(Lorg/scalatest/words/ResultOfATypeInvocation;)Lorg/scalatest/compatible/Assertion;.
+  68: scala.async.Async.async(Lscala/Function0;Lscala/concurrent/ExecutionContext;)Lscala/concurrent/Future;.
+  65: slick.collection.heterogeneous.HList#apply(I)Ljava/lang/Object;.
+  55: scala.StringContext#f(Lscala/collection/Seq;)Ljava/lang/String;.
+  48: utest.asserts.Asserts#intercept(Lscala/runtime/BoxedUnit;Lscala/reflect/ClassTag;)Ljava/lang/Object;.
+  46: com.twitter.scalding.serialization.macros.LowerPriorityImplicit#primitiveOrderedBufferSupplier()Lcom/twitter/scalding/serialization/OrderedSerialization;.
+  43: minitest.api.Asserts#intercept(Lscala/Function0;)V.
+  43: org.scalatest.Matchers#StringShouldWrapper#shouldNot(Lorg/scalatest/words/CompileWord;Lorg/scalactic/source/Position;)Lorg/scalatest/compatible/Assertion;.
+  39: org.specs2.specification.create.AutoExamples#eg(Lscala/Function0;Lorg/specs2/execute/AsResult;)Lorg/specs2/specification/core/Fragments;.
+  37: records.Rec.fld(Lrecords/Rec;)Ljava/lang/Object;.
+  36: play.api.libs.json.Json.format()Lplay/api/libs/json/OFormat;.
+  33: spire.syntax.Literals#h()S.
+  ... truncated
+</code></pre></div></div>
+<p>The complete list of results can be seen in <a href="https://gist.github.com/olafurpg/be9d01afab4e2e54e51be620279507aa">this gist</a>.
+Judging by the numbers, it seems that</p>
+
+<ul>
+  <li>developer ergonomics macros such as <code class="language-plaintext highlighter-rouge">assert</code> and <code class="language-plaintext highlighter-rouge">source.Position</code> are
+heavily used in test sources, an order of magnitude more than any other
+category of macros.
+This is not surprising since large test suites contain many <code class="language-plaintext highlighter-rouge">assert</code> calls.
+Note that we excluded the ScalaTest sources from the corpus since they heavily biased
+the results by adding 140,000 call-sites to <code class="language-plaintext highlighter-rouge">scalactic.source.Position.here()</code>.</li>
+  <li>Other popular uses of macros include optimization macros like those in spire/parboiled
+and code generation macros like Play JSON.</li>
+  <li>there are not many usages of embedded DSLs in this corpus.</li>
+</ul>
+
+<p>One caveat with this analysis is that the results are heavily biased by the
+choice of the corpus, which is predominantly open source libraries.
+Please get in touch with me if you would like to contribute more data to this corpus.
+My contact info is at the end of this post.
+We are especially interested in applications codebases rather than libraries,
+as well as projects making heavy use of macros for embedded DSLs.</p>
+
+<p>If there is interest, I’m happy to write a guide on how to run the analysis on
+closed-source projects.
+It’s quite easy to do, and the results are anonymous excluding the signature
+names of the invoked def macros, which can be manually obfuscated.
+A large and representative corpus of “real-world” Scala codebases will help us
+continue to use a data-driven approach to prioritize the development of new
+macros.</p>
+
+<h2 id="tree-transformations-are-tricky">Tree transformations are tricky</h2>
+
+<p>Each of the diverse macro applications listed above require different sets of
+features from the macro system.
+For example, code generation macros typically only require inspection on existing types
+and creation of new terms.
+Embedded DSLs on the other hand typically require inspection and transformation of
+existing terms created by the compiler.
+Optimization macros like those in log4s may even be avoided with improvements
+to alternative language features like <code class="language-plaintext highlighter-rouge">inline</code>.</p>
+
+<p>Some features of the macro system appear to be relatively simple to support
+across different compilers.
+In the <a href="https://github.com/scalacenter/macros">scalacenter/macros</a> repository, we have a prototype macro system
+that runs on both Scala 2.x and Dotty.
+In only a few days, we got some interesting macros working for both compilers:
+a JSON automatic serializer for case classes and most of the <a href="https://github.com/lihaoyi/sourcecode">sourcecode</a> macros.
+That pretty exciting news for code generation macros and a subset of developer ergonomics macros.
+Inspection on types and creation of new terms doesn’t appear to introduce deep
+technical road-blockers!
+However, we struggled to implement some other macros like <a href="https://github.com/lihaoyi/utest">utest</a> assert since
+it requires the ability to transform trees.</p>
+
+<p>Macros that transform trees produced by the compiler are demanding on the macro
+system.
+When a term is transformed, the macro library or the macro system must ensure
+that internal invariants imposed by the compiler are respected.
+For example, the Scala compiler assumes that typed tree nodes cannot have
+untyped children.
+In scala-reflect, the burden is on the macro author to ensure this invariant
+holds.
+Mistakes from mixing untyped and typed tree nodes result in cryptic compiler
+crashes.
+In the new macro system, we want to avoid exposing such bad experience to macro
+authors and library users.</p>
+
+<p>This observation that tree transformation are difficult to support doesn’t
+imply that new macros won’t support them.
+It simply means that we need give this problem more time and thought so that we
+can come up with a robust solution.
+So far, we have seen two promising ideas to address or circumvent this problem,
+one by Martin Odersky and one by Lionel Parreaux.</p>
+
+<h2 id="principled-metaprogramming-for-scala">Principled Metaprogramming for Scala</h2>
+
+<p>Martin Odersky recently shared <a href="https://gist.github.com/odersky/f91362f6d9c58cc1db53f3f443311140">a gist</a>
+on Principled Metaprogramming for Scala.
+The design proposed in this gist is quite close to MetaOCaml as well as to a
+calculus by Davies and Pfenning inspired by modal logic, see
+<a href="https://www.cs.cmu.edu/~fp/papers/jacm00.pdf">“A modal analysis of staged computation”</a>.</p>
+
+<p>This proposal has triggered a rich discussion in the gist, which you may find interesting.
+However, the proposal may go too far from current scala-reflect macros
+complicating migration.
+Quoting Martin Odersky from
+<a href="https://www.reddit.com/r/scala/comments/7emo4s/oderskys_ideas_about_a_new_design_for_macros_that/dq6m1da/">r/scala</a></p>
+
+<blockquote>
+  <p>One attractive aspect of the system is that it works equally well for staging
+and for macros.  But as a macro system it is quite restrictive because it
+imposes a strong typing discipline, only works for full expressions, and in
+its original version does not allow for code inspection. Lionel’s Parreaux’s
+Squid system (paper to appear at upcoming POPL) is more powerful in that it
+does allow inspection.</p>
+</blockquote>
+
+<p>Lionel Parreaux (<a href="https://github.com/lptk">@LPTK</a>) is a PhD student at EPFL who has been working on
+related problems for the past couple years as part of his research on the
+intersection of database systems, programming languages and large-scala data
+analysis.</p>
+
+<h2 id="squid-reusable-and-type-safe-quasiquotes">Squid: reusable and type-safe quasiquotes</h2>
+
+<p><a href="https://github.com/epfldata/squid/">Squid</a> is a metaprogramming framework that facilitates the type-safe
+manipulation of Scala programs through quasiquotes.
+Unlike scala-reflect quasiquotes, Squid quasiquotes are statically guaranteed
+to produce well-typed, well-scoped and hygienic programs.
+The properties of Squid quasiquotes make them ideal for robust and safe
+transformation of trees, the exact problem we struggled with in our prototype
+macro system.</p>
+
+<p>Squid quasiquotes reject programs with references to unbound identifiers
+by statically tracking the context/scope in the type of the quasiquotes.
+For example, <code class="language-plaintext highlighter-rouge">code"(x: Int) + 1"</code> would be rejected at compile-time since <code class="language-plaintext highlighter-rouge">x</code>
+is undefined.
+Instead, the quasiquote must explicitly annotate free variables using question
+marks <code class="language-plaintext highlighter-rouge">code"(?x: Int) + 1)</code>.
+Free variables are then tracked in the second parameter of quasiquote’s type
+<code class="language-plaintext highlighter-rouge">Code[Int, {val x: Int}]</code>.</p>
+
+<p>To learn more about Squid works, I highly recommend reading their upcoming POPL
+2018 paper
+<a href="https://infoscience.epfl.ch/record/232427">“Unifying Analytic and Statically-Typed Quasiquotes”</a>.
+Here is just one interesting table from the paper that I want to include here</p>
+
+<p><img src="/resources/img/squid-quasiquotes.png" alt="Squid quasiquotes" /></p>
+
+<p>There are still many open questions on how to incorporate Squid into the new macros.
+For example,</p>
+
+<ul>
+  <li>Squid quasiquotes eagerly convert compiler trees to Squid’s IR. This may
+introduce problems for syntax like patterns and important metadata may get
+lost like positions or attachments.</li>
+  <li>Squid currently does not support the ability to define methods or classes in
+quasiquotes.</li>
+</ul>
+
+<p>I believe these problems are solvable, and we are discussing with
+Lionel and colleagues from his lab about potential collaborations.
+If successful, the new Scala macros may have potential to push the
+state-of-the-art in metaprogramming.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>There remain many open challenges in the design of the new macros.
+I believe there is a lot for us to learn from related research in this field.
+Our next step is to continue the work in the <a href="https://github.com/scalacenter/macros">scalacenter/macros</a> repository,
+which implements the building blocks that are required to support higher-level
+frameworks such as Squid.
+These building blocks include:</p>
+<ul>
+  <li>a rich compile-time reflection API to query for properties of types, symbols
+and trees.</li>
+  <li>a standard syntax to declare and implement def macros, which will be similar
+but distinct from the syntax to define scala-reflect def macros.</li>
+</ul>
+
+<p>If you are interested to join the effort, don’t hesitate to get in touch!
+You can reach me via email (olafurpg@gmail.com) or <a href="https://twitter.com/olafurpg">@olafurpg</a> on Twitter.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2017-11-27-macros.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

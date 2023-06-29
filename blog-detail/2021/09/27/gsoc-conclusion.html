@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala GSoC 2021 is finished: meet the team! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala GSoC 2021 is finished: meet the team!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog-detail/2021/09/27/gsoc-conclusion.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala GSoC 2021 is finished: meet the team!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 27 September 2021</p>
+						<p>Vincenzo Bazzucchi, Scala Center</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG-DETAIL</div>
+					<!-- <h2><a href="/blog-detail/2021/09/27/gsoc-conclusion.html">Scala GSoC 2021 is finished: meet the team!</a></h2> -->
+					<p>Google Summer of Code (further: GSoC) 2021 edition is completed 🎉</p>
+
+<p>In this post we want to celebrate the students and mentors who made Scala GSoC
+2021 a success!</p>
+
+<p>GSoC is an international annual program in which Google awards stipends to
+University students who successfully contribute to open source projects. The
+goal is to help open source projects identify and bring in new developers by
+offering students the opportunity to gain real-world software development
+experience.</p>
+
+<h2 id="scala-gsoc-2021-introducing-students-and-projects">Scala GSoC 2021: Introducing students and projects</h2>
+
+<p>The Scala Center had the honor to organize Scala GSoC 2021 and the pleasure to
+help coordinate 4 brilliant students and their mentors. In this section we
+introduce and welcome them in our Community!</p>
+
+<h3 id="add-synthetics-and-symbol-information-for-semanticdb-in-scala-3">Add synthetics and symbol information for semanticdb in Scala 3</h3>
+
+<p>Student: <strong>Rikito Taniguchi</strong></p>
+
+<p>Mentors: Tomasz Godzik, Chris Kipp, Jamie Thompson, Aleksander Boruch-Gruszecki</p>
+
+<p>SemanticDB is a data model for semantic information such as symbols and types in
+Scala programs. It is widely used for developing Scala’s devtools such as
+scalafix and Metals. However, the SemanticDB extractor for Scala3 was a work in
+progress, and some features in devtools were unavailable for Scala3. This
+project focuses on enriching SemanticDB with additional information from the
+Scala3 compiler in order to improve the developer experience of Scala 3
+developers You can read more
+<a href="https://github.com/tanishiking/gsoc-2021/blob/main/README.md">here</a></p>
+
+<blockquote>
+  <p>Rikito’s work enables a huge amount of features in tools used for working with
+he Scala 3 code including Metals and Scalafix.  There is nothing currently that
+think Rikito can improve as his work has been completely stellar.</p>
+</blockquote>
+
+<p>cit. Tomasz</p>
+
+<h3 id="cross-compiling-shapeless-2-to-scala-3">Cross compiling “Shapeless 2” to Scala 3</h3>
+
+<p>Student: <strong>Katrix</strong></p>
+
+<p>Mentors:  Julien Richard-Foy, Aleksander Boruch-Gruszecki</p>
+
+<p>Shapeless is a crucial dependency of many popular Scala libraries. This project
+explores how the Scala 2 version of the library could be cross-built for Scala 3
+by porting some parts to Scala 3. It aims at helping library maintainers to
+adopt Scala 3 faster.  You can read more
+<a href="https://github.com/milessabin/shapeless/pull/1200">here</a></p>
+
+<blockquote>
+  <p>Congratulations for your work on Shapeless, especially for being so autonomous
+in this project!</p>
+</blockquote>
+
+<p>cit. Julien</p>
+
+<h3 id="implement-support-for-scalapy-in-scala-3">Implement support for ScalaPy in Scala 3</h3>
+
+<p>Student: <strong>Mykola Medynskyi</strong></p>
+
+<p>Mentors: Shadaj Laddad, Anatolii Kmetiuk</p>
+
+<p>ScalaPy is a library that enables Scala programs to use Python libraries. This
+project brings support for Scala 3 to the library to enable users to leverage
+all the new cool features that the new language versions ships while relying on
+powerful and well known Python libraries.  You can read more
+<a href="https://gist.github.com/jlareck/7268918d28b0c6a0efebeafa11011e3c">here</a></p>
+
+<blockquote>
+  <p>Mykola’s contributions bringing support for Scala 3 are really impressive and
+will enable many new research and production use cases in the future!</p>
+</blockquote>
+
+<p>cit. Shadaj</p>
+
+<p>A special thanks goes to <strong>Zhendong Ang</strong> who co-menthored Mykola and
+collaborated on the project for his semester project at EPFL.</p>
+
+<h3 id="a-python---scala-integrated-environment-with-almond-ammonite-and-scalapy">A Python - Scala integrated environment with Almond, Ammonite and ScalaPy</h3>
+
+<p>Mentors: Anatolii Kmetiuk, Alexandre Archambault</p>
+
+<p>ScalaPy is a library that enables Scala programs to use Python libraries. This
+project focuses on improving developer experience by simplifying the setup
+process, providing autocomplete functionalities in Almond and Ammonite,
+enriching the documentation and object displays.  You can read more
+<a href="https://gist.github.com/kiendang/e6c2fc41448fabba6f1e6ae34cf65c49">here</a></p>
+
+<blockquote>
+  <p>This work kick-started a better integration of the ScalaPy library in Scala
+notebooks, making it easier to use Python libraries from there, and helping the
+future prospects of both Scala notebooks and the use of Python libraries from
+Scala.</p>
+</blockquote>
+
+<p>cit. Alexandre</p>
+
+<h2 id="thank-you-mentors">Thank you, Mentors!</h2>
+
+<p>Scala GSoC 2021 would not have been possible without our Mentors that dedicated
+their time and energy as volunteers to guide new contributors.  Thank you
+mentors for the great work. We hope to see you in the next edition(s)!</p>
+
+<p>Here are a few of the comments that students submitted:</p>
+
+<blockquote>
+  <p>Both mentors are very helpful to me in this project and I learned a lot from
+them (Hi Alex and Toli!)</p>
+</blockquote>
+
+<blockquote>
+  <p>Thank you so much Tomasz for mentoring me [..]  Thank you so much for helping me
+with communication: pinging to reviewers, inviting Jamie to the call, and always
+trying to move the project forward. I admire your communication skill. and thank
+you so much Jamie for reviewing my Pull Requests!</p>
+</blockquote>
+
+<blockquote>
+  <p>Shadaj Laddad and Anatolii Kmetiuk are great mentors. Anatolii is incredibly
+skilled in explanations. He perfectly explained in 30 minutes the basics of
+metaprogramming in Scala which I could not understand for a month before it by
+reading Scala docs and I am very thankful to him for this. Shadaj is an
+excellent coordinator. He has a great vision of the whole project, possible
+problems in it, and how to fix them. Also, his code reviews helped me to learn
+how to make my code better and I am also very thankful to him. It is a pleasure
+to work with them.</p>
+</blockquote>
+
+<p>We also want to thank our candidate Mentors who accepted the call of the Scala
+Center to propose interesting project ideas and who volunteered their time:</p>
+
+<ul>
+  <li>Wojciech Mazur</li>
+  <li>Sébastien Doeraene</li>
+  <li>Adrien Piquerez</li>
+  <li>Eric Loots</li>
+  <li>Meriam Lachkar</li>
+  <li>Dale Wijnand</li>
+  <li>Fengyun Liu</li>
+  <li>Lars Hupel</li>
+  <li>Krzysztof Romanowski</li>
+  <li>Mateusz Ziarko</li>
+  <li>Felix Mulder</li>
+  <li>Noel Welsh</li>
+</ul>
+
+<h2 id="how-to-get-involved-in-scala-gsoc-2022">How to get involved in Scala GSoC 2022</h2>
+
+<p>Google has not disclosed information about the 2022 edition of GSoC yet. We can
+however learn from previous editions how to prepare for it and, if it follows
+the same general organization of 2021, the event might start <strong>as soon as February
+2022, so it’s not too soon to start</strong>. Here is how:</p>
+
+<h3 id="for-open-source-project-maintainers">For Open Source Project Maintainers</h3>
+
+<p>First and foremost it is important to keep an updated list of project ideas:
+open source projects willing to be part of the GSoC should maintain GitHub
+issues, project boards or simple text files containing proposals for students.
+To make your project more approachable, offer projects with different levels of
+complexity and various topics.  You can find useful information about project
+proposals at
+https://google.github.io/gsocguides/mentor/defining-a-project-ideas-list</p>
+
+<p>You should also identify at least one mentor and one backup mentor for each
+proposal. This will speed up the application process but also make the project
+visible to students before the event starts, increasing the chances that
+motivated students will take the opportunity to work on your repository.</p>
+
+<p>Communication is fundamental too: candidate mentors are encouraged to
+communicate about their participation in GSoC and about project ideas throughout
+the year. Be responsive to students approaching you on the project
+channels (GitHub issues, Discord, Gitter, Twitter…).</p>
+
+<p>If you maintain a Scala library and would like to be part of Scala GSoC 2022
+with the help of the Scala Center, do not hesitate to contact us at
+<a href="mailto:scala-gsoc@epfl.ch">scala-gsoc@epfl.ch</a>!</p>
+
+<h3 id="for-students">For Students</h3>
+
+<p>If you are a student and want to be involved in Scala GSoC 2022, get in touch
+with the maintainers of the projects that you would like to contribute to. The
+GitHub repo or project site will contain information about communication media
+such as Discord, Gitter, Twitter or good-old email.</p>
+
+<p>Remember that most maintainers volunteer their free time for open source, so do
+not expect immediate replies. You can find some tips about making first contact
+at https://google.github.io/gsocguides/student/making-first-contact</p>
+
+<p>You can also start to think about project proposals (you can find a lot of
+useful info at https://google.github.io/gsocguides/student/writing-a-proposal)
+and discuss them with project maintainers.</p>
+
+<p>Feel free to contact us at <a href="mailto:scala-gsoc@epfl.ch">scala-gsoc@epfl.ch</a> if
+you get stuck along the way, we are happy to help within our capacities.</p>
+
+<h2 id="even-more-brief-history-stats-and-goals">Even more: Brief history, stats, and goals</h2>
+
+<p>The Scala organization has been involved in GSoC for many years thanks to the
+efforts of <a href="https://www.epfl.ch/labs/lamp/">Martin Odersky’s lab (called LAMP) at
+EPFL</a>:</p>
+
+<p><img src="/resources/img/blog/lamp-gsoc-students.png" alt="Student participations by year" /></p>
+
+<p>In 2021 the Scala Center decided to
+revive this long tradition of successful projects (only 2 students in 9 editions
+did not complete their projects) with help of the maintainers of open source
+Scala libraries.</p>
+
+<p>For this year’s edition we gathered <a href="https://github.com/scalacenter/GoogleSummerOfCode2021">28 project
+ideas</a> and 20 candidate
+mentors motivated to support students with such ideas.  We received 10
+applications and after reviewing proposals and assigning students to mentors, we
+retained 4 projects to enter the program.</p>
+
+<p>For the 2022 Scala GSoC edition, we are aiming to attract at least <strong>10 new
+students</strong> and we invite you to help us by</p>
+
+<ul>
+  <li>offering to be a mentor</li>
+  <li>letting us know if you have a student interested to participate</li>
+  <li>spreading the word!</li>
+</ul>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2021-09-27-gsoc-conclusion.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

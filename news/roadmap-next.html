@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala: Next Steps | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala: Next Steps"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/news/roadmap-next.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala: Next Steps</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 28 July 2014</p>
+						<p></p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">ANNOUNCEMENT</div>
+					<!-- <h2><a href="/news/roadmap-next.html">Scala: Next Steps</a></h2> -->
+					<p>As with every living programming language, Scala will continue to evolve. This document describes where the core Scala team sees the language going in the medium term and where we plan to invest our efforts.</p>
+
+<p>In a nutshell, our main goals are to make the language and its libraries simpler to understand, more robust, and better performing. The features described in this document span the next three major releases of the Scala distribution. Naturally, the planning for later releases is more tentative and fluid than for earlier ones.</p>
+
+<h2 id="scala-212">Scala 2.12</h2>
+
+<p>Scala 2.12’s main theme is Java 8 interoperability. It will support Java 8 lambdas and streams and will allow easy cross calls with these features in both directions. We recently published a <a href="https://www.scala-lang.org/news/2.12-roadmap">detailed feature list and roadmap</a> for this release.</p>
+
+<p>We have not yet decided on version numbers for the releases beyond 2.12, so for the time being we will use opera names as designators.</p>
+
+<h2 id="scala-aida">Scala “Aida”</h2>
+
+<p>This release focuses on improving the standard library.</p>
+
+<ol>
+  <li>Cleanups and simplification of the collections library: we plan to reduce the size of the collections library, providing some functionality as separate modules.  Generally, we want to make them even easier to use and structure them so that they are more amenable to optimizations. Where needed, breaking changes will be announced using deprecation in Scala 2.12; regular use of the collections will likely be unaffected, but custom collections may need to be adapted to the simplified hierarchy.
+    <ol>
+      <li>Reduce reliance on inheritance</li>
+      <li>Make all default collections immutable (e.g. <code class="language-plaintext highlighter-rouge">scala.Seq</code> will be an alias of <code class="language-plaintext highlighter-rouge">scala.immutable.Seq</code>)</li>
+      <li>Other small cleanups that are possible with a rewriting step (e.g. rename mapValues)</li>
+    </ol>
+  </li>
+  <li>Added functionality: We’d like to introduce several new modules, including a couple of spin-offs from the collections library.
+    <ol>
+      <li>Lazy collections through improved views, including Java 8 streams interop.</li>
+      <li>Parallel collections with performance improvements obtained from operation fusion and more efficient parallel scheduling.</li>
+      <li>An integrated abstraction to handle validation.</li>
+    </ol>
+  </li>
+  <li>The (independent) <a href="http://scalamacros.org/news/2014/07/16/roadmap-for-scala-macros.html">scala.meta</a> project aims to establish a new standard for reflection and macro programming. It will be considered for integration in the standard library once it is mature and stable.</li>
+  <li>As in every Scala release, we’ll also work on improving compiler performance. Since this release focuses on the library, compiler changes will be strictly internal.</li>
+</ol>
+
+<p>Backwards compatibility and migration strategy: The changes to collections might require source code to be rewritten, even though this should be rare. However, we aim to maintain source code compatibility modulo an automatic migration tool (analogous to <code class="language-plaintext highlighter-rouge">go fix</code> for Go) that can do the rewriting automatically. Ideally, that tool should be robust and expressive enough to support cross-building.</p>
+
+<p>Prototypes of the new collection functionality and meta-programming libraries will be made available as separate libraries in the Scala 2.12 timeframe, so that projects can experiment with the new features early.</p>
+
+<h2 id="scala-don-giovanni">Scala “Don Giovanni”</h2>
+
+<p>The main focus for this release is the Scala programming language and its compiler. The new version should provide clear improvements in simplicity, usability and stability, while at the same time staying backwards compatible with current usage of the language.</p>
+
+<p>Areas that will be investigated include the following:</p>
+
+<ol>
+  <li><strong>Cleaned-up syntax</strong>: The objective is to more clearly expose Scala’s principle of having few orthogonally composable features.</li>
+  <li>Trait parameters instead of early definition syntax</li>
+  <li>XML string interpolation instead of XML literals</li>
+  <li>Procedure syntax is dropped in favor of always defining functions with <code class="language-plaintext highlighter-rouge">=</code></li>
+  <li>Simplified and unified type syntax for all forms of information elision: existential types and partial type applications are both expressed with <code class="language-plaintext highlighter-rouge">_</code>, forSome syntax is eliminated.</li>
+  <li><strong>Removing puzzlers</strong>: There are some features in Scala which are known to be prone to puzzlers, and which can be made safer by tweaking the language. In particular, the following changes would help:</li>
+  <li>Result types are mandatory for implicit definitions.</li>
+  <li>Inherited explicit result types take precedence over locally-inferred ones.</li>
+  <li>Universal toString conversion and concatenation via <code class="language-plaintext highlighter-rouge">+</code> should require explicit enabling.</li>
+  <li>Avoid surprising behavior of auto-tupling.</li>
+  <li><strong>Simple foundations</strong>: This continues the strive for simplicity on the type systems side. We will identify formerly disparate features as specific instances of a small set of concepts. This will help in understanding the individual features and how they hang together. It will also reduce unwanted feature interactions. In particular:</li>
+  <li>A single fundamental concept - type members - can give a precise meaning to generics, existential types, wildcards, and higher-kinded types.</li>
+  <li>Intersection and union types make member selection more regular and avoid blow-ups when computing tight upper and lower bounds of sets of types.</li>
+  <li>Tuples can be decomposed recursively, overcoming current limits to tuple size, and leading to simpler, streamlined native support for abstractions like <code class="language-plaintext highlighter-rouge">HList</code>s or <code class="language-plaintext highlighter-rouge">HMap</code>s which are currently implemented in some form or other in various libraries.</li>
+  <li>The type system will have theoretical foundations that are given by a minimal core calculus (DOT).</li>
+  <li><strong>Better tooling</strong>: We will continue to focus on the tooling side, with the goals to improve batch compiler speed and to make the compiler more adapted to fast incremental compilation and IDE presentation support.</li>
+  <li><strong>Faster code</strong>: We plan to improve performance of generated code using optimizations including:</li>
+  <li>Robust specialization using Miniboxing techniques, applied to collections (a preview of this may already be available in Aida).</li>
+  <li>Improvements to value classes: Can be array elements, can play part in specializations, can be multi-field.</li>
+  <li>Optimized implementation of thread-local lazy vals.</li>
+</ol>
+
+<p>We will collaborate here with the Java effort in project Valhalla, which has similar goals.</p>
+
+<h2 id="backwards-compatibility">Backwards compatibility</h2>
+<p>Since some features are superseded by others, some source code will have to be rewritten. However, using the migration tool described earlier, common Scala code should port automatically. In particular, we aim that all features described in the latest edition of “Programming in Scala” can be ported automatically. However, the porting guarantee will not extend to features that are labelled “experimental”. For some of these (e.g. macros and reflection), we aim to have a replacement that can fulfill analogous functionality, but using different notation and APIs.</p>
+
+<h2 id="resourcing">Resourcing</h2>
+<p>Currently, having a feature on the list does not mean that we have already committed the resources to work on this. The roadmap is intended as a framework for the development of future Scala versions. We are happy to take contributions that implement parts of it that are lower on our priority list. Before starting work on a feature not listed here, it must first be accepted for inclusion in the roadmap.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2014-07-28-roadmap-next.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

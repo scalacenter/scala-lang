@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala.js no longer experimental | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala.js no longer experimental"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2015/02/05/scala-js-no-longer-experimental.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala.js no longer experimental</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Thursday 5 February 2015</p>
+						<p>Sébastien Doeraene</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2015/02/05/scala-js-no-longer-experimental.html">Scala.js no longer experimental</a></h2> -->
+					<p>Today, we <a href="https://www.scala-js.org/news/2015/02/05/announcing-scalajs-0.6.0/">announced the release of Scala.js v0.6.0</a>, the Scala to JavaScript compiler, and dropped the experimental flag associated to it.
+Yes, you read it right: Scala.js is no longer experimental!
+After exactly 2 years of development, we finally feel comfortable calling it production-ready.</p>
+
+<p><em>Note, however, that Scala.js is not part of the Typesafe Reactive platform.
+Thus, although we consider Scala.js production-ready, Typesafe does not provide any commercial support for it.</em></p>
+
+<h2 id="more-than-a-compiler-an-entire-ecosystem">More than a compiler, an entire ecosystem</h2>
+
+<p>At its core, Scala.js is a compiler from Scala to JavaScript.
+It compiles <code class="language-plaintext highlighter-rouge">.scala</code> files to a single optimized and minimized <code class="language-plaintext highlighter-rouge">.js</code> file per application.
+The resulting JavaScript code is vanilla ECMAScript 5.1, which therefore works everywhere – on any OS, any browser, or even on Node.js.
+Just like regular Scala, you get all the powerful language features that you know and love: type inference, classes, traits and objects, pattern matching, the collections library, implicits, etc.
+And, in the same way that Scala is fully interoperable with Java, Scala.js is fully interoperable with JavaScript. Scala.js can interoperate with JavaScript either in a statically or dynamically-typed way.</p>
+
+<p>While that all sounds great, a compiler would be nothing without an ecosystem of libraries and tools. Scala.js has that covered too!</p>
+
+<p>You can use your favorite IDE to develop in Scala.js, and from experience, we can report that IntelliJ IDEA and Eclipse both provide a flawless development experience. Other editors should also work well.
+With Scala.js tooling, you get syntax highlighting, code completion (even for JavaScript libraries and the DOM!), jump-to-definition, and most other features you come to expect in a Scala tooling environment.
+After all, <em>Scala.js is just Scala</em>.
+Though, your IDE won’t be able to run or debug Scala.js code. For that, you can use a browser, and you can even step through your Scala code because Scala.js emits <a href="https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">source maps</a>.</p>
+
+<p>Building Scala.js libraries and applications is easy –  there is an sbt plugin, which gives you the same comfort and development speed as with Scala on the JVM.
+It can even run unit tests automatically with either Rhino, Node.js or PhantomJS, according to your needs.</p>
+
+<p>Scala.js also has a growing ecosystem of libraries, which you can depend on through Maven dependencies (<code class="language-plaintext highlighter-rouge">libraryDependencies</code> in sbt).
+They cover UI frameworks, statically-typed client-server communication, reactive extensions, and so on.
+Several popular Scala community libraries such as Shapeless and Scalaz cross-compile with Scala.js.</p>
+
+<p>Finally, we’re proud that Scala.js has a thriving community of nice and helpful people.
+Ask questions <a href="https://stackoverflow.com/questions/tagged/scala.js">on StackOverflow</a>, discuss <a href="https://groups.google.com/forum/#!forum/scala-js">on the mailing list</a>, and discuss with us <a href="https://gitter.im/scala-js/scala-js">in the Gitter chat room</a>.</p>
+
+<h2 id="why-scalajs-is-awesome">Why Scala.js is awesome</h2>
+
+<p>We’ve asked developers who use Scala.js daily why they think Scala.js is awesome.
+Here is a distilled version of what they have answered, in decreasing order of how many people mentioned it.
+You can read <a href="https://groups.google.com/forum/#!topic/scala-js/_1Sfb5Nj08w">the entire discussion on the mailing list</a>.</p>
+
+<ul>
+  <li>5 Share code between client and server</li>
+  <li>4 Strong typing, including for JavaScript libraries</li>
+  <li>4 Tooling: IDE support, sbt integration, dependency, unit testing, stack traces and source maps, cross-compiling projects</li>
+  <li>4 Portability: bring Scala to environments powered by JavaScript, most importantly the browsers, but also others, such as the brand new <a href="https://www.youtube.com/watch?v=KVZ-P-ZI6W4">React Native</a></li>
+  <li>3 Integration with JavaScript</li>
+  <li>2 Fast compilation cycle (wrt other compile-to-JS options such as GWT)</li>
+  <li>2 Statically-checked client-server RPC with Autowire</li>
+  <li>2 The Scala Standard library</li>
+  <li>2 It’s not a toy</li>
+  <li>2 Great community, welcoming to new users and helpful</li>
+  <li>1 Very good documentation</li>
+</ul>
+
+<p>Here are also a few selected quotes from the mailing list discussion.</p>
+
+<blockquote>
+  <p>It’s mostly about the strong typing for me.
+Nothing revolutionary about that idea, but it’s just as true on the client as on the server:
+having the compiler type-check your code makes it <em>much</em> quicker to get complex, sophisticated systems up and running.</p>
+
+  <p>Also, having the same language, end-to-end, is fabulous.
+[…]
+With Scala.js, for the first time ever, I have a single solid, strongly-typed language that I can use throughout the system – from the fiddly details of the UI, through the API definitions and the front-end web server, to the Akka middleware and the database back end.
+That’s really kind of amazing.
+It is also why I personally think Scala.js is the killer app for Scala as a language.
+– <cite>Justin du Cœur</cite></p>
+</blockquote>
+
+<p></p>
+
+<blockquote>
+  <p>In a lot of ways, Scala.js frees your Scala code from the confines of the headless Linux server that it’s been running on for years.
+Scala might be a nice language, but you’ve never been able to use it to make anything cool that a non-backend-systems person would understand.
+[…]
+With Scala.js, you can easily create small Scala applications and email the tiny 100kb executables (or just the link to them) to anyone, who can run them on any modern device, even smartphones.
+Made a cute game? A fun visualization? An animated sequence? Now you can show the world.</p>
+
+  <p>Scala’s no longer just for distributed systems people and type-theorists!
+– <cite>Li Haoyi</cite></p>
+</blockquote>
+
+<p></p>
+
+<blockquote>
+  <p>Before Scala.js I did investigate using <a href="http://opalang.org/">Opa</a> as another approach to get “End-to-End” type safety.
+The problem I had there was that to do JavaScript interop, I had to drop down from Opa into Ocaml and write out manual bindings to the JavaScript library I wanted to use.
+Scala.js’ approach is infinitely better.
+Despite how much better I think typed libraries are, that does not negate the fact that there are good and useful JS libraries out there, and the ability to “hack” it into Scala.js code effortlessly with <code class="language-plaintext highlighter-rouge">js.Dynamic</code> or add a typed facade if desired is fantastic.
+– <cite>Nick Childers</cite></p>
+</blockquote>
+
+<p></p>
+
+<blockquote>
+  <p>I have done some work with <a href="http://www.gwtproject.org/">GWT</a> before and compared to that the first thing you will notice is that Scala.js is FAST.
+It compiles 100 times faster, yet it still outputs JavaScript that is both faster and smaller.
+– <cite>Baldur Norddahl</cite></p>
+</blockquote>
+
+<p></p>
+
+<blockquote>
+  <p>Scala.js has very good tooling and very good documentation.
+If you already write JVM flavoured Scala you can be up and running in no time and write JS flavoured Scala.
+– <cite>Guillaume Belrose</cite></p>
+</blockquote>
+
+<p></p>
+
+<blockquote>
+  <p>[…] Scala.js has one of the smartest and most responsive communities I have ever seen.
+You, Li Haoyi, and many other posters here have contributed to making this platform welcoming to newcomers.
+The help I’ve received here has encouraged me to learn Scala proper, as well as many interesting functional programming concepts.
+– <cite>Travis Good</cite></p>
+</blockquote>
+
+<p></p>
+
+<blockquote>
+  <p>One of the biggest awesomeness of Scala.js is the core team’s steady hands.
+Right from the get go, Scala.js showed a mature engineering approach where each release made a meaningful difference to user projects, vetted release-to-release compatibility, communicated breaking changes well in advance, maintained useful associated libraries, and let pragmatism win over everything else.
+As a result, even though this is such a new project, it doesn’t feel risky to use it in real projects.
+– <cite>Ramnivas Laddad</cite></p>
+</blockquote>
+
+<p></p>
+
+<blockquote>
+  <p>Scala.js is simply the best option available on browsers today, if you’re looking for a language with a powerful yet flexible type system.
+– <cite>Xavier Cho</cite></p>
+</blockquote>
+
+<h2 id="why-remove-the-experimental-flag-now">Why remove the experimental flag now?</h2>
+
+<p>Many Scala.js users would say that it has been production-ready for quite some time already.
+Possibly as early as 0.5.0, which was released in June 2014.
+So why do we choose to remove the experimental flag now?
+What has changed?</p>
+
+<p>The big difference is several different aspects of <em>stability</em>:</p>
+
+<ul>
+  <li>The semantics of the language are settled. They may still evolve in a backward compatible way (defining previously undefined behaviors), but will otherwise not change anymore.</li>
+  <li>The standard library of Scala.js (the <code class="language-plaintext highlighter-rouge">scala.scalajs.js</code> package) will remain backward source and binary compatible.</li>
+  <li>The sbt builds will remain backward source compatible.</li>
+</ul>
+
+<p>Of course, we must still be able to evolve the library and the builds, so things might become deprecated, and eventually removed, but will do so at a slower pace than before.</p>
+
+<p>All things considered, this means that the code you write today, for Scala.js 0.6.0, will continue to work throughout 0.6.x and 1.x.y unchanged.</p>
+
+<p>“So why isn’t it 1.0.0 already?
+It seems like these properties satisfy to the requirements of a 1.0.0 version.
+What are you hiding?”</p>
+
+<p>While from all user-visible points of view Scala.js is stable, there remains just one quasi-implementation detail which might have to change in future versions – the format of the intermediate files of Scala.js, the <code class="language-plaintext highlighter-rouge">.sjsir</code> files.
+These files are essentially the Scala.js equivalent of <code class="language-plaintext highlighter-rouge">.class</code> files for the JVM.
+We’re not yet completely certain that we’re settled on their format, so we’d like to reserve the possibility of changing it in the coming months.
+Doing so means breaking binary compatibility (by definition), and therefore would require a change in major version number.
+So we’re not yet jumping to version 1.0.0 just yet – this is so that we may give ourselves one last chance to modify the Scala.js intermediate format before we make the leap to our first major version.</p>
+
+<p>Though, rest assured! We’re confident that Scala.js is otherwise stable and ready for widespread adoption.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p>There are three main ways to get started with Scala.js:</p>
+
+<ul>
+  <li><a href="https://www.scala-js.org/doc/tutorial.html">The tutorial</a></li>
+  <li>The free e-book <a href="https://lihaoyi.github.io/hands-on-scala-js/">Hands-on Scala.js</a></li>
+  <li>The online sandbox <a href="https://scalafiddle.io">ScalaFiddle</a></li>
+</ul>
+
+<p>So go ahead!
+Use it, love it, and build the web applications of the future!</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2015-02-05-scala-js-no-longer-experimental.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

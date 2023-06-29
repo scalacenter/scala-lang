@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala Chat: Hello Discord (So Long, Gitter) | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala Chat: Hello Discord (So Long, Gitter)"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2021/12/21/discord.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala Chat: Hello Discord (So Long, Gitter)</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 21 December 2021</p>
+						<p>Seth Tisue</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2021/12/21/discord.html">Scala Chat: Hello Discord (So Long, Gitter)</a></h2> -->
+					<p>On behalf of the Scala organization, I am pleased to announce that we
+have adopted <strong>Discord</strong> as our official chat platform.</p>
+
+<h2 id="join-us">Join us!</h2>
+
+<p><strong>Please join us</strong> for live text-based chat on the Scala Discord
+server, via this link:</p>
+
+<ul>
+  <li><a href="https://discord.com/invite/scala">https://discord.com/invite/scala</a></li>
+</ul>
+
+<p>The server has existed for several years now and is already
+busy and well-established.  It is actively moderated under the
+<a href="https://www.scala-lang.org/conduct/">Scala Code of Conduct</a>.</p>
+
+<p>Popular channels on the server include #scala-users,
+#scala-contributors, #announcements, #jobs, #tooling, #scala-js,
+#scala-native, and others.  New channels can be proposed on #admin.</p>
+
+<h2 id="what-about-gitter">What about Gitter?</h2>
+
+<p>Adopting Discord means we have moved away from Gitter.  Most of our
+old Gitter rooms are now closed.  The main room remains open, but
+mainly so we can help people find us on Discord.</p>
+
+<p>Gitter served the Scala community extremely well for more than six
+years.  We applaud the Gitter team for their pioneering efforts, which
+revolutionized public online chat for programmers.  We also thank
+Gitter for providing us with free, high-quality service for so long.</p>
+
+<h2 id="how-is-discord-different">How is Discord different?</h2>
+
+<p>A Discord “server” may contain many “channels”, also called rooms.</p>
+
+<p>When you join a Discord server, all of the public channels on that
+server are immediately visible to you. Unlike Gitter, you don’t have
+to join each channel individually.  (But you can individually mute
+channels that don’t interest you.)</p>
+
+<p>There is a desktop client and a mobile client (for iOS and Android).
+Both are high quality.</p>
+
+<p>Former Gitter users will notice a number of quality-of-life
+and user-interface improvements such as reactions and replies.</p>
+
+<h2 id="what-other-chat-servers-exist">What other chat servers exist?</h2>
+
+<p>Scala enthusiasts might also be interested in joining the following
+Discord servers:</p>
+
+<ul>
+  <li><strong><a href="https://discord.gg/RFpSVth">Scalameta</a></strong>: Scalameta-based tooling: Metals, Scalameta, Scalafix, Scalafmt, and Mdoc</li>
+  <li><strong><a href="https://discord.gg/XF3CXcMzqD">Typelevel</a></strong>: the Typelevel ecosystem for pure-functional programming in Scala</li>
+  <li><strong><a href="https://discord.gg/2ccFBr4">ZIO</a></strong>: Type-safe, composable asynchronous and concurrent programming for Scala</li>
+  <li><strong><a href="https://discord.gg/K6XHBSh">Functional Programming</a></strong>: not Scala-specific, but includes a Scala channel</li>
+</ul>
+
+<p>And although we have closed down all but one of the official Scala
+Gitter rooms, as of December 2021 there are still some active Gitter
+rooms out there devoted to particular libraries or topics, for example
+<a href="https://gitter.im/playframework/playframework">playframework/playframework</a>.</p>
+
+<h2 id="what-about-non-english-languages">What about non-English languages?</h2>
+
+<p>Our website’s <a href="https://www.scala-lang.org/community/#chat-rooms">community
+page</a> lists chat
+rooms and servers for many other languages besides English. Discord,
+Gitter, and Telegram are all represented.</p>
+
+<p>As of December 2021, the list is probably not very up-to-date.  We
+invite the community to submit pull requests that will make it more
+current, one language at a time.  The file to edit on GitHub is
+<a href="https://github.com/scala/scala-lang/blob/main/community/index.md">community/index.md</a>.</p>
+
+<h2 id="are-other-clients-supported">Are other clients supported?</h2>
+
+<p>Yes, via <a href="https://matrix.org">Matrix</a>.  You can connect to
+<code class="language-plaintext highlighter-rouge">#scala-lang:matrix.org</code> over the bridge, using your Matrix client of
+choice (perhaps <a href="https://element.io">Element</a>).  Not all Discord features
+are supported.</p>
+
+<h2 id="how-did-we-decide-to-switch-to-discord">How did we decide to switch to Discord?</h2>
+
+<p>The community discussion of record on this began in October 2019
+on the following Discourse thread:</p>
+
+<ul>
+  <li>https://users.scala-lang.org/t/can-we-have-an-official-scala-discord-server/5157</li>
+</ul>
+
+<p>Among the objections raised were:</p>
+
+<ul>
+  <li>Discord is a proprietary, closed-source platform.</li>
+  <li>The contents of Discord rooms are not indexed on the public web.</li>
+</ul>
+
+<p>But in the end, Discord’s feature set and its sheer popularity decided
+the matter.  By the time we officially switched over in December 2021,
+most of the community had already voted with their feet and our
+Discord server had become much more active than our Gitter rooms.</p>
+
+<p>Slack was considered as an option, but we decided it is best suited
+for private companies and groups, but not so well suited for
+open-ended public communities like ours.</p>
+
+<h2 id="tell-us-more-history">Tell us more history.</h2>
+
+<p>Okay, let’s take a trip down memory lane.</p>
+
+<p>During Scala’s earliest days (at least since 2007, perhaps earlier),
+the main chat platform for Scala was IRC.  In those early years, when
+the community was still small and there weren’t that many Scala
+conferences and meetups yet, the IRC channel (along with the Google
+Groups mailing lists) was an important place where community members
+got to know each other and, one might even say, became a community.</p>
+
+<p>Later, the IRC channel declined in popularity.  In my personal view,
+this was due to a lack of moderation and lack of any code of conduct.
+It became essential to have these once the Scala community had become
+larger.</p>
+
+<p>The IRC channel still exists to this day, now on
+<a href="https://libera.chat">Libera</a> instead of Freenode, but traffic there
+has slowed to a trickle in recent years.</p>
+
+<p>Gitter launched in 2014 and was widely adopted by the Scala community
+in 2015. The major advantages of Gitter over IRC include:</p>
+
+<ul>
+  <li>Scrollback: you can log out, log back on, and still see what
+people were saying while you were away.  (On IRC, this was only
+possible if you used special software.)</li>
+  <li>Markdown support, including syntax-highlighting of Scala code.</li>
+  <li>Messages can be edited (within a limited time frame) and
+deleted.</li>
+  <li>More features supporting effective content moderation.</li>
+</ul>
+
+<p>Discord shares these advantages as well.</p>
+
+<p>Some advantages of Gitter that Discord <em>doesn’t</em> share:</p>
+
+<ul>
+  <li>GitHub integration, including GitHub-based login. (No need to
+make a separate account.)</li>
+  <li>Easy, decentralized, room creation, with room names based on GitHub
+repo names, making it a no-brainer for an open source maintainer to
+create a room specifically for their library.</li>
+</ul>
+
+<p>However, in recent years, the Gitter platform largely stopped
+advancing and eventually came to feel stale.  After Gitter was
+acquired by GitLab in 2017, some features were added such as
+threading, but the implementation of threading was unpopular with
+users. The quality and feature set of the mobile client fell behind
+those of the desktop client.  New Vector Limited acquired Gitter in
+2020 and added Matrix support, but otherwise has not advanced the
+platform.</p>
+
+<p>Meanwhile, Discord was becoming extremely popular in the video gaming
+community, then crossed over into programming communities.</p>
+
+<h2 id="are-the-old-gitter-rooms-archived">Are the old Gitter rooms archived?</h2>
+
+<p>The main Gitter room for Scala,
+<a href="https://gitter.im/scala/scala">scala/scala</a> remains online and
+searchable.  We’ll probably leave it online indefinitely.</p>
+
+<p>The other Gitter rooms under the scala/* organization have been
+deleted and their contents archived; the Scala Center retains the
+archives.</p>
+
+<h2 id="credits">Credits</h2>
+
+<p><a href="https://twitter.com/salarrahmanian">Salar Rahmanian</a> created the
+Scala Discord server initially and administered it until recently.
+We are grateful to him for leading the way.  Thank you, Salar!</p>
+
+<p>Personally, I would also like to applaud and thank everyone who’s ever
+been helpful and kind to a Scala newcomer arriving in one of our chat
+rooms for the first time.  You keep my faith in humanity alive. ❤️</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2021-12-21-discord.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

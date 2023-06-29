@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>On Performance of the New Collections | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="On Performance of the New Collections"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2018/02/09/collections-performance.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>On Performance of the New Collections</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Friday 9 February 2018</p>
+						<p>Julien Richard-Foy</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2018/02/09/collections-performance.html">On Performance of the New Collections</a></h2> -->
+					<p>In a <a href="/blog/2017/11/28/view-based-collections.html">previous blog post</a>, I explained
+how <a href="https://www.scala-lang.org/blog/2017/02/28/collections-rework.html">Scala 2.13’s new collections</a>
+have been designed so that the default implementations of transformation operations work
+with both strict and non-strict types of collections. In essence, we abstract over
+the evaluation mode (strict or non strict) of concrete collection types.</p>
+
+<p>After we published that blog post, the community
+<a href="https://www.reddit.com/r/scala/comments/7g52cy/let_them_be_lazy/dqgol36/">raised concerns</a>
+about possible performance implications of having more levels of abstraction than before.</p>
+
+<p>This blog article:</p>
+
+<ul>
+  <li>gives more information about the overhead of the collections’
+view-based design and our solution to remove that overhead,</li>
+  <li>argues that for correctness reasons it is still better to have
+view-based default implementations,</li>
+  <li>shows that we should expect the new collections to be equally fast
+or faster than the old collections, and reports an average speedup
+of 35% in the case of <code class="language-plaintext highlighter-rouge">Vector</code>’s <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">flatMap</code>.</li>
+</ul>
+
+<p>For reference, the source code of the new collections is available in
+<a href="https://github.com/scala/collection-strawman">this GitHub repository</a>.</p>
+
+<h2 id="overhead-of-view-based-implementations">Overhead Of View Based Implementations</h2>
+
+<p>Let’s be clear, the view based implementations are in general slower than their
+builder based versions. How much slower exactly varies with the type of collection
+(e.g. <code class="language-plaintext highlighter-rouge">List</code>, <code class="language-plaintext highlighter-rouge">Vector</code>, <code class="language-plaintext highlighter-rouge">Set</code>), the operation (e.g. <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">filter</code>)
+and the number of elements in the collection. In my benchmark on <code class="language-plaintext highlighter-rouge">Vector</code>, on
+the <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">filter</code> and <code class="language-plaintext highlighter-rouge">flatMap</code> operations, with 1 to 7 million of
+elements, I measured an average slowdown of 25%.</p>
+
+<h2 id="how-to-fix-that-performance-regression">How To Fix That Performance Regression?</h2>
+
+<p>Our solution is simply to go back to builder based implementations for strict collections: we
+override the default view based implementations with more efficient builder based
+ones. We actually end up with the same implementations as in the old collections.</p>
+
+<p>In practice these implementations are factored out in traits that can be mixed
+into concrete collection types. Such trait names are always prefixed with
+<code class="language-plaintext highlighter-rouge">StrictOptimized</code>. For instance, here is an excerpt of the <code class="language-plaintext highlighter-rouge">StrictOptimizedIterableOps</code>
+trait:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">StrictOptimizedIterableOps</span><span class="o">[</span><span class="kt">+A</span>, <span class="kt">+CC</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">+C</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">CC</span>, <span class="kt">C</span><span class="o">]</span> <span class="o">{</span>
+
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">CC</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">val</span> <span class="nv">b</span> <span class="k">=</span> <span class="nv">iterableFactory</span><span class="o">.</span><span class="py">newBuilder</span><span class="o">[</span><span class="kt">B</span><span class="o">]()</span>
+    <span class="k">val</span> <span class="nv">it</span> <span class="k">=</span> <span class="nf">iterator</span><span class="o">()</span>
+    <span class="nf">while</span> <span class="o">(</span><span class="nv">it</span><span class="o">.</span><span class="py">hasNext</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">b</span> <span class="o">+=</span> <span class="nf">f</span><span class="o">(</span><span class="nv">it</span><span class="o">.</span><span class="py">next</span><span class="o">())</span>
+    <span class="o">}</span>
+    <span class="nv">b</span><span class="o">.</span><span class="py">result</span><span class="o">()</span>
+  <span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Then, to implement the <code class="language-plaintext highlighter-rouge">Vector</code> collection, we just mix such a “strict optimized” trait:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">Vector</span><span class="o">[</span><span class="kt">+A</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">IndexedSeq</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+  <span class="k">with</span> <span class="nc">IndexedSeqOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Vector</span>, <span class="kt">Vector</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span>
+  <span class="k">with</span> <span class="nc">StrictOptimizedSeqOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">Vector</span>, <span class="kt">Vector</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span>
+</code></pre></div></div>
+
+<p>Here we use <code class="language-plaintext highlighter-rouge">StrictOptimizedSeqOps</code>, which is a specialization of <code class="language-plaintext highlighter-rouge">StrictOptimizedIterableOps</code>
+for <code class="language-plaintext highlighter-rouge">Seq</code> collections.</p>
+
+<h2 id="is-the-view-based-design-worth-it">Is The View Based Design Worth It?</h2>
+
+<p>In my previous article, I explained a drawback of the old builder based design.
+On non strict collections (e.g. <code class="language-plaintext highlighter-rouge">Stream</code> or <code class="language-plaintext highlighter-rouge">View</code>), we had to carefully override all the
+default implementations of transformation operations to make them non strict.</p>
+
+<p>Now it seems that the situation is just reversed: the default implementations work well
+with non strict collections, but we have to override them in strict collections.</p>
+
+<p>So, is the new design worth it? To answer this question I will quote a comment posted
+by Stefan Zeiger <a href="https://www.reddit.com/r/scala/comments/7g52cy/let_them_be_lazy/dqixt8d/">here</a>:</p>
+
+<blockquote>
+  <p>The lazy-by-default approach is mostly beneficial when you’re implementing lazy
+collections because you don’t have to override pretty much everything or get
+incorrect semantics. The reverse risk is smaller: If you don’t override a lazy
+implementation for a strict collection type you only suffer a small performance
+impact but it’s still correct.</p>
+</blockquote>
+
+<p>In short, implementations are <strong>correct first</strong> in the new design but you might want to
+override them for performance reasons on strict collections.</p>
+
+<h2 id="performance-comparison-with-212s-collections">Performance Comparison With 2.12’s Collections</h2>
+
+<p>Talking about performance, how performant are the new collections compared to the old ones?</p>
+
+<p>Again, the answer depends on the type of collection, the operations and the number of elements.
+My <code class="language-plaintext highlighter-rouge">Vector</code> benchmarks show a 35% speedup on average:</p>
+
+<p><img src="/resources/img/blog/new-collections-performance-filter.png" alt="" /></p>
+
+<p><img src="/resources/img/blog/new-collections-performance-map.png" alt="" /></p>
+
+<p><img src="/resources/img/blog/new-collections-performance-flatMap.png" alt="" /></p>
+
+<p>These charts show the speedup factor (vertically) of the <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">flatMap</code>
+operations execution compared to the old <code class="language-plaintext highlighter-rouge">Vector</code>, for various number of elements (horizontally).
+The blue line shows the old <code class="language-plaintext highlighter-rouge">Vector</code>,
+the red line shows the new <code class="language-plaintext highlighter-rouge">Vector</code> if it used only view based
+implementations, and the yellow line shows the actual new <code class="language-plaintext highlighter-rouge">Vector</code>
+(with strict optimized implementations). Benchmark source code and numbers can be found
+<a href="https://gist.github.com/julienrf/f1cb2b062cd9783a35e2f35778959c76">here</a>.</p>
+
+<p>Since operation implementations end up being the same, why do we get better performance
+at all? Well, these numbers are specific to <code class="language-plaintext highlighter-rouge">Vector</code> and the tested operations, they
+are due to the fact that
+we more aggressively inlined a few critical methods. I don’t expect the new collections
+to be <em>always</em> faster than the old collections. However, there is no reason for
+them to be slower since the execution path, when calling an operation, can be made
+exactly the same as in the old collections.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This article studied the performance of the new collections. I’ve reported that view
+based operation implementations are about 25% slower than builder based implementations,
+and I’ve explained how we restored builder based implementations on strict collections.
+Last but not least, I’ve shown that defaulting to view based implementations does
+make sense for the sake of correctness.</p>
+
+<p>I expect the new collections to be equally fast or slightly faster than the previous collections.
+Indeed, we took advantage of the rewrite to apply some more optimizations here and
+again.</p>
+
+<p>More significant performance improvements can be achieved by using different
+data structures. For instance, we recently
+<a href="https://github.com/scala/collection-strawman/pull/342">merged</a>
+a completely new implementation of immutable <code class="language-plaintext highlighter-rouge">Set</code> and <code class="language-plaintext highlighter-rouge">Map</code> based on <a href="https://michael.steindorfer.name/publications/oopsla15.pdf">compressed
+hash-array mapped prefix-trees</a>.
+This data structure has a smaller memory footprint than the old <code class="language-plaintext highlighter-rouge">HashSet</code> and <code class="language-plaintext highlighter-rouge">HashMap</code>,
+and some operations can be an order of magnitude faster (e.g. <code class="language-plaintext highlighter-rouge">==</code> is up to 7x faster).</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2018-02-09-collections-performance.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

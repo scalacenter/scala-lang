@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Announcing Dotty 0.1.2-RC1, a major step towards Scala 3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Announcing Dotty 0.1.2-RC1, a major step towards Scala 3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/05/31/first-dotty-milestone-release.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Announcing Dotty 0.1.2-RC1, a major step towards Scala 3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 31 May 2017</p>
+						<p>Dmitry Petrashko</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2017/05/31/first-dotty-milestone-release.html">Announcing Dotty 0.1.2-RC1, a major step towards Scala 3</a></h2> -->
+					<p>Today, we are excited to release Dotty version 0.1.2-RC1.  This release
+serves as a technology preview that demonstrates new language features
+and the compiler supporting them.</p>
+
+<!--more-->
+
+<h2 id="why-is-this-important">Why is this important?</h2>
+
+<p><em>Dotty</em> is the project name for a language and compiler that
+is slated to become Scala 3.0. This is an ongoing development,
+transparently developed as open source software. The Dotty project
+started more than 4 years ago. It reached a major milestone in 2015 by
+achieving
+<a href="https://dotty.epfl.ch/blog/2015/10/23/dotty-compiler-bootstraps.html">bootstrap</a>,
+that is, showing that the new compiler could compile itself.  Today we
+have reached another milestone with this first release of the
+codebase. Developments will not stop here, but they will in the future
+all be part of regular time-based releases.</p>
+
+<h2 id="how-can-you-try-it-out">How can you try it out?</h2>
+
+<p>You have several alternatives: use the <code class="language-plaintext highlighter-rouge">sbt-dotty</code> plugin, get a standalone
+installation, or try it online on <a href="https://scastie.scala-lang.org/R5kUfVbTRpmS4l4CrO1HlA">Scastie</a>.</p>
+
+<h3 id="sbt">sbt</h3>
+<p>Using sbt 0.13.13 or newer, do:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt new lampepfl/dotty.g8
+</code></pre></div></div>
+
+<p>This will setup a new sbt project with Dotty as compiler. For more details on
+using Dotty with sbt, see the
+<a href="https://github.com/lampepfl/dotty-example-project">example project</a>.</p>
+
+<h3 id="standalone-installation">Standalone installation</h3>
+
+<p>Releases are available for download on the <em>Releases</em>
+section of the Dotty repository: 
+<a href="https://github.com/lampepfl/dotty/releases">https://github.com/lampepfl/dotty/releases</a>.</p>
+
+<p>We also provide a <a href="https://brew.sh/">homebrew</a> package that can be installed by running</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew install lampepfl/brew/dotty
+</code></pre></div></div>
+
+<h3 id="scastie">Scastie</h3>
+
+<p><a href="https://scastie.scala-lang.org/R5kUfVbTRpmS4l4CrO1HlA">Scastie</a>, the online Scala playground,
+supports Dotty. 
+You can try it out there without installing anything.</p>
+
+<h2 id="whats-in-the-012-rc1-technology-preview">What’s in the 0.1.2-RC1 technology preview?</h2>
+<p>This technology preview demonstrates new language features planned for Scala 3:</p>
+
+<ul>
+  <li><a href="https://dotty.epfl.ch/docs/reference/new-types/intersection-types.html">Intersection Types</a></li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/new-types/union-types.html">Union Types</a></li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/other-new-features/trait-parameters.html">Trait Parameters</a></li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/enums/enums.html">Enumerations</a></li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/enums/adts.html">Algebraic Data Types</a></li>
+  <li><a href="https://dotty.epfl.ch/docs/reference/contextual/by-name-context-parameters.html">By-Name Implicits</a></li>
+</ul>
+
+<p>We also ship with tools that help you try out the Dotty platform:</p>
+
+<ul>
+  <li>IDE features for Visual Studio Code</li>
+  <li><a href="https://github.com/lampepfl/dotty-example-project">sbt support, including retro-compatibility with Scala 2</a></li>
+</ul>
+
+<p>See here for the full <a href="https://dotty.epfl.ch/docs/release-notes/0.1.2.html">release notes</a>.</p>
+
+<h2 id="release-schedule">Release schedule</h2>
+
+<p>Starting from this release, we are adopting a time-based release schedule:</p>
+<ul>
+  <li>Nightly builds will be published, for those wanting to be at the forefront of
+development.</li>
+  <li>Every 6 weeks, a release candidate will be cut based on the latest nightly build.</li>
+  <li>Every 6 weeks, the latest release candidate becomes a release.</li>
+</ul>
+
+<p>At the end of 6 weeks, the milestone will be promoted to a stable release.</p>
+
+<h2 id="what-are-the-next-steps">What are the next steps?</h2>
+
+<p>Over the coming weeks and months, we plan to work on the following topics:</p>
+
+<ul>
+  <li><a href="https://github.com/lampepfl/dotty/pull/2513">Integrate Local optimizations developed in Dotty linker</a>;</li>
+  <li><a href="https://github.com/lampepfl/dotty/pull/2199">Add Language-level support for HMaps and HLists</a>;</li>
+  <li><a href="https://github.com/lampepfl/dotty/pull/1840">Port global optimizations from Dotty linker</a>.</li>
+</ul>
+
+<p>If you want to get your hands dirty with any of this, now is a good
+moment to get involved! Join the team of contributors, including
+Martin Odersky (<a href="https://twitter.com/odersky">@odersky</a>)
+Dmitry Petrashko (<a href="https://twitter.com/DarkDimius">@DarkDimius</a>),
+Guillaume Martres (<a href="https://github.com/smarter">@smarter</a>),
+Felix Mulder (<a href="https://twitter.com/felixmulder">@felixmulder</a>),
+Nicolas Stucki (<a href="https://github.com/nicolasstucki">@nicolasstucki</a>),
+Liu Fengyun (<a href="https://github.com/liufengyun">@liufengyun</a>),
+Olivier Blanvillain (<a href="https://github.com/OlivierBlanvillain">@OlivierBlanvillain</a>),
+and others!</p>
+
+<h2 id="library-authors-join-our-community-build">Library authors: Join our community build</h2>
+
+<p>Dotty now has a set of libraries that are built against every nightly snapshot.
+Currently this includes scalatest, squants and algebra.
+Join our <a href="https://github.com/lampepfl/dotty-community-build">community build</a>
+ to make sure that our regression suite includes your library.</p>
+
+<p>To get started, see <a href="https://github.com/lampepfl/dotty">https://github.com/lampepfl/dotty</a>.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2017-05-31-first-dotty-milestone-release.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

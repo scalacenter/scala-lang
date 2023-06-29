@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Tribulations of CanBuildFrom | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Tribulations of CanBuildFrom"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/05/30/tribulations-canbuildfrom.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Tribulations of CanBuildFrom</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 30 May 2017</p>
+						<p>Julien Richard-Foy</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2017/05/30/tribulations-canbuildfrom.html">Tribulations of CanBuildFrom</a></h2> -->
+					<p><a href="https://scala-lang.org/api/2.12.2/scala/collection/generic/CanBuildFrom.html"><code class="language-plaintext highlighter-rouge">CanBuildFrom</code></a> is probably the most
+infamous abstraction of the current collections. It is mainly criticised for making scary type
+signatures.</p>
+
+<p>Our ongoing collections redesign (<a href="https://www.scala-lang.org/blog/2017/02/28/collections-rework.html">blog post</a>, <a href="https://github.com/scala/collection-strawman">GitHub repo</a>) is an opportunity
+to  try alternative designs. This post explains the (many!) problems solved by <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>
+and the alternative solutions implemented in the new collections.</p>
+
+<h2 id="transforming-the-elements-of-a-collection">Transforming the elements of a collection</h2>
+
+<p>It’s useful to think of <code class="language-plaintext highlighter-rouge">String</code> as a collection of <code class="language-plaintext highlighter-rouge">Char</code> elements: you can then use
+the common collection operations like <code class="language-plaintext highlighter-rouge">++</code>, <code class="language-plaintext highlighter-rouge">find</code>, etc. on <code class="language-plaintext highlighter-rouge">String</code> values.</p>
+
+<p>However the <code class="language-plaintext highlighter-rouge">map</code> method is challenging because this one
+transforms the <code class="language-plaintext highlighter-rouge">Char</code> elements into something that might or might not be <code class="language-plaintext highlighter-rouge">Char</code>s.
+Then, what should be the return type of the <code class="language-plaintext highlighter-rouge">map</code> method on <code class="language-plaintext highlighter-rouge">String</code> values? Ideally,
+we want to get back a <code class="language-plaintext highlighter-rouge">String</code> if we transform each <code class="language-plaintext highlighter-rouge">Char</code> into another <code class="language-plaintext highlighter-rouge">Char</code>, but we
+want to get some <code class="language-plaintext highlighter-rouge">Seq[B]</code> if we transform each <code class="language-plaintext highlighter-rouge">Char</code> into a different type <code class="language-plaintext highlighter-rouge">B</code>. And this
+is the way it currently works:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Welcome to Scala 2.12.2 (OpenJDK 64-Bit Server VM, Java 1.8.0_131).
+Type in expressions for evaluation. Or try :help.
+
+scala&gt; "foo".map(c =&gt; c.toInt)
+res1: scala.collection.immutable.IndexedSeq[Int] = Vector(102, 111, 111)
+
+scala&gt; "foo".map(c =&gt; c.toUpper)
+res2: String = FOO
+</code></pre></div></div>
+
+<p>This feature is not limited to the <code class="language-plaintext highlighter-rouge">map</code> method: <code class="language-plaintext highlighter-rouge">flatMap</code>, <code class="language-plaintext highlighter-rouge">collect</code>, <code class="language-plaintext highlighter-rouge">concat</code> and a few
+others also work the same. Moreover, <code class="language-plaintext highlighter-rouge">String</code> is not the only
+collection type that needs this feature: <a href="https://scala-lang.org/api/2.12.2/index.html?search=bitset"><code class="language-plaintext highlighter-rouge">BitSet</code></a>
+and <a href="https://scala-lang.org/api/2.12.2/index.html?search=map"><code class="language-plaintext highlighter-rouge">Map</code></a> are other examples.</p>
+
+<p>The current collections rely on <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> to implement this feature. The <code class="language-plaintext highlighter-rouge">map</code>
+method is defined as follows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span>, <span class="kt">That</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">bf</span><span class="k">:</span> <span class="kt">CanBuildFrom</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">B</span>, <span class="kt">That</span><span class="o">])</span><span class="k">:</span> <span class="kt">That</span>
+</code></pre></div></div>
+
+<p>When the implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> parameter is resolved it fixes the return type <code class="language-plaintext highlighter-rouge">That</code>.
+The resolution is driven by the actual <code class="language-plaintext highlighter-rouge">B</code> type: if <code class="language-plaintext highlighter-rouge">B</code> is <code class="language-plaintext highlighter-rouge">Char</code> then <code class="language-plaintext highlighter-rouge">That</code> is fixed
+to <code class="language-plaintext highlighter-rouge">String</code>, otherwise it is <code class="language-plaintext highlighter-rouge">immutable.IndexedSeq</code>.</p>
+
+<p>The drawback of this solution is that the type signature of the <code class="language-plaintext highlighter-rouge">map</code> method looks cryptic.</p>
+
+<p>In the new design we solve this problem by defining two overloads of the <code class="language-plaintext highlighter-rouge">map</code>
+method: one that handles <code class="language-plaintext highlighter-rouge">Char</code> to <code class="language-plaintext highlighter-rouge">Char</code> transformations, and one that handles other
+transformations. The type signatures of these <code class="language-plaintext highlighter-rouge">map</code> methods are straightforward:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">map</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=&gt;</span> <span class="nc">Char</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+<span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">Char</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>Then, if you call <code class="language-plaintext highlighter-rouge">map</code> with a function that returns a <code class="language-plaintext highlighter-rouge">Char</code>, the first overload is
+selected and you get a <code class="language-plaintext highlighter-rouge">String</code>. Otherwise, the second overload is selected and you
+get a <code class="language-plaintext highlighter-rouge">Seq[B]</code>. Before Scala 2.12 such a solution would not have worked well: users
+would have been required to explicitly write the type of the argument of the supplied
+<code class="language-plaintext highlighter-rouge">f</code> function. In Scala 2.12 type inference has been improved so that it is not
+anymore necessary.</p>
+
+<p>Thus, we got rid of the cryptic method signatures while still supporting the feature
+of returning a different type of result according to the type of the transformation function.</p>
+
+<h2 id="collections-type-constructors-with-different-arities">Collections’ type constructors with different arities</h2>
+
+<p>The collections are hierarchically organized. Essentially, the most generic collection
+is <code class="language-plaintext highlighter-rouge">Iterable[A]</code>, and then we have three main kinds of collections: <code class="language-plaintext highlighter-rouge">Seq[A]</code>, <code class="language-plaintext highlighter-rouge">Set[A]</code>
+and <code class="language-plaintext highlighter-rouge">Map[K, V]</code>.</p>
+
+<p><img src="/resources/img/blog/collections-hierarchy.svg" alt="" /></p>
+
+<p>It is worth noting that <code class="language-plaintext highlighter-rouge">Map[K, V]</code> takes two type parameters (<code class="language-plaintext highlighter-rouge">K</code> and <code class="language-plaintext highlighter-rouge">V</code>) whereas the
+other collection types take only one type parameter. This makes it difficult to
+generically define, at the level of <code class="language-plaintext highlighter-rouge">Iterable[A]</code>, operations that will
+return a <code class="language-plaintext highlighter-rouge">Map[K, V]</code> when specialized.</p>
+
+<p>For instance, consider again the case of the <code class="language-plaintext highlighter-rouge">map</code> method. We want to generically define
+it on <code class="language-plaintext highlighter-rouge">Iterable[A]</code>, but which return type should we use? When this method will
+be inherited by <code class="language-plaintext highlighter-rouge">List[A]</code> we want its return type to be <code class="language-plaintext highlighter-rouge">List[B]</code>, but when
+it will be inherited by <code class="language-plaintext highlighter-rouge">HashMap[K, V]</code>, we want its return type to be <code class="language-plaintext highlighter-rouge">HashMap[L, W]</code>.
+It is clear that we want to abstract over the type constructor of the concrete collections,
+but the difficulty is that they don’t always take the same number of type parameters.</p>
+
+<p>That’s a second problem solved by <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> in the current collections.
+Look again at the type signature of the (generic) <code class="language-plaintext highlighter-rouge">map</code> method on <code class="language-plaintext highlighter-rouge">Iterable[A]</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span>, <span class="kt">That</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">bf</span><span class="k">:</span> <span class="kt">CanBuildFrom</span><span class="o">[</span><span class="kt">Repr</span>, <span class="kt">B</span>, <span class="kt">That</span><span class="o">])</span><span class="k">:</span> <span class="kt">That</span>
+</code></pre></div></div>
+
+<p>The return type <code class="language-plaintext highlighter-rouge">That</code> is inferred from the resolved <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> instance at call-site.
+Both the <code class="language-plaintext highlighter-rouge">Repr</code> and <code class="language-plaintext highlighter-rouge">B</code> types actually drive the implicit resolution: when <code class="language-plaintext highlighter-rouge">Repr</code> is <code class="language-plaintext highlighter-rouge">List[_]</code>
+the parameter <code class="language-plaintext highlighter-rouge">That</code> is fixed to <code class="language-plaintext highlighter-rouge">List[B]</code>, and when <code class="language-plaintext highlighter-rouge">Repr</code> is <code class="language-plaintext highlighter-rouge">HashMap[_, _]</code> and <code class="language-plaintext highlighter-rouge">B</code> is a
+tuple <code class="language-plaintext highlighter-rouge">(K, V)</code> then <code class="language-plaintext highlighter-rouge">That</code> is fixed to <code class="language-plaintext highlighter-rouge">HashMap[K, V]</code>.</p>
+
+<p>In the new design we solve this problem by defining two “branches” in the hierarchy:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">IterableOps</code> for collections whose type constructor takes one parameter,</li>
+  <li><code class="language-plaintext highlighter-rouge">MapOps</code> for collections whose type constructor takes two parameters.</li>
+</ul>
+
+<p>Here is a simplified version of <code class="language-plaintext highlighter-rouge">IterableOps</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">CC</span><span class="o">[</span><span class="k">_</span><span class="o">]]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">CC</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">CC</code> type parameter stands for <em>C</em>ollection type <em>C</em>onstructor. Then, the <code class="language-plaintext highlighter-rouge">List[A]</code>
+concrete collection extends <code class="language-plaintext highlighter-rouge">IterableOps[A, List]</code> to set its correct self-type constructor.</p>
+
+<p>Similarly, here is a simplified version of <code class="language-plaintext highlighter-rouge">MapOps</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">MapOps</span><span class="o">[</span><span class="kt">K</span>, <span class="kt">V</span>, <span class="kt">CC</span><span class="o">[</span><span class="k">_</span>, <span class="k">_</span><span class="o">]]</span> <span class="nc">extends</span> <span class="nc">IterableOps</span><span class="o">[(</span><span class="kt">K</span>, <span class="kt">V</span><span class="o">)</span>, <span class="kt">Iterable</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">L</span>, <span class="kt">W</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="o">((</span><span class="kt">K</span><span class="o">,</span> <span class="kt">V</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">L</span><span class="o">,</span> <span class="n">W</span><span class="o">))</span><span class="k">:</span> <span class="kt">CC</span><span class="o">[</span><span class="kt">L</span>, <span class="kt">W</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And then the <code class="language-plaintext highlighter-rouge">HashMap[K, V]</code> concrete collection extends <code class="language-plaintext highlighter-rouge">MapOps[K, V, HashMap]</code> to set
+its correct self-type constructor. Note that <code class="language-plaintext highlighter-rouge">MapOps</code> extends <code class="language-plaintext highlighter-rouge">IterableOps</code>: consequently it
+inherits from its <code class="language-plaintext highlighter-rouge">map</code> method, which will be selected when the transformation function
+passed to <code class="language-plaintext highlighter-rouge">map</code> does not return a tuple.</p>
+
+<h2 id="sorted-collections">Sorted collections</h2>
+
+<p>The third challenge is about sorted collections (like <code class="language-plaintext highlighter-rouge">TreeSet</code> and <code class="language-plaintext highlighter-rouge">TreeMap</code>, for instance).
+These collections define their order of iteration according to an ordering relationship for the
+type of their elements.</p>
+
+<p>As a consequence, when you transform the type of the elements (e.g. by using the – now familiar! –
+<code class="language-plaintext highlighter-rouge">map</code> method), an implicit ordering instance for the new type of elements has to be available.</p>
+
+<p>With <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>, the solution relies (again) on the implicit resolution mechanism:
+the implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom[TreeSet[_], X, TreeSet[X]]</code> instance is available for some
+type <code class="language-plaintext highlighter-rouge">X</code> only if an implicit <code class="language-plaintext highlighter-rouge">Ordering[X]</code> instance is also available.</p>
+
+<p>In the new design we solve this problem by introducing a new branch in the hierarchy.
+This one defines transformation operations that require an ordering instance for the element
+type of the resulting collection:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">SortedIterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">CC</span><span class="o">[</span><span class="k">_</span><span class="o">]]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span> <span class="kt">:</span> <span class="kt">Ordering</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">CC</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>However, as mentioned in the previous section, we need to also abstract over the kind of the
+type constructor of the concrete collections. Consequently we have in total four branches:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>kind</th>
+      <th>not sorted</th>
+      <th>sorted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CC[_]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">IterableOps</code></td>
+      <td><code class="language-plaintext highlighter-rouge">SortedIterableOps</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">CC[_, _]</code></td>
+      <td><code class="language-plaintext highlighter-rouge">MapOps</code></td>
+      <td><code class="language-plaintext highlighter-rouge">SortedMapOps</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In summary, instead of having one <code class="language-plaintext highlighter-rouge">map</code> method that supports all the use cases described in
+this section and the previous ones, we specialized the hierarchy to have overloads of
+the <code class="language-plaintext highlighter-rouge">map</code> method, each one supporting a specific use case. The benefit is that the type
+signatures immediately tell you the story: you don’t have to have a look at the actual
+implicit resolution to know the result you will get from calling <code class="language-plaintext highlighter-rouge">map</code>.</p>
+
+<h2 id="implicit-builders">Implicit builders</h2>
+
+<p>In the current collections, the fact that <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> instances are available in the
+implicit scope is useful to implement, separately from the collections, generic operations
+that work with any collection type.</p>
+
+<p>Examples of use cases are:</p>
+
+<ul>
+  <li><a href="https://github.com/scala/scala/blob/92ffe04070f25452b8d48ee7fbced587ddafbf6d/src/library/scala/concurrent/Future.scala#L822-L840"><code class="language-plaintext highlighter-rouge">Future.traverse</code></a></li>
+  <li>type-driven builders (e.g. in <a href="https://github.com/playframework/play-json/blob/8642c485c79e32263b7bef5f991abb486523b3ef/play-json/shared/src/main/scala/Reads.scala#L144-L170">play-json</a>, or <a href="https://github.com/slick/slick/blob/51e14f2756ed29b8c92a24b0ae24f2acd0b85c6f/slick/src/main/scala/slick/jdbc/PositionedResult.scala#L150-L154">slick</a>)</li>
+  <li>extension methods (e.g. in <a href="https://github.com/cvogt/scala-extensions/blob/master/src/main/scala/collection.scala#L14-L28">scala-extensions</a>)</li>
+</ul>
+
+<p>In the new design we are still experimenting with solutions to support these features. So far
+the decision is to not put implicit builders in the collections implementation. We might
+provide them as an optional dependency instead, but it seems that most of these use cases
+could be supported even without implicit builders: you could just use an existing collection
+instance and navigate through its companion object (providing the builder), or you could just
+use the companion object directly to get a builder.</p>
+
+<h2 id="breakout-escape-hatch"><code class="language-plaintext highlighter-rouge">breakOut</code> escape hatch</h2>
+
+<p>As we have previously seen, in the current collections when we want to transform some
+collection into a new collection, we rely on an available implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>
+instance to get a builder for the target collection. The implicit search is
+driven by the type of the initial collection and the type of elements of the target
+collection. The available implicit instances have been designed to make sense in the most
+common cases.</p>
+
+<p>However, sometimes this default behavior is not what you want. For instance, consider the
+following program:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="mi">3</span> <span class="o">::</span> <span class="nc">Nil</span>
+<span class="k">val</span> <span class="nv">xsWithSquares</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">xs</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>If you try to compile it you will get a compile error because the implicitly
+resolved builder produces a <code class="language-plaintext highlighter-rouge">List[(Int, Int)]</code> instead of the desired <code class="language-plaintext highlighter-rouge">Map[Int, Int]</code>.
+We could convert this <code class="language-plaintext highlighter-rouge">List[(Int, Int)]</code> into a <code class="language-plaintext highlighter-rouge">Map[Int, Int]</code> but that
+would be inefficient for large collections.</p>
+
+<p>We can fix this issue by using the <code class="language-plaintext highlighter-rouge">breakOut</code> escape hatch:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="mi">3</span> <span class="o">::</span> <span class="nc">Nil</span>
+<span class="k">val</span> <span class="nv">xsWithSquares</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">xs</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">))(</span><span class="nv">collection</span><span class="o">.</span><span class="py">breakOut</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">breakOut</code> selects a <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> instance irrespective of the initial collection type.
+This requires the target type to be known, in this case via an explicit type ascription.</p>
+
+<p>In the new design we have no direct equivalent of <code class="language-plaintext highlighter-rouge">breakOut</code>. The solution of the
+above example consists in using a <code class="language-plaintext highlighter-rouge">View</code> to avoid the construction of an
+intermediate collection:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="mi">1</span> <span class="o">::</span> <span class="mi">2</span> <span class="o">::</span> <span class="mi">3</span> <span class="o">::</span> <span class="nc">Nil</span>
+<span class="k">val</span> <span class="nv">xsWithSquares</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">xs</span><span class="o">.</span><span class="py">view</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">)).</span><span class="py">to</span><span class="o">(</span><span class="nc">Map</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>In practice, we expect that most usages of <code class="language-plaintext highlighter-rouge">breakOut</code> could be adapted to the new design by using
+a <code class="language-plaintext highlighter-rouge">View</code> followed by an explicit <code class="language-plaintext highlighter-rouge">to</code> call. However, this is an area that remains to explore.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this article we have reviewed the features built on top of <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> and explained
+the design decision we made for the new collections to support most of these features
+without <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2017-05-30-tribulations-canbuildfrom.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

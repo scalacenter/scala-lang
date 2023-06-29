@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Releasing spores 0.4.3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Releasing spores 0.4.3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2016/11/30/spores-release.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Releasing spores 0.4.3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 30 November 2016</p>
+						<p>Jorge Vicente Cantero</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2016/11/30/spores-release.html">Releasing spores 0.4.3</a></h2> -->
+					<p>Today we at the Scala Center are happy to announce a new release of spores, now
+designed to work with Java Serialization. In the August Advisory Board meeting,
+IBM proposed that the Scala Center work on <a href="https://github.com/scalacenter/advisoryboard/blob/master/proposals/006-compile-time-serializibility-check.md">improving the status quo of
+serialization in
+Scala</a>.
+The basic idea of the proposal was to pick up work on spores to prevent users
+from dealing with serialization runtime errors.</p>
+
+<h2 id="spores">Spores</h2>
+
+<p><a href="https://github.com/scalacenter/spores">Spores</a>, a project started in 2014
+by Heather Miller and Philipp Haller, took a first step towards solving
+this problem.</p>
+
+<p>Spores provide a way to control what a closures captures, and thus
+hopes to make it easier to operate with them in concurrent and distributed
+enviornments. The key idea is to capture more type information than a standard
+closure, and to use this type information to have more fine-grained control over
+the closures’s environment.</p>
+
+<p>One creates a spore like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.spores._</span>
+<span class="k">val</span> <span class="nv">greeting</span> <span class="k">=</span> <span class="err">“</span><span class="nc">Hello</span><span class="err">”</span>
+<span class="k">val</span> <span class="nv">exampleSpore</span> <span class="k">=</span> <span class="n">spore</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">capturedGreeting</span> <span class="k">=</span> <span class="nf">greeting</span>
+  <span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=&gt;</span>
+    <span class="nf">println</span><span class="o">(</span><span class="n">s</span><span class="s">"$capturedGreeting, $name!"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that anything which the function in the spore refers to is explicitly
+declared after <code class="language-plaintext highlighter-rouge">spore</code>. Variables that are not explicitly listed here result in
+a compilation error. This makes it clear to developers what a function captures
+in its environment, and allows the spores framework to check for other
+properties for all of the values declared in the environment, such as that each
+value is able to be serialized.</p>
+
+<p>Though, wait a second. Java Serialization does all of its checks at runtime. If
+spores use type information to figure out whether or not something can be
+serialized at compile time, how can this work with Java Serialization?</p>
+
+<p>To achieve this, previously, spores required Scala Pickling to transitively
+check the entire enviornment was able to be serialized, statically, at
+compile-time. However, we now wish to perform this check instead for Java
+Serialization, as Java Serialization is most often used by developers.</p>
+
+<h2 id="the-transitive-checker">The transitive checker</h2>
+
+<p>In order to ensure that captured types only extend <code class="language-plaintext highlighter-rouge">Serializable</code>, and whose
+members are also <code class="language-plaintext highlighter-rouge">Serializable</code>, spores version 0.4.1 comes with a compiler
+plugin that complements the spores macro library. Its goal is to transitively
+check that every captured variable, and all of its members, are extend
+<code class="language-plaintext highlighter-rouge">Serializable</code> and are thus serializable at compile time.</p>
+
+<p>Let’s see it with an example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">NotSerializable</span><span class="o">(</span><span class="k">val</span> <span class="nv">o</span><span class="k">:</span> <span class="kt">Object</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Serializable</span>
+</code></pre></div></div>
+
+<p>Capturing an instance of <code class="language-plaintext highlighter-rouge">NotSerializable</code> inside a spore that is going to be
+serialized crashes our program with a runtime exception. Although the class
+<code class="language-plaintext highlighter-rouge">NotSerializable</code> extends indeed <code class="language-plaintext highlighter-rouge">java.io.Serializable</code>, the member <code class="language-plaintext highlighter-rouge">o</code> of type
+<code class="language-plaintext highlighter-rouge">Object</code> does not and the JVM does not know how to serialize it.</p>
+
+<p>The transitive checker makes sure that examples like the above are detected at
+compile-time rather than runtime.</p>
+
+<h2 id="getting-started">Getting started</h2>
+
+<p>To add spores to your project, add the following keys to your SBT build file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="s">"ch.epfl.scala"</span> <span class="o">%%</span> <span class="s">"spores"</span> <span class="o">%</span> <span class="s">"0.4.3"</span>
+<span class="nf">addCompilerPlugin</span><span class="o">(</span><span class="s">"ch.epfl.scala"</span> <span class="o">%%</span> <span class="s">"spores-serialization"</span> <span class="o">%</span> <span class="s">"0.4.3"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>For further information on how to use it and a specification of spores, check
+the <a href="https://scalacenter.github.io/spores/spores.html">docs</a>.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>This stable release is the first step towards the spores and Spark integration.
+In the upcoming weeks, we will work with IBM to improve the developer experience
+of using spores in Spark and solve reported issues.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-11-30-spores-release.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

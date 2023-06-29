@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Introducing Scalafix: a code migration tool for Scala | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Introducing Scalafix: a code migration tool for Scala"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2016/10/24/scalafix.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Introducing Scalafix: a code migration tool for Scala</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 24 October 2016</p>
+						<p>Ólafur Páll Geirsson</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2016/10/24/scalafix.html">Introducing Scalafix: a code migration tool for Scala</a></h2> -->
+					<p>I am excited to announce the first release of
+<a href="https://scalacenter.github.io/scalafix/">scalafix</a>, a new tool to
+prepare Scala code for future Scala versions, including Scala 2.13
+and beyond as well as <a href="https://dotty.epfl.ch/">Dotty</a>, a next
+generation Scala compiler.</p>
+
+<p>This effort follows the Scala Center Advisory
+Board proposal:
+<a href="https://scala.epfl.ch/minutes/2016/06/06/may-9-2016.html#proposal-scp-002-clarification-of-scala-to-dotty-migration-path">“Clarification of Scala to Dotty migration path”</a>.</p>
+
+<h2 id="what-can-scalafix-do">What can scalafix do?</h2>
+
+<p>Scalafix takes care of easy, repetitive and tedious code transformations
+so you can focus on the changes that truly deserve your attention. In a
+nutshell, scalafix reads a source file, transforms usage of unsupported
+features into newer alternatives, and writes the final result back to
+the original source file. Scalafix aims to automate the migration of as
+many unsupported features as possible. There will be cases where
+scalafix is unable to perform automatic migration. In such situations,
+scalafix will point to the offending source line and provide
+instructions on how to refactor the code. The objective is that your
+existing Scala code base gets up and running faster with new Scala versions.</p>
+
+<h2 id="scalafix-and-scala-2">Scalafix and Scala 2</h2>
+
+<p>Scala 2.13 is still being planned, so we don’t know yet exactly what
+language changes it will include.  But with Scalafix available to help
+migrate existing code, changes could become possible that would
+previously have been considered too disruptive because they would
+require too much code to be updated by hand.  Possible examples include:</p>
+
+<ul>
+  <li>Rewriting code to avoid the use of the now-disfavored
+<code class="language-plaintext highlighter-rouge">language.postfixOps</code> syntax</li>
+  <li>Deprecation of <code class="language-plaintext highlighter-rouge">any2StringAdd</code>, in favor of string interpolation</li>
+  <li>Deprecation of procedure syntax, as in Dotty</li>
+  <li>Changes to the Scala collections API</li>
+</ul>
+
+<h2 id="scalafix-and-dotty">Scalafix and Dotty</h2>
+
+<p>There is a lot to be excited over in Dotty,
+<a href="https://www.slideshare.net/Odersky/scala-days-nyc-2016">faster compilation times</a>,
+<a href="https://d-d.me/talks/scaladays2015/#/">faster+smaller binaries</a> and
+<a href="https://www.scala-lang.org/blog/2016/10/14/dotty-errors.html">awesome error messages</a>
+to name a few things. However, some Scala 2.x applications can’t
+immediately enjoy these benefits due to several breaking changes in
+Dotty. Scalafix is part of our strategy to smoothen the migration
+process for those applications.</p>
+
+<h2 id="what-can-scalafix-do-1">What can scalafix do?</h2>
+
+<p>Scalafix comes with a command line interface and an SBT plugin. Running
+scalafix is as simple as:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># CLI
+scalafix Code.scala
+# SBT, after adding plugin to project/plugins.sbt
+sbt scalafix
+</code></pre></div></div>
+
+<p>More detailed instructions on how to setup scalafix are on the
+<a href="https://scalacenter.github.io/scalafix/">project website</a>.</p>
+
+<p>This initial release implements two rewrites: <code class="language-plaintext highlighter-rouge">ProcedureSyntax</code> and
+<code class="language-plaintext highlighter-rouge">VolatileLazyVal</code>. More rewrite rules are planned for future releases.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ProcedureSyntax</code> rewrite works like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// before</span>
+<span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="o">{</span> <span class="c1">// note lack of '='</span>
+  <span class="nf">println</span><span class="o">(</span><span class="s">"Hello scalafix!"</span><span class="o">)</span>
+<span class="o">}</span>
+<span class="c1">// after</span>
+<span class="k">def</span> <span class="nf">main</span><span class="o">(</span><span class="n">args</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">Unit</span> <span class="o">=</span> <span class="o">{</span> <span class="c1">// note ': Unit ='</span>
+  <span class="nf">println</span><span class="o">(</span><span class="s">"Hello scalafix!"</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Deprecating or dropping procedure syntax is part of a general effort to
+simplify the Scala language.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">VolatileLazyVal</code> rewrite adds Dotty’s <code class="language-plaintext highlighter-rouge">@volatile</code> annotation to lazy vals,
+like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lazy</span> <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// before</span>
+<span class="nd">@volatile</span> <span class="k">lazy</span> <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="o">...</span> <span class="c1">// after</span>
+</code></pre></div></div>
+
+<p>With <code class="language-plaintext highlighter-rouge">@volatile</code>, Dotty uses a deadlock free scheme that is
+comparable-if-not-faster than the scheme used in scalac.</p>
+
+<h2 id="how-does-scalafix-work">How does scalafix work?</h2>
+
+<p>All the heavy-lifting behind scalafix happens in
+<a href="https://scalameta.org/">scala.meta</a>, a new metaprogramming toolkit
+aspiring to succeed scala.reflect. Scala.meta makes it easy to do
+non-trivial code transformations while preserving syntactic details in
+the original source file. This key attribute of scala.meta makes it
+suitable for both developer tools like scalafix as well as compile-time
+metaprograms like macros.</p>
+
+<p>The grand vision of scala.meta is to provide a single interface to
+accomplish most common metaprogramming tasks in
+Scala.
+<img src="/resources/img/scalameta-sketch.jpg" alt="scala.meta sketch" />
+ The idea is to untie metaprograms from compiler implementations, providing a
+platform-independent API that works both in the Scala compiler, Dotty
+and tools like IntelliJ IDEA. Metaprogram authors benefit from a
+user-friendly interface built on immutable ADTs and type classes.
+Compiler authors benefit from the fact that they don’t need to expose
+compiler internals in order to support popular features like macros.</p>
+
+<p>In scalafix, we use the scala.meta API to parse Scala source files,
+traverse abstract syntax trees, inspect tokens (including comments!) and
+then perform the minimum required transformations to the source file.
+Thanks to scala.meta dialects, which abstract away syntactic differences
+between variants of Scala, we can use the same programs to manipulate
+regular Scala source files, SBT files as well as code that uses new
+Dotty syntax such as union types and trait parameters. All this powerful
+functionality is implemented behind a minimalistic interface.
+The NonVolatileLazyVal
+<a href="https://github.com/scalacenter/scalafix/blob/5f927db1d820995323665bd37bcc1947e9e6dbfe/core/src/main/scala/scalafix/rewrite/VolatileLazyVal.scala">implementation</a>
+is 15 lines of code. It could comfortably fit in three tweets.</p>
+
+<p>We would not be able to achieve this level of expressiveness with
+scala.reflect, the current standard metaprogramming framework for Scala.
+Why? To name a few reasons, scala.reflect does not preserve syntactic
+details such as comments and scala.reflect has no notions of dialects,
+so it is bound to only support Scala 2.x.</p>
+
+<h2 id="how-does-scalafix-evolve">How does scalafix evolve?</h2>
+
+<p>As we have seen above, the functionality of scalafix heavily relies on
+the infrastructure provided by scala.meta. However, in order to write
+more sophisticated scalafix rewrite rules, there are two main features
+missing in scala.meta, namely a <em>scalac converter</em> and <em>semantic API</em>.
+We are closely collaborating with Eugene Burmako, the lead developer of
+scala.meta, in the development efforts of these two features.</p>
+
+<h3 id="scalac-converter">Scalac converter</h3>
+
+<p>The scalac converter is a key subsystem of scala.meta.
+For every Scala feature, the converter recognizes its representation in the Scala
+compiler and translates it into the corresponding data structures of the
+scala.meta API.</p>
+
+<p>Over the last months, we’ve made great improvements to the converter,
+which is under development in the <a href="https://github.com/scalamacros/paradise">scalamacros/paradise</a> repository.
+We have established a comprehensive test suite that consists of a sample of
+over 26.000 Scala source files collected from popular open-source
+projects. Thanks to the joint effort of the team of
+<a href="https://github.com/scalamacros/paradise/graphs/contributors">contributors</a>,
+the converter now supports about 19.000 source files form the test
+corpus. We are continuously working to increase that number, aiming to
+bring language coverage to 100%.</p>
+
+<h3 id="semantic-api">Semantic API</h3>
+
+<p>The semantic API will enable scala.meta programs to inspect compiler information
+such as type inference, name resolution and other functionality that
+requires a compilation step. This opens opportunities for new scalafix rewrite
+rules that cannot be done on a purely syntactic level,
+like <code class="language-plaintext highlighter-rouge">NonVolatileLazyVal</code> and <code class="language-plaintext highlighter-rouge">ProcedureSyntax</code>.</p>
+
+<p>We already have a
+<a href="https://github.com/scalacenter/scalafix/pull/14">working prototype</a> 
+of the first scalafix rewrite that uses the semantic API: <code class="language-plaintext highlighter-rouge">ExplicitImplicit</code>.
+<code class="language-plaintext highlighter-rouge">ExplicitImplicit</code> inserts type annotations for implicit definitions, like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// before</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="o">(</span><span class="k">_:</span> <span class="kt">String</span><span class="o">).</span><span class="py">length</span>
+<span class="c1">// after</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=&gt;</span> <span class="nc">Int</span> <span class="k">=</span> <span class="o">(</span><span class="k">_:</span> <span class="kt">String</span><span class="o">).</span><span class="py">length</span>
+</code></pre></div></div>
+<p><code class="language-plaintext highlighter-rouge">ExplicitImplicit</code> requires the semantic API in order to get the inferred type
+annotations.</p>
+
+<h2 id="towards-new-style-macros">Towards new-style macros</h2>
+
+<p>One could say that by contributing to scala.meta, we get two features
+for the price of one. First, an improved converter and semantic API
+enables us to implement more sophisticated scalafix rewrite rules.
+Secondly, we accelerate the development of a new macro system that will
+work both with scalac and Dotty.</p>
+
+<p>As announced at Scala Days 2016, the current macros based on
+scala.reflect will be going away. Such macros have a number of known
+issues, including over complicated API and lacking IDE support. More
+importantly, the deep coupling between old-style macros and scalac
+means macros written in the old system effectively cannot be
+ported to Dotty. The plan is to discontinue support for scala.reflect
+macros in favor of <a href="https://github.com/scala/scala.github.com/pull/567">a new macro system called
+inline/meta</a>.</p>
+
+<p>A technology preview of the new-style macros came out this summer. This
+early release is still somewhat rough around the edges. Nevertheless,
+<a href="https://olafurpg.github.io/scalafmt/">scalafmt</a> is already using
+these new macro annotations in production for more than a month now. If you
+are interested in learning more, the best place to get started is 
+<a href="https://scalameta.org/tutorial/">the Whirlwind Tour of scala.meta</a>.</p>
+
+<p>Much like scalafix, new-style macros crucially rely on the
+infrastructure provided by scala.meta. Concretely, the converter and the
+semantic APIs constitute a significant chunk of the implementation
+effort behind the new macro system.</p>
+
+<p>Interestingly, our contributions to scala.meta were originally motivated
+by the needs of scalafix. However, they are also immediately helping the
+development of this new universal macro system for Scala. We are excited
+that our open-source collaboration with the scala.meta team brings
+multiple benefits for the good of everyone!</p>
+
+<h2 id="get-involved">Get involved</h2>
+
+<p>Are you interested in metaprogramming, developer tools and running
+experiments on millions of lines of Scala code? Come chat with us on
+<a href="https://gitter.im/scalacenter/scalafix">Gitter</a>, and we’ll discuss how you can make a difference in shaping the
+developer tools of the future!</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-10-24-scalafix.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

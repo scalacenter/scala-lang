@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 2.11.0-M4 is now available! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 2.11.0-M4 is now available!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/announcement/2013/07/11/release-notes-v2.11.0-M4.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 2.11.0-M4 is now available!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Thursday 11 July 2013</p>
+						<p></p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">ANNOUNCEMENT</div>
+					<!-- <h2><a href="/announcement/2013/07/11/release-notes-v2.11.0-M4.html">Scala 2.11.0-M4 is now available!</a></h2> -->
+					<p>The <a href="https://github.com/scala/scala/releases/v2.11.0-M4">fourth development milestone</a> of Scala 2.11 is now available for download!</p>
+
+<p>It brings the following <a href="https://github.com/scala/scala/issues?direction=desc&amp;labels=reviewed&amp;milestone=18&amp;page=1&amp;sort=comments&amp;state=closed">goodness</a>:</p>
+
+<ul>
+  <li>initial version of a new experimental back-end based on ASM by <a href="https://github.com/magarciaEPFL">@magarciaEPFL</a> (<a href="https://github.com/scala/scala/pull/2620">#2620</a>)</li>
+  <li><a href="https://docs.scala-lang.org/overviews/macros/quasiquotes.html">quasiquotes</a> by <a href="https://github.com/densh">@densh</a> (<a href="https://github.com/scala/scala/pull/2714">#2714</a>)</li>
+  <li>a more modular standard library: scala.xml and scala.util.parsing now come in separate jars (<a href="https://github.com/scala/scala/pull/2704">#2704</a>)
+    <ul>
+      <li>we now also use a bog-standard <a href="https://github.com/jline/jline2/tree/jline-2.11">jline 2.11</a></li>
+    </ul>
+  </li>
+  <li><a href="https://github.com/soc">@soc</a> implemented deprecation of the confusing octal literals (<a href="https://github.com/scala/scala/pull/2343">#2343</a>)</li>
+  <li><a href="https://github.com/JamesIry">@JamesIry</a> and <a href="https://github.com/gkossakowski">@gkossakowski</a> reduced scalac’s memory retention (<a href="https://github.com/scala/scala/pull/2605">#2605</a>)</li>
+  <li>a Semmle-driven cleanup of the compiler’s code base by <a href="https://github.com/lexspoon">@lexspoon</a> (<a href="https://github.com/scala/scala/pull/2693">#2693</a>)</li>
+  <li><a href="https://github.com/paulp">@paulp</a> thwarted dangerous implicits in <a href="https://github.com/scala/scala/pull/2625">#2625</a> (SI-6899)</li>
+  <li>other <a href="https://issues.scala-lang.org/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=project+%3D+SI+AND+resolution+%3D+fixed+AND+fixVersion+%3D+%22Scala+2.11.0-M4%22+ORDER+BY+key+ASC%2C+priority+DESC">bug fixes</a></li>
+  <li>a growing number of contributions – thank you!</li>
+</ul>
+
+<p>We’re working on an <a href="https://web.archive.org/web/20170623002210/http://docs.scala-lang.org/scala/2.11/">overview of the Scala 2.11 release</a> – <a href="https://github.com/scala/scala/blob/gh-pages/2.11/index.markdown">PRs</a> welcome!</p>
+
+<h3 id="coming-up">Coming up</h3>
+<p>For the <a href="https://github.com/scala/scala/issues?milestone=20&amp;state=open">next milestone</a>, slated for mid August, we’re working on:</p>
+
+<ul>
+  <li>optimizations for the experimental back-end (<a href="https://github.com/scala/scala/pull/2711">#2711</a> and others)</li>
+  <li>a new translation for closures that lifts a closure body to a method</li>
+  <li><a href="https://github.com/adriaanm/scala/tree/sammy">support for SAM target typing</a></li>
+  <li>more modules</li>
+</ul>
+
+<h3 id="regressions">Regressions</h3>
+<p>We’d <a href="https://issues.scala-lang.org/">love to hear</a> about any regressions since 2.10.2 or 2.11.0-M3. Before doing so, please search for existing bugs and/or consult with the <a href="https://groups.google.com/forum/#!forum/scala-user">scala-user</a> mailing list to be sure it is a genuine problem.</p>
+
+<p>When reporting a bug, please set the ‘Affects Version’ field to 2.11.0-M4 and add the <code class="language-plaintext highlighter-rouge">regression</code> label where appropriate.</p>
+
+<h3 id="scala-ide-lithium-40-for-eclipse">Scala IDE Lithium (4.0) for Eclipse</h3>
+<p>Please point your Eclipse 4.2/4.3 at http://scala-ide.org/ to update to the latest version that includes this milestone!
+For more info, please see <a href="http://scala-ide.org/docs/user/gettingstarted.html">the getting started guide</a>.</p>
+
+<h3 id="binary-compatibility">Binary compatibility</h3>
+<p>Note that this release is not binary compatible with the 2.10.x series, so you will need to obtain a fresh build of your dependencies against this version.</p>
+
+<p><a href="https://github.com/cunei">@cunei</a> is working on a tool to solve this problem. The current version already builds akka, genjavadoc, sbinary, sbt, sbt-full-library, sbt-republish, scala, scala-arm, scala-stm, scalabuff, scalacheck, scalatest, scalaz, shapeless, specs2, sperformance, zeromq-scala-binding, zinc.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2013-07-11-release-notes-v2.11.0-M4.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

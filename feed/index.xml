@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://www.scala-lang.org/</id>
+  <title type="text" xml:lang="en">The Scala Programming Language :: News</title>
+  <link type="application/atom+xml" href="https://www.scala-lang.org/feed/index.xml" rel="self"/>
+  <link type="text/html" href="https://www.scala-lang.org/news/" rel="alternate"/>
+
+  <updated>2023-04-21T12:41:28+02:00</updated>
+  <author>
+    <name>École Polytechnique Fédérale de Lausanne</name>
+  </author>
+  <rights>Copyright (c) 2002-2023 École Polytechnique Fédérale de Lausanne (EPFL), Lausanne, Switzerland</rights>
+
+  
+  <entry>
+    <title>Kelley Robinson receives community award</title>
+    <link href="https://www.scala-lang.org/news/2019/09/13/bagwell-award-2019.html"/>
+    <updated>2019-09-13T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2019/09/13/bagwell-award-2019</id>
+    <content type="html">&lt;p&gt;We are pleased to announce that the Phil Bagwell Memorial Scala Community Award for 2019 has been awarded to &lt;a href=&quot;https://twitter.com/kelleyrobinson&quot;&gt;Kelley Robinson&lt;/a&gt;. The award was presented in Lausanne at the outset of &lt;a href=&quot;https://scaladays.org/&quot;&gt;Scala Days&lt;/a&gt; 2019.&lt;/p&gt;
+
+&lt;p&gt;You can watch the ceremony &lt;a href=&quot;https://www.youtube.com/watch?v=HX3lxMhFDbs&quot;&gt;here&lt;/a&gt;.  (The ceremony also included the 2018 award to Kenji Yoshida.)&lt;/p&gt;
+
+&lt;p&gt;And here is a &lt;a href=&quot;https://www.youtube.com/watch?v=koyufYkatVc&quot;&gt;tribute video&lt;/a&gt; with remarks from Noel Welsh, Yifan Xing, Eugene Yokota, Holden Karau, Rob Norris, and others.&lt;/p&gt;
+
+&lt;h2 id=&quot;about-the-winner&quot;&gt;About the winner&lt;/h2&gt;
+
+&lt;p&gt;Kelley is known to Scala users as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Founder of &lt;a href=&quot;https://scalabridge.org&quot;&gt;ScalaBridge&lt;/a&gt;, a series of
+introductory Scala workshops for underrepresented groups, aimed at making
+the Scala community more diverse and inclusive.  Since its launch in
+2016, ScalaBridge has spread around the globe.&lt;/li&gt;
+  &lt;li&gt;Co-creator of the &lt;a href=&quot;https://www.scala-lang.org/conduct/&quot;&gt;Scala Code of Conduct&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Conference speaker, known for talks such as “Why the Free Monad Isn’t
+Free”, “Demystifying Scala”, and “Building a Better Scala Community”.&lt;/li&gt;
+  &lt;li&gt;Developer evangelist at &lt;a href=&quot;https://www.twilio.com&quot;&gt;Twilio&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;about-the-award&quot;&gt;About the award&lt;/h2&gt;
+
+&lt;p&gt;The Bagwell Award is named in honor of Phil Bagwell, who passed away in 2012. In a &lt;a href=&quot;https://www.lightbend.com/blog/rip-phil-bagwell&quot;&gt;2012 blog post&lt;/a&gt;, Martin Odersky remembers Phil and his special place in the Scala community.&lt;/p&gt;
+
+&lt;p&gt;The Award Committee consists of previous Award winners (see below). They took &lt;a href=&quot;https://www.scala-lang.org/blog/2019/03/01/phil-bagwell-nominations.html&quot;&gt;community nominations&lt;/a&gt; into consideration.&lt;/p&gt;
+
+&lt;p&gt;Past winners of the award:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2018: &lt;a href=&quot;https://www.scala-lang.org/news/2019/09/13/bagwell-award-2018.html&quot;&gt;Kenji Yoshida&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2017: &lt;a href=&quot;https://www.scala-lang.org/news/2017/09/25/bagwell-award-2017.html&quot;&gt;Josh Suereth&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2016: &lt;a href=&quot;https://www.scala-lang.org/news/2016/10/26/bagwell-award-2016.html&quot;&gt;Erik Osheim&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2015: &lt;a href=&quot;https://scala-lang.org/news/2015/06/25/bagwell-award-2015.html&quot;&gt;Bill Venners&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2014: &lt;a href=&quot;https://kojoenv.wordpress.com/2014/09/27/phil-bagwell-award/&quot;&gt;Lalit Pant&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2013: &lt;a href=&quot;https://twitter.com/dickwall&quot;&gt;Dick Wall&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Kenji Yoshida receives community award</title>
+    <link href="https://www.scala-lang.org/news/2019/09/13/bagwell-award-2018.html"/>
+    <updated>2019-09-13T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2019/09/13/bagwell-award-2018</id>
+    <content type="html">&lt;p&gt;We are pleased to announce that the Phil Bagwell Memorial Scala Community Award for 2018 has been awarded to &lt;a href=&quot;https://twitter.com/xuwei_k&quot;&gt;Kenji Yoshida&lt;/a&gt;. The award was presented in Lausanne at the outset of &lt;a href=&quot;https://scaladays.org/&quot;&gt;Scala Days&lt;/a&gt; 2019.&lt;/p&gt;
+
+&lt;!-- the Scala Days link should be replaced with a 2019-specific link, once one is available --&gt;
+
+&lt;p&gt;On stage, Eugene Yokota accepted the award on Yoshida-san’s behalf.  You can watch the ceremony &lt;a href=&quot;https://www.youtube.com/watch?v=HX3lxMhFDbs&quot;&gt;here&lt;/a&gt;.  (The ceremony also included the 2019 award to Kelley Robinson.)&lt;/p&gt;
+
+&lt;p&gt;And here is a &lt;a href=&quot;https://www.youtube.com/watch?v=mq-43ds0-pY&quot;&gt;tribute video&lt;/a&gt; with remarks from Josh Suereth, Eugene Yokota, Rob Norris, and Miles Sabin.&lt;/p&gt;
+
+&lt;h2 id=&quot;about-the-winner&quot;&gt;About the winner&lt;/h2&gt;
+
+&lt;p&gt;Yoshida-san is known to Scala users as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Long-term maintainer of &lt;a href=&quot;https://github.com/scalaz/scalaz&quot;&gt;scalaz&lt;/a&gt;, the first library to pioneer full support for pure-functional programming in Scala.&lt;/li&gt;
+  &lt;li&gt;Prominent contributor to Scala 2.13.  His many pull requests to the Scala repo were done while he was on parental leave in 2018.&lt;/li&gt;
+  &lt;li&gt;A ubiquitous presence in pull request queues across the Scala open-source world, in literally hundreds of projects.  Taken individually, his contributions are often small, but in aggregate, they are essential to our ecosystem’s health.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some of Yoshida-san’s Japanese-language tweets are available in English translation at &lt;a href=&quot;https://twitter.com/not_xuwei_k&quot;&gt;@not_xuwei_k&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;about-the-award&quot;&gt;About the award&lt;/h2&gt;
+
+&lt;p&gt;The Bagwell Award is named in honor of Phil Bagwell, who passed away in 2012. In a &lt;a href=&quot;https://www.lightbend.com/blog/rip-phil-bagwell&quot;&gt;2012 blog post&lt;/a&gt;, Martin Odersky remembers Phil and his special place in the Scala community.&lt;/p&gt;
+
+&lt;p&gt;The Award Committee consists of previous Award winners (see below). They took &lt;a href=&quot;https://www.scala-lang.org/blog/2019/03/01/phil-bagwell-nominations.html&quot;&gt;community nominations&lt;/a&gt; into consideration.&lt;/p&gt;
+
+&lt;p&gt;Past winners of the award:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2017: &lt;a href=&quot;https://www.scala-lang.org/news/2017/09/25/bagwell-award-2017.html&quot;&gt;Josh Suereth&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2016: &lt;a href=&quot;https://www.scala-lang.org/news/2016/10/26/bagwell-award-2016.html&quot;&gt;Erik Osheim&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2015: &lt;a href=&quot;https://scala-lang.org/news/2015/06/25/bagwell-award-2015.html&quot;&gt;Bill Venners&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2014: &lt;a href=&quot;https://kojoenv.wordpress.com/2014/09/27/phil-bagwell-award/&quot;&gt;Lalit Pant&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2013: &lt;a href=&quot;https://twitter.com/dickwall&quot;&gt;Dick Wall&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>New Course: “Programming Reactive Systems”</title>
+    <link href="https://www.scala-lang.org/news/2018/12/20/programming-reactive-systems-course.html"/>
+    <updated>2018-12-20T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/2018/12/20/programming-reactive-systems-course</id>
+    <content type="html">&lt;p&gt;We are excited to announce the release of a new MOOC:
+&lt;a href=&quot;https://www.edx.org/course/programming-reactive-systems&quot;&gt;Programming Reactive Systems&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;This seven weeks long course teaches you how to use “reactive programming” techniques
+for implementing scalable, resilient and responsive systems. Skills you will learn
+include how to:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;use, transform and sequence asynchronous computations using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Future&lt;/code&gt; values,&lt;/li&gt;
+  &lt;li&gt;write concurrent systems based on &lt;a href=&quot;https://akka.io&quot;&gt;Akka&lt;/a&gt; actors,&lt;/li&gt;
+  &lt;li&gt;design systems resilient to failures,&lt;/li&gt;
+  &lt;li&gt;implement systems that scale out according to varying workloads,&lt;/li&gt;
+  &lt;li&gt;define well-typed communication protocols using &lt;strong&gt;Akka Typed&lt;/strong&gt;,&lt;/li&gt;
+  &lt;li&gt;process large streams of data with limited resources using &lt;strong&gt;Akka Streams&lt;/strong&gt;,&lt;/li&gt;
+  &lt;li&gt;understand how back-pressure controls flows of data.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The course is taught by two experts of the field:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Roland Kuhn&lt;/strong&gt;, former Akka team lead and co-author of the
+&lt;a href=&quot;https://www.reactivemanifesto.org/&quot;&gt;Reactive Manifesto&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Konrad Malawski&lt;/strong&gt;, long-time Akka team and
+&lt;a href=&quot;https://www.reactive-streams.org/&quot;&gt;Reactive Streams&lt;/a&gt; expert group member.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In case you have followed the former “Principles of Functional Reactive
+Programming in Scala” course a couple of years ago, this course contains updated
+material as well as three weeks of new material on Akka Typed and Akka Streams.&lt;/p&gt;
+
+&lt;p&gt;The first session will start on February 18th, 2019. You can
+&lt;a href=&quot;https://courses.edx.org/register?course_id=course-v1%3AEPFLx%2Bscala-reactiveX%2B1T2019&amp;amp;enrollment_action=enroll&amp;amp;email_opt_in=false&quot;&gt;sign up&lt;/a&gt;
+and audit the course for free or pursue a certificate.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Our MOOCs Now Support The EdX Platform</title>
+    <link href="https://www.scala-lang.org/news/2018/02/27/moocs-edx-support.html"/>
+    <updated>2018-02-27T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/2018/02/27/moocs-edx-support</id>
+    <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: After a couple of years experimenting with Open edX, we decided
+to shut down these course instances. You can find an up-to-date list of
+online courses &lt;a href=&quot;https://docs.scala-lang.org/online-courses.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We are thrilled to announce that our 4 main MOOCs are now also available
+on an &lt;a href=&quot;https://courseware.epfl.ch&quot;&gt;Open edX instance managed at EPFL&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://courseware.epfl.ch/&quot;&gt;&lt;img src=&quot;/resources/img/courseware-scala-moocs.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The content of the courses remains the same as the ones on
+&lt;a href=&quot;https://www.coursera.org/specializations/scala&quot;&gt;Coursera&lt;/a&gt;. The differences
+are that our platform is free to use and doesn’t deliver certificates (official credentials
+that confirm that you successfully completed a course).&lt;/p&gt;
+
+&lt;p&gt;As a reminder, the courses are the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Functional Programming Principles in Scala:
+An introduction to functional programming (pure functions, recursion, pattern matching, higher-order
+functions, immutable data types, type parameters, equational reasoning),&lt;/li&gt;
+  &lt;li&gt;Functional Program Design in Scala:
+A follow-up of the first course, showing how to apply the functional programming style
+to larger programs. Covers topics such as monads, lazy evaluation, property-based testing,
+futures and dataflow programming.&lt;/li&gt;
+  &lt;li&gt;Parallel Programming:
+Introduces the fundamentals of parallel programming, from task parallelism to data parallelism,&lt;/li&gt;
+  &lt;li&gt;Big Data Analysis with Scala and Spark:
+Extends the data parallel paradigm to the distributed case (as opposed to shared-memory parallel
+or sequential collections), using Spark.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://open.edx.org&quot;&gt;Open edX&lt;/a&gt; is an open source learning management system that
+was originally developed by the &lt;a href=&quot;https://edx.org&quot;&gt;edX&lt;/a&gt; nonprofit.&lt;/p&gt;
+
+&lt;p&gt;Our goal is to deliver the courses content in the most accessible way. We
+hope you will enjoy the learning experience provided by the Open edX platform.&lt;/p&gt;
+
+&lt;p&gt;Happy learning!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Josh Suereth receives community award</title>
+    <link href="https://www.scala-lang.org/news/2017/09/25/bagwell-award-2017.html"/>
+    <updated>2017-09-25T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2017/09/25/bagwell-award-2017</id>
+    <content type="html">&lt;p&gt;We are pleased to announce that the Phil Bagwell Memorial Scala Community Award for 2017 has been awarded to &lt;a href=&quot;https://twitter.com/jsuereth&quot;&gt;Josh Suereth&lt;/a&gt;.  The award was presented in the UK’s Lake District at &lt;a href=&quot;https://scala.world&quot;&gt;Scala World 2017&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Josh has been a prominent member of the Scala community ever since the early
+days of the language’s commercial adoption.  He is known to Scala users as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;author of &lt;em&gt;Scala in Depth&lt;/em&gt; and co-author of &lt;em&gt;sbt in Action&lt;/em&gt;,
+both published by Manning&lt;/li&gt;
+  &lt;li&gt;maintainer of the &lt;a href=&quot;https://www.scala-sbt.org&quot;&gt;sbt&lt;/a&gt; build tool
+for several years at Typesafe (the company now known as Lightbend)&lt;/li&gt;
+  &lt;li&gt;leader or contributor to numerous other open source Scala projects
+including scala-arm, pickling, and assorted sbt plugins&lt;/li&gt;
+  &lt;li&gt;cohost of the &lt;a href=&quot;https://scalawags.tv&quot;&gt;Scalawags podcast&lt;/a&gt;
+(and its predecessor, The Scala Types)&lt;/li&gt;
+  &lt;li&gt;a friendly and tireless conference-goer and presenter (and
+organizer of the Scala Lift Off unconference in Virginia in 2009)&lt;/li&gt;
+  &lt;li&gt;a positive force on nearly every online medium devoted to
+Scala – mailing lists, chat rooms, Twitter, you name it –
+answering any and all questions with tact and humor&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here’s a
+&lt;a href=&quot;https://www.youtube.com/watch?v=0sLixaObVwA&quot;&gt;three minute video&lt;/a&gt;
+of friends and colleagues paying tribute to Josh.  The video was shown
+when the award was presented.&lt;/p&gt;
+
+&lt;p&gt;Josh’s surname is pronounced “Suereth”.&lt;/p&gt;
+
+&lt;p&gt;The Bagwell Award is named in honor of Phil Bagwell, who passed away in 2012.  In a &lt;a href=&quot;https://www.lightbend.com/blog/rip-phil-bagwell&quot;&gt;2012 blog post&lt;/a&gt;, Martin Odersky remembers Phil and his special place in the Scala community.&lt;/p&gt;
+
+&lt;p&gt;Past winners of the award:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2016: &lt;a href=&quot;https://www.scala-lang.org/news/2016/10/26/bagwell-award-2016.html&quot;&gt;Erik Osheim&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2015: &lt;a href=&quot;https://scala-lang.org/news/2015/06/25/bagwell-award-2015.html&quot;&gt;Bill Venners&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2014: &lt;a href=&quot;https://kojoenv.wordpress.com/2014/09/27/phil-bagwell-award/&quot;&gt;Lalit Pant&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2013: &lt;a href=&quot;https://twitter.com/dickwall&quot;&gt;Dick Wall&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Scala 2.11.11, 2.12.2 and 2.13.0-M1 now available!</title>
+    <link href="https://www.scala-lang.org/news/releases-1Q17.html"/>
+    <updated>2017-04-18T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/releases-1Q17</id>
+    <content type="html">&lt;p&gt;We are happy to announce three new Scala releases: 2.11.11 concludes the 2.11 series, 2.12.2 brings bug fixes and small improvements, and 2.13.0-M1 sets the scene for modularization and improvements coming in the next major release next year. Many thanks to everyone who contributed!&lt;/p&gt;
+
+&lt;p&gt;As part of our ongoing efforts at Lightbend to simplify contributing to Scala, we are thrilled to announce our move to GitHub for &lt;a href=&quot;https://github.com/scala/bug&quot;&gt;bug reporting&lt;/a&gt;, as well as for &lt;a href=&quot;https://github.com/scala/scala/releases&quot;&gt;release notes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;For the highlights of these three releases, read on.&lt;/p&gt;
+
+&lt;!-- break --&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/scala/scala/releases/tag/v2.11.11&quot;&gt;Scala 2.11.11&lt;/a&gt; contains many smaller fixes and a few backports from 2.12. It also features improved error messages on missing dependencies; this improvement was developed by @jvican at the Scala Center under proposal SCP-009, which aims to speed up builds by &lt;a href=&quot;https://github.com/scalacenter/classpath-shrinker&quot;&gt;shrinking the build classpath&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;(Yes, we skipped 2.11.9 and 2.11.10. Special thanks to @xuwei-k and @sjrd for reporting and helping diagnose the regressions in those withdrawn releases.)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/scala/scala/releases/tag/v2.12.2&quot;&gt;Scala 2.12.2&lt;/a&gt; adds support for trailing commas, the first proposal (&lt;a href=&quot;https://docs.scala-lang.org/sips/trailing-commas.html&quot;&gt;SIP-27&lt;/a&gt;) to make it all the way through the revived Scala Improvement Process. Congratulations, @dwijnand!&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/scala/scala/releases/tag/v2.13.0-M1&quot;&gt;Scala 2.13.0-M1&lt;/a&gt; (milestone 1) prepares for the next phase of the standard library &lt;a href=&quot;https://github.com/scala/scala-dev/issues/323&quot;&gt;modularization&lt;/a&gt; and the &lt;a href=&quot;https://github.com/scala/collection-strawman&quot;&gt;collections rework&lt;/a&gt;. The parallel collections are now a separate &lt;a href=&quot;https://github.com/scala/scala-parallel-collections&quot;&gt;module&lt;/a&gt;, and many deprecated members have been removed. As a reminder, our &lt;a href=&quot;https://github.com/scala/scala-dev/issues/324&quot;&gt;full 2.13 roadmap&lt;/a&gt; is available for review on GitHub.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Scala 2.13 roadmap</title>
+    <link href="https://www.scala-lang.org/news/roadmap-2.13.html"/>
+    <updated>2017-03-06T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/roadmap-2.13</id>
+    <content type="html">&lt;p&gt;On behalf of the Scala team at Lightbend, I’d like to share our plans with you, and invite you to join us in shaping Scala’s roadmap for 2017. As this is a collective effort, and roadmaps evolve, we’ve decided to use our development issue tracker to organize our thoughts and open up the discussion for your feedback. Below is the overview of what we plan to work on. Please join the discussion on the &lt;a href=&quot;https://github.com/scala/scala-dev/issues/324&quot;&gt;roadmap theme issue&lt;/a&gt; or any of the issues linked below!&lt;/p&gt;
+
+&lt;p&gt;The next release of Scala will focus on the following themes:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/scala/scala-dev/labels/t%3Aperformance&quot;&gt;compiler performance&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/scala/scala-dev/labels/t%3Acollections&quot;&gt;simplifying the collections&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/scala/scala-dev/labels/t%3Amodularize&quot;&gt;modularizing the standard library&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/scala/scala-dev/labels/t%3Afriendliness&quot;&gt;user-friendliness&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We intend to shorten the development cycle a little compared to 2.12, with the first 2.13 release candidate slated for the end of Q1 2018. In 2017, we will release quarterly 2.13 &lt;a href=&quot;https://github.com/scala/scala/milestones&quot;&gt;milestones&lt;/a&gt; so you can get a good sense of the library changes. While Scala 2.11 will come to a halt with 2.11.9 in Q1 2017, we will maintain 2.12 with regular minor releases throughout 2017.&lt;/p&gt;
+
+&lt;!-- break --&gt;
+
+&lt;p&gt;In collaboration with the Scala Center, as outlined in &lt;a href=&quot;https://github.com/scalacenter/advisoryboard/blob/master/proposals/007-collections.md&quot;&gt;SCP-007: Collaborative redesign and implementation of Scala 2.13’s collections library&lt;/a&gt; and &lt;a href=&quot;https://scala-lang.org/blog/2017/02/28/collections-rework.html&quot;&gt;Stefan’s blog post&lt;/a&gt;, the collections library rework effort has kicked off at https://github.com/scala/collection-strawman. Our goal is to simplifying usage and improve performance, with a smooth migration path from the current collections. Please &lt;a href=&quot;https://github.com/scala/collection-strawman&quot;&gt;join&lt;/a&gt; and help shape one of the defining parts of Scala!&lt;/p&gt;
+
+&lt;p&gt;In tandem, the modularisation of the standard library (begun with Scala 2.11) will continue as part of the &lt;a href=&quot;https://www.scala-lang.org/blog/2016/11/28/spp.html&quot;&gt;Scala Platform process&lt;/a&gt;, to foster innovation in our eco-system while maintaining a stable core. The core consists of the collections and the other standard types, such as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Option&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TupleN&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Either&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Try&lt;/code&gt;.  Ultimately, we’d like provide even stronger binary compatibility guarantees for the core, with a vibrant complement of modules that evolve more quickly (offering only backwards compatibility).  &lt;a href=&quot;https://github.com/scala/scala-dev/issues/323&quot;&gt;Discuss this theme&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Scala 2.13 is a library release, which means the language itself won’t see big changes. However, we continue to invest heavily in the implementation, with a single goal: make the compiler faster. The first phase of this work involves benchmarking infrastructure, to guide our progress towards a faster compiler. After that, we will attack slowness on all fronts with all available tools. In addition to YourKit and other JVM profilers, which we have been using intensively over the years, we now have a JMH benchmarking harness for the compiler. We are also investigating lower-level performance (cpu caches, memory access patterns, JIT profiles, etc). We are eager to hear your ideas at the compiler performance theme issue. Please head over to &lt;a href=&quot;https://github.com/scala/compiler-benchmark&quot;&gt;the new compiler-benchmark repo&lt;/a&gt; for the benchmarks and the issue tracker, or &lt;a href=&quot;https://github.com/scala/scala-dev/issues/322&quot;&gt;discuss this theme here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Finally, there are &lt;a href=&quot;https://github.com/scala/scala-dev/issues?q=is%3Aopen+is%3Aissue+milestone%3A2.13+label%3Awishlist&quot;&gt;many more things&lt;/a&gt; we’d like to include in 2.13. Let us know if you’d like to work on one of these. We’re always happy to help! In addition to GitHub, you’ll find us on our forums and chat rooms.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Google Summer Of Code 2017</title>
+    <link href="https://www.scala-lang.org/news/2017/02/22/gsoc-2017.html"/>
+    <updated>2017-02-22T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/2017/02/22/gsoc-2017</id>
+    <content type="html">&lt;p&gt;This year the Scala team applied again for &lt;a href=&quot;https://summerofcode.withgoogle.com/&quot;&gt;Google Summer of Code&lt;/a&gt;.
+Scala contributors are welcome to propose project ideas on our
+&lt;a href=&quot;https://contributors.scala-lang.org/&quot;&gt;discussion forums&lt;/a&gt;! Students
+can apply for &lt;a href=&quot;/gsoc/2017/&quot;&gt;projects&lt;/a&gt; until 3rd of April!&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Erik Osheim receives community award</title>
+    <link href="https://www.scala-lang.org/news/2016/10/26/bagwell-award-2016.html"/>
+    <updated>2016-10-26T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2016/10/26/bagwell-award-2016</id>
+    <content type="html">&lt;p&gt;We are pleased to announce that the Phil Bagwell Memorial Scala Community Award for 2016 has been awarded to &lt;a href=&quot;https://twitter.com/d6&quot;&gt;Erik Osheim&lt;/a&gt;.  The award was presented in Lake District, UK at &lt;a href=&quot;https://scala.world&quot;&gt;Scala World 2016&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Erik is known to Scala users as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;creator of &lt;a href=&quot;https://github.com/non/spire&quot;&gt;Spire&lt;/a&gt;, a leading library for numerics in Scala&lt;/li&gt;
+  &lt;li&gt;creator of other tools and libraries such as &lt;a href=&quot;https://github.com/non/kind-projector&quot;&gt;kind-projector&lt;/a&gt; (a compiler plugin for type lambdas) and &lt;a href=&quot;https://github.com/non/jawn/&quot;&gt;jawn&lt;/a&gt; (a very fast JSON parser)&lt;/li&gt;
+  &lt;li&gt;leader of the &lt;a href=&quot;https://github.com/typelevel/cats&quot;&gt;Cats&lt;/a&gt; project, which provides abstractions for functional programming in Scala (“cats” being short for “category”, as in category theory)&lt;/li&gt;
+  &lt;li&gt;cofounder of &lt;a href=&quot;https://typelevel.org&quot;&gt;Typelevel&lt;/a&gt;, a Scala community organization dedicated to furthering pure, typeful functional programming in Scala&lt;/li&gt;
+  &lt;li&gt;a friendly and tireless conference-goer and presenter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Erik’s 2015 Scala World presentation, “Principles for approachable,
+modular, functional libraries”
+(&lt;a href=&quot;http://plastic-idolatry.com/erik/sw2015-inv.pdf&quot;&gt;slides&lt;/a&gt;,
+&lt;a href=&quot;https://www.youtube.com/watch?v=iKyIKozv8a8&quot;&gt;video&lt;/a&gt;) is a classic on
+the subject of open-source library design, not only from a technical
+perspective, but with attention to how software communities and
+ecosystems operate.&lt;/p&gt;
+
+&lt;p&gt;The Bagwell Award is named in honor of Phil Bagwell, who passed away in 2012.  In a &lt;a href=&quot;https://www.lightbend.com/blog/rip-phil-bagwell&quot;&gt;2012 blog post&lt;/a&gt;, Martin Odersky remembers Phil and his special place in the Scala community.&lt;/p&gt;
+
+&lt;p&gt;Past winners of the award:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2015: &lt;a href=&quot;https://scala-lang.org/news/2015/06/25/bagwell-award-2015.html&quot;&gt;Bill Venners&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2014: &lt;a href=&quot;https://kojoenv.wordpress.com/2014/09/27/phil-bagwell-award/&quot;&gt;Lalit Pant&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2013: &lt;a href=&quot;https://twitter.com/dickwall&quot;&gt;Dick Wall&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>Bill Venners receives community award</title>
+    <link href="https://www.scala-lang.org/news/2015/06/25/bagwell-award-2015.html"/>
+    <updated>2015-06-25T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2015/06/25/bagwell-award-2015</id>
+    <content type="html">&lt;p&gt;We are pleased to announce that the Phil Bagwell Memorial Scala Community Award for 2015 has been awarded to &lt;a href=&quot;https://twitter.com/bvenners&quot;&gt;Bill Venners&lt;/a&gt;.  The award was presented in Amsterdam at the outset of &lt;a href=&quot;http://event.scaladays.org/scaladays-amsterdam-2015&quot;&gt;Scala Days&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Bill is known to Scala users as:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;creator of &lt;a href=&quot;https://www.scalatest.org&quot;&gt;ScalaTest&lt;/a&gt;, a popular open-source test framework first &lt;a href=&quot;https://www.artima.com/weblogs/viewpost.jsp?thread=222678&quot;&gt;released in 2008&lt;/a&gt;, as well as other tools and libraries such as &lt;a href=&quot;https://www.scalactic.org&quot;&gt;Scalactic&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;co-author of the first Scala book, &lt;a href=&quot;https://www.artima.com/shop/programming_in_scala_3ed&quot;&gt;&lt;em&gt;Programming in Scala&lt;/em&gt;&lt;/a&gt; (Artima)&lt;/li&gt;
+  &lt;li&gt;founder of &lt;a href=&quot;https://www.artima.com/aboutartima.html&quot;&gt;Artima&lt;/a&gt;, which continues to publish &lt;a href=&quot;https://www.artima.com/shop/catalog&quot;&gt;Scala-themed books&lt;/a&gt;, and hosted Scala-themed blogs and forums which were important in spreading the news about Scala in its early years&lt;/li&gt;
+  &lt;li&gt;friendly and tireless conference-goer, presenter, and trainer&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Bagwell Award is named in honor of Phil Bagwell, who passed away in 2012.  In a &lt;a href=&quot;https://www.lightbend.com/blog/rip-phil-bagwell&quot;&gt;2012 blog post&lt;/a&gt;, Martin Odersky remembers Phil and his special place in the Scala community.&lt;/p&gt;
+
+&lt;p&gt;Past winners of the award:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2014: &lt;a href=&quot;https://kojoenv.wordpress.com/2014/09/27/phil-bagwell-award/&quot;&gt;Lalit Pant&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;2013: &lt;a href=&quot;https://twitter.com/dickwall&quot;&gt;Dick Wall&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>Google Summer of Code 2015</title>
+    <link href="https://www.scala-lang.org/news/2015/03/16/GSoC-projects.html"/>
+    <updated>2015-03-16T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/2015/03/16/GSoC-projects</id>
+    <content type="html">&lt;p&gt;&lt;strong&gt;This year the Scala team applied again for
+&lt;a href=&quot;https://www.google-melange.com/gsoc/homepage/google/gsoc2015&quot;&gt;Google Summer of Code&lt;/a&gt;,
+and we’re happy to announce that we have been approved to be mentoring organization!
+Students can &lt;a href=&quot;https://www.google-melange.com/gsoc/homepage/google/gsoc2015&quot;&gt;apply&lt;/a&gt; for 
+&lt;a href=&quot;https://scala-lang.org/gsoc/2015/&quot;&gt;projects&lt;/a&gt; until 27th of March!&lt;/strong&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Google Summer of Code 2014</title>
+    <link href="https://www.scala-lang.org/news/2014/02/24/scala-team-approved-to-be-gsoc-mentor-organization.html"/>
+    <updated>2014-02-24T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/2014/02/24/scala-team-approved-to-be-gsoc-mentor-organization</id>
+    <content type="html">&lt;p&gt;&lt;strong&gt;This year the Scala team applied again for
+&lt;a href=&quot;https://www.google-melange.com/gsoc/homepage/google/gsoc2014&quot;&gt;Google Summer of Code&lt;/a&gt;,
+and we’re happy to announce that we have been approved to be mentoring organization!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-google-summer-of-code&quot;&gt;What is Google Summer of Code&lt;/h3&gt;
+
+&lt;p&gt;Google invites students to come up with interesting, non-trivial problems for
+their favourite open-source projects and work on them over the summer.
+Participants get support from the community, plus a mentor who makes sure they
+don’t get lost and that students meet their goals. Aside from the satisfaction
+of solving challenging problems, students get paid for their work. This is an
+incredible opportunity to get involved in the Scala community and get helpful
+support along the way.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-get-involved&quot;&gt;How to get involved&lt;/h3&gt;
+
+&lt;p&gt;First, have a look at our &lt;a href=&quot;https://www.scala-lang.org/gsoc/2014/&quot;&gt;project ideas page&lt;/a&gt;. The ideas there are
+meant as suggestions to serve as a starting point. We expect students to
+explore the ideas in much more detail, preferably with their own suggestions
+and detailed plans on how they want to proceed. But don’t feel constrained by
+the provided list! We welcome any challenging project idea pertaining to
+Scala!&lt;/p&gt;
+
+&lt;p&gt;The best place to propose and discuss your proposals is our
+&lt;a href=&quot;https://groups.google.com/group/scala-language&quot;&gt;“scala-language”&lt;/a&gt; mailing list. This
+way you will get quickly responses from the whole Scala community. If you know
+of a potential mentor, it also might be a good idea to also include them in
+your discussion on the scala-language mailing list. If not, don’t be afraid to
+ask who you might be able to contact in your discussion on scala-language.&lt;/p&gt;
+
+&lt;h3 id=&quot;previous-summer-of-code&quot;&gt;Previous Summer of Code&lt;/h3&gt;
+
+&lt;p&gt;We encourage you to have a look at our &lt;a href=&quot;https://www.scala-lang.org/old/gsoc2010&quot;&gt;Summer of Code 2010&lt;/a&gt;,
+&lt;a href=&quot;https://www.scala-lang.org/old/gsoc2011&quot;&gt;2011&lt;/a&gt;, &lt;a href=&quot;https://www.scala-lang.org/old/gsoc2012&quot;&gt;2012&lt;/a&gt; and &lt;a href=&quot;https://www.scala-lang.org/news/2013/03/20/gsoc13.html&quot;&gt;2013&lt;/a&gt; pages to get an idea
+of kind of projects we undertook in previous years.&lt;/p&gt;
+
+&lt;p&gt;Please join us!&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>10 Years of Scala</title>
+    <link href="https://www.scala-lang.org/news/2014/01/22/10-years-of-scala.html"/>
+    <updated>2014-01-22T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/2014/01/22/10-years-of-scala</id>
+    <content type="html">&lt;p&gt;The first release of Scala
+&lt;a href=&quot;http://article.gmane.org/gmane.comp.lang.scala/17&quot;&gt;happened ten years ago&lt;/a&gt;
+on January 20th.&lt;/p&gt;
+
+&lt;p&gt;Looking back I am stunned how we could have taken an experimental research
+language and turned it into a tool for everyday programming that’s used by
+hundreds of thousands of developers.
+This is even more surprising in that no big company or organization backed Scala.
+Instead it was a grassroots movement with many super smart and motivated contributors.
+They are far too numerous to be all listed here, but I nevertheless want to thank some
+of the contributors by name who influenced the trajectory of Scala in a crucial way.
+In particular, there were:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The early EPFL contributors around Matthias Zenger, Michel Schinz, Philippe Altherr.&lt;/li&gt;
+  &lt;li&gt;The second wave of EPFL contributors, including Iulian Dragos, Philipp Haller, Lukas Rytz, Tiark Rompf, Stéphane Micheloud, Burak Emir, Vincent Cremet, Ingo Meier, Nikolay Mihaylov, Lex Spoon, Antonio Cunei, Sean McDermid, Erik Stenman.&lt;/li&gt;
+  &lt;li&gt;Early users who told the world about it: John Pretty, Miles Sabin, David Pollak, Dick Wall, Bill Venners, David McIver, Josh Suereth, Jonas Bonér, Viktor Klang, James Iry, Daniel Sobral and many others.&lt;/li&gt;
+  &lt;li&gt;Phil Bagwell, who designed our core collection structures, and was a great spokesperson for the community.&lt;/li&gt;
+  &lt;li&gt;Paul Phillips, who put in amazing work over many years.&lt;/li&gt;
+  &lt;li&gt;The many active open-source committers, including Simon Ochsenreither, Denys Shabalin, Pavel Pavlov, Dominik Gruntz, Rex Kerr.&lt;/li&gt;
+  &lt;li&gt;The Typesafe Scala team: Adriaan Moors, Jason Zaugg, Greg Kossakowski.&lt;/li&gt;
+  &lt;li&gt;The people working hard on giving us good tooling: Scala IDE, IntelliJ, NetBeans, SBT, Ensime.&lt;/li&gt;
+  &lt;li&gt;Lalit Pant, for making Scala accessible to children and Shadaj Laddad for showing how much fun Scala can be.&lt;/li&gt;
+  &lt;li&gt;The people who contributed to our massive open online courses: Heather Miller, Aleksandar Prokopec, Vojin Jovanovic, Lukas Rytz, Nada Amin, Tobias Schlatter, Roland Kuhn, Erik Meijer.&lt;/li&gt;
+  &lt;li&gt;The other people who take Scala forward at EPFL: Hubert Plocinicak, Eugene Burmako, Manohar Jonalagedda, Vlad Ureche, Sandro Stucki, Miguel Garcia, Christopher Vogt.&lt;/li&gt;
+  &lt;li&gt;The vibrant Scala.js team around Sébastien Doeraene and Haoyi Li.&lt;/li&gt;
+  &lt;li&gt;The authors of all the Scala books.&lt;/li&gt;
+  &lt;li&gt;The people writing great open-source libraries using Scala and contributing them back to the public.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Drawing up this list, I am humbled by the amount of hard work people have put in to make Scala what it is.
+I am sure I have forgotten many others whose contributions were equally crucial.
+A big thank you to you all!&lt;/p&gt;
+
+&lt;p&gt;Now, looking at the next ten years, I believe we have some truly exciting times ahead.
+I’ll write about some of the opportunities and challenges that I see in another post.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>New Online Courses</title>
+    <link href="https://www.scala-lang.org/news/2013/08/27/coursera-announcements.html"/>
+    <updated>2013-08-27T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2013/08/27/coursera-announcements</id>
+    <content type="html">&lt;p&gt;Last year, the Scala team and I developed a massive open online course
+for Principles of Functional Programming in Scala on the Coursera
+platform.  We were blown away by the success of that course. So far,
+it got over 100’000 registrations, with one of the
+&lt;a href=&quot;http://www.katyjordan.com/MOOCproject.html&quot;&gt;highest completion rates&lt;/a&gt;
+of any open online course.&lt;/p&gt;
+
+&lt;p&gt;Today, I am thrilled to announce together with the third iteration
+of &lt;a href=&quot;https://www.coursera.org/course/progfun&quot;&gt;Principles of Functional
+Programming&lt;/a&gt; two new
+offerings.&lt;/p&gt;
+
+&lt;h2 id=&quot;reactive-programming&quot;&gt;Reactive Programming&lt;/h2&gt;
+
+&lt;p&gt;First, there will be a successor to the course. It’s called
+&lt;a href=&quot;https://www.coursera.org/course/reactive&quot;&gt;Principles of Reactive
+Programming&lt;/a&gt;. I am
+super-excited to co-teach the course together with Erik Meijer, of Rx
+fame, and with Roland Kuhn, the tech lead of the Akka actors
+framework. Reactive programming will assume a good grounding in
+functional programming and will add topics such different forms of
+monads, combining functions and state, composing with futures and
+observables, and designing resilient actor systems.&lt;/p&gt;
+
+&lt;p&gt;Time wise, the two courses follow each other. Principles of Functional
+Programming starts September 16 and goes for 7 weeks, then Principles
+of Reactive Programming starts November 4 and also goes for 7 weeks.
+So if you want learn about reactive programming but feel your Scala
+skills could use some improvement, there’s still time to enroll for
+the functional programming course.&lt;/p&gt;
+
+&lt;h2 id=&quot;personalized-tutorials&quot;&gt;Personalized Tutorials&lt;/h2&gt;
+
+&lt;p&gt;In a second new development, Typesafe will offer supervised tutorial
+classes that follow both classes and run concurrently with them. One
+of the challenges of massive online courses is that students get only
+automated feedback on their homework assignments. Using Typesafe’s
+online tutorial platform, students can enroll in small groups with
+an expert tutor who will give detailed feedback on programming
+techniques in their homework assignments and elsewhere.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <title>Scala Workshop (Scala2013) Program Announced!</title>
+    <link href="https://www.scala-lang.org/news/2013/05/21/scala-workshop-13.html"/>
+    <updated>2013-05-21T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2013/05/21/scala-workshop-13</id>
+    <content type="html">&lt;p&gt;The &lt;a href=&quot;http://lampwww.epfl.ch/~hmiller/scala2013/program.html&quot;&gt;Scala2013 Workshop Program&lt;/a&gt; is now available! We’re quite excited about this year’s program– we received a record number of submissions, leading to a first-class program spanning compilation &amp;amp; metaprogramming, parallelism/concurrency, verification &amp;amp; synthesis, debugging tools and more!&lt;/p&gt;
+
+&lt;p&gt;In order to accomodate as many quality submissions as we could, we teamed up with the organizers of the &lt;a href=&quot;http://lame2013.dei.uc.pt/&quot;&gt;LaME’13&lt;/a&gt; workshop (short for “Languages for the Multicore Era”) to co-sponsor a special Scala parallelism/concurrency session that will take place on July 1st. That means we will now be having Scala2013 talks on two days– July 1st &amp;amp; 2nd.&lt;/p&gt;
+
+&lt;p&gt;Please join us this summer in Montpellier! 
+For more info, and to register, visit: &lt;a href=&quot;http://lampwww.epfl.ch/~hmiller/scala2013/&quot;&gt;http://lampwww.epfl.ch/~hmiller/scala2013/&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Scala Workshop (Scala2013) Student Talks to be Awarded Full ECOOP Registration!</title>
+    <link href="https://www.scala-lang.org/news/2013/04/11/student-talks-sw13.html"/>
+    <updated>2013-04-11T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2013/04/11/student-talks-sw13</id>
+    <content type="html">&lt;p&gt;Thanks to a generous donation from Typesafe and Oracle Labs, we will be awarding a limited number of accepted student talks with full ECOOP registration (a value of 350EUR). Student talks are designed to be 5-10 minutes in duration, presenting ongoing or completed research related to Scala, or announcing a project that would be of interest to the Scala community. To be considered, simply submit a title and abstract by April 12th (students may update/change title/abstract until the final April 19th deadline) at the &lt;a href=&quot;http://lampwww.epfl.ch/~hmiller/scala2013/&quot;&gt;Scala2013 website&lt;/a&gt;. In addition to student talks, we solicit full research papers, short research papers, and tool demos.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Prof. Philip Wadler to Keynote at the Scala Workshop (Scala2013)!</title>
+    <link href="https://www.scala-lang.org/news/2013/04/11/philip-wadler-sw13.html"/>
+    <updated>2013-04-11T00:00:00+02:00</updated>
+    <id>https://www.scala-lang.org/news/2013/04/11/philip-wadler-sw13</id>
+    <content type="html">&lt;p&gt;We’re excited to announce that Prof. Philip Wadler will be keynoting at this
+year’s &lt;a href=&quot;http://lampwww.epfl.ch/~hmiller/scala2013/&quot;&gt;Scala Workshop (Scala2013)&lt;/a&gt;!
+Prof. Wadler is Professor of Theoretical
+Computer Science at the University of Edinburgh. An ACM Fellow, he is well-
+known for his seminal work on effectful computations in purely functional
+languages based on monads, as well as his contributions to the design of
+Haskell, Java, and XQuery.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://lampwww.epfl.ch/~hmiller/scala2013/&quot;&gt;fourth Scala Workshop&lt;/a&gt;
+is the leading forum for research and development on
+or related to the Scala programming language. It will take place July 2nd,
+2013, and will be co-located this year with ECOOP, ECMFA, and ECSA in
+Montpellier, France.&lt;/p&gt;
+
+&lt;p&gt;We solicit full research papers, short papers, tool demos, and student talks.
+Abstracts are due April 12 (23:59 Samoa time), full papers/demos/etc are due
+April 19th. Students are encouraged to submit talk proposals, as we will be
+awarding a limited number of student talks with full ECOOP registrations (a
+350EUR value).&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>Google Summer of Code 2013 Scala Projects</title>
+    <link href="https://www.scala-lang.org/news/2013/03/20/gsoc13.html"/>
+    <updated>2013-03-20T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/2013/03/20/gsoc13</id>
+    <content type="html">&lt;p&gt;&lt;strong&gt;This year the Scala team applied again for the &lt;a href=&quot;https://code.google.com/soc/&quot;&gt;Google Summer of Code&lt;/a&gt; program to work with enthusiastic students on challenging Scala projects and got accepted!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;What is Google Summer of Code&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Google invites students to come up with interesting, non-trivial problems for their favourite open-source projects and work on them over the summer. Participants get support from the community, plus a mentor who makes sure you don’t get lost and that you meet your goals. Aside from the satisfaction of solving challenging problems, students get paid for their work. But wait, there’s more! Successful participants also receive an official Google Summer of Code t-shirt! This is an incredible opportunity to get involved in the Scala community and get helpful support along the way.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Project Ideas&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Below we have collected a list of project ideas. The suggestions are only a starting point for students. We expect students to explore the ideas in much more detail, preferably with their own suggestions and detailed plans on how they want to proceed. Don’t feel constrained by the provided list! We welcome any of your own challenging ideas, but make sure that the proposed project satisfies the main requirements mentioned here below.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;How to get involved&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The best place to propose and discuss your proposals is our “scala-language” mailing list (scala-language @ Google Groups, instructions to subscribe are available at &lt;a href=&quot;https://www.scala-lang.org/node/199#scala&quot;&gt;https://www.scala-lang.org/node/199#scala&lt;/a&gt;). This way you will get quickly responses from the whole Scala community.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Previous Summer of Code&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We encourage you to have a look at our &lt;a href=&quot;https://www.scala-lang.org/gsoc2010#&quot;&gt;Summer of Code 2010&lt;/a&gt;, &lt;a href=&quot;https://www.scala-lang.org/gsoc2011#&quot;&gt;2011&lt;/a&gt; and &lt;a href=&quot;https://www.scala-lang.org/gsoc2012#&quot;&gt;2012&lt;/a&gt; page to get an idea on what we and you can expect while working on Scala.&lt;/p&gt;
+
+&lt;p&gt;Please make sure to read &lt;strong&gt;carefully&lt;/strong&gt; the instructions at the end of this page for requirements and submission details.&lt;/p&gt;
+
+&lt;h1 id=&quot;project-ideas&quot;&gt;Project Ideas&lt;/h1&gt;
+
+&lt;p&gt;Here are some project ideas for you. The list is non-binding and any reasonable project related to Scala that is proposed by student will be thoroughly reviewed.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;scala-language&quot;&gt;Scala language&lt;/h2&gt;
+
+&lt;h3 id=&quot;prototype-an-extension-of-for-comprehensions-for-scala&quot;&gt;Prototype an extension of for-comprehensions for Scala&lt;/h3&gt;
+
+&lt;p&gt;The to goal of this project is to extend the desugaring of for-comprehensions in the Scala compiler to support additional operations like grouping or sorting. Similar work has been done for Haskell (see &lt;a href=&quot;https://research.microsoft.com/en-us/um/people/simonpj/papers/list-comp/&quot; title=&quot;https://research.microsoft.com/en-us/um/people/simonpj/papers/list-comp/&quot;&gt;https://research.microsoft.com/en-us/um/people/simonpj/papers/list-comp/&lt;/a&gt;). The optimal design for this is not clear yet. We have some written documentation of our past thoughts on the topic you can use as a basis for your own ideas (drafts &lt;a href=&quot;https://docs.google.com/document/d/1g6iWTmu-Zrquc2j8OM2vQgATllxXzynBAQB7rOF-Qkk/edit#heading=h.3y9blwy9e9sm&quot;&gt;SIP&lt;/a&gt; and &lt;a href=&quot;https://docs.google.com/document/d/1GyPXaWrQcViZsLZlUL5mysu_GqXiT5HzMENnUVFa1vo/edit&quot;&gt;SIP alternative&lt;/a&gt;). Your implementation along with a SIP (Scala Improvement Process) proposal, should serve as a proof of concept that could lead to the addition of this feature to the Scala language. We want to work with you in an agile, ticket-based development  style with frequent communication and coordination.&lt;/p&gt;
+
+&lt;h3 id=&quot;alternative--social-scala-documentation&quot;&gt;Alternative / social Scala documentation&lt;/h3&gt;
+
+&lt;p&gt;This project has two  parts. First you will work on generating alternative api documentation  formats for Scaladoc. You will need to hook into the scaladoc part of  the scala compiler, to access and work with Scaladoc’s code model. We  have a small prototype you can use as a starting point. You should then  generate documentation in (non-framed, non-js) single/multi-page HTML,  PDF, CHM formats. The result should make sensible use of the scaladoc  @-commands and you should think about a good way to present apis  designed as in cake patterns. HTML-Formats should support external  linking to methods. You can use a documentation generator such as Sphinx  to help generating different formats. The second part of this project  concerns collaboration. You will need to come up with smart and simple  ideas and an implementation how to make Scala api documentation more  social, favorably in a way that can be shared between the different HTML  doc formats. It can be as simple as adding GitHub Links and Disqus or  more involved. Make sure to also review the work  that has been done on &lt;a href=&quot;https://colladoc.github.io/&quot;&gt;Colladoc&lt;/a&gt;. We are very open for your own new or alternative ideas  regarding any aspect of this project.  Good knowledge of modern, accessible HTML/CSS and possibly JS will be  helpful. We want to work with you in an agile, ticket-based development  style with frequent communication and coordination.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;parallel-collections&quot;&gt;Parallel Collections&lt;/h2&gt;
+
+&lt;p&gt;Scala Parallel Collections are a data-parallel shared-memory programming framework that was integrated into the Scala  Standard Library in version 2.9. &lt;a href=&quot;https://docs.scala-lang.org/overviews/parallel-collections/overview.html&quot; title=&quot;https://docs.scala-lang.org/overviews/parallel-collections/overview.html&quot;&gt;https://docs.scala-lang.org/overviews/parallel-collections/overview.html&lt;/a&gt; &lt;a href=&quot;https://infoscience.epfl.ch/record/150220/files/pc.pdf&quot; title=&quot;https://infoscience.epfl.ch/record/150220/files/pc.pdf&quot;&gt;https://infoscience.epfl.ch/record/150220/files/pc.pdf&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;specializing-parallel-collections-with-customized-work-stealing-and-scala-macros&quot;&gt;Specializing parallel collections with customized work-stealing and Scala Macros&lt;/h3&gt;
+
+&lt;p&gt;The goals of this project are twofold. First, the Parallel Collections  scheduler must be extended with work-stealing customized for specific collections. This  work-stealing should be based on the work-stealing tree scheduling which we currently have a prototype of. Second, the Scala Macro system should be integrated with the Parallel  Collections to generate more efficient operation versions at the callsite where there is more  information about the collection type, element type and other parallel operation arguments  like higher-order functions. It is desirable that the student is knowledgeable in the Scala  programming language and its collections model, has knowledge about concurrent lock-free programming and parallel  programming, Java memory model, and has an interest in data-structures in general. Knowledge about the JVM, JIT compilation, benchmarking and the JVM  performance model is a plus. Some of the tasks in this project are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;replace parallel operation implementations with macro implementations  that generate specialized operation instances at the callsite&lt;/li&gt;
+  &lt;li&gt;specialize parallel operation instances for the concrete data-structures&lt;/li&gt;
+  &lt;li&gt;tweak and verify performance on different architectures&lt;/li&gt;
+  &lt;li&gt;implement a comprehensive test suite&lt;/li&gt;
+  &lt;li&gt;implement a comprehensive microbenchmarking suite with performance  regression tests&lt;/li&gt;
+  &lt;li&gt;implement several bigger benchmark applications&lt;/li&gt;
+  &lt;li&gt;investigate API improvements and missing parallel operations to  support a wider range of problems more effectively (asynchronous  execution, in-place bulk modification, etc.)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Background:
+Currently, the Scala Parallel Collections incur some abstraction  penalties, that lead to boxing, virtual calls, and reliance on iterators. With the arrival of Scala Macros, there exists a plethora of  optimization opportunities at the library level that allows us to eliminate these inefficiencies. Orthogonally, the scheduling based purely on the  fork-join framework  (&lt;a href=&quot;https://docs.oracle.com/javase/tutorial/essential/concurrency/forkjoin.html&quot; title=&quot;https://docs.oracle.com/javase/tutorial/essential/concurrency/forkjoin.html&quot;&gt;https://docs.oracle.com/javase/tutorial/essential/concurrency/forkjoin.html&lt;/a&gt;) suffers from several abstraction penalties, and needs to be specialized  to achieve better performance and load-balancing.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;slick&quot;&gt;Slick&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://scala-slick.org/&quot;&gt;https://scala-slick.org/&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;schema-manipulations-for-slick&quot;&gt;Schema manipulations for Slick&lt;/h3&gt;
+
+&lt;p&gt;The goal of this project is to extend Slick to support database schema manipulations (that could be used for writing migration scripts for example). You need to add an API for manipulating existing database schemas (alter columns, change constraints, etc. similar to &lt;a href=&quot;https://guides.rubyonrails.org/migrations.html&quot;&gt;Rails&lt;/a&gt; or &lt;a href=&quot;https://code.google.com/p/scala-migrations/&quot; title=&quot;https://code.google.com/p/scala-migrations/&quot;&gt;https://code.google.com/p/scala-migrations/&lt;/a&gt;). In coordination with us, you will have to come up with a sensible set of manipulation operations to be supported and a strategy how to integrate them into Slick considering existing code and code, which is still in development. We want to work with you in an agile, ticket-based development style with frequent communication and coordination.&lt;/p&gt;
+
+&lt;h3 id=&quot;data-migration-tool&quot;&gt;Data migration tool&lt;/h3&gt;
+
+&lt;p&gt;The goal of this project is creating a tool for managing data migration scripts based on Slick. We have a rough proof of concept implementation you can base work on at &lt;a href=&quot;https://github.com/cvogt/migrations&quot; title=&quot;https://github.com/cvogt/migrations&quot;&gt;https://github.com/cvogt/migrations&lt;/a&gt; . The idea is roughly similar to migrations/evolutions in Ruby on Rails or Scala Play 2. You will need to significantly improve (or re-write) the code of the proof of concept implementation to make it production ready, extend it by futher features and explore some exciting ideas like reliable migrations in a development scenario with branches (like git branches). Your ideas are important to this project. Here is how we see it right now:&lt;/p&gt;
+
+&lt;p&gt;Existing features (which all require revision)&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;migration scripts written in Slick/SQL/Scala&lt;/li&gt;
+  &lt;li&gt;diagnostic features for reviewing scripts and database&lt;/li&gt;
+  &lt;li&gt;flexible Scala code-generation for case classes, Slick table objects and custom user code related to the data model&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Required improvements&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;make it work with all Slick backends (the proof of concept is hard-coded to h2)&lt;/li&gt;
+  &lt;li&gt;make it as production ready as possible&lt;/li&gt;
+  &lt;li&gt;improve it based on comparison with other tools and potential user feedback gathered via mailing list, etc.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;New feature ideas&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;dumping Slick migration scripts into SQL scripts (desired by potential users)&lt;/li&gt;
+  &lt;li&gt;integration with SQL-file-based migration tools like Play&lt;/li&gt;
+  &lt;li&gt;a version compatibility scheme between generated code and database schema versions&lt;/li&gt;
+  &lt;li&gt;support for a convenient work flow for working with databases and git branches&lt;/li&gt;
+  &lt;li&gt;support for common industry use cases (like pre, during, post shutdown migration scripts)&lt;/li&gt;
+  &lt;li&gt;&amp;lt; your ideas here &amp;gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What features you need to implement exactly is open and needs to re-evaluated as we go in discussion with you and based on potential user feedback. We want to work with you in an agile, ticket-based development style with frequent communication and coordination.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;scala-library-as-a-deep-edsl-module&quot;&gt;Scala Library as a Deep EDSL Module&lt;/h2&gt;
+
+&lt;p&gt;Deep EDSLs intrinsically trade user experience for performance improvements. The Scala library Yin-Yang [1] allows both good user experience and high-performance by keeping parallel implementations of shallow and deep embeddings. Transparent and reliable transformation from the shallow to the deep embedding allows programmer friendly development with the shallow EDSL and good performance in production with the equivalent deep EDSL.&lt;/p&gt;
+
+&lt;p&gt;Duplication of code in the parallel shallow embedding requires additional user effort and can lead to diverging semantics of DSLs. In this project we would utilize the implementations of existing Scala libraries/DSLs to generate the adequate deep embeddings. Yin-Yang should be modified to generate high-level IR nodes from existing libraries/DSLs and generate the DSL IR transformers that will lower those high-level nodes into their implementations. The transformers would be generated from shallow implementations by the existing Yin-Yang transformation. Furthermore, the side-effect information [2] will be collected from the Scala annotations and introduced into the deep embedding. The generated DSLs would use the Lightweight Modular Staging [3] as the back-end compiler for the DSLs.&lt;/p&gt;
+
+&lt;p&gt;With this project the deep DSL embedding would be greatly simplified. The DSL author would provide the shallow embedding with minimal number of annotations and Yin-Yang &amp;gt;iii) code generation. Finally, the DSL author would provide optimizations on the high-level IR.&lt;/p&gt;
+
+&lt;p&gt;The deep embedding of run-time compiled DSLs can further improve performance by utilizing the run-time collected data for optimizations. However, when this data changes the costly recompilation must be performed greatly increasing delay. Another goal of this project would be to investigate the DSL author guided JIT compilation of DSLs. With JIT compilation the run-time compiled DSLs could be utilized in latency critical programs that operate on smaller data (e.g. web servers, compilers, GUI applications).&lt;/p&gt;
+
+&lt;p&gt;The grand vision for the project is to generate the DSL modules from the whole Scala Library and provide DSL optimizations for them. These modules could then be used in critical paths of all Scala projects. Due to the magnitude of the project the GSoC candidate would focus on one well defined part.&lt;/p&gt;
+
+&lt;p&gt;Skills required for this project are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Good knowledge of Scala:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Scalable Components&lt;/li&gt;
+  &lt;li&gt;Implicit conversions&lt;/li&gt;
+  &lt;li&gt;Macros&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Basic knowledge of DSL embedding in Scala&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;[1] Yin-Yang: Transparent Deep Embedding of DSLs - &lt;a href=&quot;https://web.archive.org/web/20140702193720/https://infoscience.epfl.ch/record/185832&quot;&gt;https://web.archive.org/web/20140702193720/https://infoscience.epfl.ch/record/185832&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[2] Lightweight Polymorphic Effects - &lt;a href=&quot;https://infoscience.epfl.ch/record/175240&quot;&gt;https://infoscience.epfl.ch/record/175240&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;[3] Lightweight Modular Staging - &lt;a href=&quot;https://scala-lms.github.io/&quot;&gt;https://scala-lms.github.io/&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;constraint-solver-in-scala&quot;&gt;Constraint Solver in Scala&lt;/h2&gt;
+
+&lt;p&gt;The goal of this project is to develop a reasonably efficient constraint solver in Scala.&lt;/p&gt;
+
+&lt;p&gt;You will build on a SAT solver we are currently releasing and will add incremental&lt;/p&gt;
+
+&lt;p&gt;SAT solving capabilities as well as reasoning about functional data structures.&lt;/p&gt;
+
+&lt;p&gt;Full project description: &lt;a href=&quot;https://lara.epfl.ch/w/solver&quot;&gt;https://lara.epfl.ch/w/solver&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Related projects:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.verit-solver.org/&quot;&gt;http://www.verit-solver.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Scala^Z3&lt;/li&gt;
+  &lt;li&gt;Kaplan paper: &lt;a href=&quot;https://lara.epfl.ch/~kuncak/papers/KoeksalETAL12ConstraintsControl.html&quot;&gt;https://lara.epfl.ch/~kuncak/papers/KoeksalETAL12ConstraintsControl.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;kojo&quot;&gt;Kojo&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.kogics.net/sf:kojo&quot;&gt;https://www.kogics.net/sf:kojo&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;script-tracing-in-kojo&quot;&gt;Script Tracing in Kojo&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Motivation/Benefit&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This feature will allow users to trace programs within Kojo - to get a better understanding of what/how/when the programs do.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://gbracha.blogspot.in/2012/11/debug-mode-is-only-mode.html&quot;&gt;http://gbracha.blogspot.in/2012/11/debug-mode-is-only-mode.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;High Level Specification&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There are two new UI elements - a trace button and a trace window.&lt;/li&gt;
+  &lt;li&gt;You click on the trace button to trace a program. Trace output goes into the trace window in the form of a trace history.&lt;/li&gt;
+  &lt;li&gt;When a trace run is over (this happens when a program finishes or  you stop it), you can go over to the trace history to see the different  trace points in the program. These are things like the entry to and exit  from every procedure (command or function).&lt;/li&gt;
+  &lt;li&gt;When you click on a trace point, the corresponding source code line  is highlighted in the editor, the canvas reverts to its state at that  point, and you can view the value of all the visible variables/values at  that point in time.&lt;/li&gt;
+  &lt;li&gt;You can move back and forth across the trace history, and jump to any point in the history.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://kogics.wdfiles.com/local--files/gsoc13/GSOC-13.pdf&quot;&gt;More information about the project&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Required Skills&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Good working knowledge of Scala.&lt;/li&gt;
+  &lt;li&gt;Familiarity with Java and the JVM.&lt;/li&gt;
+  &lt;li&gt;Familiarity with Swing (the Java GUI framework).&lt;/li&gt;
+  &lt;li&gt;Familiarity with 2D graphics.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Bonus Skills&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Experience with JPDA.&lt;/li&gt;
+  &lt;li&gt;Experience with Debugger Implementation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sprite-enhancements-in-kojo&quot;&gt;Sprite Enhancements in Kojo&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Motivation/Benefit&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This set of features will make it easier for users to write sprite based games, animations, and cartoons within Kojo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Kojo has historically supported drawing and animation primarily through  Vector graphics. This has included the command oriented Turtle graphics  and the functional Picture graphics.&lt;/p&gt;
+
+&lt;p&gt;In recent times, Kojo has acquired good support for sprite based animation. This has involved:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Refinements related to multiple turtles/sprites.&lt;/li&gt;
+  &lt;li&gt;Support for specifying sprite costumes.&lt;/li&gt;
+  &lt;li&gt;Support for cycling through a sequence of sprite costumes during an animation.&lt;/li&gt;
+  &lt;li&gt;Refinements to the translation, rotation, and scaling of sprites.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;High Level Specification&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The next set of required sprite features, which are the goal of this GSOC project, include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sprite Collision Detection. This involves:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Implementing image edge detection for sprite images (to obtain a vector representation of the sprite image boundary)&lt;/li&gt;
+      &lt;li&gt;Leveraging the vector collision detection support in Kojo to do collision detection for sprites.&lt;/li&gt;
+      &lt;li&gt;Making this feature available via the Kojo API, so that it is available in games/animations.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Sprite Messaging - to allow sprites to communicate with each other.&lt;/li&gt;
+  &lt;li&gt;Sprite ‘Speaking’ and ‘Thinking’ - to enable the display of speaking/thinking bubbles next to sprites for specified durations.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The Scratch project (&lt;a href=&quot;https://scratch.mit.edu&quot;&gt;https://scratch.mit.edu&lt;/a&gt;) is a good source of ideas in this area.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Required Skills&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Good working knowledge of Scala.&lt;/li&gt;
+  &lt;li&gt;Good working knowledge of 2D graphics.&lt;/li&gt;
+  &lt;li&gt;Familiarity with Java and the JVM.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;friendlier-error-messages-in-kojo&quot;&gt;Friendlier Error Messages in Kojo&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Motivation/Benefit&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;This feature will make it easier for users to understand and recover from syntax errors in their scripts.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the areas that needs improvement within Kojo relates to the  complexity of the error messages that show up for scripts with syntax  errors.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Project Description&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;There are two approaches to trying to solve this problem:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Write custom Scala parsers for different subsets of Scala (Level 1, Level2, etc) that output suitable error messages for Kojo.&lt;/li&gt;
+  &lt;li&gt;Annotate the current error messages with helpful (in the context of  Kojo) text. This approach can potentially be very powerful; it can  analyze the current code to determine what the user is trying to do, the  error location to determine the context of the error, and the error  message to determine what went wrong. It can then combine these three  elements to help the user understand and fix the error.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Required Skills&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Good working knowledge of Scala.&lt;/li&gt;
+  &lt;li&gt;Good working knowledge of Parser writing.&lt;/li&gt;
+  &lt;li&gt;Familiarity with Swing (the Java GUI framework).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;subscript-httpsubscript-langorg&quot;&gt;SubScript (&lt;a href=&quot;http://subscript-lang.org/&quot;&gt;http://subscript-lang.org/&lt;/a&gt;)&lt;/h2&gt;
+
+&lt;p&gt;SubScript is a way to extend common programming languages aimed to ease event handling and concurrency. Typical application areas are GUI controllers, text processing applications and discrete event simulations. SubScript is based on a mathematical concurrency theory named Algebra of Communicating Processes (ACP).&lt;/p&gt;
+
+&lt;p&gt;You can regard ACP as an extension to Boolean algebra with ‘things that can happen’. These items are glued together with operations such alternative, sequential and parallel compositions. This way ACP combines the essence of grammar specification languages and notions of parallelism.&lt;/p&gt;
+
+&lt;p&gt;Adding ACP to a common programming language yields a lightweight alternative for threading concurrency. It also brings the 50 year old but still magic expressiveness of languages for parser generators and compiler compilers, so that SubScript suits language processing. The nondeterministic style combined with concurrency support happens to be very useful for programming GUI controllers. Surprisingly, ACP with a few extras even enables data flow style programming, like you have with pipes in Unix shell language.&lt;/p&gt;
+
+&lt;p&gt;Currently a SubScript extension to Scala is available. This comes with a branch of the Scala compiler, a run-time library, support for the Scala-Swing reactive framework and example programs. The “C” part of ACP is not yet supported.&lt;/p&gt;
+
+&lt;h3 id=&quot;investigate-subscript-on-top-of-javascript&quot;&gt;Investigate SubScript on top of JavaScript&lt;/h3&gt;
+
+&lt;p&gt;SubScript might as well extend other languages next to Scala. An  interesting starter would be JavaScript. The good thing is that as from  April 2013 (?) Scala translates into JavaScript. Therefore a single code  base of the SubScript VM, which is written in Scala, may also work for  JavaScript.&lt;/p&gt;
+
+&lt;p&gt;The project would involve some of the following tasks:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;develop use cases, both for client-side and server-side applications&lt;/li&gt;
+  &lt;li&gt;create a translator for SubScript into JavaScript&lt;/li&gt;
+  &lt;li&gt;extend an existing JavaScript interpreter to understand SubScript&lt;/li&gt;
+  &lt;li&gt;define a strategy to send over SubScript in HTML pagesand have it translated&lt;/li&gt;
+  &lt;li&gt;provide a translator for the SubScript VM source code into JavaScript&lt;/li&gt;
+  &lt;li&gt;JavaScript does not support explicit multithreading; develop an alternative&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;enhance-akka-using-subscript&quot;&gt;Enhance Akka using SubScript&lt;/h3&gt;
+
+&lt;p&gt;Akka is the Scala actor implementation, very useful for distributed  functions. Typically an actor operates a state machine, which is  programmed using state variables. This is relatively inconvenient to  program and read. SubScript may provide a better alternative for  programming actor internals. This project would involve:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;develop typical actors in two versions: just Scala and SubScript&lt;/li&gt;
+  &lt;li&gt;compare these versions in terms of clearness and conciseness&lt;/li&gt;
+  &lt;li&gt;measure the performance of these versions&lt;/li&gt;
+  &lt;li&gt;make a tutorial&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;More information on SubScriptActors is available at &lt;a href=&quot;http://subscript-lang.org/subscript-actors/&quot;&gt;http://subscript-lang.org/subscript-actors/&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Generic Tasks &amp;amp; Deliverables&lt;/strong&gt;
+ In each project the student should&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;investigate the problem area: what are current practices: inspect open source projects, how could SubScript help&lt;/li&gt;
+  &lt;li&gt;build software&lt;/li&gt;
+  &lt;li&gt;make a tutorial&lt;/li&gt;
+  &lt;li&gt;measure performance&lt;/li&gt;
+  &lt;li&gt;discuss the pros and cons, and make recommendations for future work&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Each project has the following generic deliverables:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a working plan&lt;/li&gt;
+  &lt;li&gt;a report&lt;/li&gt;
+  &lt;li&gt;a GitHub repository&lt;/li&gt;
+  &lt;li&gt;a Linux VM containing: a complete development environment with build scripts, all developed software in sources and executables, test data, a console with a command history for building and testing&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Full project descriptions available at &lt;a href=&quot;http://subscript-lang.org/student-projects/&quot;&gt;http://subscript-lang.org/student-projects/&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;saddle-httpssaddlegithubio&quot;&gt;&lt;strong&gt;Saddle (&lt;/strong&gt;&lt;a href=&quot;https://saddle.github.io/&quot;&gt;https://saddle.github.io&lt;/a&gt;)&lt;/h2&gt;
+&lt;p&gt;Saddle is a new high-performance data  manipulation library for Scala.  Saddle provides array-backed, indexed,  one- and two-dimensional data structures; vectorized numerical  calculations; automatic data alignment; and robustness to missing  values. Saddle aims to be the easiest and most expressive way to program  with structured data on the JVM. Saddle is missing features in a few key areas that  the interested student could help implement. The following ideas touch  on all aspects of Saddle.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CSV (comma-separated value) data output&lt;/li&gt;
+  &lt;li&gt;specialization on Float and Short numeric types&lt;/li&gt;
+  &lt;li&gt;implement sparse matrix data structure&lt;/li&gt;
+  &lt;li&gt;implement diehard random number tests for marsiglia xorshift prng&lt;/li&gt;
+  &lt;li&gt;extend test coverage using ScalaCheck&lt;/li&gt;
+  &lt;li&gt;prototype and implement data visualization using D3/NVD3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The  student would learn about efficient numerical computing on the JVM, as  well as advanced Scala features such as specialization, the typeclass  pattern, Java-Scala integration, and D3/NVD3. The interested student  would already have a decent working knowledge of Scala and the mechanics  of the JVM.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;ensime-plugin-for-sublime-text&quot;&gt;Ensime Plugin for Sublime Text&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://github.com/sublimescala/sublime-ensime&quot;&gt;Sublime-Ensime&lt;/a&gt; plugin enhances the &lt;a href=&quot;https://www.sublimetext.com/2&quot;&gt;Sublime Text 2&lt;/a&gt; editor with Scala-specific error highlighting, autocompletion and many other features. With about 1.5K downloads, and many users sucessfully using it, we are keen on introducing additional features to provide comprehensive integrated experience. We also expect that users will demand the plugin for &lt;a href=&quot;https://www.sublimetext.com/3&quot;&gt;Sublime Text 3&lt;/a&gt;, but this requires refactoring the plugin, preparing it for running in Python 3.3 and possibly integrating with more recent features such as symbol indexing.&lt;/p&gt;
+
+&lt;p&gt;The ideal candidate is fluent in both Python and Scala and currently uses the Sublime Text editor frequently. We also welcome candidates who are active and engage the community via issue reports, mailing lists and forums.&lt;/p&gt;
+
+&lt;p&gt;The project will have three phases:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Develop several features for the plugin: a) finish the debugger, b) implement refactorings provided by Ensime,&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;c) add support for multiple projects. This phase of the project will target Sublime Text 2, so that all the users of the plugin&lt;/p&gt;
+
+&lt;p&gt;will benefit from your contributions.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Port the plugin to Python 3.3 and Sublime Text 3, possibly taking advantage of the features introduced in the new version. A guide can be found on the &lt;a href=&quot;https://www.sublimetext.com/docs/3/porting_guide.html&quot;&gt;Sublime Text 3 webpage&lt;/a&gt;. There’s also the ST3 branch, which has already ported a bulk of functionality.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a GitHub-flavored-Markdown file for the project detailing the plugin installation and usage and a screencast of using the new plugin.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Before applying, please choose one of the bugs in the current plugin (&lt;a href=&quot;https://github.com/sublimescala/sublime-ensime/issues?state=open&quot;&gt;https://github.com/sublimescala/sublime-ensime/issues?state=open&lt;/a&gt;) and try to fix it, so you see how the plugin works. We do accept partial fixes and simple workarounds, but please do try to fix it yourself.&lt;/p&gt;
+
+&lt;p&gt;Resources:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sublime Text 2 API Reference (&lt;a href=&quot;https://www.sublimetext.com/docs/2/api_reference.html&quot;&gt;https://www.sublimetext.com/docs/2/api_reference.html&lt;/a&gt;);&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sublime-Ensime repository (&lt;a href=&quot;https://github.com/sublimescala/sublime-ensime&quot;&gt;https://github.com/sublimescala/sublime-ensime&lt;/a&gt;) and the README (&lt;a href=&quot;https://github.com/sublimescala/sublime-ensime/blob/master/README.md&quot;&gt;https://github.com/sublimescala/sublime-ensime/blob/master/README.md&lt;/a&gt;) with detailed instructions on installing;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sublime-Ensime Issue tracker (&lt;a href=&quot;https://github.com/sublimescala/sublime-ensime/issues?state=open&quot;&gt;https://github.com/sublimescala/sublime-ensime/issues?state=open&lt;/a&gt;);&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A work in progress Sublime-Ensime hacker’s guide (&lt;a href=&quot;https://github.com/VladUreche/sublimescala.github.com/blob/hacker-guide/hacker.md&quot;&gt;https://github.com/VladUreche/sublimescala.github.com/blob/hacker-guide/hacker.md&lt;/a&gt;).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Contact details for the plugin project&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;mailto:dev@sublimescala.org&quot;&gt;dev@sublimescala.org&lt;/a&gt;, &lt;a href=&quot;mailto:eugene.burmako@epfl.ch&quot;&gt;eugene.burmako@epfl.ch&lt;/a&gt;, &lt;a href=&quot;mailto:vlad.ureche@epfl.ch&quot;&gt;vlad.ureche@epfl.ch&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;requirements-and-guidelines&quot;&gt;Requirements and Guidelines&lt;/h1&gt;
+
+&lt;h2 id=&quot;general-student-application-requirements&quot;&gt;General Student Application Requirements&lt;/h2&gt;
+
+&lt;p&gt;This is the second time the Scala project has applied to the Summer of Code, and from last years experience, increased popularity of the language and stories of other mentor organizations we expect a high number of applications. First, be aware of the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Make sure that you understand, fulfill and agree to the general &lt;a href=&quot;https://www.google-melange.com/archive/gsoc/2013&quot;&gt;Google Summer of Code rules&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The work done during GSoC requires some discipline from the students as they have to plan their day-to-day activities by themselves. Nevertheless we expect regular contact with the mentors by the usual forms of communication (mail, chat, phone) to make sure that the development is going according to the plan and students don’t get stuck for weeks at a time (3 months may seem long, but in reality it is very easy to run out of time).&lt;/li&gt;
+  &lt;li&gt;The &lt;a href=&quot;https://www.google-melange.com/archive/gsoc/2013&quot;&gt;official SoC timetable&lt;/a&gt; mentions June 17th as the official start of coding, but if you have time you are encouraged to research your proposals even before that (and definitely learn the basics of Scala, if you haven’t done that already). Note that the official time for coding has now shifted more towards summer and autumn (rather than spring and summer).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;student-application-guidelines&quot;&gt;Student Application Guidelines&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Student proposals should be very specific. We want to see evidence that you can succeed in the project. Applications with one-liners and general descriptions definitely won’t make the cut.&lt;/li&gt;
+  &lt;li&gt;Because of the nature of our projects students must have at some knowledge of the Scala language. Applicants with Scala programming experience will be preferred. Alternatively, experience with functional programming could suffice, but in your application we want to see evidence that you can quickly be productive in Scala.&lt;/li&gt;
+  &lt;li&gt;You can think of Google Summer of Code as a kind of independent internship. Therefore, we expect you to work full-time during the duration. Applicants with other time commitments are unlikely to be selected. From our previous experience we know that students’ finishing their studies (either Bachelor, Master of PhD) are likely to be overwhelmed by their final work, so please don’t be too optimistic and carefully plan your time for the project.&lt;/li&gt;
+  &lt;li&gt;If you are unsure whether your proposal is suitable, feel free to discuss it on our “scala-language” mailing list (registration instructions are at &lt;a href=&quot;https://www.scala-lang.org/node/199#scala&quot;&gt;https://www.scala-lang.org/node/199#scala&lt;/a&gt;). We have many community members on our mailing list who will quickly answer any of your questions regarding the project. Mentors are also constantly monitoring the mailing list. Don’t be afraid of asking questions, we enjoy solving puzzles like that!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;general-proposal-requirements&quot;&gt;General Proposal Requirements&lt;/h2&gt;
+
+&lt;p&gt;The proposal will be submitted via the standard web-interface at &lt;a href=&quot;https://www.google-melange.com/gsoc/homepage/google/gsoc2013&quot;&gt;https://www.google-melange.com/gsoc/homepage/google/gsoc2013&lt;/a&gt;,  therefore plain text is the best way to go. We expect your application to be in the range of 700-1500 words. Anything less than that will probably not contain enough information for us to determine whether you are the right person for the job.&lt;/p&gt;
+
+&lt;p&gt;Your proposal should contain at least the following information, but feel free to include anything that you think is relevant:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Please include your name (weird as it may be, people do forget about it)&lt;/li&gt;
+  &lt;li&gt;Title of your proposal&lt;/li&gt;
+  &lt;li&gt;Abstract of your proposal&lt;/li&gt;
+  &lt;li&gt;Detailed description of your idea including explanation on why is it innovative (maybe you already have some prototype?), what contribution do you expect to make to the Scala community and why do you think your project is needed, a rough plan of your development and possible architecture sketches.&lt;/li&gt;
+  &lt;li&gt;Description of previous work, existing solutions (links to prototypes, bibliography are more than welcome!)&lt;/li&gt;
+  &lt;li&gt;Write us about yourself and convince us that you are the right person for the job (linking to your resume/CV is good but not sufficient)
+    &lt;ul&gt;
+      &lt;li&gt;Mention the details of your academic studies, any previous work, internships&lt;/li&gt;
+      &lt;li&gt;Any relevant skills that will help you to achieve the goal (programming languages, frameworks)?&lt;/li&gt;
+      &lt;li&gt;Any previous open-source projects (or even previous GSoC) you have contributed to?&lt;/li&gt;
+      &lt;li&gt;Do you plan to have any other commitments during SoC that may affect you work? Any vacations/holidays planned? Please be specific as much as you can.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Contact details (&lt;strong&gt;very important!&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <title>4th Scala Days Conference to run in New York City</title>
+    <link href="https://www.scala-lang.org/news/2013/03/12/scala-days-4.html"/>
+    <updated>2013-03-12T00:00:00+01:00</updated>
+    <id>https://www.scala-lang.org/news/2013/03/12/scala-days-4</id>
+    <content type="html">&lt;p&gt;The fourth annual &lt;a href=&quot;https://scaladays.org/&quot;&gt;Scala Days&lt;/a&gt; will be held this year at The Hudson Theater in NYC, June 10th-12th. Now is the time to submit speaking sessions and register to attend!&lt;/p&gt;
+
+&lt;p&gt;Scala Days 2013 aims to bring together developers from all corners of the world to share their experiences and new ideas around creating applications with Scala and Scala-based libraries and frameworks. The conference will provide a unique opportunity for Scala users to interact with contributors to the language and related technologies. Martin Odersky  will give this year’s keynote, and featured speakers include Jonas Bonér, Viktor Klang and others.&lt;/p&gt;
+
+&lt;p&gt;The call for papers will stay open until Monday, April 15th; however, we will announce accepted talks on a rolling basis, so get your proposals in quickly! We are aiming to host a series of Technical Talks, Reports of Real World Applications and Tools Demonstrations. The Scala Days committee also looks for creative ideas from you, so submit any topics you think the community would find exciting, inspiring, thought provoking and interesting!&lt;/p&gt;
+
+&lt;p&gt;Please prepare an abstract of your talk (less than 1000 characters), and submit it to &lt;a href=&quot;mailto:info@scaladays.org&quot;&gt;info@scaladays.org&lt;/a&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala Library Index Reaches Beta! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala Library Index Reaches Beta!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2016/08/09/the-scala-library-index-reaches-beta.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala Library Index Reaches Beta!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 9 August 2016</p>
+						<p>Guillaume Massé</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2016/08/09/the-scala-library-index-reaches-beta.html">Scala Library Index Reaches Beta!</a></h2> -->
+					<p>Today, the Scala Center team is very proud to announce that <a href="https://index.scala-lang.org/">The Scala Package Index</a>, or Scaladex for short, has reached beta v1! This means we’re now confident that Scaladex is now in state where it is ready for widespread use. Scaladex now supports most major features we planned for it, in addition to serving as an index of the known Scala ecosystem; self-updating, reindexing, user editing of published libraries (keywords, documentation links, and artifact deprecation), and more, even as we work to iron out user experience. In particular we’d like to thank contributors <a href="https://github.com/Scyks">Ronald Marske</a>, and <a href="https://github.com/rafaparadela">Rafa Paradela</a> and Israel Pérez from <a href="https://www.47deg.com/">47 Degrees</a> in helping us to reach this milestone!</p>
+
+<p>Here’s a quick walkthrough we put together of some of Scaladex’s main features:</p>
+
+<iframe width="610" height="315" src="https://www.youtube.com/embed/TBoJivIJsbU" frameborder="0" allowfullscreen=""></iframe>
+
+<h2 id="what-can-i-do-with-the-scala-index">What can I do with the Scala Index?</h2>
+
+<p>Scaladex is meant to represent a map of all published Scala libraries. With Scaladex, a developer can now query more than 100,000 releases of Scala libraries. We group those releases into projects, artifacts, targets, and versions. Scaladex indexes over 3,000 individual projects, which can each contain a number of artifacts, or jars.</p>
+
+<p>For example the <code class="language-plaintext highlighter-rouge">akka</code> project contains multiple artifacts, some that are quite different from one another, such as <code class="language-plaintext highlighter-rouge">akka-actor</code> and <code class="language-plaintext highlighter-rouge">akka-http</code>. You can explore all artifacts and versions from the unified project page, for example for the Akka project, the project page can be found at <a href="https://index.scala-lang.org/akka/akka">https://index.scala-lang.org/akka/akka</a>. It’s even possible to explore the web of dependencies between artifacts by selecting an artifact on the main project page, for example, the “Artifact Dependents” section of the page shows all of the published artifacts that depend on the current version, 2.4.8, of the <code class="language-plaintext highlighter-rouge">akka-actor</code> artifact.</p>
+
+<p>You can even search for libraries based on targets such as those compiled for use with Scala.js, Scala 2.11.x, or even Scala 2.12.x.</p>
+
+<p>Projects can also be edited and tagged with keywords, to help in searching, and indexing and to help users identify, at a glance, what a given library might do. Authors can also customize their project by indicating custom documentation to link to per version and artifact, or mark projects as deprecated so users know not to depend on a specific artifact in the future.</p>
+
+<p>The Index is also similar to a DNS (Domain Name Server). With a project or artifact name, you can find the exact release to paste into your sbt, Gradle, or Maven builds.</p>
+
+<p>One can imagine many more features for us to include in Scaladex– for example, an API that tools could query Scaladex for compatibility information between libraries. As always, if you have any ideas or wishes, let us know in our <a href="https://gitter.im/scalacenter/scaladex">Gitter channel</a>!</p>
+
+<h2 id="how-does-it-work">How does it work?</h2>
+
+<p>We run a daily process to discover and download published releases (.pom files). We currently index artifacts found on Bintray and Maven Central via the JCenter repository. Scala libraries normally include the Scala compiler major and minor version in the artifact name. We automatically find any library following this convention. (If you don’t follow it, you can create a pull request to <a href="https://github.com/scalacenter/scaladex-data/edit/master/non-standard.json">add your library to the index</a>.)</p>
+
+<p>When we have all the release information, we can group them by the GitHub repository they provide and we generate a project page from the combination of info found on GitHub and on Bintray/Maven Central. If you forgot to include your project’s GitHub URL you can always <a href="https://github.com/scalacenter/scaladex-data/edit/master/claims.json">claim your project manually</a> via a pull request.</p>
+
+<p>Scaladex has the advantage of performing well without manual intervention. However, with the help of library owners, we can improve the quality of our data.</p>
+
+<p>So please head on over to <a href="https://index.scala-lang.org/">the Scala Library Index</a>, login with your GitHub account, and start editing your projects! Project keywords, in particular, wanted! :-)</p>
+
+<h2 id="whats-next">What’s next?</h2>
+
+<p>The Scala Center wants you! Ideas and feature requests are welcome on our <a href="https://gitter.im/scalacenter/scaladex">Gitter channel</a>, and there’s a list of <a href="https://github.com/scalacenter/scaladex/issues?q=is:open+is:issue+label:v2">low-hanging fruit todos/issues</a> on our issue tracker that we’d love help on! We love PRs, so, come on in and help us map the Scala ecosystem!</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-08-09-the-scala-library-index-reaches-beta.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

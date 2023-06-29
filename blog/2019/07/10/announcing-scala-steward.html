@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Keep your projects up-to-date with Scala Steward | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Keep your projects up-to-date with Scala Steward"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2019/07/10/announcing-scala-steward.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Keep your projects up-to-date with Scala Steward</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 10 July 2019</p>
+						<p>Frank S. Thomas</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2019/07/10/announcing-scala-steward.html">Keep your projects up-to-date with Scala Steward</a></h2> -->
+					<p>I’m excited to announce version 0.3 of <a href="https://scala-steward.org">Scala Steward</a> and to introduce it
+to the Scala community! Scala Steward is a robot that helps you keep dependencies,
+sbt, and sbt plugins up-to-date by automatically creating pull requests on GitHub, GitLab,
+or Bitbucket that bump outdated version numbers.</p>
+
+<h2 id="how-to-use-it">How to use it</h2>
+
+<p>You can use it with any public Scala project on GitHub that uses sbt simply by adding it
+to <a href="https://github.com/fthomas/scala-steward/blob/master/repos.md">this file</a> and then wait for the first pull requests to come in a few hours
+later. Over 500 projects are already using this public instance of Scala Steward which
+I’m running as a free service for the whole Scala OSS ecosystem. Since Sep 9, 2018,
+when Scala Steward created <a href="https://github.com/fthomas/datapackage/pull/1">its first pull request</a>, it has created more than
+<a href="https://github.com/search?o=desc&amp;q=author%3Ascala-steward+is%3Apr&amp;s=created&amp;type=Issues">11 900 pull requests</a> of which over <a href="https://github.com/search?o=desc&amp;q=author%3Ascala-steward+is%3Amerged+sort%3Aupdated-desc&amp;s=created&amp;type=Issues">8 300</a> are already merged!</p>
+
+<p>Here is a screenshot of one of Scala Steward’s pull requests:
+<img src="https://user-images.githubusercontent.com/141252/60855361-e48b4200-a1f2-11e9-8173-1a53eacffd92.png" alt="screenshot of a Scala Steward pull request" /></p>
+
+<p>Receiving automatic pull requests that bump versions of dependencies reduces maintenance
+if your code compiles without warnings and errors with the new version. In many cases, it
+is enough to review the changelog of the new version and to check that your automated
+tests pass before merging such pull requests. If you are adventurous, you can even let
+<a href="https://github.com/fthomas/scala-steward/blob/master/docs/faq.md#how-can-scala-stewards-prs-be-merged-automatically">Scala Steward’s pull requests be merged automatically</a>.</p>
+
+<h2 id="running-your-own-instance">Running your own instance</h2>
+
+<p>You can also run your own instance of Scala Steward for your private repositories and
+join the <a href="https://github.com/fthomas/scala-steward#community">companies</a> that are already doing this. Unfortunately this isn’t
+<a href="https://github.com/fthomas/scala-steward/blob/master/docs/running.md">well documented</a> yet. Improving the documentation would make a great
+first contribution after you have figured out how to set it up.</p>
+
+<h2 id="automatic-code-migrations-with-scalafix">Automatic code migrations with Scalafix</h2>
+
+<p>What if a new version of your dependencies contains breaking changes so that your
+code does not compile without errors or warnings anymore? In these cases automatic
+version bumps only notify you of a new version and make you aware that human
+intervention is needed to fix errors and warnings and to adapt the code to the new
+version.</p>
+
+<p>Fortunately, we can improve on this situation by combining Scala Steward with the
+excellent <a href="https://scalacenter.github.io/scalafix/">Scalafix</a> tool. Scalafix is a refactoring and linting tool that
+allows to rewrite code based on user-supplied rules. You can read more about Scalafix
+<a href="https://www.scala-lang.org/blog/2016/10/24/scalafix.html">here</a> and <a href="https://www.scala-lang.org/blog/2018/11/16/scalafix-scalameta.html">here</a>. Scalafix rules can also be used
+for version migrations to help users updating to new versions and some
+libraries (like <a href="https://github.com/typelevel/cats/tree/v1.6.1/scalafix">Cats</a>,
+<a href="https://github.com/functional-streams-for-scala/fs2/tree/v1.0.5/scalafix">FS2</a>, or
+<a href="https://github.com/http4s/http4s/tree/v0.20.3/scalafix">http4s</a>) are already
+providing such migrations. With Scala Steward, we now have the possibility to apply
+Scalafix migrations automatically to create
+<a href="https://github.com/fthomas/scalafix-test/pull/9/files">pull requests like this</a>:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/build.sbt b/build.sbt
+</span><span class="gd">--- a/build.sbt
+</span><span class="gi">+++ b/build.sbt
+</span> libraryDependencies := List(
+<span class="gd">-  "org.typelevel" %% "cats-core" % "0.9.0"
+</span><span class="gi">+  "org.typelevel" %% "cats-core" % "1.6.1"
+</span> )
+
+diff --git a/src/main/scala/cats.scala b/src/main/scala/cats.scala
+<span class="gd">--- a/src/main/scala/cats.scala
+</span><span class="gi">+++ b/src/main/scala/cats.scala
+</span> object cats {
+<span class="gd">-  (Option(1) |@| Option(2) |@| Option(3)).map(_ + _ + _)
+</span><span class="gi">+  (Option(1), Option(2), Option(3)).mapN(_ + _ + _)
+</span> }
+</code></pre></div></div>
+
+<p>Besides bumping the Cats version number, the Scalafix migration took care of the
+breaking changes that were introduced between Cats 0.9.0 and Cats 1.0.0 and updated
+the code so that it compiles cleanly with the new version. These automatic
+migrations have the potential to significantly reduce maintenance costs of version
+updates that contain breaking changes or deprecations.</p>
+
+<h2 id="get-involved">Get involved</h2>
+
+<p>Scalafix migrations are great but we haven’t yet solved the problem of writing them
+automatically for version updates. <strong>:-)</strong> That means there are plenty of opportunities
+for new contributors to help library maintainers writing Scalafix migrations. And by
+integrating them into Scala Steward, their value is amplified by the number of
+projects that use Scala Steward. Even small contributions can already benefit a
+large chunk of the Scala ecosystem.</p>
+
+<p>After you have written a Scalafix migration for your favorite library,
+Scala Steward needs to be made aware that it exists and for which version update it
+should be applied. Instructions for adding them to Scala Steward and more details about
+the Scalafix integration in Scala Steward can be found <a href="https://github.com/fthomas/scala-steward/blob/master/docs/scalafix-migrations.md">here</a>.
+Once the migration has been added and the new version of the library is released, you
+can enjoy watching Scala Steward creating pull requests with changes from your Scalafix
+migration!</p>
+
+<p>There are also enough opportunities to <a href="https://github.com/fthomas/scala-steward/issues">improve Scala Steward itself</a>.
+The Scalafix integration, for example, has only been added recently and is still rough around
+the edges.</p>
+
+<h2 id="recap">Recap</h2>
+
+<p>Scala Steward:</p>
+
+<ul>
+  <li>Can create automatic pull requests that bump dependency versions. This saves a lot of time.</li>
+  <li>In addition to the version bumps, it can migrate the code with Scalafix.</li>
+  <li>You can help the whole Scala ecosystem by writing Scalafix migrations.</li>
+</ul>
+
+<p><a href="https://github.com/fthomas/scala-steward#quick-start-guide">Try out Scala Steward</a> now!</p>
+
+<h2 id="credits">Credits</h2>
+
+<p>Scala Steward wouldn’t exist without Roman Timushev’s great <a href="https://github.com/rtimush/sbt-updates">sbt-updates</a>
+which is an integral part of Scala Steward. A special shout-out also goes to
+<a href="https://twitter.com/impurepics/">@impurepics</a> who created the cute and iconic logo!</p>
+
+<p>And many thanks to the 20+ contributors who made Scala Steward to what it is today:
+Alex,
+Anil Kumar Myla,
+Arulselvan Madhavan,
+Bayram Kiran,
+Cédric Chantepie,
+Christopher Davenport,
+Dale Wijnand,
+Daniel Pfeiffer,
+David Francoeur,
+Fabian,
+Filipe Regadas,
+Jakub Kozłowski,
+JCollier,
+Jeff Martin,
+kenji yoshida,
+Mark Canlas,
+Michael Wizner,
+Philippus Baalman,
+Piotr Gabara,
+Renato Cavalcanti,
+sullis,
+TATSUNO Yasuhiro,
+Thomas Heslin, and
+Thomas Kaliakos.</p>
+
+<p>I’d also like to thank Andrea Magnorsky, David Francoeur, Lars Hupel,
+Seth Tisue, and Yifan Xing for proofreading this post.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2019-07-10-announcing-scala-steward.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

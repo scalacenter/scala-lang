@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>SIP/SLIP Summary, July 27th 2015 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="SIP/SLIP Summary, July 27th 2015"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2015/07/26/sip-slip-summary-july-2015.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>SIP/SLIP Summary, July 27th 2015</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Sunday 26 July 2015</p>
+						<p>Dick Wall</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2015/07/26/sip-slip-summary-july-2015.html">SIP/SLIP Summary, July 27th 2015</a></h2> -->
+					<h2 id="sipslip-summary-july-27th-2015">SIP/SLIP Summary, July 27th 2015</h2>
+
+<h3 id="next-committee-meeting">Next Committee Meeting:</h3>
+
+<p>Thursday August 13th, 4.30pm GMT. Google Hangout Event (dead link: httpx://plus.google.com/u/1/events/cfh933nkhhq0pe7h23c9v4csk6o)</p>
+
+<p><a href="https://www.youtube.com/watch?v=ndkT5qHZHI0">Video of last meeting</a></p>
+
+<h2 id="fixing-either">Fixing Either</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/robcd/scala.github.com/blob/master/sips/pending/_posts/2012-06-29-fixing-either.md">Fixing Either</a></td>
+      <td>Rob Dickens</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="summary">Summary</h3>
+
+<p>Fix a number of issues with using <code class="language-plaintext highlighter-rouge">Either</code>, particularly in for expressions. Potentially implement right bias for <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code> and related functions.</p>
+
+<h3 id="notes">Notes</h3>
+
+<p>This is a SIP that has been dormant for a long time. We are reaching out to Rob Dickens to see if he is still interested in pursuing the changes.</p>
+
+<p>Either, and related proposals/ideas such as validation and the <code class="language-plaintext highlighter-rouge">Or</code> type are currently being discussed by multiple interested parties in the Scala space.</p>
+
+<p>As a result, the likely path forward for this SIP and the related activity/interest will be to attempt to put together an expert group for this work.</p>
+
+<p>Since this change is likely to be contained entirely within library code and not require language changes, the resulting proposal should be a SLIP.</p>
+
+<h3 id="related">Related</h3>
+
+<p>https://github.com/scala/scala/pull/4547 is a closed pull request against Scala that covers some of the same territory.</p>
+
+<h3 id="invitation-to-comment">Invitation to Comment</h3>
+
+<p>For the time being, until a formal SLIP submission is contributed, please register interest
+on the scala/slip gitter channel with your contact details (preferably email, if you don’t want to make that public, contact @dickwall directly on gitter).</p>
+
+<h2 id="implicits-in-for-comprehensions">Implicits in For Comprehensions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/scala/scala.github.com/pull/417">Implicits in For Comprehensions</a></td>
+      <td>Harold Lee</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="summary-1">Summary</h3>
+
+<p>Allow the use of the implicit keyword in for expressions for the definition of
+values. The comments indicate that this should likely be broadened to all pattern matches.</p>
+
+<h3 id="notes-1">Notes</h3>
+
+<p>This will be a SIP if successful since it requires a language change. It will be renumbered
+if accepted.</p>
+
+<p>This is a recent SIP and has some useful discussion already on the pull request. Comments prior to the next SIP/SLIP committee meeting on Thursday, August 13th are requested.</p>
+
+<h3 id="invitation-to-comment-1">Invitation to comment</h3>
+
+<p>Please direct comments to <a href="https://github.com/scala/scala.github.com/pull/417">Pull Request #417</a>.</p>
+
+<h2 id="extensions-of-futures-and-promises">Extensions of Futures and Promises</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Extensions of Futures and Promises (dead link)</td>
+      <td>Anton Kolmakov, Eduard Maltsev</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="summary-2">Summary</h3>
+
+<p>Extension to SIP 14 to provide extra functionality not covered in that SIP, including scheduling, future-local variables, and more functionality on <code class="language-plaintext highlighter-rouge">scala.concurrent.Future</code>.</p>
+
+<h3 id="notes-2">Notes</h3>
+
+<p>Another candidate for a SLIP since changes appeared to be contained within libraries.</p>
+
+<p>SLIP number will be assigned if/when accepted.</p>
+
+<p>Need to gauge current level of interest from proposers.</p>
+
+<p>Seeking public comment prior to August 13th meeting.</p>
+
+<h3 id="invitation-to-comment-2">Invitation to comment</h3>
+
+<p>You can comment on <a href="https://github.com/scala/scala.github.com/pull/295">pull request #295</a> for more general comments or concerns.</p>
+
+<!-- the proposal document was deleted: https://docs.google.com/document/d/1Vza2-B3FzgtleX8RNs6rqRbhOn9jotrUfFB77h0DIGU/edit?hl=en_US#heading=h.bu8cg3api4vx -->
+
+<h2 id="backticks-in-string-interpolation">Backticks in String Interpolation</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://github.com/scala/scala.github.com/pull/297/">Backticks in String Interpolation</a></td>
+      <td>Kevin Wright</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="summary-3">Summary</h3>
+
+<p>Allow backticks to be used to denote identifiers in string interpolation without the need for the surrounding <code class="language-plaintext highlighter-rouge">{</code> <code class="language-plaintext highlighter-rouge">}</code>s, or in the enhanced proposal, without the need for <code class="language-plaintext highlighter-rouge">$</code> either.</p>
+
+<h3 id="notes-3">Notes</h3>
+
+<p>Needs language changes, hence will continue to be a (renumbered) SIP if/when accepted.</p>
+
+<p>Feeling for this change is mostly negative within the committee at present. Kevin points out that backtick identifiers are already possible if surrounded by <code class="language-plaintext highlighter-rouge">${ }</code>, so while this would streamline string interpolation, particularly for quasiquoting, it may be a tough sell with regards to risk/reward.</p>
+
+<p>Seeking public comment (and in particular multiple supporters willing to volunteer to push the SIP forward) prior to August 13th meeting.</p>
+
+<h3 id="invitation-to-comment-3">Invitation to comment</h3>
+
+<p>Comments requested on <a href="https://github.com/scala/scala.github.com/pull/297/">pull request #297</a>. There is more than the usual onus on supporters to back up their support with volunteer effort for this proposal.</p>
+
+<h2 id="binary-literals-underscores-in-literals">Binary Literals, Underscores in Literals</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author(s)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="https://groups.google.com/forum/#!msg/scala-debate/4-CE9Lpf6CM/UJrhS9cyYcgJ">Support _ in numeric literals</a></td>
+      <td>Eran Medan</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="source-material">Source Material</h3>
+
+<p><a href="https://www.reddit.com/r/scala/comments/3aqlhu/is_there_a_voting_mechanism_for_new_scala_features/">Reddit Posting from eranation</a></p>
+
+<p><a href="https://github.com/non/spire#syntax">Spire Syntax using String Interpolation and Macros</a></p>
+
+<h3 id="summary-4">Summary</h3>
+
+<p>Allow underscores in numeric literals, e.g. <code class="language-plaintext highlighter-rouge">1_000_000_000</code> instead of <code class="language-plaintext highlighter-rouge">1000000000</code>. This is a change that Java introduced in Java 7 and the desire of a SIP for this would be to keep Scala in line with Java lexically in this regard.</p>
+
+<h3 id="notes-4">Notes</h3>
+
+<p>Not yet a formal SIP/SLIP proposal, and status of SIP vs SLIP submission will depend on the proposed implementation: If a library based approach, like that used in Spire, is proposed, a SLIP, if language changes are required, a SIP.</p>
+
+<p>The committee is divided on language changes for this feature, with the leaning tending toward the Spire approach of string interpolation and macros at present, but with Martin supporting the language change to keep in line with Java lexical syntax.</p>
+
+<p>Detractors note that <code class="language-plaintext highlighter-rouge">_</code> is already used for many different purposes within Scala, and this would introduce another meaning for it.</p>
+
+<p>To move forward in either form, volunteer support from the community will be required.</p>
+
+<h3 id="invitation-to-comment-4">Invitation to comment</h3>
+
+<p>Since there is no PR or proposal at present upon which to comment, supporters (and detractors) are invited to discuss and register interest on the <a href="https://groups.google.com/forum/#!msg/scala-debate/4-CE9Lpf6CM/UJrhS9cyYcgJ">scala debate post</a> prior to the August 13th meeting. At that time we will discuss whether to invite the proposal, and in what form (SIP or SLIP).</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2015-07-26-sip-slip-summary-july-2015.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

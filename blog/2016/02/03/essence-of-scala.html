@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>The Essence of Scala | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="The Essence of Scala"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2016/02/03/essence-of-scala.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>The Essence of Scala</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 3 February 2016</p>
+						<p>Martin Odersky</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2016/02/03/essence-of-scala.html">The Essence of Scala</a></h2> -->
+					<p>What do you get if you boil Scala on a slow flame and wait until all
+incidental features evaporate and only the most concentrated essence
+remains? After doing this for 8 years we believe we have the answer:
+it’s DOT, the calculus of dependent object types, that underlies Scala.</p>
+
+<p>A <a href="https://infoscience.epfl.ch/record/215280">paper on DOT</a> will be
+presented in April at <a href="https://events.inf.ed.ac.uk/wf2016">Wadlerfest</a>,
+an event celebrating Phil Wadler’s 60th birthday. There’s also a prior
+technical report (<a href="https://arxiv.org/abs/1510.05216">From F to DOT</a>)
+by Tiark Rompf and Nada Amin describing a slightly different version
+of the calculus. Each paper describes a proof of type soundness that
+has been machine-checked for correctness.</p>
+
+<h2 id="the-dot-calculus">The DOT calculus</h2>
+
+<p>A calculus is a kind of mini-language that is small enough to be
+studied formally. Translated to Scala notation, the language covered
+by DOT is described by the following abstract grammar:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Value       v  =  (x: T) =&gt; t            Function
+                  new { x: T =&gt; ds }     Object
+
+Definition  d  =  def a = t              Method definition
+                  type A = T             Type
+
+Term        t  =  v                      Value
+                  x                      Variable
+                  t1(t2)                 Application
+                  t.a                    Selection
+                  { val x = t1; t2 }     Local definition
+
+Type        T  =  Any                    Top type
+                  Nothing                Bottom type
+                  x.A                    Selection
+                  (x: T1) =&gt; T2          Function
+                  { def a: T }           Method declaration
+                  { type T &gt;: T1 &lt;: T2 } Type declaration
+                  T1 &amp; T2                Intersection
+                  { x =&gt; T }             Recursion
+</code></pre></div></div>
+
+<p>The grammar uses several kinds of names:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x      for (immutable) variables
+a      for (parameterless) methods
+A      for types
+</code></pre></div></div>
+
+<p>The full calculus adds to this syntax formal <em>typing rules</em> that
+assign types <code class="language-plaintext highlighter-rouge">T</code> to terms <code class="language-plaintext highlighter-rouge">t</code> and formal <em>evaluation rules</em> that
+describe how a program is evaluated. The following <em>type soundness</em>
+property was shown with a mechanized, (i.e. machine-checked) proof:</p>
+
+<blockquote>
+  <p>If a term <code class="language-plaintext highlighter-rouge">t</code> has type <code class="language-plaintext highlighter-rouge">T</code>, and the evaluation of <code class="language-plaintext highlighter-rouge">t</code> terminates, then
+  the result of the evaluation will be a value <code class="language-plaintext highlighter-rouge">v</code> of type <code class="language-plaintext highlighter-rouge">T</code>.</p>
+</blockquote>
+
+<h2 id="difficulties">Difficulties</h2>
+
+<p>Formulating the precise soundness theorem and proving it was unexpectedly hard,
+because it uncovered some technical challenges that had not been
+studied in depth before. In DOT - as well as in many programming languages -
+you can have conflicting definitions. For instance you might have an abstract
+type declaration in a base class with two conflicting aliases in subclasses:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> trait Base { type A }
+ trait Sub1 extends Base { type A = String }
+ trait Sub2 extends Base { type A = Int }
+ trait Bad extends Sub1 with Sub2
+</code></pre></div></div>
+
+<p>Now, if you combine <code class="language-plaintext highlighter-rouge">Sub1</code> and <code class="language-plaintext highlighter-rouge">Sub2</code> in trait <code class="language-plaintext highlighter-rouge">Bad</code> you get a conflict,
+since the type <code class="language-plaintext highlighter-rouge">A</code> is supposed to be equal to both <code class="language-plaintext highlighter-rouge">String</code> and <code class="language-plaintext highlighter-rouge">Int</code>. If you do
+not detect the conflict and assume the equalities at face value you
+get <code class="language-plaintext highlighter-rouge">String = A = Int</code>, hence by transitivity <code class="language-plaintext highlighter-rouge">String = Int</code>! Once you
+are that far, you can of course engineer all sorts of situations where
+a program will typecheck but cause a wrong execution at runtime. In
+other words, type soundness is violated.</p>
+
+<p>Now, the problem is that one cannot always detect these
+inconsistencies, at least not by a local analysis that does not need
+to look at the whole program. What’s worse, once you have an
+inconsistent set of definitions you can use these definitions to
+“prove” their own consistency - much like a mathematical theory that
+assumes <code class="language-plaintext highlighter-rouge">true = false</code> can “prove” every proposition including its own
+correctness.</p>
+
+<p>The crucial reason why type soundness still holds is this: If one
+compares <code class="language-plaintext highlighter-rouge">T</code> with an alias, one does so always relative to some <em>path</em>
+<code class="language-plaintext highlighter-rouge">x</code> that refers to the object containing <code class="language-plaintext highlighter-rouge">T</code>.  So it’s really <code class="language-plaintext highlighter-rouge">x.T =
+Int</code>. Now, we can show that during evaluation every such path refers
+to some object that was created with a <code class="language-plaintext highlighter-rouge">new</code>, and that, furthermore,
+every such object has consistent type definitions. The tricky bit is
+to carefully distinguish between the full typing rules, which allow
+inconsistencies, and the typing rules arising from runtime values,
+which do not.</p>
+
+<h2 id="why-is-this-important">Why is This Important?</h2>
+
+<p>There are at least four reasons why insights obtained in the DOT
+project are important.</p>
+
+<ol>
+  <li>
+    <p>They give us a well-founded explanation of <em>nominal typing</em>.
+Nominal typing means that a type is distinguished from others
+simply by having a different name.
+For instance, given two trait definitions</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  trait A extends AnyRef { def f: Int }
+  trait B extends AnyRef { def f: Int }
+</code></pre></div>    </div>
+
+    <p>we consider <code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">B</code> to be different types, even though both
+traits have the same parents and both define the same members.
+The opposite of
+nominal typing is structural typing, which treats types
+that have the same structure as being the same. Most programming
+languages are at least in part nominal whereas most formal type systems,
+including DOT, are structural. But the abstract types in DOT
+provide a way to express nominal types such as classes and traits.
+The Wadlerfest paper contains examples that show how
+one can express classes for standard types such as <code class="language-plaintext highlighter-rouge">Boolean</code> and <code class="language-plaintext highlighter-rouge">List</code> in DOT.</p>
+  </li>
+  <li>
+    <p>They give us a stable basis on which we can study richer languages
+that resemble Scala more closely. For instance, we can encode
+type parameters as type members of objects in DOT. This encoding
+can give us a better understanding of the interactions of
+subtyping and generics. It can explain why variance rules
+are the way they are and what the precise typing rules for
+wildcard parameters <code class="language-plaintext highlighter-rouge">[_ &lt;: T]</code>, <code class="language-plaintext highlighter-rouge">[_ &gt;: T]</code> should be.</p>
+  </li>
+  <li>
+    <p>DOT also provides a blueprint for Scala compilation. The new Scala
+compiler <em>dotty</em> has internal data structures that closely resemble DOT.
+In particular, type parameters are immediately mapped to type members,
+in the way we propose to encode them also in the calculus.</p>
+  </li>
+  <li>
+    <p>Finally, the proof principles explored in the DOT work give us guidelines
+to assess and treat other possible soundness issues. We now know much
+better what conditions must be fulfilled to ensure type soundness.
+This lets us put other constructs of the Scala language to the test,
+either to increase our confidence that they are indeed sound, or
+to show that they are unsound. In my next blog I will
+present some of the issues we have discovered through that exercise.</p>
+  </li>
+</ol>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-02-03-essence-of-scala.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

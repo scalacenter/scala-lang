@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>BSP Support in sbt 1.4 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="BSP Support in sbt 1.4"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2020/10/27/bsp-in-sbt.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>BSP Support in sbt 1.4</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 27 October 2020</p>
+						<p>Adrien Piquerez, Scala Center</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2020/10/27/bsp-in-sbt.html">BSP Support in sbt 1.4</a></h2> -->
+					<p>sbt is a prominent tool of the Scala ecosystem. Yet it is poorly integrated in our IDEs and code editors, which are used to relying on internals or third parties to perform operations like compiling, running and testing.</p>
+
+<p>From this lack of integration derives a number of inconveniences:</p>
+<ul>
+  <li>Duplicated compilation times between sbt and the IDE</li>
+  <li>False compiler errors on the IDE</li>
+  <li>Outdated dependencies causing run-time failures</li>
+  <li>Conflicting Java versions</li>
+</ul>
+
+<p>We, at the Scala Center, are dedicated to improving the tooling that benefits all Scala users. We collaborated with <a href="https://www.jetbrains.com/">JetBrains</a> on designing the <a href="https://build-server-protocol.github.io/">Build Server Protocol</a> (BSP), a communication protocol between IDEs and build tools. It has since been adopted by some major players of the Scala tooling ecosystem, among which IntelliJ Idea, Metals and Bloop. Yet it was not supported by sbt until recently.</p>
+
+<p>Today we are proud to announce that support of BSP has been shipped into <a href="https://eed3si9n.com/sbt-1.4.0">sbt 1.4.0</a>.</p>
+
+<p>As we will see in more details, BSP in sbt improves the integration of sbt inside IDEs and code editors. It provides the user with a unified working environment that is:</p>
+<ul>
+  <li>Optimal in terms of compilation speed and reliability</li>
+  <li>Centralized around the sbt build definition</li>
+  <li>Highly customizable, by benefitting from the sbt task graph</li>
+</ul>
+
+<p>You can already try using sbt as the build server in IntelliJ Idea or Metals by following the instructions in this <a href="https://contributors.scala-lang.org/t/build-server-protocol-in-sbt/4234/27">Scala contributors post</a> or in the <a href="https://eed3si9n.com/sbt-1.4.0">sbt 1.4.0 release note</a>. <em>(Metals integration will soon become much smoother thanks to <a href="https://github.com/scalameta/metals/pull/2154">this PR</a> by <a href="https://github.com/ckipp01">Chris Kipp</a>)</em></p>
+
+<h2 id="background">Background</h2>
+
+<p>Support of BSP in sbt is a <a href="https://github.com/scalacenter/advisoryboard/blob/master/proposals/023-bsp.md">Scala Center Advisory Board Proposal</a>, dated January 2020, initiated by <a href="https://github.com/jastice">Justin Kaeser</a> from <a href="https://www.jetbrains.com/">JetBrains</a> and submitted by <a href="https://github.com/bvenners">Bill Venners</a> as a community representative. We, at the Scala Center, had the chance to closely collaborate with <a href="https://eed3si9n.com/">Eugene Yokota</a> on this proposal.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>The idea of BSP emerged after facing the fact that the integration of build tools inside IDEs requires a fair amount of work and maintenance effort, which is multiplied by the ever growing number of available build tools.</p>
+
+<p>This integration is often fragile because of the highly customizable nature of build tools. It is quite common for the users of IDEs to experience false compiler errors or out-of-sync state of the dependencies or the generated source files.</p>
+
+<p>By formalizing BSP, we aimed at providing a standard protocol of communication between IDEs and build tools, in which the build tool plays the role of the server that performs the operation requested by the IDE. The ultimate goal being to ease the integration on both sides while providing a better experience to the end-users.</p>
+
+<p>BSP is inspired by LSP, the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a>. The main difference being that LSP abstracts over the language whereas BSP abstracts over the build tool.</p>
+
+<p><img src="/resources/img/blog/bsp.png" alt="BSP clients" /></p>
+
+<p>Metals is both a language server and a build client. It provides text editors with support of the Scala language, enabling code-edition related features such as error reporting, code completion, go-to-definition, and more. But Metals itself depends on a build server to perform build-related operations, such as fetching the dependencies, invoking the compiler, running the tests or the application.</p>
+
+<p>IntelliJ Idea is also a build client, but it does not rely on a language server. It interacts directly with the build server to import the project and perform compilation on save. The Scala language support in IntelliJ is embedded in the Scala plugin.</p>
+
+<h2 id="whats-new">What’s new</h2>
+
+<p>With the recent built-in support of BSP in sbt, it is going to be possible for Metals and IntelliJ to connect to the sbt server and communicate with it directly. This solution is an alternative to the current status quo of using Bloop as a third-party BSP server.</p>
+
+<p>Bloop still offers some advantages compared to sbt server. It can serve several build clients, on different projects, and run the requests concurrently. It also supports DAP, the Debug Adapter Protocol, which provides code editors with the ability to debug applications and evaluate code at runtime.</p>
+
+<p>In contrast, by using sbt as the build server, you avoid potential inconsistencies, you spare duplicated compilation times, and you benefit from the customization of your build inside your IDE.</p>
+
+<p>Choosing Bloop or sbt as the build server depends on the project you are working on and the developer experience you are looking for. In the following paragraph we describe the main characteristics of using sbt as a build server.</p>
+
+<h2 id="the-full-sbt-experience-inside-your-ide">The full sbt experience inside your IDE</h2>
+
+<p>The Build Server Protocol improves the integration of sbt inside IDEs by leveraging on three sbt core concepts:</p>
+<ul>
+  <li>The incremental compiler (aka Zinc): one single compiler for all working environments.</li>
+  <li>The build definition: the structure of your build definition mirrors the project structure from your IDE.</li>
+  <li>The task graph: the custom tasks and settings of your build are taken into account by your IDE.</li>
+</ul>
+
+<h3 id="the-sbt-incremental-compiler">The sbt incremental compiler</h3>
+
+<p>One good aspect of using sbt as a build server is that you benefit from the sbt incremental compiler in all your working environments: in the sbt shell and the different IDEs you are using.</p>
+
+<p>Let’s take an example that illustrates a traditional workflow of working on an sbt project.</p>
+
+<p>You start by opening your sbt project in IntelliJ Idea, for the purpose of adding a new feature. You reorganize the existing code by moving some classes from module to module. You add a new class, modify a few methods and add a bunch of tests.</p>
+
+<p>During this process IntelliJ Idea compiles the code for you and reports the compilation errors. When you run the tests, it loads the classpath that it has itself compiled and calls the main method of the test framework.</p>
+
+<p>Pleased by the result of your work, you decide to deploy the application. You open the sbt shell and run the <code class="language-plaintext highlighter-rouge">package</code> command. sbt does not know that the application has already been compiled by IntelliJ Idea, and so it must recompile the changes you have made since you started working.</p>
+
+<p>If you are like me and you use several IDEs, you might want to try out Metals. You open VS Code and import your sbt project with the Metals plugin. This takes time again because the project is recompiled from scratch by Bloop, which is the build server used by Metals.</p>
+
+<p>All in all, a lot of time is wasted by recompiling the exact same codebase.</p>
+
+<p>With sbt as the build server, the sbt incremental compiler is the one and 
+only compiler for all your working environments:</p>
+<ul>
+  <li>You can switch from one IDE to another with no compilation latency.</li>
+  <li>You can open two IDEs simultaneously. Each change would trigger a single compiler invocation but both IDEs would be notified of compiler errors.</li>
+  <li>At any point in your coding workflow you can run an sbt command and benefit from the fact that the code is already compiled. The tests or the application start without delay.</li>
+</ul>
+
+<p>This kind of workflow was already possible by configuring and using Bloop in all your working environments. The main difference is that it is now natively supported by sbt and it does not rely on a third party.</p>
+
+<p>This feature mixes remarkably well with the new, and experimental, remote caching feature in sbt 1.4.0 (<a href="https://eed3si9n.com/sbt-1.4.0">see release note</a>). By enabling remote caching, a new developer can clone an sbt project and start working on it with no initial full compilation.</p>
+
+<h3 id="the-sbt-build-definition">The sbt build definition</h3>
+
+<p>An sbt build definition is made of projects, configurations (Compile, Test, Runtime…) and settings. A project can have an arbitrary number of configurations, which in turn can have an arbitrary number of settings. A BSP workspace, on the other hand, is composed of top-level build targets. A <code class="language-plaintext highlighter-rouge">project / configuration</code> scope in sbt becomes a BSP build target if it contains some predefined BSP-related settings. In particular it must contain the <code class="language-plaintext highlighter-rouge">bspBuildTargetId</code> setting.</p>
+
+<p>By default those settings are defined on the <code class="language-plaintext highlighter-rouge">project / Compile</code> and <code class="language-plaintext highlighter-rouge">project / Test</code> scopes, making them two distinct build targets. It means that the <code class="language-plaintext highlighter-rouge">main</code> and <code class="language-plaintext highlighter-rouge">test</code> sources of your project are compiled separately, each with its own classpath. Of course the <code class="language-plaintext highlighter-rouge">project / Test</code> build target depends on the <code class="language-plaintext highlighter-rouge">project / Compile</code> one.</p>
+
+<p>You can have additional configurations, such as the <a href="https://www.scala-sbt.org/1.x/docs/Testing.html#Additional+test+configurations">IntegrationTest</a> configuration. They will automatically be mapped to more BSP build targets.</p>
+
+<p>It may sometimes be convenient to disable the BSP support on a particular project or configuration. For instance, some projects cannot be compiled incrementally. Or you can have a configuration that is similar to another one in terms of its compiler inputs.</p>
+
+<p>To this purpose you can use the <code class="language-plaintext highlighter-rouge">bspEnabled</code> key: the <code class="language-plaintext highlighter-rouge">bspEnabled := false</code> setting disables BSP on an entire project, whereas <code class="language-plaintext highlighter-rouge">Test / bspEnabled := false</code> setting disbales BSP on the <code class="language-plaintext highlighter-rouge">Test</code> configuration only.</p>
+
+<p>The BSP structure of an sbt project mirrors the exact structure of the build definition. It is the same across all the environments of the developers working on this project.</p>
+
+<h3 id="the-sbt-task-graph">The sbt task graph</h3>
+
+<p>An sbt build definition is highly customizable. The list of <a href="https://www.scala-sbt.org/1.x/docs/Community-Plugins.html">available plugins</a> is very large and covers a lot of use cases.</p>
+
+<p>In addition to plugins, you can shape the task graph of your build by defining new settings and tasks, overloading existing tasks or adding new dependencies between tasks. sbt can merely execute any piece of Scala code at any point in the build task graph.</p>
+
+<p>When sbt receives a BSP request it translates this request into a task execution. This task is no different than any other task. It is a regular sbt task that depends on other well-known sbt tasks and settings.</p>
+
+<p>For instance the <code class="language-plaintext highlighter-rouge">buildTarget/compile</code> BSP request is translated into a <code class="language-plaintext highlighter-rouge">bspBuildTargetCompile</code> task which depends on the traditional <code class="language-plaintext highlighter-rouge">compile</code> task. It means that the BSP <code class="language-plaintext highlighter-rouge">buildTarget/compile</code> triggers the execution of the real <code class="language-plaintext highlighter-rouge">compile</code> task that is defined in your build definition and so it performs all the custom operations that you have defined.</p>
+
+<p>By using sbt as the build server you bring the level of customization of sbt to the IDE.</p>
+
+<h4 id="the-example-of-source-generation">The example of source generation</h4>
+
+<p>Let’s take a simple example, that is source generation.</p>
+
+<p>sbt gives the ability to automatically generate sources before the compilation happens. This can be done by either adding a custom <code class="language-plaintext highlighter-rouge">sourceGenerator</code> or by installing a source generation plugin.</p>
+
+<p>Assume we want to generate some Java code from protobuf files. We can use the <code class="language-plaintext highlighter-rouge">sbt-protobuf</code> plugin:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// project/plugins.sbt</span>
+<span class="nf">addSbtPlugin</span><span class="o">(</span><span class="s">"com.github.gseitz"</span> <span class="o">%</span> <span class="s">"sbt-protobuf"</span> <span class="o">%</span> <span class="s">"0.6.5"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// build.sbt</span>
+<span class="k">lazy</span> <span class="k">val</span> <span class="nv">root</span> <span class="k">=</span> <span class="nv">project</span><span class="o">.</span><span class="py">in</span><span class="o">(</span><span class="nf">file</span><span class="o">(</span><span class="s">"."</span><span class="o">))</span>
+  <span class="o">.</span><span class="py">enablePlugins</span><span class="o">(</span><span class="nc">ProtobufPlugin</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Now we add a <code class="language-plaintext highlighter-rouge">src/main/protobuf/SearchRequest.proto</code> file and run the <code class="language-plaintext highlighter-rouge">compile</code> command to generate and compile the corresponding java file. sbt goes over the files in <code class="language-plaintext highlighter-rouge">src/main/protobuf</code>, runs the <code class="language-plaintext highlighter-rouge">protoc</code> command on each file, which generates a java file in the <code class="language-plaintext highlighter-rouge">target/scala-2.13/src_managed/java</code> folder. Then it compiles all the generated, as well as the unmanaged sources.</p>
+
+<p>Traditionally, when working in an IDE, we must verify by ourselves that the generated sources are up-to-date. This can be quite cumbersome because each time a <code class="language-plaintext highlighter-rouge">.proto</code> file has changed, by a manual edit or a git operation, we must run <code class="language-plaintext highlighter-rouge">sbt compile</code> or <code class="language-plaintext highlighter-rouge">sbt generateSources</code> manually.</p>
+
+<p>With sbt as the build server, the workflow is greatly simplified because each of the <code class="language-plaintext highlighter-rouge">buildTarget/compile</code> requests sent by the IDE will trigger the source generation task. It is worth noting it is efficient because sbt uses a file tracking system to avoid regenerating sources that have not changed.</p>
+
+<h4 id="other-opportunities">Other opportunities</h4>
+
+<p>The previous example gives us a glimpse at the possibilities opened by BSP in sbt. There are many others, among which we can think of:</p>
+<ul>
+  <li>Better support of multi-platform and multi-version projects using <code class="language-plaintext highlighter-rouge">sbt-projectmatrix</code>.</li>
+  <li>Custom code linting using <code class="language-plaintext highlighter-rouge">sbt-scalafix</code>.</li>
+  <li>Automated formatting using <code class="language-plaintext highlighter-rouge">sbt-scalafmt</code>.</li>
+</ul>
+
+<h2 id="wrapping-up">Wrapping Up</h2>
+
+<p>BSP support in sbt is a major milestone in the adoption of BSP in the Scala ecosystem. We hope that it will ease the integration of sbt for the teams working on IDEs and language servers.</p>
+
+<p>We also hope that it will improve the experience of the large group of all sbt users by offering them a unified working environment that meets their needs:</p>
+<ul>
+  <li>An optimal workflow for developing, compiling, testing and releasing their project.</li>
+  <li>A centralized source of configuration, that is the sbt build definition.</li>
+  <li>A high level of customization that is compatible with all environments.</li>
+</ul>
+
+<p>The BSP implementation is very fresh in sbt 1.4.0. No doubt that we will need some time to round the corners. You are nonetheless very much encouraged to give it a try by following the instructions in this <a href="https://contributors.scala-lang.org/t/build-server-protocol-in-sbt/4234/27">Scala contributors post</a> or in the <a href="https://eed3si9n.com/sbt-1.4.0">sbt 1.4.0 release note</a>.</p>
+
+<h2 id="links-and-additional-resources">Links and Additional Resources</h2>
+
+<ul>
+  <li><a href="https://eed3si9n.com/sbt-1.4.0">The sbt 1.4.0 release note</a></li>
+  <li><a href="https://www.scala-sbt.org/">The sbt website</a></li>
+  <li><a href="https://build-server-protocol.github.io/">The Build Server Protocol website</a></li>
+  <li><a href="https://github.com/scalacenter/advisoryboard/blob/master/proposals/023-bsp.md">The Scala Center Advisory Board proposal</a></li>
+  <li><a href="https://contributors.scala-lang.org/t/build-server-protocol-in-sbt/4234">The Scala Contributors thread</a></li>
+</ul>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2020-10-27-bsp-in-sbt.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

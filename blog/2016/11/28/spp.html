@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Introducing the Scala Platform Process | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Introducing the Scala Platform Process"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2016/11/28/spp.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Introducing the Scala Platform Process</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 28 November 2016</p>
+						<p>Jorge Vicente Cantero</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2016/11/28/spp.html">Introducing the Scala Platform Process</a></h2> -->
+					<p>Today we’re happy to release our (initial) plans for the Scala Platform Process.
+If you’re unfamiliar with previous calls for a Scala Platform, the idea is
+simple; let’s reduce the Scala standard library to a very small core, and open
+up the decision about what popular libraries should be shipped in a “batteries
+included” distribution of Scala. This is the basic idea of the Scala Platform.</p>
+
+<p>The Scala Platform is the logical continuation of the modularization effort
+that began in Scala 2.11. Ultimately, the scala-library should be a small core,
+that consists of the Scala types we’ve come to think of as part of the language,
+such as the collections and most classes defined directly in the <code class="language-plaintext highlighter-rouge">scala</code> package.
+The modularization of xml, swing and parser combinators has made it easier for
+community maintainers to step up, and the SPP will continue opening up the
+standard library to community involvement.</p>
+
+<p>However, bringing many open source libraries together,
+isn’t easy, nor is is it easy to ensure that these essential libraries continue
+to be developed. This is why we’ve come up with and proposed an initial draft of
+what we call the Scala Platform Process. The goal of the Scala Platform Process
+is simple; provide infrastructure (for building, continuous integration, and
+releasing) as well as help with project governance (processes and guidelines to
+recruit contributors) to try and make it easier on platform library authors to
+ensure that maintenance and releases of their library can scale beyond just them
+alone.</p>
+
+<h2 id="infrastructure">Infrastructure</h2>
+
+<p>The infrastructure that the Scala Center provides includes:</p>
+
+<ul>
+  <li><a href="https://scalacenter.github.io/platform/sbt-platform.html">sbt-platform plugin</a>,</li>
+  <li><a href="https://scalacenter.github.io/platform/ci-integration.html">continuous integration</a>, and</li>
+  <li>a release manager.</li>
+</ul>
+
+<p>The sbt-platform plugin bundles together many tasks required for Scala Platform
+libraries such as; configuring automatic nightly builds, automatic releases of
+stable versions when a git tag is found, MiMa compatibility checks and PGP
+signatures for artifacts (with Scala Platform keys), integration with our Drone
+setup for writing your own sbt scripts, and other configuration that is
+oftentimes tedious to manage.</p>
+
+<p>Continuous integration (CI) is provided by Drone, on an EPFL cluster. The CI
+integration comes with a default Scala template that requires minor
+customization, and yet allows users to remotely configure the build, store their
+tokens, send notifications and act on certain events.</p>
+
+<p>When new changes are forwarded to the corresponding projects’ <code class="language-plaintext highlighter-rouge">platform-release</code>
+branch, our release manager releases them every night. If anything goes wrong,
+it will notify maintainers via email with an error log.</p>
+
+<h2 id="governance">Governance</h2>
+
+<p>The Scala Platform process also establishes process and policies to enable
+outside contributors, companies, and industrial users to contribute back to the
+modules, and to help along the modules’ maintenance.</p>
+
+<p>The goals of these policies are to create and evolve friendly communities around
+the modules and to provide a way for libraries to synchronize on releases and
+updates while still providing stability guarantees to users. For that, the
+process offers contracts for maintaining and contributing to modules as well as
+a <a href="https://scalacenter.github.io/platform/policies.html#policies-on-release-and-stability">predictable release process</a>.</p>
+
+<p>The aforementioned policies can be best summed up as a slightly <a href="https://scalacenter.github.io/platform/policies.html#policies-on-committers-and-contributors">modified version
+of the C4 contract</a>, Pieter Hintjens’ set of rules that made ZeroMQ successful.</p>
+
+<h3 id="the-collective-code-construction-contract-c4-contract">The Collective Code Construction Contract (C4) contract</h3>
+
+<p>The C4 process can perhaps be most succinctly motivated by its goals, taken directly from the C4 specification (dead link: rfc.zeromq.org/spec:42/C4/):</p>
+
+<blockquote>
+C4 is meant to provide a reusable optimal collaboration model for open source software projects. It has these specific goals:
+<ol>
+  <li>To maximize the scale and diversity of the community around a project, by reducing the friction for new Contributors and creating a scaled participation model with strong positive feedbacks;</li>
+  <li>To relieve dependencies on key individuals by separating different skill sets so that there is a larger pool of competence in any required domain;</li>
+  <li>To allow the project to develop faster and more accurately, by increasing the diversity of the decision making process;</li>
+  <li>To support the natural life cycle of project versions from experimental through to stable, by allowing safe experimentation, rapid failure, and isolation of stable code;</li>
+  <li>To reduce the internal complexity of project repositories, thus making it easier for Contributors to participate and reducing the scope for error;</li>
+  <li>To enforce collective ownership of the project, which increases economic incentive to Contributors and reduces the risk of hijack by hostile entities.</li>
+</ol>
+</blockquote>
+
+<p>As an example, the C4 contract sets rules for developer interaction such as what
+happens when someone submits a patch, how users should create pull-requests and
+motivate them, how maintainers can evolve and document APIs, or how they should
+deal with bad actors in case of a conflict.</p>
+
+<p>Our modifications to the process focus on minor Scala Platform requirements and
+licensing, where all modules can choose their open-source licenses so long as
+they are compatible with the modules already in the Platform. For those that
+don’t have one yet, Mozilla Public License v2 is recommended. The complete
+description of the rules is available
+<a href="https://scalacenter.github.io/platform/policies.html#policies-on-committers-and-contributors">here</a>.</p>
+
+<h3 id="a-predictable-release-process">A predictable release process</h3>
+<p>The predictable release process allows potential contributors to more easily
+reason about releases. It consists of three release pipelines:</p>
+
+<ul>
+  <li>nightly (for beta testers and early adopters),</li>
+  <li>stable (for users), and</li>
+  <li>bug fixes (in case that critical bugs are found).</li>
+</ul>
+
+<p>While nightlies are published automatically every night, stable versions of
+platform libraries are released cyclically every 12 weeks, if a release is
+ready.</p>
+
+<p>The release process asks modules to use semantic versioning to reflect breaking
+behaviour. Therefore, major releases happen every 18 months or when new Scala
+versions are released. Maintainers that want to experiment with major changes
+can use the @experimental annotation, whose semantics are documented <a href="https://scalacenter.github.io/platform/platform.html#expectations">here</a>.</p>
+
+<p>Modules also need to be cross-compiled with the latest two Scala major versions
+and, in order to ensure Platform’s long-term compatibility, bug fixes are
+accepted and released for major Platform releases in the last 24 months. Those
+modules that fall unmaintained are removed in every major release.</p>
+
+<h3 id="the-current-draft">The current draft</h3>
+
+<p>We think that the benefits of these policies are twofold: they help maintainers
+and contributors to organize themselves and they make it easier for outside
+contributors, companies and organizations to engage in the development of these
+libraries.</p>
+
+<p>With the help of the Scala Platform Committee members, we have drafted these
+processes in the Scala Platform specification.</p>
+
+<p>These policies are open for discussion and we hope that the Scala community will
+help us improve them!</p>
+
+<h2 id="the-committee">The Committee</h2>
+
+<p>The Scala Platform Committee is exclusively composed of members of the Scala
+community. They set the direction of the Platform, review proposals from the
+community, and decide on the modules that join the Platform.</p>
+
+<p>The members of the Committee are dedicated developers with a long record of
+contributions to the Scala ecosystem, the development of the language and major
+open-source projects. They have been selected to represent and serve the broad
+interest of the Scala community, not their personal or employers’ viewpoints.</p>
+
+<ol>
+  <li>Dale Wijnand (@dwijnand)</li>
+  <li>Aleksandar Prokopec (@axel22)</li>
+  <li>Lars Hupel (@larsrh)</li>
+  <li>Marius Eriksen (@mariusae)</li>
+  <li>Bill Venners (@bvenners)</li>
+  <li>Konrad Malawski (@ktoso)</li>
+  <li>Pathikrit Bhowmick (@pathikrit)</li>
+  <li>Alexander Podkhalyuzin (@Alefas)</li>
+  <li>Mathias Doenitz (@sirthias)</li>
+  <li>Rex Kerr (@Ichoran)</li>
+  <li>David Hall (@dlwh)</li>
+</ol>
+
+<h2 id="we-need-your-help">We need your help!</h2>
+<p>To make the Scala Platform successful, we need the help from the Community. Here’s how you can get involved!:</p>
+
+<ol>
+  <li>Make suggestions to improve the Scala Platform policies on our <a href="https://contributors.scala-lang.org/">Scala Contributors Discourse Forum</a>.</li>
+  <li><a href="https://scalacenter.github.io/platform/proposal-submission.html">Create a Scala Platform proposal</a>;</li>
+  <li>Discuss and give feedback on current proposals on our <a href="https://contributors.scala-lang.org/">Scala Contributors Discourse Forum</a>;</li>
+</ol>
+
+<p>The process has been designed to “give feedback early, give feedback often” on
+any proposal. We encourage you to <a href="https://scalacenter.github.io/platform/proposal-submission.html">get your hands dirty and submit
+yours</a>!</p>
+
+<h2 id="spp-meetings">SPP Meetings</h2>
+
+<p>Stay tuned, you can follow our regular SPP meetings, which are broadcast live on YouTube at the <a href="https://www.youtube.com/channel/UCn_8OeZlf5S6sqCqntAvaIw">Scala Process YouTube Channel</a>!</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-11-28-spp.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

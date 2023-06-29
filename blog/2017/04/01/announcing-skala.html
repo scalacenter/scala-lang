@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Introducing Skala: A New Vision for Dotty | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Introducing Skala: A New Vision for Dotty"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/04/01/announcing-skala.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Introducing Skala: A New Vision for Dotty</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Saturday 1 April 2017</p>
+						<p>Jon Pretty</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2017/04/01/announcing-skala.html">Introducing Skala: A New Vision for Dotty</a></h2> -->
+					<h1 id="introducing-skala-a-new-vision-for-dotty">Introducing Skala: A New Vision for Dotty</h1>
+
+<p>We are very proud today to be able to reveal that Dotty, sometimes referred to
+as “Scala 3”, will now officially be known as, “Skala”. And for the first time,
+we are delighted to announce that Skala will be adopting German keywords and
+syntax.</p>
+
+<p>Designing programming languages based on English is a recurrent historical
+leitmotif, but – this April – we felt that as Britain moves away from the
+European Union, taking much of the influence of the English language with it,
+now is the perfect time to make the transition to a superior language.</p>
+
+<p>Just a few years ago Dotty was a mere twinkling in the eye of Martin Odersky,
+but it was then that he first envisaged a successor to Scala based on German.
+We met up with Prof Odersky, Skala’s übermensch, at the Skala launchfest in a
+Munich biergarten to find out more about this exciting development.</p>
+
+<p>“I always felt that the English in Scala was a weak ersatz, and risked leaving
+it in a hinterland in the long-term, so I realised then that I had to take this
+decisive diktat to set Skala on the right track for a bright future. It’s a
+very pragmatic move; very realpolitik…” says Odersky.</p>
+
+<p>The Scala community aren’t neanderthals, though the transition may be harder
+for some people than others, so as long as we are all finding our feet in
+“Skala kindergarten”, we will not be making the English keywords verboten
+immediately.  And any existing Scala users concerned about feeling like
+ausländers should not worry: over the coming months, the Skalazentrum
+(formerly the Scala Center) will have a blitz to convert existing Scala
+source code to Skala.</p>
+
+<p>The Skalazentrum continues to do some very important work on
+<a href="https://github.com/scalacenter/scalafix">Skalafix</a>, supporting automatic code
+rewriting between Scala and Skala. It already supports many of the Glitzy new
+features first introduced in Dotty, and support for German keywords will be a
+trivial addition.</p>
+
+<h2 id="about-the-changes">About the Changes</h2>
+
+<p>Martin goes on, “One aspect of Scala’s keywords I always liked was that <code class="language-plaintext highlighter-rouge">val</code>,
+<code class="language-plaintext highlighter-rouge">var</code> and <code class="language-plaintext highlighter-rouge">def</code> were all the same length, so identifier names would align
+vertically. It just looked beautiful! We’ve managed to retain that property
+with the new keywords, <code class="language-plaintext highlighter-rouge">unveränderliche</code>, <code class="language-plaintext highlighter-rouge">opportunistisch</code> and
+<code class="language-plaintext highlighter-rouge">verfahrensweise</code>, whilst giving each of them more character, and indeed more
+characters.  I’m particularly fond of <code class="language-plaintext highlighter-rouge">opportunistisch</code>, which exemplifies how
+every programmer should feel about using mutable state.  And while <code class="language-plaintext highlighter-rouge">val</code> and
+<code class="language-plaintext highlighter-rouge">var</code> were near-doppelgangers, <code class="language-plaintext highlighter-rouge">unveränderliche</code> and <code class="language-plaintext highlighter-rouge">opportunistisch</code> are now
+much more easily disambiguated.”</p>
+
+<p>Some users may have angst about typing characters such as <code class="language-plaintext highlighter-rouge">ü</code> and <code class="language-plaintext highlighter-rouge">ß</code>, but
+Odersky dismisses this idea: “Being completely unable to enter half the syntax
+on an English keyboard may make coding slower, but that never seemed to hold
+Scalaz back.”</p>
+
+<p>It won’t be long before talk of <code class="language-plaintext highlighter-rouge">do</code>/<code class="language-plaintext highlighter-rouge">while</code> loops, <code class="language-plaintext highlighter-rouge">try</code>/<code class="language-plaintext highlighter-rouge">catch</code>/<code class="language-plaintext highlighter-rouge">finally</code>
+blocks and <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">then</code>/<code class="language-plaintext highlighter-rouge">else</code> expressions, are a thing of the past, and
+<code class="language-plaintext highlighter-rouge">mach</code>/<code class="language-plaintext highlighter-rouge">während</code> loops, <code class="language-plaintext highlighter-rouge">versuche</code>/<code class="language-plaintext highlighter-rouge">fang</code>/<code class="language-plaintext highlighter-rouge">endlich</code> blocks and
+<code class="language-plaintext highlighter-rouge">sofern</code>/<code class="language-plaintext highlighter-rouge">gegebenenfalls</code>/<code class="language-plaintext highlighter-rouge">andernfalls</code> expressions become part of the
+programming zeitgeist.</p>
+
+<p>We took choosing the new German keywords as an opportunity to improve upon
+their old English variants. For example, <code class="language-plaintext highlighter-rouge">ich</code> sounds much more personal than
+<code class="language-plaintext highlighter-rouge">this</code>, <code class="language-plaintext highlighter-rouge">implementationsdefiniert</code> conveys the meaning of <code class="language-plaintext highlighter-rouge">abstract</code> so much
+more concretely, and <code class="language-plaintext highlighter-rouge">erbt</code> saves typing a few characters over the more verbose
+<code class="language-plaintext highlighter-rouge">extends</code>. Skala also introduces the new keyword, <code class="language-plaintext highlighter-rouge">auffaltungsanleitung</code> –
+called <code class="language-plaintext highlighter-rouge">inline</code> in Dotty – but now with a more explanatory name.</p>
+
+<p>“Also, many people criticize the concept of implicits as masochistic. That’s
+why I decided to not talk about them, to keep quiet, to be <code class="language-plaintext highlighter-rouge">stillschweigend</code> in
+a sense. And I’m very happy that the new keyword makes this feeling implicit.”</p>
+
+<p>“I have often been approached about the suitability of Scala in the enterprise.
+Maybe it’s just schadenfreude, but to better reflect corporate hierarchies,
+<code class="language-plaintext highlighter-rouge">super</code>’s replacement keyword, <code class="language-plaintext highlighter-rouge">vorgesetzte</code>, makes it clear that the
+programmer has to defer to their manager.”</p>
+
+<p>In this update, we also wanted to acknowledge that German is not the only
+language programmers use, so we settled on replacing the <code class="language-plaintext highlighter-rouge">return</code> keyword,
+which we didn’t care much about anyway, with <code class="language-plaintext highlighter-rouge">retoure</code>, a French word loaned to
+German.</p>
+
+<p>Here is a full list of Skala keywords:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">implementationsdefiniert</code></td>
+      <td><code class="language-plaintext highlighter-rouge">muster</code></td>
+      <td><code class="language-plaintext highlighter-rouge">klasse</code></td>
+      <td><code class="language-plaintext highlighter-rouge">fang</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">verfahrensweise</code></td>
+      <td><code class="language-plaintext highlighter-rouge">mach</code></td>
+      <td><code class="language-plaintext highlighter-rouge">andernfalls</code></td>
+      <td><code class="language-plaintext highlighter-rouge">erbt</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">unrichtig</code></td>
+      <td><code class="language-plaintext highlighter-rouge">letzte</code></td>
+      <td><code class="language-plaintext highlighter-rouge">endlich</code></td>
+      <td><code class="language-plaintext highlighter-rouge">für</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">gegeben</code></td>
+      <td><code class="language-plaintext highlighter-rouge">sofern</code></td>
+      <td><code class="language-plaintext highlighter-rouge">stillschweigend</code></td>
+      <td><code class="language-plaintext highlighter-rouge">einführen</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">auffaltungsanleitung</code></td>
+      <td><code class="language-plaintext highlighter-rouge">faul</code></td>
+      <td><code class="language-plaintext highlighter-rouge">kompilationsroutine</code></td>
+      <td><code class="language-plaintext highlighter-rouge">vergleiche</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">erzeuge</code></td>
+      <td><code class="language-plaintext highlighter-rouge">nichtig</code></td>
+      <td><code class="language-plaintext highlighter-rouge">entität</code></td>
+      <td><code class="language-plaintext highlighter-rouge">überschreiben</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">paket</code></td>
+      <td><code class="language-plaintext highlighter-rouge">vertraulich</code></td>
+      <td><code class="language-plaintext highlighter-rouge">zugangsbeschränkt</code></td>
+      <td><code class="language-plaintext highlighter-rouge">retoure</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">versiegelt</code></td>
+      <td><code class="language-plaintext highlighter-rouge">vorgesetzte</code></td>
+      <td><code class="language-plaintext highlighter-rouge">gegebenenfalls</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ich</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">wirf</code></td>
+      <td><code class="language-plaintext highlighter-rouge">charakterzug</code></td>
+      <td><code class="language-plaintext highlighter-rouge">wahrhaftig</code></td>
+      <td><code class="language-plaintext highlighter-rouge">versuche</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">sorte</code></td>
+      <td><code class="language-plaintext highlighter-rouge">unveränderliche</code></td>
+      <td><code class="language-plaintext highlighter-rouge">opportunistisch</code></td>
+      <td><code class="language-plaintext highlighter-rouge">außerdem</code></td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">währen</code></td>
+      <td><code class="language-plaintext highlighter-rouge">vorfahrtGewähren</code></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="try-it-out">Try it out!</h2>
+
+<p>One of the biggest ongoing efforts of the newly-renamed Skalazentrum is the
+development of the new collections library, which will form the basis for the
+data structures we use on a daily basis in Skala. We have already completed
+work on translating the current Strawman Collections to Skala, and to offer a
+first glimpse of the improved readability of Skala code, you can browse some
+Skala source code
+here (dead link: https://github.com/propensive/collection-strawman/blob/master/src/main/scala/strawman/collection/View.scala).
+We are working with GitHub to support syntax highlighting for Skala, but it’s
+not there yet.</p>
+
+<p>You can also try out Skala for yourself
+today (https://github.com/fmasion/skala) with the fully-functional compiler
+and REPL. Instructions on running the compiler are in the README
+file (https://github.com/fmasion/skala/blob/master/README.md).</p>
+
+<p><a href="/resources/img/skala-repl.png"><img src="/resources/img/skala-repl.png" alt="skala-repl" /></a></p>
+
+<h2 id="future-work">Future Work</h2>
+
+<p>This is just the first step in Skala’s journey, but that journey is not yet
+complete.</p>
+
+<p>One of Scala’s great innovations was support for using method names in infix
+position, and Odersky would like to take that one step further to make all
+method applications postfix by default. As Mark Twain observes in his <a href="https://en.wikipedia.org/wiki/The_Awful_German_Language">appraisal
+of German sentence structure</a>, “…the writer
+[appends] ‘haben sind gewesen gehabt haben geworden sein,’ or words to that
+effect, and the monument is finished.” To Odersky, postfix verbs are like “the
+alpenglow of a sentence”.</p>
+
+<p>A problem Scala always suffered from was that it was never clear what was an
+object, or “noun”, and what was a method, or “verb”. Soon, Skala will require
+that all objects start with a capital letter, and all methods start with a
+lower-case character. This will mean some changes to pattern matching, but as
+Odersky says, “most people never knew the rules about capitalization of
+identifiers in patterns anyway, and the backtick syntax will continue to be
+available, so for me it’s worth the compromise”.</p>
+
+<p>Another great feature of German, separable verbs, is on the cards for Skala,
+too.  Odersky explains, “People often accuse German of combining multiple words
+into a single word. But English can be just as clumsy: Why use just one word,
+“map”, to describe the method of a functor when, conceptually, you <em>bilde</em> the list
+<em>ab</em>? That <code class="language-plaintext highlighter-rouge">ab</code> isn’t just some insignificant particle; it changes the whole
+meaning of <em>bilde</em>!” So Skala will soon be supporting this convenient syntax
+for separable method names,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  list.bilde(_ + 1)ab
+</code></pre></div></div>
+
+<p>and remembering that <code class="language-plaintext highlighter-rouge">verfahrensweise</code> is the keyword formerly known as <code class="language-plaintext highlighter-rouge">def</code>, we
+can define this new method with,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  verfahrensweise bilde[A](f: E =&gt; R)ab = ...
+</code></pre></div></div>
+
+<p>One more planned change to Skala’s syntax is the elimination of unnecessary
+spaces between modifiers and definitions. It was always a frustration to
+Odersky that <code class="language-plaintext highlighter-rouge">abstract override lazy val</code> could not be a single word.  “It’s a
+single concept, so why not?” he asks, incredulously. Yet the reason was always
+that forming compound words simply didn’t work so well in English; but in
+German, writing <code class="language-plaintext highlighter-rouge">implementationsdefiniertüberschreibenfaulunveränderliche</code> is
+completely natural, so we intend to fully embrace it.</p>
+
+<h2 id="get-involved">Get involved!</h2>
+
+<p>We have come a long way in getting Skala
+to this stage, and there continues to be much exciting work going into the
+language. With the help of organizations like the
+<a href="https://scala.epfl.ch/">Skalazentrum</a>, <a href="https://typelevel.org">Typstufe</a>,
+events like <a href="https://scala.world/">Skala World</a> and inclusive groups like
+<a href="https://www.scalabridge.org/">SkalaBridge</a>, we hope to grow the community
+around this ambitious new language. So I hope you will join with us in
+embracing this bold step towards a better zukunft.</p>
+
+<p><strong>Editor’s note: this article is dedicated to all the non-native English
+speakers who use, persevere with and contribute to Scala in English. Thank you.
+We are also grateful to Lars Hupel for his assistance with some of the
+translations.</strong></p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2017-04-01-announcing-skala.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

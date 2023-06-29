@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 2.13 Collections Rework | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 2.13 Collections Rework"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/02/28/collections-rework.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 2.13 Collections Rework</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 28 February 2017</p>
+						<p>Stefan Zeiger</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2017/02/28/collections-rework.html">Scala 2.13 Collections Rework</a></h2> -->
+					<p>In October of 2015 Martin Odersky <a href="https://github.com/lampepfl/dotty/issues/818">asked for strawman proposals</a> for a new collections library design for Scala 2.13, which eventually led to the project that we are currently working on, based on his latest proposal. This was not the first redesign for the Scala collections. The <a href="https://docs.scala-lang.org/overviews/core/architecture-of-scala-collections.html">current design</a> was first implemented in Scala 2.8 along with the required improvements to type inference in the Scala compiler. It can generally be considered a success, providing powerful and flexible abstractions that bring together immutable and mutable collections, both sequential and parallel, with a high amount of shared interfaces and implementations. However, it does exhibit some symptoms of <a href="https://en.wikipedia.org/wiki/Second-system_effect">second-system syndrome</a> that have been problematic in practice.</p>
+
+<h2 id="goals">Goals</h2>
+
+<p>Before looking at details of these problems and possible solutions in the new design, let’s start with the broader goals for the new design:</p>
+
+<ul>
+  <li>
+    <p>Simplify the API for users: This includes doing common operations without <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>, pruning back the inheritance tree and a better separation of immutable and mutable collection operations.</p>
+  </li>
+  <li>
+    <p>Simplify the API for implementors: Implementing a new collection type is <a href="https://docs.scala-lang.org/overviews/core/architecture-of-scala-collections.html">far from trivial</a> at the moment. Setting up the implicits to get the desired <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> instance in all cases (both through static implicits lookup and at run-time) is tricky. Inheriting lots of method implementations by default appears like a benefit at first but you still need to manually check (and possibly override) all methods whose default implementation has unsatisfactory performance for a specific collection.</p>
+  </li>
+  <li>
+    <p>Design for better performance: The best algorithms are not very useful if you ignore lower-level performance concerns such as specialization for primitive types or method dispatch in the JVM. For example, <a href="https://github.com/slick/slick/pull/1252/commits/2adb7c36874c41f068176570d3812b674463660e">replacing Scala collections in Slick’s AST</a> by a custom collection implementation improved the performance of Slick’s query compiler by 25% (from reducing overhead and implementing efficient operations alone, without any use of specialization). While we do not expect the same improvements for a more generic collection library, it does show that there is room for improvement.</p>
+  </li>
+  <li>
+    <p>Provide source compatibility with 2.12 where it makes sense but allow breaking changes where required: We expect the majority of collection usage to be compatible between 2.12 and 2.13 and the majority of the remaining incompatibilities to be automatically fixable with <a href="https://scalacenter.github.io/scalafix/">ScalaFix</a>.</p>
+  </li>
+</ul>
+
+<h2 id="traversable-and-iterable">Traversable and Iterable</h2>
+
+<p>Leaving the “generic” abstractions (which encompass both sequential and parallel collections) and the implementation traits (like <code class="language-plaintext highlighter-rouge">TraversableLike</code> and <code class="language-plaintext highlighter-rouge">IterableLike</code>) aside, we have <code class="language-plaintext highlighter-rouge">Traversable</code> at the root of the current collections hierarchy. Its only real subtype that is used by collection implementations is <code class="language-plaintext highlighter-rouge">Iterable</code>. The difference is that <code class="language-plaintext highlighter-rouge">Traversable</code> only provides <em>internal iteration</em>, i.e. a <code class="language-plaintext highlighter-rouge">foreach</code> method, whereas <code class="language-plaintext highlighter-rouge">Iterable</code> gives you the more powerful <em>external iteration</em> via an <code class="language-plaintext highlighter-rouge">Iterator</code>. The <code class="language-plaintext highlighter-rouge">Traversable</code> abstraction has not carried its weight in the current library and will likely not resurface in the new design. Everything we want to do can be expressed with <code class="language-plaintext highlighter-rouge">Iterable</code>.</p>
+
+<p>We are also looking at other opportunities to remove collection traits. While each one of them is there for a good reason, their interactions and the sheer number create a huge amount of complexity. For example, this is the class declaration of the standard <a href="https://www.scala-lang.org/api/2.12.1/scala/collection/immutable/List.html"><code class="language-plaintext highlighter-rouge">List</code></a> class:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sealed</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">List</span><span class="o">[</span><span class="kt">+A</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">AbstractSeq</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+                               <span class="k">with</span> <span class="nc">LinearSeq</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>
+                               <span class="k">with</span> <span class="nc">Product</span>
+                               <span class="k">with</span> <span class="nc">GenericTraversableTemplate</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">List</span><span class="o">]</span>
+                               <span class="k">with</span> <span class="nc">LinearSeqOptimized</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span>
+                               <span class="k">with</span> <span class="nv">scala</span><span class="o">.</span><span class="py">Serializable</span> <span class="o">{</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If you traverse all these supertypes you find no less than 37 (!) linear supertypes in total.</p>
+
+<h2 id="canbuildfrom">CanBuildFrom</h2>
+
+<p>One of the most powerful but also most controversial features of the current collections library is <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span>, <span class="kt">That</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">bf</span><span class="k">:</span> <span class="kt">CanBuildFrom</span><span class="o">[</span><span class="kt">Repr</span>, <span class="kt">B</span>, <span class="kt">That</span><span class="o">])</span><span class="k">:</span> <span class="kt">That</span>
+</code></pre></div></div>
+
+<p>This is the standard <code class="language-plaintext highlighter-rouge">map</code> method as declared in <code class="language-plaintext highlighter-rouge">TraversableLike</code>. It is so inscrutable to beginners that simplified <em>use case signatures</em> were added to the API documentation in order to better convey the intended meaning:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   def map[B](f: A =&gt; B): $Coll[B]
+</code></pre></div></div>
+
+<p>While use case signatures help you when you look at the scaladocs, you still have to deal with the real definitions in IDE code-completion and in compiler errors.</p>
+
+<p>Here is the same method as defined in <code class="language-plaintext highlighter-rouge">IterablePolyTransforms</code> in the new design:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">C</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span>
+</code></pre></div></div>
+
+<p>The method has the expected signature, there is no compile-time or run-time overhead to find the right <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>, and the type constructor <code class="language-plaintext highlighter-rouge">C</code> is refined to a concrete collection type in almost every use case, so you see the expected definitions in scaladocs, code-completion and error messages.</p>
+
+<p>Of course, <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> was added in Scala 2.8 for a good reason. It allows a single definition of a standard method like <code class="language-plaintext highlighter-rouge">map</code> to work for regular, unconstrained collections and for constrained collections that require an implicit evidence for their element type. For example, we can naturally define <code class="language-plaintext highlighter-rouge">class BitSet extends Set[Int]</code>, but what does it mean to call <code class="language-plaintext highlighter-rouge">map</code> on a <code class="language-plaintext highlighter-rouge">BitSet</code>?</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">BitSet</span> <span class="o">=</span> <span class="o">...</span>
+<span class="k">val</span> <span class="nv">c1</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="k">val</span> <span class="nv">c2</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="nv">i</span><span class="o">.</span><span class="py">toString</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>The current Scala collections design makes it possible to not only build a <code class="language-plaintext highlighter-rouge">BitSet</code> for <code class="language-plaintext highlighter-rouge">c1</code> and a <code class="language-plaintext highlighter-rouge">HashSet</code> for <code class="language-plaintext highlighter-rouge">c2</code> at run-time but also compute these types statically at compile-time. It gets slightly more complicated when you take code such as</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">BitSet</span> <span class="o">=</span> <span class="o">...</span>
+<span class="k">val</span> <span class="nv">c1</span> <span class="k">=</span> <span class="o">(</span><span class="n">s</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Int</span><span class="o">]).</span><span class="py">map</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>You wouldn’t expect <code class="language-plaintext highlighter-rouge">c1</code> to be of type <code class="language-plaintext highlighter-rouge">BitSet</code> but is it still backed by a <code class="language-plaintext highlighter-rouge">BitSet</code> at run-time or do you get a default <code class="language-plaintext highlighter-rouge">Set</code> implementation? In this case it is the latter but there are inconsistencies between static and dynamic lookup of <code class="language-plaintext highlighter-rouge">Builder</code> types in the current library that can lead to unexpected types or implementations.</p>
+
+<p>As shown above, the new design does not have an implicit evidence parameter for <code class="language-plaintext highlighter-rouge">map</code>, so you are assured that you always get the same implementation no matter if you statically see your <code class="language-plaintext highlighter-rouge">BitSet</code> as a <code class="language-plaintext highlighter-rouge">BitSet</code> or a <code class="language-plaintext highlighter-rouge">Set[Int]</code>. This “same implementation” in the case of <code class="language-plaintext highlighter-rouge">BitSet</code> means <code class="language-plaintext highlighter-rouge">Set</code> though. A collection implementation is free to pick any collection type to build (between what its supertype promises and what it implements itself, of course) as long as it is <em>unconstrained</em>. In order to call <code class="language-plaintext highlighter-rouge">BitSet.map</code> and get another constrained <code class="language-plaintext highlighter-rouge">BitSet</code> out of it, we need to overload the <code class="language-plaintext highlighter-rouge">map</code> method:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BitSet</span> <span class="k">extends</span> <span class="nc">Set</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="o">{</span>
+  <span class="c1">// inherited:</span>
+  <span class="c1">//def map[B](f: Int =&gt; B): Set[B]</span>
+
+  <span class="k">def</span> <span class="nf">map</span><span class="o">(</span><span class="n">f</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">BitSet</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Thanks to <a href="https://github.com/scala/scala/pull/5307">an improvement to type inference</a> it is possible to call the overloaded method with a lambda without explicit type annotations in Scala 2.12:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">BitSet</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1">// Scala 2.11 and earlier would have required:</span>
+<span class="k">val</span> <span class="nv">c1</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">map</span><span class="o">((</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="c1">// This works in 2.12+:</span>
+<span class="k">val</span> <span class="nv">c2</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">i</span> <span class="k">=&gt;</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>While <code class="language-plaintext highlighter-rouge">BitSet</code> is a rather esoteric collection type, the same principle of implicit constraints on element types <code class="language-plaintext highlighter-rouge">T</code> applies to other collection types as well:</p>
+
+<ul>
+  <li>BitSet: <code class="language-plaintext highlighter-rouge">T &lt;:&lt; Int</code> (“must be an Int”)</li>
+  <li>All <code class="language-plaintext highlighter-rouge">Map</code> types: <code class="language-plaintext highlighter-rouge">T &lt;:&lt; (_, _)</code> (“must be a Tuple2”)</li>
+  <li>All sorted collections (like <code class="language-plaintext highlighter-rouge">TreeSet</code>): <code class="language-plaintext highlighter-rouge">Ordering[T]</code> (“must have an Ordering”)</li>
+  <li>String (not a collection type per se but it gets many collection methods as extension methods): <code class="language-plaintext highlighter-rouge">T &lt;:&lt; Char</code> (“must be a Char”)</li>
+  <li>Array (same situation as String): <code class="language-plaintext highlighter-rouge">ClassTag[T]</code> (“must have a ClassTag”)</li>
+</ul>
+
+<p>This covers most uses of <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> in a much simpler way. The most important use cases that cannot be supported directly by the new design are <code class="language-plaintext highlighter-rouge">collection.breakOut</code> (for building a different collection type directly without an extra conversion step) and <code class="language-plaintext highlighter-rouge">to</code> (for converting to a different collection type for which a <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> is available). The new design provides alternative ways to achieve the same effects.</p>
+
+<h2 id="fromiterable">FromIterable</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">to</code> method still exists in the new design but it is only a decorator around <code class="language-plaintext highlighter-rouge">FromIterable</code>, the basic abstraction that is implemented by every unconstrained collection type’s companion object:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">+A</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">Any</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">to</span><span class="o">[</span><span class="kt">C</span><span class="o">[</span><span class="kt">X</span><span class="o">]</span> <span class="k">&lt;:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">X</span><span class="o">]](</span><span class="n">fi</span><span class="k">:</span> <span class="kt">FromIterable</span><span class="o">[</span><span class="kt">C</span><span class="o">])</span><span class="k">:</span> <span class="kt">C</span><span class="o">[</span><span class="kt">A</span> <span class="kt">@uncheckedVariance</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">fi</span><span class="o">.</span><span class="py">fromIterable</span><span class="o">(</span><span class="n">coll</span><span class="o">)</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+
+<span class="k">trait</span> <span class="nc">FromIterable</span><span class="o">[</span><span class="kt">+C</span><span class="o">[</span><span class="kt">X</span><span class="o">]</span> <span class="k">&lt;:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">X</span><span class="o">]]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">fromIterable</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">it</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">B</span><span class="o">])</span><span class="k">:</span> <span class="kt">C</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">fi</code> parameter is not implicit (like the <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> in the current library), so you now call <code class="language-plaintext highlighter-rouge">to</code> with a value and have the type inferred instead of calling it with a type and having the value filled in by implicit lookup:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+<span class="k">val</span> <span class="nv">v</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">to</span><span class="o">(</span><span class="nc">Vector</span><span class="o">)</span> <span class="c1">// this used to be to[Vector]</span>
+</code></pre></div></div>
+
+<p>This has the advantage that we can overload <code class="language-plaintext highlighter-rouge">to</code> to cover maps (and maybe also other constrained collection types) which is not possible in the current design (where <code class="language-plaintext highlighter-rouge">to</code> only works for unary type constructors).</p>
+
+<h2 id="views">Views</h2>
+
+<p><a href="https://docs.scala-lang.org/overviews/collections/views.html">Views</a> in the current collections library <a href="https://github.com/scala/collection-strawman/issues/21#issuecomment-275861238">are one of the lesser-used features</a> yet they add a lot of complexity to the implementation. The new design separates immutable views from mutable views (the latter have not yet been implemented), with only two types of immutable views: indexed and non-indexed. This is a huge simplification over the current design where a view type is specific to its underlying collection type.</p>
+
+<p>Conceptually a <code class="language-plaintext highlighter-rouge">View</code> is now a reified operation over an <code class="language-plaintext highlighter-rouge">Iterator</code>. Like a <a href="https://zeroturnaround.com/rebellabs/java-8-streams-cheat-sheet/">Java 8 Stream</a> it has <em>terminal</em> operations which run the operation represented by the current <code class="language-plaintext highlighter-rouge">View</code> on a fresh <code class="language-plaintext highlighter-rouge">Iterator</code> (e.g. <code class="language-plaintext highlighter-rouge">foreach</code> and <code class="language-plaintext highlighter-rouge">foldLeft</code>) and <em>intermediate</em> operations which create a new <code class="language-plaintext highlighter-rouge">View</code> (e.g. <code class="language-plaintext highlighter-rouge">filter</code> and <code class="language-plaintext highlighter-rouge">flatMap</code>). This provides clear semantics even when used together with mutable collections: Composing views with intermediate operations is always independent of concurrent modifications to the underlying collection. Only when you call a terminal operation will the current state of the collection be used (by calling <code class="language-plaintext highlighter-rouge">iterator</code> on it).</p>
+
+<p>Views are also the recommended replacement for <code class="language-plaintext highlighter-rouge">collection.breakOut</code>. For example,</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+<span class="k">val</span> <span class="nv">set</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toString</span><span class="o">)(</span><span class="nv">collection</span><span class="o">.</span><span class="py">breakOut</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>can be expressed with the same performance characteristics as:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+<span class="k">val</span> <span class="nv">set</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">view</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toString</span><span class="o">).</span><span class="py">to</span><span class="o">(</span><span class="nc">Set</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>If you combine multiple operations they are executed lazily:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">s</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">...</span>
+
+<span class="c1">// First build a filtered Seq, then a mapped Seq, then a Set</span>
+<span class="k">val</span> <span class="nv">set1</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toString</span><span class="o">).</span><span class="py">to</span><span class="o">(</span><span class="nc">Set</span><span class="o">)</span>
+
+<span class="c1">// Build a Set directly by evaluating filter and map together:</span>
+<span class="k">val</span> <span class="nv">set2</span> <span class="k">=</span> <span class="nv">s</span><span class="o">.</span><span class="py">view</span><span class="o">.</span><span class="py">filter</span><span class="o">(</span><span class="k">_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">toString</span><span class="o">).</span><span class="py">to</span><span class="o">(</span><span class="nc">Set</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="laziness">Laziness</h2>
+
+<p>Aside from views the current collections library also supports lazy collections but they do not get a first class treatment. While we do have <code class="language-plaintext highlighter-rouge">Stream</code>, it is only lazy in the tail but still strict in the head element and the implementation needs to special-case pretty much everything because the basic abstraction for building new collections (which is used by all of the default implementations that strict collection types can safely inherit) is <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> / <code class="language-plaintext highlighter-rouge">Builder</code> which uses strict, push-based collection building.</p>
+
+<p>By combining <code class="language-plaintext highlighter-rouge">FromIterable</code> with the new <code class="language-plaintext highlighter-rouge">View</code> design we can turn this around to provide pull-based building which can be used by strict and lazy collections alike.  For example, this is the default implementation of <code class="language-plaintext highlighter-rouge">map</code> in <code class="language-plaintext highlighter-rouge">IterablePolyTransforms</code> which does not need to be overridden in <code class="language-plaintext highlighter-rouge">LazyList</code> to provide the expected laziness:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">C</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="nf">fromIterable</span><span class="o">(</span><span class="nv">View</span><span class="o">.</span><span class="py">Map</span><span class="o">(</span><span class="n">coll</span><span class="o">,</span> <span class="n">f</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>Any operation that is available on <code class="language-plaintext highlighter-rouge">View</code> can get a default implementation like this based on rebuilding the current collection type from a <code class="language-plaintext highlighter-rouge">View</code> operation. Naturally a <code class="language-plaintext highlighter-rouge">LazyList</code> can be “built” from an <code class="language-plaintext highlighter-rouge">Iterable</code> by getting an <code class="language-plaintext highlighter-rouge">Iterator</code> and only pulling elements one by one as they are needed, so we automatically get a lazy implementation of <code class="language-plaintext highlighter-rouge">map</code>.</p>
+
+<h2 id="language-integration">Language Integration</h2>
+
+<p>You may have wondered about the asymmetry in the default types that are in scope through <code class="language-plaintext highlighter-rouge">Predef</code> or the <code class="language-plaintext highlighter-rouge">scala</code> package object:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; classOf[Set[_]]
+res1: Class[Set[_]] = interface scala.collection.immutable.Set
+
+scala&gt; classOf[Map[_, _]]
+res2: Class[Map[_, _]] = interface scala.collection.immutable.Map
+
+scala&gt; classOf[Seq[_]]
+res3: Class[Seq[_]] = interface scala.collection.Seq
+</code></pre></div></div>
+
+<p>Unlike all other collection types, <code class="language-plaintext highlighter-rouge">Seq</code> is not the immutable version but the generic one that encompasses both, mutable and immutable sequences. The reason for this is that the Scala specification represents varargs as type <code class="language-plaintext highlighter-rouge">scala.Seq</code> (and it should not have to rely on any type outside the top-level <code class="language-plaintext highlighter-rouge">scala</code> package). Since varargs in Java (and on the JVM) are really mutable arrays, the default <code class="language-plaintext highlighter-rouge">Seq</code> has to allow mutable collections.</p>
+
+<p>In practice though, this kind of array can be treated as quasi-immutable, so we plan to add a new <code class="language-plaintext highlighter-rouge">ImmutableArray</code> wrapper in the new design which can be used for varargs, thereby removing the need for a non-immutable default <code class="language-plaintext highlighter-rouge">Seq</code> type.</p>
+
+<h2 id="outlook">Outlook</h2>
+
+<p>We are currently working on the new design as part of <a href="https://github.com/scalacenter/advisoryboard/blob/master/proposals/007-collections.md">SCP-007</a> which is funded by <a href="https://scala.epfl.ch/">Scala Center</a>. At this stage all work is happening in the <a href="https://github.com/scala/collection-strawman">collection-strawman</a> repository with the goal of refining and completing it to the point where we are confident that it can and should become a part of Scala 2.13. The core project team consists of Julien Richard-Foy (from Scala Center), Martin Odersky, Rex Kerr and myself (as a member of the Scala team at Lightbend who maintain the Scala compiler).</p>
+
+<p>If you’d like to get involved, now is the time to weigh in on the discussions that are happening on the pull requests and issues. We also have a chat room and a <a href="https://contributors.scala-lang.org/t/ongoing-work-on-standard-collections-redesign/293">Scala Contributors</a> discourse discussion thread.</p>
+
+<p>A few topics still need further exploration:</p>
+
+<ul>
+  <li>
+    <p>Currently there is no support for <a href="https://web.archive.org/web/20180924231107/http://www.scala-notes.org/2011/04/specializing-for-primitive-types/">specialization</a> of collections. It would be nice to allow this in the new design if we can do it without too much of an impact on the majority of non-specialized collections.</p>
+  </li>
+  <li>
+    <p>We need a story for parallel collections. They will be <a href="https://github.com/scala/scala/pull/5603/">moved into a separate module</a> in Scala 2.13 as part of the ongoing modularization of the standard library but it is not clear yet how closely they will be integrated into the new design.</p>
+  </li>
+  <li>
+    <p>The <a href="https://github.com/scala/scala-java8-compat">scala-java8-compat</a> module provides better integration of collections with Java Streams. Some basic parts like the specialized <code class="language-plaintext highlighter-rouge">Stepper</code> types (which unify Java Iterators, Scala Iterators and Java Spliterators) may find their way into the standard library.</p>
+  </li>
+  <li>
+    <p>Apart from <a href="https://scalacenter.github.io/scalafix/">ScalaFix</a> we should explore other migration options, for example using IntelliJ IDEA’s refactoring API or providing compatibility libraries that allow you to cross-build most sources against the old and new collection libraries.</p>
+  </li>
+</ul>
+
+<p>The current roadmap calls for the basic design to be completed in Q1 2017 so we can focus on migration options in Q2 and come to a decision whether to adopt the new design in Scala 2.13. If all goes according to plan, the remaining implementation work should be finished by the end of the year in time for Scala 2.13.0-RC1.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2017-02-28-collections-rework.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

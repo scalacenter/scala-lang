@@ -1,0 +1,9 @@
+_site/
+.DS_Store
+/bundle-vendor/bundle/
+vendor/
+/.jekyll-metadata
+.bundle
+/.idea
+.ruby-version
+.sass-cache/

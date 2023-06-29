@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 3.2.0 released! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 3.2.0 released!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2022/09/05/scala-3.2.0-released.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 3.2.0 released!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 5 September 2022</p>
+						<p>Paweł Marks, VirtusLab</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2022/09/05/scala-3.2.0-released.html">Scala 3.2.0 released!</a></h2> -->
+					<p><img src="/resources/img/scala-3.2-launch.png" alt="Scala 3.2" /></p>
+
+<p>We are happy to announce the release of Scala 3.2.0. This new minor release allowed us to deliver some significant improvements.</p>
+
+<h2 id="whats-new-in-scala-320">What’s new in Scala 3.2.0</h2>
+
+<h3 id="support-for-code-coverage">Support for code coverage</h3>
+
+<p><a href="https://github.com/scoverage/scalac-scoverage-plugin">Scoverage</a> is an excellent tool for keeping track of the test coverage of code written in Scala. Unfortunately, it relied on a compiler plugin to generate coverage data. This means that it was limited only to Scala 2 code. Now we have changed that. Since the launch of 3.2, the Scala compiler can natively generate coverage data. To enable that, use the <code class="language-plaintext highlighter-rouge">-coverage-out</code> flag and provide the output directory. The Scoverage plugin for sbt is even more convenient. It sets up the compiler flags, includes other parts of the Scoverage toolset, and automatically generates human-readable reports.</p>
+
+<h3 id="exports-in-extension-clauses">Exports in extension clauses</h3>
+
+<p>We have added Extension clauses to the list of places where users can export definitions. That allows, among other benefits, to add extensions method in bulk without relying on any form of implicit conversion. Let’s examine the simple example:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">RichInt</span><span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span>
+  <span class="kt">def</span> <span class="kt">double</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+  <span class="k">def</span> <span class="nf">triple</span> <span class="k">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span>
+
+<span class="nf">extension</span> <span class="o">(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+  <span class="k">private</span> <span class="k">def</span> <span class="nf">richInt</span> <span class="k">=</span> <span class="nc">RichInt</span><span class="o">(</span><span class="n">i</span><span class="o">)</span>
+  <span class="n">export</span> <span class="n">richInt</span><span class="o">.*</span>
+</code></pre></div></div>
+
+<p>This adds <code class="language-plaintext highlighter-rouge">double</code> and <code class="language-plaintext highlighter-rouge">triple</code> methods as extensions to the <code class="language-plaintext highlighter-rouge">Int</code> type, so calling <code class="language-plaintext highlighter-rouge">2.double</code> will return <code class="language-plaintext highlighter-rouge">4</code>.</p>
+
+<p>In this example, there is no benefit in exporting the methods instead of declaring them as extensions. However, in real life, the equivalent of our <code class="language-plaintext highlighter-rouge">RichInt</code> class can be generic, rely on inheritance, declare its own exports from other types or be used in multiple extension clauses. This allows for much better reuse and modularity of extensions, which was not possible before.</p>
+
+<h3 id="code-completion-for-refined-types">Code completion for refined types</h3>
+
+<p>Scala 3.0 introduced a <code class="language-plaintext highlighter-rouge">Selectable</code> marker trait for types that support the dynamic selection of members. It allows bridging the outside world of untyped data (such as JSON) with strongly typed Scala code. In 3.2, the <code class="language-plaintext highlighter-rouge">Selectable</code> trait gained a huge boost as the compiler now generates code completion data for it based on type refinements. Metals and Scala REPL are already using said data and are providing code completion for <code class="language-plaintext highlighter-rouge">Selectable</code>’s members.</p>
+
+<p>Let’s assume that in our code, we have some simple implementation of JSON data and the type for JSON representing a person. It may look something like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Json</span><span class="o">(</span><span class="n">raw</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Selectable</span><span class="k">:</span>
+  <span class="c1">// provide the implementation for parsing here</span>
+
+<span class="k">type</span> <span class="kt">Person</span> <span class="o">=</span> <span class="nc">Json</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">name</span><span class="k">:</span> <span class="kt">String</span>
+  <span class="k">val</span> <span class="nv">age</span><span class="k">:</span> <span class="kt">Int</span>
+  <span class="k">val</span> <span class="nv">address</span><span class="k">:</span> <span class="kt">String</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>If we have an instance of the <code class="language-plaintext highlighter-rouge">Person</code> type named <code class="language-plaintext highlighter-rouge">person</code> and then type <code class="language-plaintext highlighter-rouge">person.a</code> in our IDE or REPL, the auto-completion will provide suggestions for the <code class="language-plaintext highlighter-rouge">address</code> and <code class="language-plaintext highlighter-rouge">age</code> fields.</p>
+
+<p>If you are interested in how you can use <code class="language-plaintext highlighter-rouge">Selectable</code> and refined types for safer work with untyped data in your code, you may want to take a look at this example: <a href="https://github.com/VirtusLab/iskra">Iskra</a>. This simple library provides better type safety and auto-completion when working with Apache Spark’s data frames.</p>
+
+<h3 id="improved-mirror-synthesis">Improved Mirror synthesis</h3>
+
+<p>Mirrors are an important innovation in Scala 3. They are the given instances of type class generated by the compiler for selected types and, most importantly, all case classes and enums. They allow for defining type class derivation without using advanced metaprogramming techniques.</p>
+
+<p>In 3.2, a lot of work was put into improving the Mirror synthesis. Most importantly, Mirrors are now generated for local and inner classes and generic tuples up to the size of 22. Also, there are substantial improvements in reporting Mirror-related errors. Now, the compiler prints a list of reasons why it couldn’t generate the requested Mirror.</p>
+
+<h3 id="easier-use-of-class-constructors-with-using-clauses">Easier use of class constructors with using clauses</h3>
+
+<p>Until now, classes using clauses sometimes required passing awkward empty parameter lists to the constructor.  For example, the following snippet:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Example</span><span class="o">(</span><span class="n">using</span> <span class="nc">String</span><span class="o">)(</span><span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+<span class="n">given</span> <span class="nc">String</span> <span class="k">=</span> <span class="s">"something"</span>
+<span class="k">val</span> <span class="nv">instance</span> <span class="k">=</span> <span class="nc">Example</span><span class="o">(</span><span class="mi">6</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>was failing with a misleading error message. The only proper way to instantiate the <code class="language-plaintext highlighter-rouge">Example</code> class was inserting an unintuitive empty parameter list and writing <code class="language-plaintext highlighter-rouge">Example()(6)</code>.</p>
+
+<p>Now the compiler correctly inserts parameter lists, so this snippet compiles as expected.</p>
+
+<h3 id="given-instances-in-for-comprehension">Given instances in for-comprehension</h3>
+
+<p>It is now possible to declare bindings in for-comprehensions as given instances that are visible in the for-comprehension scope.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">usesString</span><span class="o">(</span><span class="n">using</span> <span class="nc">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+
+<span class="k">val</span> <span class="nv">ints</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+  <span class="k">for</span>
+    <span class="n">given</span> <span class="nc">String</span> <span class="k">&lt;-</span> <span class="nc">List</span><span class="o">(</span><span class="s">"abc"</span><span class="o">,</span> <span class="s">"def"</span><span class="o">,</span> <span class="s">"xyz"</span><span class="o">)</span> <span class="c1">// this now works</span>
+    <span class="n">result</span> <span class="k">&lt;-</span> <span class="n">usesString</span>
+  <span class="k">yield</span> <span class="n">results</span>
+</code></pre></div></div>
+
+<h3 id="statistics-about-code-complexity">Statistics about code complexity</h3>
+
+<p>The new <code class="language-plaintext highlighter-rouge">-Vprofile</code> compiler flags give some insights into code complexity and where compilation time is likely spent. If set, the compiler prints a summary for every compiled source file. The summary contains:</p>
+
+<ul>
+  <li>the source file name,</li>
+  <li>the number of code lines in the source, excluding comments and whitespace,</li>
+  <li>the number of tokens (separately parsed words) in the source,</li>
+  <li>the number of TASTy chunks produced from the source. A chunk consists of 50 bytes of Tasty output that serializes the type-checked tree coming from the source, using some compression techniques. The size of the generated Tasty is a good estimator of compile times and code complexity.</li>
+  <li>the average complexity per line, computed by dividing the number of lines by the number of Tasty chunks.</li>
+  <li>
+    <p>an explanation of the average complexity number, computed as follows:</p>
+
+    <ul>
+      <li>low: fewer Tasty chunks than source lines,</li>
+      <li>moderate: up to 5 times more TASTy chunks than source lines,</li>
+      <li>high: up to 25 times more TASTy chunks than source lines,</li>
+      <li>extreme: At least 25 times more TASTy chunks than source lines,</li>
+    </ul>
+  </li>
+  <li>the directory where the source is located.</li>
+</ul>
+
+<p>There are two additional related flags:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-Vprofile-sorted-by:&lt;column label&gt;</code> prints the same output as <code class="language-plaintext highlighter-rouge">-Vprofile</code>, but it is sorted according to a specified column, for example: <code class="language-plaintext highlighter-rouge">complexity</code> or <code class="language-plaintext highlighter-rouge">lines</code></li>
+  <li><code class="language-plaintext highlighter-rouge">-Vprofile-details &lt;number&gt;</code> summarizes the profiles of the <code class="language-plaintext highlighter-rouge">&lt;number&gt;</code> most complex methods</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">-Vprofile</code> option family is useful for trouble-spotting long compile times.</p>
+
+<h3 id="new-experimental-apis">New experimental APIs</h3>
+
+<p>The following new APIs were introduced to the language and currently can be used in experimental code. We are looking forward to user feedback before we decide to stabilise them.</p>
+
+<ul>
+  <li><a href="https://scala-lang.org/api/3.x/scala/annotation/MainAnnotation.html#"><code class="language-plaintext highlighter-rouge">scala.annotation.MainAnnotation</code></a> - the annotation that can be used to define custom entry points to the application</li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/annotation/newMain.html#"><code class="language-plaintext highlighter-rouge">scala.annotation.newMain</code></a> - new implementation of <code class="language-plaintext highlighter-rouge">@main</code> annotation. It is planned to replace it in the future</li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/util/TupledFunction.html#"><code class="language-plaintext highlighter-rouge">scala.util.TupledFunction</code></a> - the typeclass allowing to abstract over function arities</li>
+</ul>
+
+<h2 id="stabilised-apis">Stabilised APIs</h2>
+
+<p>The 3.2 release stabilises a bunch of APIs that previously could be used only in experimental code. Those are:</p>
+
+<ul>
+  <li><a href="https://scala-lang.org/api/3.x/scala/deriving/Mirror$.html#fromTuple-fffffb85"><code class="language-plaintext highlighter-rouge">scala.deriving.Mirror.fromTuple</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/Tuple.html#:*-a82"><code class="language-plaintext highlighter-rouge">scala.Tuple.:*</code></a> together with <a href="https://scala-lang.org/api/3.x/scala/Tuple$.html#Append-0"><code class="language-plaintext highlighter-rouge">scala.Tuple.Append</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/NonEmptyTuple.html#init-ffffff96"><code class="language-plaintext highlighter-rouge">scala.NonEmptyTuple.init</code></a> together with <a href="https://scala-lang.org/api/3.x/scala/Tuple$.html#Init-0"><code class="language-plaintext highlighter-rouge">scala.Tuple.Init</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/NonEmptyTuple.html#last-fffff7c4"><code class="language-plaintext highlighter-rouge">scala.NonEmptyTuple.last</code></a> together with <a href="https://scala-lang.org/api/3.x/scala/Tuple$.html#Last-0"><code class="language-plaintext highlighter-rouge">scala.Tuple.Last</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/quoted/Quotes$reflectModule$AppliedTypeModule.html#apply-fffffbf2"><code class="language-plaintext highlighter-rouge">scala.quoted.Quotes.reflectModule.AppliedTypeModule.apply</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/quoted/Quotes$reflectModule$SymbolMethods.html#asQuotes-fffffdc2"><code class="language-plaintext highlighter-rouge">scala.quoted.Quotes.reflectModule.SymbolMethods.asQuotes</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/quoted/Quotes$reflectModule$SymbolMethods.html#termRef-d26"><code class="language-plaintext highlighter-rouge">scala.quoted.Quotes.reflectModule.SymbolMethods.termRef</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/quoted/Quotes$reflectModule$SymbolMethods.html#typeRef-d26"><code class="language-plaintext highlighter-rouge">scala.quoted.Quotes.reflectModule.SymbolMethods.typeRef</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/quoted/Quotes$reflectModule$TypeReprMethods.html#substituteTypes-3a6"><code class="language-plaintext highlighter-rouge">scala.quoted.Quotes.reflectModule.TypeReprMethods.substituteTypes</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/quoted/Quotes$reflectModule$TypeReprMethods.html#typeArgs-5f"><code class="language-plaintext highlighter-rouge">scala.quoted.Quotes.reflectModule.TypeReprMethods.typeArgs</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/quoted/Quotes$reflectModule$TypeTreeModule.html#ref-d26"><code class="language-plaintext highlighter-rouge">scala.quoted.Quotes.reflectModule.TypeTreeModule.ref</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/Predef$.html#eq-fffff7fa"><code class="language-plaintext highlighter-rouge">scala.Predef.eq</code></a></li>
+  <li><a href="https://scala-lang.org/api/3.x/scala/Predef$.html#ne-fffff7fa"><code class="language-plaintext highlighter-rouge">scala.Predef.ne</code></a></li>
+</ul>
+
+<h2 id="should-i-update-to-scala-320">Should I update to Scala 3.2.0?</h2>
+
+<p>We thoroughly tested all release candidates for 3.2.0 to detect any source incompatibilities. We run a so-called Open Community Build, a compilation of nearly 1000 real-life projects on each compiler build. You can read how we achieved this ambitious goal in <a href="https://virtuslab.com/blog/prevent-scala3-compiler-regressions-community-build/">the recent blog post</a> of our teammate. Thanks to the knowledge we have gathered using Open Community Build, we have managed to ensure that over 98% of projects passing compilation with 3.1.3 are still compiling correctly without any changes to the source code.</p>
+
+<p>In most cases, fixing an error that resulted from source-incompatible change does not require many fundamental steps for the project author. Typically, it requires explicitly specifying the type in a place where the code previously relied on type inference. If somehow you encounter source incompatibility that cannot be easily fixed, let us know, and we will try to fix that in upcoming patch releases of the 3.2 compiler.</p>
+
+<p>The more important question than “Should I update to Scala 3.2.0?” is “When should I update to Scala 3.2.0?”. The answer for standalone projects and applications is “The sooner, the better”. The update most likely won’t require any additional work, and you will be able to enjoy all the improvements brought by the current version.</p>
+
+<p>If you are a library author, you also need to consider that bumping the compiler version in your library will also force all downstream users to use the new compiler the next time they bump the version of your library. For this reason, we encourage you that if you are following the semantic versioning, you bump the compiler version in the next minor release of your library.</p>
+
+<p>You can read more about our compatibility guarantees and future plans regarding this aspect in <a href="/blog/2022/08/17/long-term-compatibility-plans.html">the previous blog post</a>.</p>
+
+<h3 id="known-incompatibilities">Known incompatibilities</h3>
+
+<ul>
+  <li>
+    <p>The code that used <code class="language-plaintext highlighter-rouge">()</code> to signal that the class constructor should use given instances from the scope as using parameters is no longer compiling.</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Bar</span><span class="o">(</span><span class="n">using</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)(</span><span class="n">y</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+<span class="n">given</span> <span class="nc">Int</span> <span class="k">=</span> <span class="o">???</span>
+<span class="k">def</span> <span class="nf">test</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Bar</span><span class="o">()(</span><span class="s">""</span><span class="o">)</span> <span class="c1">// error</span>
+</code></pre></div>    </div>
+
+    <p>You should use <code class="language-plaintext highlighter-rouge">Bar("")</code> instead.</p>
+  </li>
+  <li><a href="https://docs.scala-lang.org/scala3/reference/dropped-features/nonlocal-returns.html">Nonlocal returns</a> from nested anonymous functions now produce a warning. They will be hard errors at some point in the future.</li>
+  <li>
+    <p>Refutable pattern bindings now produce a warning.</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">option</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+<span class="k">val</span> <span class="nv">Some</span><span class="o">(</span><span class="n">result</span><span class="o">)</span> <span class="k">=</span> <span class="n">option</span> <span class="c1">// Will emit warning</span>
+</code></pre></div>    </div>
+
+    <p>To suppress the warning, you can annotate the right side with the <code class="language-plaintext highlighter-rouge">@unchecked</code> annotation.</p>
+  </li>
+  <li>
+    <p>Mirrors for top-level union types are no longer generated.</p>
+
+    <p>Up to 3.1.3, the compiler tried to generate Mirrors for some union types. Even when it succeeded, the result was often incorrect. Now the Mirrors are never generated for any union types.</p>
+  </li>
+</ul>
+
+<h2 id="contributors">Contributors</h2>
+
+<p>Thank you to all the contributors who made the release of 3.2.0 possible 🎉</p>
+
+<p>According to <code class="language-plaintext highlighter-rouge">git shortlog -sn --no-merges 3.1.3..3.2.0</code>, they are:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   154 odersky
+    62 Nicolas Stucki
+    51 Filip Zybała
+    42 Jamie Thompson
+    39 Dale Wijnand
+    30 Tom Grigg
+    29 Paweł Marks
+    29 rochala
+    25 Guillaume Raffin
+    13 Fengyun Liu
+    13 Ondrej Lhotak
+    11 Guillaume Martres
+    11 Sébastien Doeraene
+     7 Matt Bovel
+     7 Som Snytt
+     6 Szymon Rodziewicz
+     5 Julien Richard-Foy
+     5 Martin Odersky
+     5 Wojciech Mazur
+     4 Chris Kipp
+     4 Olivier Blanvillain
+     4 Xavientois
+     3 Rikito Taniguchi
+     3 Vadim Chelyshov
+     2 Adrien Piquerez
+     2 Albert Chen
+     2 Anatolii Kmetiuk
+     2 Arnout Engelen
+     2 Jan Chyb
+     2 Lan, Jian
+     2 Phil
+     2 Philippus
+     2 Raphael Jolly
+     2 Robert Stoll
+     2 Tim Spence
+     2 cgccuser
+     2 gagandeepkalra
+     2 manojo
+     2 noti0na1
+     2 Артём
+     1 Aleksander Boruch-Gruszecki
+     1 Dmitrii Naumenko
+     1 Humberto Rodríguez A
+     1 Johannes Rudolph
+     1 Jędrzej Rochala
+     1 Krzysztof Romanowski
+     1 Magnolia.K
+     1 Michał Pałka
+     1 Ondřej Lhoták
+     1 Stéphane Micheloud
+     1 Timothée Loyck Andres
+     1 Yichen Xu
+     1 adampauls
+     1 johannes karoff
+     1 ouertani
+     1 xuwei-k
+     1 yoshinorin
+</code></pre></div></div>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2022-09-05-scala-3.2.0-released.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

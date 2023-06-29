@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Let Them Be Lazy! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Let Them Be Lazy!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/11/28/view-based-collections.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Let Them Be Lazy!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 28 November 2017</p>
+						<p>Julien Richard-Foy</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2017/11/28/view-based-collections.html">Let Them Be Lazy!</a></h2> -->
+					<p>One of the main changes in the new design of the collections is that operations have
+“view based” default implementations rather than “builder based”. This blog article
+explains what this means as well as what it means for a collection to be lazy or
+strict, how the view based design allows us to support both types of collections,
+and finally why this is an improvement over the current design of the collections.</p>
+
+<p>More background information about the collections redesign can be found in
+<a href="https://www.scala-lang.org/blog/2017/02/28/collections-rework.html">this blog post</a>. The
+source code is available in
+<a href="https://github.com/scala/collection-strawman">this GitHub repository</a>.</p>
+
+<h2 id="background-lazy-vs-strict-collections">Background: Lazy vs Strict Collections</h2>
+
+<p>We can classify collections into two categories: those that evaluate their elements when
+they are created, and those that evaluate their elements when they are needed only.</p>
+
+<p>An example of the first category is <code class="language-plaintext highlighter-rouge">List[A]</code>: when we create a list we compute all
+its elements, when we transform a list (e.g. using <code class="language-plaintext highlighter-rouge">map</code>) we compute all the elements
+of the resulting list. We say that list is a <strong>strict</strong> collection type.</p>
+
+<p>An example of the second category is <code class="language-plaintext highlighter-rouge">Stream[A]</code>: we can create and transform streams
+without computing their elements. Those might never be computed unless we iterate
+through them. We say that streams are <strong>lazy</strong>.</p>
+
+<p>Laziness allows us to create fancy infinite collections without blowing the memory:
+<code class="language-plaintext highlighter-rouge">Stream.continually(42)</code>. In practice, lazy collections are particularly useful to
+describe successive transformation operations without evaluating intermediate
+transformations. Typically, if we want to transform the first <code class="language-plaintext highlighter-rouge">n</code> elements of
+a list using <code class="language-plaintext highlighter-rouge">map</code> we will probably write something like <code class="language-plaintext highlighter-rouge">xs.take(n).map(f)</code>.
+Unfortunately, this expression will create an intermediate collection (resulting from
+the <code class="language-plaintext highlighter-rouge">.take(n)</code> call) although we are only interested in the result of the <code class="language-plaintext highlighter-rouge">map</code> call.
+Creating this intermediate collection can be an expensive operation that we can
+avoid by using a view, which is a lazy collection: <code class="language-plaintext highlighter-rouge">xs.view.take(n).map(f)</code>.</p>
+
+<h2 id="whats-wrong-with-views">What’s Wrong With Views?</h2>
+
+<p>Unfortunately, the current support of views in the standard library suffers from
+two issues.</p>
+
+<h3 id="operations-default-implementations-break-laziness">Operations Default Implementations Break Laziness</h3>
+
+<p>In the current collections, the default implementations of operations that return
+new collections (e.g. <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">++</code>) are based on strict builders.
+Consequently, when these operations are inherited by lazy collections they break
+their laziness. Therefore, these operations have to carefully be overridden by lazy
+collections to disable the default behaviour and preserve laziness instead.
+From a maintainer point of view, this is a headache.</p>
+
+<h3 id="canbuildfrom-doesnt-work-with-views"><code class="language-plaintext highlighter-rouge">CanBuildFrom</code> Doesn’t Work With Views</h3>
+
+<p>Unfortunately, views not only cause trouble for the standard library maintainers
+but also end users. Indeed, the primary mechanism to extend the collections
+with new operations, namely <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>, is incompatible with views. This means
+that users that use an implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> instance to build a collection will
+get a runtime exception if that instance has been resolved for a view.
+This is because <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>, as its name suggests, also uses a strict
+“builder based” approach. Therefore no sensible implementation of its methods can
+be provided for lazy collections.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>We have seen that on one hand views are useful to avoid unnecessary computations but
+the other hand they give pain to maintainers and are dangerous for end users.</p>
+
+<p>The collections redesign is an opportunity to fix these issues, as
+explained in the remainder of this article.</p>
+
+<h2 id="view-based-default-implementations">“View Based” Default Implementations</h2>
+
+<p>Essentially, in the new collections we reversed the situation.
+Instead of having strict by default operations, they are now lazy by default and
+concrete collection types decide whether to evaluate their result or not. For instance,
+here is the implementation of <code class="language-plaintext highlighter-rouge">map</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">CC</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">C</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">CC</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="nf">fromIterable</span><span class="o">(</span><span class="nv">View</span><span class="o">.</span><span class="py">Map</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">f</span><span class="o">))</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>(where <code class="language-plaintext highlighter-rouge">CC[_]</code> is <code class="language-plaintext highlighter-rouge">List</code> or <code class="language-plaintext highlighter-rouge">Vector</code>)</p>
+
+<p>We can break down this implementation into two steps.</p>
+
+<p>First, we create a lazy <code class="language-plaintext highlighter-rouge">View</code> that “records” that the <code class="language-plaintext highlighter-rouge">map</code> operation has been applied.
+Constructing such a view is a cheap operation, here is the implementation of
+<code class="language-plaintext highlighter-rouge">View.Map</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">object</span> <span class="nc">View</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="k">class</span> <span class="nc">Map</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">B</span><span class="o">](</span><span class="n">underlying</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">View</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">iterator</span> <span class="k">=</span> <span class="nv">underlying</span><span class="o">.</span><span class="py">iterator</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="n">f</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>As you can see, unless we actually iterate on the view we don’t evaluate the elements
+of the <code class="language-plaintext highlighter-rouge">underlying</code> collection or the mapped elements.</p>
+
+<p>Second, we build the resulting collection from the view by calling <code class="language-plaintext highlighter-rouge">fromIterable</code>. This operation
+is abstract in <code class="language-plaintext highlighter-rouge">IterableOps</code> and is implemented by leaf classes of the hierarchy (e.g.
+<code class="language-plaintext highlighter-rouge">List</code>, <code class="language-plaintext highlighter-rouge">Vector</code>, etc.). Here is the implementation of <code class="language-plaintext highlighter-rouge">fromIterable</code> in <code class="language-plaintext highlighter-rouge">List</code>,
+for instance:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">List</span>, <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">fromIterable</span><span class="o">[</span><span class="kt">E</span><span class="o">](</span><span class="n">it</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">E</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">E</span><span class="o">]</span> <span class="k">=</span> <span class="o">(</span><span class="nv">List</span><span class="o">.</span><span class="py">newBuilder</span><span class="o">[</span><span class="kt">E</span><span class="o">]()</span> <span class="o">++=</span> <span class="n">it</span><span class="o">).</span><span class="py">result</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>This implementation creates a new list and adds all the elements of the passed <code class="language-plaintext highlighter-rouge">Iterable[E]</code>
+to it. By doing so, it necessarily computes the elements of the source collection
+and the resulting collection: <code class="language-plaintext highlighter-rouge">List</code> is a strict collection type.</p>
+
+<p>Now let’s have a look at the <code class="language-plaintext highlighter-rouge">fromIterable</code> implementation in <code class="language-plaintext highlighter-rouge">View</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">View</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">View</span>, <span class="kt">View</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">fromIterable</span><span class="o">[</span><span class="kt">E</span><span class="o">](</span><span class="n">it</span><span class="k">:</span> <span class="kt">Iterable</span><span class="o">[</span><span class="kt">E</span><span class="o">])</span><span class="k">:</span> <span class="kt">View</span><span class="o">[</span><span class="kt">E</span><span class="o">]</span> <span class="k">=</span>
+    <span class="k">new</span> <span class="nc">View</span><span class="o">[</span><span class="kt">E</span><span class="o">]</span> <span class="o">{</span>
+      <span class="k">def</span> <span class="nf">iterator</span> <span class="k">=</span> <span class="nv">it</span><span class="o">.</span><span class="py">iterator</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Here we return a view that will only evaluate its elements (by delegating to the
+<code class="language-plaintext highlighter-rouge">underlying</code> collection elements) when it is actually iterated: <code class="language-plaintext highlighter-rouge">View</code> is a lazy
+collection type.</p>
+
+<p>Let’s take a step back and consider again the implementation of the <code class="language-plaintext highlighter-rouge">map</code> operation:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">trait</span> <span class="nc">IterableOps</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">CC</span><span class="o">[</span><span class="k">_</span><span class="o">]</span>, <span class="kt">C</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">map</span><span class="o">[</span><span class="kt">B</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">CC</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="nf">fromIterable</span><span class="o">(</span><span class="nv">View</span><span class="o">.</span><span class="py">Map</span><span class="o">(</span><span class="k">this</span><span class="o">,</span> <span class="n">f</span><span class="o">))</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The first part of the implementation creates a lazy view of the transformed elements,
+and the second part of the implementation (the call to <code class="language-plaintext highlighter-rouge">fromIterable</code>) turns this view
+into the resulting collection (which can be done either in a lazy or strict way, as
+we’ve just seen).</p>
+
+<p>Note that in practice, the <code class="language-plaintext highlighter-rouge">map</code> operation has been overridden in <code class="language-plaintext highlighter-rouge">List</code> (for performance
+reasons) so we don’t actually use the default implementation, but the reasoning presented
+above still applies to most operations.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We have classified collections type into two categories: strict collections eagerly evaluate
+their elements (examples of such collections are <code class="language-plaintext highlighter-rouge">List</code>, <code class="language-plaintext highlighter-rouge">Vector</code>, etc.), whereas lazy
+collections evaluate their elements only when they are needed (examples are <code class="language-plaintext highlighter-rouge">Stream</code> and
+<code class="language-plaintext highlighter-rouge">View</code>).</p>
+
+<p>In the new collections, the default implementations of transformation operations preserve
+laziness: when they are applied to a strict collection they are strict, and when they are
+applied to a lazy collection they are lazy. To achieve this we switched from a
+builder based approach to a view based approach to create collections.</p>
+
+<p>More precisely, the new pattern to implement an operation consists in decoupling the
+logic of the operation and the evaluation mode of the underlying collection type.
+The logic of the operation is captured in a <code class="language-plaintext highlighter-rouge">View</code> and the evaluation mode is
+defined by the <code class="language-plaintext highlighter-rouge">fromIterable</code> method implementation in leaf collection types.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2017-11-28-view-based-collections.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Multiversal Equality for Scala | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Multiversal Equality for Scala"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2016/05/06/multiversal-equality.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Multiversal Equality for Scala</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Friday 6 May 2016</p>
+						<p>Martin Odersky</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2016/05/06/multiversal-equality.html">Multiversal Equality for Scala</a></h2> -->
+					<p>I have been working recently on making equality tests using <code class="language-plaintext highlighter-rouge">==</code> and
+<code class="language-plaintext highlighter-rouge">!=</code> safer in Scala. This has led to a <a href="https://github.com/lampepfl/dotty/issues/1247">Language Enhancement
+Proposal</a> which I summarize in this blog.</p>
+
+<h2 id="why-change-equality">Why Change Equality?</h2>
+
+<p>Scala prides itself of its strong static type system. Its type discipline is particularly useful when it comes to refactoring. Indeed, it’s possible to write programs in such a way that refactoring problems show up with very high probability as type errors. This is essential for being able to refactor with the confidence that nothing will break. And the ability to do such refactorings is in turn very important for keeping code bases from rotting.</p>
+
+<p>Of course, getting such a robust code base requires the cooperation of the developers. They should avoid type <code class="language-plaintext highlighter-rouge">Any</code>, casts, <a href="https://wiki.c2.com/?StringlyTyped">stringly typed</a> logic, and more generally any operation over loose types that do not capture the important properties of a value. Unfortunately, there is one area in Scala where such loose types are very hard to avoid: That’s equality. Comparisons with <code class="language-plaintext highlighter-rouge">==</code> and <code class="language-plaintext highlighter-rouge">!=</code> are <em>universal</em>. They compare any two values, no matter what their types are. This causes real problems for writing code and more problems for refactoring it.</p>
+
+<p>For instance, one might want to introduce a proxy for some data structure so that instead of accessing the data structure directly one goes through the proxy. The proxy and the underlying data would have different types. Normally this should be an easy refactoring. If one passes by accident a proxy for the underlying type or <em>vice versa</em> the type checker will flag the error. However, if one accidentally compares a proxy with the underlying type using <code class="language-plaintext highlighter-rouge">==</code> or a pattern match, the program is still valid, but will just always say <code class="language-plaintext highlighter-rouge">false</code>. This is a real worry in practice. I recently abandoned a desirable extensive refactoring because I feared that it would be too hard to track down such errors.</p>
+
+<h2 id="where-are-we-today">Where Are We Today?</h2>
+
+<p>The problems of universal equality in Scala are of course well
+known. Some libraries have tried to fix it by adding another equality
+operator with more restricted typing. Most often this safer equality
+is written <code class="language-plaintext highlighter-rouge">===</code>. While <code class="language-plaintext highlighter-rouge">===</code> is certainly useful, I am not a fan of
+adding another equality operator to the language and core
+libraries. It would be much better if we could fix <code class="language-plaintext highlighter-rouge">==</code> instead. This
+would be both simpler and would catch all potential equality problems
+including those related to pattern matching.</p>
+
+<p>How can <code class="language-plaintext highlighter-rouge">==</code> be fixed? It looks much harder to do this than adding an
+alternate equality operator. First, we have to keep backwards
+compatibility. The ability to compare everything to everything is by
+now baked into lots of code and libraries.
+Second, with just one equality operator
+we need to make this operator work in all cases where it makes
+sense. An alternative <code class="language-plaintext highlighter-rouge">===</code> operator can choose to refuse some
+comparisons that should be valid because there’s always <code class="language-plaintext highlighter-rouge">==</code>
+to fall back to. With a unique <code class="language-plaintext highlighter-rouge">==</code> operator we do not have this
+luxury.</p>
+
+<p>The current status in Scala is that the compiler will give warnings
+for <em>some</em> comparisons that are always <code class="language-plaintext highlighter-rouge">false</code>. But the coverage is
+weak. For instance this will give a warning:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; 1 == "abc"
+&lt;console&gt;:12: warning: comparing values of types Int and String using `==' will always yield false
+</code></pre></div></div>
+
+<p>But this will not:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala&gt; "abc" == 1
+res2: Boolean = false
+</code></pre></div></div>
+
+<p>There are also cases where a warning is given for a valid equality
+test that actually makes sense because the result could be <code class="language-plaintext highlighter-rouge">true</code>. In
+summary, the current checking catches some obvious bugs, which is
+nice. But it is far too weak and fickle to be an effective refactoring
+aid.</p>
+
+<h2 id="whats-proposed">What’s Proposed?</h2>
+
+<p>I believe to do better, we need to enlist the cooperation of
+developers. Ultimately it’s the developer who provides implementations
+of equality methods and who is therefore best placed to characterize
+which equalities make sense. Sometimes this characterization can be
+involved. For instance, an <code class="language-plaintext highlighter-rouge">Int</code> can be compared to other primitive
+numeric values or to instances of type <code class="language-plaintext highlighter-rouge">java.lang.Number</code> but any other
+comparison will always yield <code class="language-plaintext highlighter-rouge">false</code>. Or, it makes sense to compare
+two <code class="language-plaintext highlighter-rouge">Option</code> values if and only if it makes sense to compare the optional
+element values.</p>
+
+<p>The best known way to characterize such relationships is with type
+classes. Implicit values of a trait <code class="language-plaintext highlighter-rouge">Eq[T, U]</code> can capture the
+property that values of type <code class="language-plaintext highlighter-rouge">T</code> can be compared to values of type
+<code class="language-plaintext highlighter-rouge">U</code>. Here’s the definition of <code class="language-plaintext highlighter-rouge">Eq</code></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>package scala
+
+trait Eq[-T, -U]
+</code></pre></div></div>
+
+<p>That is, <code class="language-plaintext highlighter-rouge">Eq</code> is a pure marker trait with two type parameters and without
+any members.  Developers can define equality classes by giving
+implicit <code class="language-plaintext highlighter-rouge">Eq</code> instances. Here is a simple one:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   implicit def eqString: Eq[String, String] = Eq
+</code></pre></div></div>
+
+<p>This states that strings can be only compared to strings, not to values of other types.
+Here’s a more complicated <code class="language-plaintext highlighter-rouge">Eq</code> instance:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  implicit def eqOption[T, U](implicit _eq: Eq[T, U]): Eq[Option[T], Option[U]] = Eq
+</code></pre></div></div>
+
+<p>This states that <code class="language-plaintext highlighter-rouge">Option</code> values can be compared if their elements can be compared.</p>
+
+<p>It’s foreseen that such <code class="language-plaintext highlighter-rouge">Eq</code> instances can be generated automatically. If we add
+an annotation <code class="language-plaintext highlighter-rouge">@equalityClass</code> to <code class="language-plaintext highlighter-rouge">Option</code> like this</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  @equalityClass class Option[+T] { ... }
+</code></pre></div></div>
+
+<p>then the <code class="language-plaintext highlighter-rouge">eqOption</code> definition above would be generated automatically in <code class="language-plaintext highlighter-rouge">Option</code>’s companion object.</p>
+
+<p>Given a set of <code class="language-plaintext highlighter-rouge">Eq</code> instances, the idea is that the Scala
+compiler will check every time it encounters a <em>potentially
+problematic</em> comparison between values of types <code class="language-plaintext highlighter-rouge">T</code> and <code class="language-plaintext highlighter-rouge">U</code> that there
+is an implicit instance of <code class="language-plaintext highlighter-rouge">Eq[T, U]</code>. A comparison is <em>potentially
+problematic</em> if it is between incompatible types. As long as <code class="language-plaintext highlighter-rouge">T &lt;: U</code>
+or <code class="language-plaintext highlighter-rouge">U &lt;: T</code> the equality could make sense because both sides can
+potentially be the same value.</p>
+
+<p>So this means we still keep universal equality as it is in Scala now</p>
+<ul>
+  <li>we don’t have a choice here anyway, because of backwards
+compatibility. But we render it safe by checking that for each
+comparison the corresponding <code class="language-plaintext highlighter-rouge">Eq</code> instance exists.</li>
+</ul>
+
+<p>What about types for which no <code class="language-plaintext highlighter-rouge">Eq</code> instance exists? To maintain
+backwards compatibility, we allow comparisons of such types as well,
+by means of a fall-back <code class="language-plaintext highlighter-rouge">eqAny</code> instance. But we do not allow comparisons
+between types that have an <code class="language-plaintext highlighter-rouge">Eq</code> instance and types that have none.
+Details are explained in the
+<a href="https://github.com/lampepfl/dotty/issues/1247">proposal</a>.</p>
+
+<h2 id="properties">Properties</h2>
+
+<p>Here are some nice properties of the proposal</p>
+
+<ol>
+  <li>It is <em>opt-in</em>. To get safe checking, developers have to annotate with <code class="language-plaintext highlighter-rouge">@equalityClass</code> classes that should
+ allow comparisons only between their instances, or they have to define implicit
+<code class="language-plaintext highlighter-rouge">Eq</code> instances by hand.</li>
+  <li>It is backwards compatible. Without developer-provided <code class="language-plaintext highlighter-rouge">Eq</code> instances, equality works as before.</li>
+  <li>It carries no run-time cost compared to universal equality. Indeed the run-time behavior of
+ equality is not affected at all.</li>
+  <li>It has no problems with parametricity, variance, or bottom types.</li>
+  <li>Depending on the actual <code class="language-plaintext highlighter-rouge">Eq</code> instances given, it can be very precise. That is,
+ no comparisons that might yield <code class="language-plaintext highlighter-rouge">true</code> need to be rejected, and most comparisons that
+will always yield <code class="language-plaintext highlighter-rouge">false</code> are in fact rejected.</li>
+</ol>
+
+<p>The scheme effectively leads to a partition of the former universe of
+types into sets of types. Values with types in the same partition can
+be compared among themselves but values with types in different
+partitions cannot.
+An <code class="language-plaintext highlighter-rouge">@equalityClass</code> annotation on a type creates a new partition. All
+types that do not have any <code class="language-plaintext highlighter-rouge">Eq</code> instances (except <code class="language-plaintext highlighter-rouge">eqAny</code>, that is)
+form together another partition.
+So instead of a single <em>universe</em> of values that can be compared to
+each other we get a <em>multiverse</em> of partitions. Hence the name of the
+proposal: <strong>Multiversal Equality</strong>.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-05-06-multiversal-equality.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

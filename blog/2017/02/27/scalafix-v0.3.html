@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Refactor with scalafix v0.3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Refactor with scalafix v0.3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/02/27/scalafix-v0.3.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Refactor with scalafix v0.3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 27 February 2017</p>
+						<p>Ólafur Páll Geirsson</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2017/02/27/scalafix-v0.3.html">Refactor with scalafix v0.3</a></h2> -->
+					<p>I am happy to announce the release of <a href="https://scalacenter.github.io/scalafix/#0.3.0">scalafix v0.3</a>, a library and tool to rewrite Scala source code.
+Scalafix is developed at the <a href="https://scala.epfl.ch/">Scala Center</a> with the long-term mission to help automate the migration of between Scala versions.
+However, as I hope to demonstrate in this post, scalafix can be used for more than just migrating between Scala versions.
+Scalafix can also be used for ad-hoc library and application migrations.</p>
+
+<p>Scalafix v0.3 uses the new scala.meta semantic API to provide a re-designed <code class="language-plaintext highlighter-rouge">Rewrite</code> and <code class="language-plaintext highlighter-rouge">Patch</code> API to implement custom refactorings.
+Let me explain what that means word by word.</p>
+
+<blockquote>
+  <p>Note. This is the second post on scalafix and scala.meta. You might be
+interested in reading the first post
+<a href="https://scala-lang.org/blog/2016/10/24/scalafix.html">here</a>.</p>
+</blockquote>
+
+<h2 id="scalameta-semantic-api">Scala.meta semantic API</h2>
+
+<p>Scala.meta recently announced the <a href="https://github.com/scalameta/scalameta/blob/master/changelog/1.6.0.md#semantic-api">first release of its semantic API</a>.
+This release is the product of close collaboration for the past several months between
+<a href="https://twitter.com/xeno_by">@xeno_by</a> at Twitter and <a href="https://twitter.com/olafurpg">myself</a> at the Scala Center.
+The objective of the semantic API is to provide operations to query information from the compiler.</p>
+
+<p>The first version of the scala.meta semantic API makes it possible to query for the resolved “symbol” of a name that appears in a Scala source file.
+A name is a reference to some definition, for example <code class="language-plaintext highlighter-rouge">println</code> or <code class="language-plaintext highlighter-rouge">scala.Predef.println</code>.
+A symbol is a unique identifier of a single definition.
+For example, <code class="language-plaintext highlighter-rouge">println</code> from the standard library has the symbol <code class="language-plaintext highlighter-rouge">_root_.scala.Predef.println(Ljava/lang/Object;)V.</code>.
+The compiler is responsible for resolving names to symbols.</p>
+
+<p><a href="https://github.com/scalameta/sbt-semantic-example">Scalahost</a> is a compiler plugin in the scala.meta project that extracts symbols from the compiler and maps them to scala.meta syntax trees.
+Scalahost emits the extracted symbols into a “semantic database”.
+The semantic database can be persisted to files on disk and loaded for later analysis.
+Semantic databases from different compilation units, potentially produced by different
+versions of the Scala compiler, can be merged.
+This opens possibilities for large-scale code analysis.</p>
+
+<p>The introduction of the scala.meta semantic API is a game changer for scalafix.
+The ability to resolve names to symbols opens possibilities for many scalafix rewrites.
+Before we cover a few example rewrites, let’s look closer at what exactly “rewrite” means.</p>
+
+<h2 id="rewrite-metatree--seqpatch">Rewrite: meta.Tree =&gt; Seq[Patch]</h2>
+<p>In a nutshell, a scalafix <code class="language-plaintext highlighter-rouge">Rewrite</code> is a <code class="language-plaintext highlighter-rouge">scala.meta.Tree =&gt; Seq[Patch]</code> function.
+The tree is backed by the scala.meta semantic API, so the rewrite is able to query for compiler information such as symbols.
+A scalafix <code class="language-plaintext highlighter-rouge">Patch</code> is a small operation that can produce a diff on a Scala source file.
+A patch can either be a “token patch” or a “tree patch”.</p>
+
+<p>Token patches are low-level but give full control over how every detail in a source file is handled, for example formatting and comments.
+Example token patches are <code class="language-plaintext highlighter-rouge">Remove(token)</code> and <code class="language-plaintext highlighter-rouge">AddLeft(token, toAdd: String)</code>, which removes or prepends a string to <code class="language-plaintext highlighter-rouge">token</code>, respectively.</p>
+
+<p>Tree patches are high-level and allow the rewrite author to declaratively explain what operation to perform.
+An example tree patch is <code class="language-plaintext highlighter-rouge">AddGlobalImport(importer)</code>, which adds a new import to the top of a file if it does not exist.
+Observe that <code class="language-plaintext highlighter-rouge">AddGlobalImport</code> does not worry about token-level details such as whether the user groups imports by prefix (<code class="language-plaintext highlighter-rouge">import a.{b, c}</code>) or not (<code class="language-plaintext highlighter-rouge">import a.b; import a.c</code>).</p>
+
+<p>Tree and token patches build a small algebra of operations that can be composed to build complex refactorings.
+A challenge with composing patches is to figure out what to do on conflicts.
+For example, what happens when one patch renames a token while the other patch removes the same token?
+The current strategy in scalafix is to try and resolve as many conflicts as possible on the tree patch level.
+It can be harder to resolve conflicts on the token level since the original intent of the patch is lost.
+Unsolvable conflicts abort the refactoring.
+In the future, we hope to support more advanced conflict resolution strategies.</p>
+
+<p>To demonstrate how rewrites are implemented with scalafix v0.3, let’s step through an example use-case.</p>
+
+<h2 id="example-xor-to-either">Example: Xor to Either</h2>
+
+<p>The functional programming library <a href="https://github.com/typelevel/cats">cats</a> migrated recently from its <code class="language-plaintext highlighter-rouge">Xor</code> data type to <code class="language-plaintext highlighter-rouge">Either</code> from the standard library.
+It requires a few mechanical steps to migrate code to use <code class="language-plaintext highlighter-rouge">Either</code> instead of <code class="language-plaintext highlighter-rouge">Xor</code>.
+For example, below is a diff that’s taken from <a href="https://github.com/circe/circe/pull/343/files">circe</a>’s migration to <code class="language-plaintext highlighter-rouge">Either</code>.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">-final def either: Xor[HCursor, HCursor] = if (succeeded) Xor.right(any) else Xor.left(any)
+</span><span class="gi">+final def either: Either[HCursor, HCursor] = if (succeeded) Right(any) else Left(any)
+</span></code></pre></div></div>
+
+<p>For this particular rewrite, we are able to get away with only using tree patches.
+<code class="language-plaintext highlighter-rouge">Replace</code> is one tree patch that can be used to replace usage of a reference such as a type, term or a static method.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Replace</span><span class="o">(</span><span class="nc">Symbol</span><span class="o">(</span><span class="s">"_root_.cats.data.Xor."</span><span class="o">),</span> <span class="n">q</span><span class="s">"Either"</span><span class="o">)</span>
+<span class="nc">Replace</span><span class="o">(</span><span class="nc">Symbol</span><span class="o">(</span><span class="s">"_root_.cats.data.Xor.Left."</span><span class="o">),</span> <span class="n">q</span><span class="s">"Left"</span><span class="o">)</span>
+<span class="nc">Replace</span><span class="o">(</span><span class="nc">Symbol</span><span class="o">(</span><span class="s">"_root_.cats.data.Xor.Right."</span><span class="o">),</span> <span class="n">q</span><span class="s">"Right"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">Symbol(_root_...data.Xor)</code> part is the scala.meta symbol referencing the class definition of <code class="language-plaintext highlighter-rouge">cats.data.Xor</code>.
+As we saw in the <code class="language-plaintext highlighter-rouge">either: Xor[HCursor</code> diff above, references to <code class="language-plaintext highlighter-rouge">Xor</code> should become <code class="language-plaintext highlighter-rouge">Either</code> after the rewrite.</p>
+
+<p>Symbols are normalized by default, so the <code class="language-plaintext highlighter-rouge">cats.data.Xor.Right</code> replace patch will handle the <code class="language-plaintext highlighter-rouge">Xor.Right</code> type, <code class="language-plaintext highlighter-rouge">Xor.Right</code> companion object as well as the <code class="language-plaintext highlighter-rouge">Right.apply</code> constructor method.</p>
+
+<p>To introduce new imports, it’s possible to pass in <code class="language-plaintext highlighter-rouge">additionalImports</code></p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Replace</span><span class="o">(</span><span class="nc">Symbol</span><span class="o">(</span><span class="s">"_root_.cats.data.XorT."</span><span class="o">),</span> <span class="n">q</span><span class="s">"EitherT"</span><span class="o">,</span>
+        <span class="n">additionalImports</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="n">importer</span><span class="s">"cats.data.EitherT"</span><span class="o">)),</span>
+</code></pre></div></div>
+
+<p>Imports can be removed with the <code class="language-plaintext highlighter-rouge">RemoveGlobalImport</code> patch</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">RemoveGlobalImport</span><span class="o">(</span><span class="n">importer</span><span class="s">"cats.data.Xor"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Nothing happens if the import does not appear in the source file.
+Likewise, it’s OK to add the same import twice, scalafix will de-duplicate it.</p>
+
+<p>The full <code class="language-plaintext highlighter-rouge">Xor</code> to <code class="language-plaintext highlighter-rouge">Either</code> scalafix rewrite can be found <a href="https://github.com/scalacenter/scalafix/blob/f61136fad79afcdbb03528ce78c7928afc6eafd6/core/src/main/scala/scalafix/rewrite/Xor2Either.scala">here</a> and its accompanying test
+suite <a href="https://github.com/scalacenter/scalafix/blob/f61136fad79afcdbb03528ce78c7928afc6eafd6/scalafix-nsc/src/test/resources/syntactic/Xor2Either.source">here</a>.</p>
+
+<h2 id="try-it-out">Try it out!</h2>
+<p>You can use scalafix both as a library and a tool.</p>
+
+<p>The recommended way to use scalafix as a library is with the <a href="https://scalacenter.github.io/scalafix/#sbt-scalahost"><code class="language-plaintext highlighter-rouge">sbt-scalahost</code></a> plugin.
+By using scalafix as a library, you have full control of how, where and when to run rewrites.</p>
+
+<p>The recommended way to use scalafix as tool is the <a href="https://scalacenter.github.io/scalafix/#sbt-scalafix"><code class="language-plaintext highlighter-rouge">sbt-scalafix</code></a> plugin.
+It’s possible define custom tree patches in the <a href="https://scalacenter.github.io/scalafix/#patches"><code class="language-plaintext highlighter-rouge">.scalafix.conf</code> configuration file</a>.</p>
+
+<p>I am excited to see what applications the community can build with scala.meta and scalafix.
+Some promising ideas that have floated around include</p>
+
+<ul>
+  <li>parse and run rewrites from <code class="language-plaintext highlighter-rouge">@deprecated</code> warning messages. This would enable
+library authors to provide executable migration guides.</li>
+  <li>shim/cross-build libraries with similar APIs. For example,
+a library could be developed with the scalaz API, and use scalafix to
+code-generate a version of the library that uses cats instead.</li>
+  <li>build a code search web-interface with “jump to definition” functionality
+powered by the scala.meta’s semantic database (similar to <a href="https://github.com/harrah/browse">sxr</a>).</li>
+  <li>replace usage of <code class="language-plaintext highlighter-rouge">any2stringadd</code> with string interpolators or explicit <code class="language-plaintext highlighter-rouge">.toString</code>.</li>
+  <li>replace usage of <code class="language-plaintext highlighter-rouge">scala.Seq</code>, which can be mutable, in favor of <code class="language-plaintext highlighter-rouge">scala.collection.immutable.Seq</code>.</li>
+</ul>
+
+<p>If this sounds exciting to you, join us!
+I am happy to answer any question in the <a href="https://gitter.im/scalacenter/scalafix">scalafix gitter</a> channel.</p>
+
+<p>PS. I want to thank <a href="https://twitter.com/ShaneDelmore">@ShaneDelmore</a> who has provided invaluable feedback from
+the early days of scalafix development and come up with several brilliant ideas
+for scalafix use-cases.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2017-02-27-scalafix-v0.3.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

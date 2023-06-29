@@ -1,0 +1,524 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 2.12.17 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 2.12.17"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/download/2.12.17.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" class="active">Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+
+
+<main id="inner-main" class="download-page scala2">
+
+
+<!-- Title -->
+<section class="title-page">
+	<div class="wrap">
+		<h1>Scala 2.12.17</h1>
+	</div>
+</section>
+
+<section class="books">
+  <div class="wrap">
+    <div class="inner-box download">
+      <div class="content-ribbon">
+        <div class="ribbon-version">
+          <span>2.12.17</span>
+        </div>
+        <ul>
+          
+            <li><a href="https://github.com/scala/scala/releases">Release Notes</a></li>
+            <li class="dot">•</li>
+            <li><a href="/blog/announcements/">Changelog</a></li>
+          
+          
+          <li class="dot">•</li>
+          <li><a href="https://www.scala-lang.org/api/2.12.17/">API Docs</a></li>
+          
+        </ul>
+
+      </div>
+      <div class="main-download">
+        
+          <p>Are you looking for <a href="/download/all.html">another release</a> of Scala?</p>
+<h3>Release Notes</h3>
+For a summary of important changes, see the <a href="https://github.com/scala/scala/releases">GitHub release notes</a>.
+<br/><small>(Or consult our archive of <a href="/blog/announcements/">older release
+    notes</a>.)</small>
+
+<div class="install-steps">
+  <div class="text-step">
+    <h2>Ways to Install This Release</h2>
+    <ul>
+      <li>
+        Using <a
+          href="https://docs.scala-lang.org/getting-started/index.html#using-the-scala-installer-recommended-way">Coursier
+          CLI</a>, run:<br>
+        <code>cs install scala:2.12.17 && cs install scalac:2.12.17</code>.
+      </li>
+      <li>
+	      <div id="download-binaries"></div>Download the Scala binaries for <span id="users-os"></span>
+        <br /><span class="install"><a href="/download/install.html">Need help running the
+            binaries?</a></span>
+      </li>
+      <li><a href="/documentation/getting-started-intellij-track/getting-started-with-scala-in-intellij.html">Download and
+          use Scala</a><span> with </span><a href="https://www.jetbrains.com/idea">IntelliJ</a><span> and then </span><a
+          href="/documentation/getting-started-intellij-track/building-a-scala-project-with-intellij-and-sbt.html">build a
+          project</a><span>, then </span><a
+          href="/documentation/getting-started-intellij-track/testing-scala-in-intellij-with-scalatest.html">test it.</a>
+      </li>
+      <li>Using <a href="https://sdkman.io/">SDKMAN!</a>, you can easily <a href="https://sdkman.io/sdks#scala">install
+          specific versions of Scala</a> on any platform with <code>sdk install scala 2.13.11</code></li>
+      <li>On macOS you can also use <a href="https://brew.sh/">Homebrew</a> and existing <a
+          href="https://formulae.brew.sh/formula/scala">Scala
+          Formulae</a><br /><code>brew update</code><br /><code>brew install scala</code></li>
+      <li>With <a href="https://www.macports.org/">MacPorts</a>, you can get Scala using
+        <code>sudo port install scala2.x</code>command.<br /> For example to install Scala 2.12 simply
+        use<code>sudo port install scala2.12</code></li>
+      <li><a href="https://ammonite.io/">Get Ammonite</a>, a popular Scala REPL</li>
+    </ul>
+  </div>
+  <div class="text-step">
+
+
+<h3>Other resources</h3>
+
+<p>You can find the installer download links for other operating systems, as well as documentation and source code
+  archives for Scala 2.12.17 below.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Archive</th>
+      <th style="text-align: left">System</th>
+      
+      <th style="text-align: left">Size</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    
+    <tr>
+      <td style="text-align: left">
+        <a id="#link-main-unixsys" href="https://downloads.lightbend.com/scala/2.12.17/scala-2.12.17.tgz">
+          scala-2.12.17.tgz
+        </a>
+      </td>
+      <td style="text-align: left">Mac OS X, Unix, Cygwin</td>
+      
+      <td style="text-align: left">19.99M</td>
+      
+    </tr>
+    
+    <tr>
+      <td style="text-align: left">
+        <a id="#link-main-windows" href="https://downloads.lightbend.com/scala/2.12.17/scala-2.12.17.msi">
+          scala-2.12.17.msi
+        </a>
+      </td>
+      <td style="text-align: left">Windows (msi installer)</td>
+      
+      <td style="text-align: left">126.57M</td>
+      
+    </tr>
+    
+    <tr>
+      <td style="text-align: left">
+        <a id="#link-non-main-sys" href="https://downloads.lightbend.com/scala/2.12.17/scala-2.12.17.zip">
+          scala-2.12.17.zip
+        </a>
+      </td>
+      <td style="text-align: left">Windows</td>
+      
+      <td style="text-align: left">20.03M</td>
+      
+    </tr>
+    
+    <tr>
+      <td style="text-align: left">
+        <a id="#link-non-main-sys" href="https://downloads.lightbend.com/scala/2.12.17/scala-2.12.17.deb">
+          scala-2.12.17.deb
+        </a>
+      </td>
+      <td style="text-align: left">Debian</td>
+      
+      <td style="text-align: left">147.47M</td>
+      
+    </tr>
+    
+    <tr>
+      <td style="text-align: left">
+        <a id="#link-non-main-sys" href="https://downloads.lightbend.com/scala/2.12.17/scala-2.12.17.rpm">
+          scala-2.12.17.rpm
+        </a>
+      </td>
+      <td style="text-align: left">RPM package</td>
+      
+      <td style="text-align: left">126.81M</td>
+      
+    </tr>
+    
+    <tr>
+      <td style="text-align: left">
+        <a id="#link-non-main-sys" href="https://downloads.lightbend.com/scala/2.12.17/scala-docs-2.12.17.txz">
+          scala-docs-2.12.17.txz
+        </a>
+      </td>
+      <td style="text-align: left">API docs</td>
+      
+      <td style="text-align: left">54.86M</td>
+      
+    </tr>
+    
+    <tr>
+      <td style="text-align: left">
+        <a id="#link-non-main-sys" href="https://downloads.lightbend.com/scala/2.12.17/scala-docs-2.12.17.zip">
+          scala-docs-2.12.17.zip
+        </a>
+      </td>
+      <td style="text-align: left">API docs</td>
+      
+      <td style="text-align: left">109.77M</td>
+      
+    </tr>
+    
+    <tr>
+      <td style="text-align: left">
+        <a id="#link-non-main-sys" href="https://github.com/scala/scala/archive/v2.12.17.tar.gz">
+          scala-sources-2.12.17.tar.gz
+        </a>
+      </td>
+      <td style="text-align: left">Sources</td>
+      
+      <td style="text-align: left">7.2M</td>
+      
+    </tr>
+    
+  </tbody>
+</table>
+
+
+<h2 id="other-releases">Other Releases</h2>
+
+<p>You can find the links to prior versions or the latest development version below.
+To see a detailed list of changes for each version of Scala please refer to the <a href="/download/changelog.html">changelog</a>.</p>
+
+<p>
+  Note that different major releases of Scala 2 (e.g. Scala 2.11.x and Scala 2.12.x) are not
+  <a href="https://docs.scala-lang.org/overviews/core/binary-compatibility-of-scala-releases.html">binary compatible</a>
+  with each other. Scala 3 minor releases (e.g. 3.0.x and 3.1.x) follow a
+  <a href="https://docs.scala-lang.org/scala3/reference/language-versions/binary-compatibility.html">
+    different compatibility model
+  </a>.
+</p>
+
+<ul>
+  
+  <li>Current 3.3.x LTS release:
+    <ul>
+      <li><a href="/download/3.3.0.html">Scala 3.3.0</a> - Released on May 30, 2023</li>
+    </ul></li>
+  
+  <li>Current 2.13.x release:
+    <ul>
+      <li><a href="/download/2.13.11.html">Scala 2.13.11</a> - Released on June 7, 2023</li>
+    </ul></li>
+  
+  <li>Latest 2.12.x maintenance release:
+    <ul>
+      <li><a href="/download/2.12.18.html">Scala 2.12.18</a> - Released on June 7, 2023</li>
+    </ul></li>
+  
+  <li>Last 2.11.x maintenance release:
+    <ul>
+      <li><a href="/download/2.11.12.html">Scala 2.11.12</a> - Released on November 9, 2017</li>
+    </ul></li>
+  
+  <li>Last 2.10.x maintenance release:
+    <ul>
+      <li><a href="/download/2.10.7.html">Scala 2.10.7</a> - Released on November 9, 2017</li>
+    </ul></li>
+  
+  <li><a href="https://scala-lang.org/files/archive/nightly/">Nightly builds</a></li>
+  <li><a href="/download/changelog.html">Changelog</a></li>
+  <li><a href="/download/all.html">All Scala releases</a></li>
+</ul>
+</div>
+
+</div>
+<h3>License</h3>
+<p>The Scala 2.12.17 distribution is released under the .</p>
+
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>
+

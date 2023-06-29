@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Google Summer of Code 2017 Scala Projects | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Google Summer of Code 2017 Scala Projects"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/gsoc/2017/"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Google Summer of Code 2017 Scala Projects</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<p><em>This page is work in progress for the upcoming GSOC 2017</em></p>
+
+<h2 id="google-summer-of-code">Google Summer of Code</h2>
+
+<p><strong>This year the Scala team applied again for the <a href="https://developers.google.com/open-source/gsoc/">Google Summer of
+  Code</a>
+  program to work with enthusiastic students on challenging Scala
+  projects</strong></p>
+
+<p>This page provides a list of project ideas. The suggestions are only a
+starting point for students. We expect students to explore the ideas
+in much more detail, preferably with their own suggestions and
+detailed plans on how they want to proceed. Don’t feel constrained by
+the provided list! We welcome any of your own challenging ideas, but
+make sure that the proposed project satisfies the <a href="#requirements-and-guidelines">main
+requirements</a> mentioned below.</p>
+
+<h3 id="how-to-get-involved">How to get involved</h3>
+
+<p>The best place to propose and discuss your proposals is our
+<a href="https://contributors.scala-lang.org/">“contributors”</a>
+discussion forum. This way you will get quickly responses from the whole
+Scala community.</p>
+
+<h3 id="previous-summer-of-code">Previous Summer of Code</h3>
+
+<p>We encourage you to have a look at our
+<a href="https://scala-lang.org/gsoc/2016/">2016</a>,
+<a href="https://scala-lang.org/gsoc/2015/">2015</a>,
+<a href="https://scala-lang.org/gsoc/2014/">2014</a>,
+<a href="https://www.scala-lang.org/news/2013/03/20/gsoc13.html">2013</a>,
+<a href="https://www.scala-lang.org/gsoc2012#">2012</a>,
+<a href="https://www.scala-lang.org/gsoc2011#">2011</a>,
+<a href="https://www.scala-lang.org/gsoc2010#">Summer of Code 2010</a>
+pages to get an idea on what we and you can expect while working on Scala.</p>
+
+<h2 id="project-ideas">Project Ideas</h2>
+
+<p>Here are some project ideas. The list is non-binding and any reasonable
+project related to Scala that is proposed by a student will be thoroughly
+reviewed.</p>
+
+<h3 id="string-interpolator-for-xml-literals">String interpolator for XML literals</h3>
+
+<p>We have wanted for a long time to deprecate XML literals in Scala and replace them by a string interpolator. That is, instead of</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;body&gt;
+  ...
+&lt;/body&gt;
+</code></pre></div></div>
+
+<p>future Scala programs would use an interpolated string</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xml"""
+  &lt;body&gt;
+    ...
+  &lt;/body&gt;
+"""
+</code></pre></div></div>
+
+<p>This project should turn the wish into reality by implementing the
+<code class="language-plaintext highlighter-rouge">xml</code> interpolator. The implementation should re-use most of the
+existing infrastructure for xml literals. It would probably be a good
+idea to re-package the existing XML parser in the Scala compiler, and
+to map interpolated strings to constructors from the existing
+<code class="language-plaintext highlighter-rouge">scala.xml</code> library. Some other aspects need to be re-thought. In
+particular name-space management should be handled by implicts
+instead of being hard-coded in the Scala typer.</p>
+
+<p>The project is a success if it can support essentially all legal XML
+expressions in Scala as interpolated strings. By contrast, support for
+XML patterns is optional: it would be nice if we could do it, but it’s
+not required.</p>
+
+<p>This project is ideal for someone who knows XML basics, and is
+interested to learn enough about aspects of the compiler (either Scala 2.12
+or Dotty) to identify what can be re-used.</p>
+
+<p>Supervised by <a href="https://github.com/densh">@densh</a></p>
+
+<h3 id="shared-async-debugging-library">Shared Async Debugging Library</h3>
+
+<p>There are three IDEs for Scala: IntelliJ, Scala IDE and ENSIME.
+Unfortunately, all three have their own debugger solutions, resulting
+in duplicated effort across the overburdened tooling community.</p>
+
+<p>This project aims to extract and build on the Scala IDE Async Debugger
+in a standalone debugging library. The Scala IDE has excellent support
+for typical async constructs such as Futures and Akka Actors.</p>
+
+<p>Once in the shared library, ENSIME and command line tools can make use
+of the debugging support, and JetBrains could be approached to make
+use of the library also, which is part of a general theme of moving
+towards common tooling components (c.f. sbt server).</p>
+
+<p>There is also scope within this project to improve the visual
+debugging support in the ENSIME text editors (Emacs, Vim, Atom,
+VSCode, Sublime) as well as to add features such as expression
+evaluation and time travel into the debugging library.</p>
+
+<ul>
+  <li>https://ensime.github.io/</li>
+  <li>https://scala-debugger.org/</li>
+  <li>https://scalacamp.pl/data/async-debugger-slides/index.html#/</li>
+</ul>
+
+<p>Supervised by <em><a href="https://github.com/fommil">Sam Halliday</a></em> (ENSIME) and
+<em><a href="https://github.com/chipsenkbeil">Chip Senkbeil</a></em> (scala-debugger)
+with advice from <em><a href="https://github.com/dragos">Iulian Dragos</a></em> and
+<em><a href="https://github.com/wpopielarski">Wiesław Popielarski</a></em> (Scala IDE)</p>
+
+<h3 id="future-proof-scala-refactoring-to-use-scalameta">Future-proof scala-refactoring to use scala.meta</h3>
+
+<p>There are three IDEs for Scala: IntelliJ, Scala IDE and ENSIME. Scala
+IDE and ENSIME share a common library for refactorings, e.g. “rename
+method” or “organise imports”, but IntelliJ have their own
+implementation.</p>
+
+<p>Within the past year the <code class="language-plaintext highlighter-rouge">scala.meta</code> / scalafix projects have become
+mature enough for use in CI tooling and inclusion in IntelliJ.
+<code class="language-plaintext highlighter-rouge">scala.meta</code> is planned to replace Scala macros and its newly released
+Semantic API allows for many refactoring tasks to be written with this
+common API.</p>
+
+<p>In a nutshell, <code class="language-plaintext highlighter-rouge">scala.meta</code> gives us an opportunity to consolidate our
+tooling libraries into a single refactoring and automated suggestions
+library, used by all IDEs and static analysis tools.</p>
+
+<p>This project aims to rewrite the most important parts of
+scala-refactoring to use <code class="language-plaintext highlighter-rouge">scala.meta</code>, in such a way that it can be
+shared between all three IDEs (integration into any specific IDE is
+not part of the scope).</p>
+
+<p>This project also aims to form the foundation of a new intentions
+library, providing agreement between all the IDEs and to build a
+community-powered static analysis database.</p>
+
+<ul>
+  <li>https://github.com/scala-ide/scala-refactoring</li>
+  <li>https://scalameta.org/</li>
+</ul>
+
+<p>Supervised by <em><a href="https://github.com/mlangc">Matthias Langer</a></em> (Scala
+Refactoring) with advice from
+<em><a href="https://github.com/fommil">Sam Halliday</a></em> (ENSIME),
+<em><a href="https://github.com/wpopielarski">Wiesław Popielarski</a></em> / <em><a href="https://github.com/sschaef">Simon Schäfer</a></em> (Scala IDE)
+and <em><a href="https://github.com/mutcianm">Mikhail Mutcianko</a></em> (IntelliJ).</p>
+
+<h3 id="case-classes-a-la-carte-with-scalameta">Case classes a la carte with scala.meta</h3>
+
+<p><code class="language-plaintext highlighter-rouge">case class</code>es are a very useful feature of the scala language, but
+can be limiting. For example, there is no way to modify the internal
+representation of a case class, leading to heap usage problems for
+larger applications that generate hundreds of millions of instances (a
+common problem in monolithic financial services applications).</p>
+
+<p>In this project we would introduce a <code class="language-plaintext highlighter-rouge">@data</code> annotation, as a
+user-land alternative to <code class="language-plaintext highlighter-rouge">case class</code>. The default implementation
+would have feature parity with <code class="language-plaintext highlighter-rouge">final case class</code> but opt-in features
+include: interning (backed by a fast, non-blocking, concurrent, weak
+hashset, allowing for super-fast instance equality), hashCode caching,
+fast value equality (backed by instance ids and a cache of previous
+equality tests), unboxing of Options and primitives (each unbox saving
+64bits per instance), Booleans as bitsets on a shared Long, all the
+way to FastInfoSet-style custom compression dictionaries (e.g. for
+Strings).</p>
+
+<p>Another usecase would be to allow for automatic typeclass derivation
+of well-known typeclasses, placed on the companion. e.g.
+<code class="language-plaintext highlighter-rouge">LabelledGeneric</code>, <code class="language-plaintext highlighter-rouge">Show</code>, <code class="language-plaintext highlighter-rouge">Lens</code>. This would speed up compilations of
+downstream code and simplify implicit resolution.</p>
+
+<p>https://github.com/fommil/scala-data-classes</p>
+
+<p>Supervised by <em><a href="https://github.com/fommil">Sam Halliday</a></em> with advice
+from <em><a href="https://github.com/xeno-by">Eugene Burmako</a></em>.</p>
+
+<h3 id="dotty-documentation-compiler">Dotty Documentation Compiler</h3>
+
+<p><a href="https://dotty.epfl.ch">Dotty</a> is the future Scala compiler developed at EPFL.
+Getting in to compiler development is usually a very difficult especially when
+it comes to compilers for advanced languages like Scala.</p>
+
+<p>Luckily, there are two compilers in the Dotty project. One for the language and
+one which acts as a documentation compiler. The docs compiler, alias
+“Dottydoc”, uses parts of the main compiler to collect semantic information
+about the user’s source files, it then creates a full-blown static site similar
+to Jekyll - featuring an API reference, markdown parsing for documentation,
+cross-referencing between docs and API and a blog. Gone is the divide between
+what is API and what is documentation. If you visited the Dotty
+<a href="https://dotty.epfl.ch">website</a>, then you’ve seen Dottydoc - that entire site
+was generated by it.</p>
+
+<p>If you feel that you want to help shape the future of Scala, either by
+contributing to the Dotty compiler or by dramatically improving the tooling
+surrounding the Scala language, this is the place to start.</p>
+
+<p>Supervised by <a href="https://github.com/felixmulder">@felixmulder</a></p>
+
+<h3 id="auto-completion-and-type-information-in-scastie">Auto-completion and type information in Scastie</h3>
+
+<p>Scastie is an online Scala programming environment. This project would
+add support for auto-completion and type information to the online code editor.
+That would require to perform calls to the presentation compiler running
+on the server-side to retrieve the required informations.</p>
+
+<p><a href="https://github.com/scalacenter/scastie">https://github.com/scalacenter/scastie</a></p>
+
+<p>Supervised by <a href="https://github.com/MasseGuillaume">@MasseGuillaume</a> and/or
+<a href="https://github.com/julienrf">@julienrf</a></p>
+
+<h3 id="writing-interactive-programs-with-scastie">Writing interactive programs with Scastie</h3>
+
+<p>Scastie is an online Scala programming environment. Currently, programs
+written in scastie have limited means of showing an output to users.
+This project would add support for writing programs showing images and
+interactive animations running in the browser.</p>
+
+<p><a href="https://github.com/scalacenter/scastie">https://github.com/scalacenter/scastie</a></p>
+
+<p>Supervised by <a href="https://github.com/MasseGuillaume">@MasseGuillaume</a> and/or
+<a href="https://github.com/julienrf">@julienrf</a></p>
+
+<h3 id="reimplement-the-jdk-in-scala-native">Reimplement the JDK in Scala-Native</h3>
+
+<p>Scala-Native is a new target for Scala. Instead of compiling to bytecode and running on the JVM, we
+use llvm to generate native assembly code. We currently do not compile Java to llvm. Therefore we need
+to reimplement some parts of JDK such as <code class="language-plaintext highlighter-rouge">java.net.*</code>, <code class="language-plaintext highlighter-rouge">java.io.*</code>, <code class="language-plaintext highlighter-rouge">java.nio.*</code> and <code class="language-plaintext highlighter-rouge">java.util.*</code>. We are already
+reimplementing the JDK and we need your help to increase our coverage. It’a unique chance to learn
+how to implement the java api and write low level Scala code.</p>
+
+<p>Supervised by <a href="https://github.com/MasseGuillaume">@MasseGuillaume</a></p>
+
+<h3 id="slick-bug-and-feature-hunt">Slick bug and feature hunt</h3>
+
+<p>There are lots of open tickets in the Slick issue tracker. Some which have long
+time fallen behind. This project would be about tackling as many of them as
+time permits.</p>
+
+<p><a href="https://github.com/slick/slick/issues">https://github.com/slick/slick/issues</a></p>
+
+<p>Supervised by <a href="https://github.com/cvogt">@cvogt</a> and/or <a href="https://github.com/szeiger">@szeiger</a></p>
+
+<h3 id="cbt-plugin-initiative">CBT plugin initiative</h3>
+
+<p>CBT, the new build tool for Scala is making fast progress. In order to be a
+viable alternative to the existing choices, many people will need plugins,
+which often do not exist yet for CBT. The focus of this project will be
+converting builds of popular Scala libraries to CBT and writing whatever
+plugins necessary to pull it off. This project gives you the chance to play
+with one of the new exciting tools in the Scala world, work on a fairly elegant
+Scala code base and sharpen your proficiency in parts of the JDK often
+forgotten by Scala developers.</p>
+
+<p><a href="https://github.com/cvogt/cbt/issues?q=is%3Aopen+is%3Aissue+label%3Aplugin+label%3A%22help+wanted%22">https://github.com/cvogt/cbt/issues?q=is%3Aopen+is%3Aissue+label%3Aplugin+label%3A%22help+wanted%22</a></p>
+
+<p>Supervised by <a href="https://github.com/cvogt">@cvogt</a></p>
+
+<h3 id="cbt-ide-integration">CBT IDE integration</h3>
+
+<p>CBT, the new build tool for Scala is making fast progress. In order to be a
+viable alternative to the existing choices, we need good integration with IDEs.
+Your goal will be to build solid integration with  IntelliJ and potentially
+also tackle Ensime and Scala IDE. This project gives you the chance to play
+with one of the new exciting tools in the Scala world, work on a fairly elegant
+Scala code base and sharpen your proficiency in parts of the JDK often
+forgotten by Scala developers.</p>
+
+<p><a href="https://github.com/cvogt/cbt/issues/123">https://github.com/cvogt/cbt/issues/123</a></p>
+
+<p>Supervised by <a href="https://github.com/cvogt">@cvogt</a></p>
+
+<h3 id="implementation-of-the-savina-benchmark-suite-using-the-reactors-framework">Implementation of the Savina Benchmark Suite using the Reactors Framework</h3>
+
+<p>The Savina suite is a benchmark suite for actor-oriented programs.
+Its goal is to provide standard benchmarks that enable researchers and
+application developers to compare different actor implementations and
+identify those that deliver the best performance for a given use-case.
+The <a href="http://reactors.io/">Reactors framework</a> is a novel actor framework
+based on the reactor programming model, and offers better composition
+and modularity compared to standard actors. So far, only a part of the
+Savina suite was ported to the Reactors framework. To make Reactors
+fully compliant with Savina, the goal of this project is to implement
+the remaining 21 Savina benchmarks using the Reactors framework.</p>
+
+<p><a href="https://github.com/shamsimam/savina">Savina Benchmark Suite</a></p>
+
+<p><a href="https://github.com/reactors-io/reactors/">Reactors Framework</a></p>
+
+<p>Supervised by <a href="https://github.com/axel22">@axel22</a></p>
+
+<h3 id="benchmarking-the-new-collections">Benchmarking the new collections</h3>
+
+<p>The standard collections are in the process of being redesigned. We want to
+be sure that the new implementation is as efficient as the current one, if not
+more efficient. A simple benchmark suite has been implemented but it lacks nice
+features like performance regression reports via interactive charts. This project
+would require the student to be familiar with benchmarking (especially within
+the JVM) and web-based visualization libraries such as d3.</p>
+
+<p><a href="https://github.com/scala/collection-strawman">https://github.com/scala/collection-strawman</a></p>
+
+<p>Supervised by <a href="https://github.com/julienrf">@julienrf</a></p>
+
+<h3 id="connecting-potential-contributors-with-scala-projects-via-scaladex">Connecting potential contributors with Scala projects via Scaladex</h3>
+
+<p>Scaladex is a cool new tool that maps out the known Scala ecosystem by
+connecting GitHub users, published binaries, contributor info, documentation
+info, and release info of Scala projects. The one thing though that Scaladex
+doesn’t do yet is connecting potential contributors to Scala projects that are
+on the lookout for contributors. Your task if you take on this project would be
+to find a way to better connect project maintainers with interested open source
+contributors, by building on Scaladex, a web application built with Scala and
+Scala.js.</p>
+
+<p>Supervised by <a href="https://github.com/heathermiller">@heathermiller</a></p>
+
+<h3 id="new-line-wrapping-algorithm-for-scalafmt">New line-wrapping algorithm for scalafmt</h3>
+
+<p><a href="https://olafurpg.github.io/scalafmt/">Scalafmt</a> is a code formatter for Scala.
+A key feature of scalafmt is that users can define a maximum width (for example 80 characters)
+so that long code lines get automatically wrapped into shorter lines.
+Currently, scalafmt uses a <a href="https://geirsson.com/assets/olafur.geirsson-scalafmt-thesis.pdf">token-based best-first search algorithm</a> to wrap long lines.
+Both <a href="https://journal.stuffwithstuff.com/2015/09/08/the-hardest-program-ive-ever-written/">dartfmt</a>
+and <a href="https://www.youtube.com/watch?v=s7JmdCfI__c">clang-format</a> use a similar approach.
+This token-based best-first algorithm has <a href="https://olafurpg.github.io/scalafmt/#Deeplynestedcode">known issues</a> in scalafmt.</p>
+
+<p>The goal of this project would be to explore and implement an alternative line wrapping algorithm for scalafmt.
+One promising alternative is the dynamic-programming algorithm employed by rfmt (dead link: httpx://www.researchgate.net/profile/Phillip_Yelland/publication/284724851_A_New_Approach_to_Optimal_Code_Formatting/links/5657f1e608ae4988a7b58558.pdf)
+(see <a href="https://github.com/google/rfmt">Python implementation</a>).
+Another promising algorithm is Philip Wadler’s <a href="https://homepages.inf.ed.ac.uk/wadler/papers/prettier/prettier.pdf">“prettier printer”</a>.
+The prettier-printer algorithm has been successfully employed by the <a href="https://github.com/jlongster/prettier">prettier</a> JavaScript formatter.</p>
+
+<p>Supervised by <a href="https://github.com/olafurpg">@olafurpg</a></p>
+
+<h3 id="implementing-a-benchmark-suite-for-big-data-and-machine-learning-applications">Implementing a Benchmark Suite for Big Data and Machine Learning Applications</h3>
+
+<p>In this project, the aim is to design and implement several larger Big Data and Machine Learning applications, which will be used to regularly test the performance of the Scala compiler releases, and to test the performance of JVMs running these applications. By the time the project is completed, you are expected to implement one larger data-intensive application at least for these frameworks: <a href="https://spark.apache.org/">Spark</a>, <a href="https://flink.apache.org/">Flink</a>, <a href="https://storm.apache.org/">Storm</a>, <a href="https://kafka.apache.org/">Kafka</a> and <a href="https://github.com/deeplearning4j">DeepLearning4j</a>. Each of the applications will have to be accompanied with a dataset used to run the application.</p>
+
+<p>This project is an excellent opportunity to familiarize yourself with these modern cutting-edge frameworks for distributed computing and machine learning!</p>
+
+<p><em>… Mentors: please insert your projects here. You can use the following template and submit a PR <a href="https://github.com/scala/scala-lang">here</a>. Note that student applications will end on April 3, 2017 …</em></p>
+
+<h3 id="project-name"><em>Project name</em></h3>
+
+<p><em>Project description.</em></p>
+
+<p><em>Link to the corresponding code repository, if relevant.</em></p>
+
+<p>Supervised by <em><a href="https://github.com/user-name">@username</a></em>.</p>
+
+<h2 id="requirements-and-guidelines">Requirements and Guidelines</h2>
+
+<h3 id="general-student-application-requirements">General Student Application Requirements</h3>
+
+<p>This is the seventh time the Scala project has applied to the Summer of
+Code, and from previous years’ experience, increased popularity of the
+language and stories of other mentor organizations we expect a high
+number of applications. First, be aware of the following:</p>
+
+<ul>
+  <li>Make sure that you understand, fulfill and agree to the general
+<a href="https://summerofcode.withgoogle.com/rules/">Google Summer of Code rules</a></li>
+  <li>The work done during GSoC requires some discipline as
+you have to plan your day-to-day activity by
+yourself. Nevertheless, you can expect regular contact with your
+mentors both via the usual means of communication for you project
+as well as personal guidance via email, chat or phone. The mentor is
+there for you in case you get stuck or need some guidance during your 3 month coding project.</li>
+  <li>The <a href="https://summerofcode.withgoogle.com/how-it-works/#timeline">official SoC timetable</a>
+mentions May 30 as the official start of coding. If you
+have time, you are encouraged to research your proposals even
+before that (and definitely learn the basics of Scala, if you
+haven’t done that already).</li>
+</ul>
+
+<h3 id="student-application-guidelines">Student Application Guidelines</h3>
+
+<ul>
+  <li>Student proposals should be very specific. We want to see evidence
+that you can succeed in the project. Applications with one-liners
+and general descriptions definitely won’t make the cut.</li>
+  <li>Because of the nature of our projects students must have some
+knowledge of the Scala language. Applicants with Scala programming
+experience will be preferred. Alternatively, experience with
+functional programming could suffice, but in your application we
+want to see evidence that you can quickly be productive in Scala.</li>
+  <li>You can think of Google Summer of Code as a kind of independent
+internship. Therefore, we expect you to work full-time during the
+duration. Applicants with other time commitments are unlikely to
+be selected. From our previous experience we know that students’
+finishing their studies (either Bachelor, Master of PhD) are
+likely to be overwhelmed by their final work, so please don’t be
+too optimistic and carefully plan your time for the project.</li>
+  <li>If you are unsure whether your proposal is suitable, feel free to
+discuss it on our
+<a href="https://contributors.scala-lang.org/">“contributors”</a>
+discussion forum. We have many community members on our mailing list
+who will quickly answer any of your questions regarding the
+project. Mentors are also constantly monitoring the mailing
+list. Don’t be afraid to ask questions. We’d love to help you out!</li>
+</ul>
+
+<h3 id="general-proposal-requirements">General Proposal Requirements</h3>
+
+<p>The proposal will be submitted via the standard web-interface at
+<a href="https://summerofcode.withgoogle.com/">https://summerofcode.withgoogle.com/</a>,
+therefore plain text is the best way to go. We expect your application
+to be in the range of 700-1500 words. Anything less than that will
+probably not contain enough information for us to determine whether
+or not you are the right person for the job.</p>
+
+<p>Your proposal should contain at least the following information, but
+feel free to include anything that you think is relevant:</p>
+
+<ul>
+  <li>Please include your name (weird as it may be, people do forget it)</li>
+  <li>Title of your proposal</li>
+  <li>Abstract of your proposal</li>
+  <li>Detailed description of your idea including explanation on why it
+is innovative (maybe you already have a prototype?), what
+contribution do you expect to make to the Scala community and why
+do you think your project is needed. A rough plan of your
+development and possible architecture sketches.</li>
+  <li>Description of previous work, existing solutions (links to
+prototypes or references are more than welcome!)</li>
+  <li>Write us about yourself and convince that you are the right
+person for the job (linking to your resume/CV is good but not
+sufficient)
+    <ul>
+      <li>Mention the details of your academic studies, any previous
+work, internships</li>
+      <li>Any relevant skills that will help you to achieve the goal
+(programming languages, frameworks)?</li>
+      <li>Any previous open-source projects (or even previous GSoC) you
+have contributed to?</li>
+      <li>Do you plan to have any other commitments during SoC that may
+affect you work? Any vacations/holidays planned? Please be
+specific as much as you can.</li>
+    </ul>
+  </li>
+  <li>If you apply to more than one GSoC project, especially if you also apply
+for a project in another organization, specify which project you prefer.
+In case two organizations choose to accept your applications,
+we can then give you the project that is most important to you.
+Preferring the project of another organization will <em>not</em> influence our
+decision whether to accept your application.</li>
+  <li>Contact details (<strong>very important!</strong>)</li>
+</ul>
+
+			</div>
+		</div>
+		
+		<!-- TOC -->
+		
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/gsoc/2017.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+	</div>
+</section>
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

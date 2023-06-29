@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Towards Scala 3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Towards Scala 3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2018/04/19/scala-3.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Towards Scala 3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Thursday 19 April 2018</p>
+						<p>Martin Odersky</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2018/04/19/scala-3.html">Towards Scala 3</a></h2> -->
+					<p>Now that Scala 2.13 is only a few months away, it’s time to consider the
+roadmap beyond it. It’s been no secret that the work on <a href="https://github.com/lampepfl/dotty">Dotty</a> over the
+last 5 years was intended to explore what a new Scala could look
+like. We are now at a stage where we can commit: Dotty will become
+Scala 3.0.</p>
+
+<p>Of course, this statement invites many follow-up questions. Here are
+some answers we can already give today. We expect there will be more
+questions and answers as things shape up.</p>
+
+<h3 id="when-will-it-come-out">When will it come out?</h3>
+
+<p>The intent is to publish the final Scala 3.0 soon after Scala 2.14. At the
+current release schedule (which might still change), that means early 2020.</p>
+
+<h3 id="what-is-scala-214-for">What is Scala 2.14 for?</h3>
+
+<p>Scala 2.14’s main focus will be on smoothing the migration to Scala 3.
+It will do this by defining migration tools, shim libraries, and
+targeted deprecations, among others.</p>
+
+<h3 id="whats-new-in-scala-3">What’s new in Scala 3?</h3>
+
+<p>Scala has pioneered the fusion of object-oriented and functional
+programming in a typed setting. Scala 3 will be a big step towards
+realizing the full potential of these ideas. Its main objectives are
+to</p>
+
+<ul>
+  <li>become more opinionated by promoting programming idioms we found
+to work well,</li>
+  <li>simplify where possible,</li>
+  <li>eliminate inconsistencies and surprising behavior,</li>
+  <li>build on strong foundations to ensure the design hangs well together,</li>
+  <li>consolidate language constructs to improve the language’s consistency, safety, ergonomics, and performance.</li>
+</ul>
+
+<p>The main language changes, either implemented or projected, are listed
+in the <a href="https://dotty.epfl.ch/docs/reference/overview.html">Reference section on the Dotty website</a>.
+Many of the new features will be submitted to the <a href="https://docs.scala-lang.org/sips">SIP</a> process, subject to approval.</p>
+
+<p>It’s worth emphasizing that Scala 2 and Scala 3 are fundamentally the
+same language. The compiler is new, but nearly everything Scala
+programmers already know about Scala 2 applies to Scala 3 as well, and
+most ordinary Scala 2 code will also work on Scala 3 with only minor
+changes.</p>
+
+<h3 id="what-about-migration">What about migration?</h3>
+
+<p>As with previous Scala upgrades, Scala 3 is not binary compatible with Scala 2.
+They are mostly source compatible, but differences exist. However:</p>
+
+<ul>
+  <li>Scala 3 code can use Scala 2 artifacts because the Scala 3 compiler
+understands the classfile format for sources compiled with Scala 2.12 and upwards.</li>
+  <li>Scala 3 and Scala 2 share the same standard library.</li>
+  <li>With some small tweaks it is possible to cross-build code for both Scala 2 and 3.
+We will provide a guide defining the shared language subset that can be compiled under both versions.</li>
+  <li>The Scala 3 compiler has a <code class="language-plaintext highlighter-rouge">-language:Scala2</code> option that lets it compile most Scala 2 code
+and at the same time highlights necessary rewritings as migration warnings.</li>
+  <li>The compiler can perform many of the rewritings automatically using a <code class="language-plaintext highlighter-rouge">-rewrite</code> option.</li>
+  <li>Migration through automatic rewriting will also be offered through the <a href="https://github.com/scalacenter/scalafix">scalafix</a> tool, which can convert sources to the cross-buildable language subset without requiring Scala 3 to be installed.</li>
+</ul>
+
+<h3 id="whats-the-expected-state-of-tool-support">What’s the expected state of tool support?</h3>
+
+<ul>
+  <li>Compiler: The Scala 3 compiler <code class="language-plaintext highlighter-rouge">dotc</code> has been used to compile itself and a growing set of libraries for a number of years now.</li>
+  <li>IDEs: IDE support is provided by having <code class="language-plaintext highlighter-rouge">dotc</code> implement LSP, the <a href="https://langserver.org">Language Server Protocol</a>,
+including standard operations such as completion and hyperlinking and more advanced ones
+ such as find references or rename. There’s a VS Code plugin incorporating these operations.
+JetBrains has also released a first version of Scala 3 support in their <a href="https://blog.jetbrains.com/scala/2017/03/23/scala-plugin-for-intellij-idea-2017-1-cleaner-ui-sbt-shell-repl-worksheet-akka-support-and-more">Scala IntelliJ plugin</a>, and we intend to work with them on further improvements.</li>
+  <li>REPL: A friendly REPL is supported by the compiler</li>
+  <li>Docs: A revamped Scaladoc tool generates docs for viewing in a browser and (in the future) also in the IDE..</li>
+  <li>Build tools: There is a Dotty/Scala 3 plugin for <a href="https://www.scala-sbt.org">sbt</a>, and we will also work on Scala 3 integration in other build tools.</li>
+</ul>
+
+<h3 id="what-about-stability">What about stability?</h3>
+
+<ul>
+  <li>A <a href="https://github.com/lampepfl/dotty-community-build">community build</a> contains some <a href="https://github.com/lampepfl/dotty-community-build/blob/88e871d726198a17e1cb240b05df7b60ab09b0cf/src/test/scala/dotty/communitybuild/CommunityBuildTest.scala">initial open source projects</a> that are compiled nightly using Scala 3. We plan to add a lot more projects to the build between now and the final release.</li>
+  <li>We plan to use the period of developer previews to ensure that core projects are published for Scala 3.</li>
+  <li>We have incorporated most of the Scala 2 regression tests in the Scala 3 test suite and will keep including new tests.</li>
+  <li>In the near future we plan to build all Scala 3 tools using a previous version of the <code class="language-plaintext highlighter-rouge">dotc</code> compiler itself.
+So far all tools are built first with the current Scala compiler and then again with <code class="language-plaintext highlighter-rouge">dotc</code>.
+Basing the build exclusively on Scala 3 has the advantage that it lets us “eat our own dog food”
+and try out the usability of Scala 3’s new language feature on a larger scale.</li>
+</ul>
+
+<h3 id="when-can-i-try-it-out">When can I try it out?</h3>
+
+<p>You can start working with Dotty now. See the <a href="https://dotty.epfl.ch/docs/contributing/getting-started.html">getting
+started</a>
+guide. Dotty releases are published every 6 weeks. We expect to be in
+feature-freeze and to release developer previews for Scala 3.0 in the
+first half of 2019.</p>
+
+<h3 id="what-about-macros">What about macros?</h3>
+
+<p>Stay tuned! We are about to release another blog post specifically
+about that issue.</p>
+
+<h3 id="how-can-i-help">How can I help?</h3>
+
+<p>Scala 3 is developed completely in the open at
+<a href="https://github.com/lampepfl/dotty">https://github.com/lampepfl/dotty</a>.
+Get involved there, by fixing and
+opening issues, making pull requests, and participating in the
+discussions.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2018-04-19-scala-3.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

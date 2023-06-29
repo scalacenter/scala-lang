@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Import Suggestions in Scala 3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Import Suggestions in Scala 3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2020/05/05/scala-3-import-suggestions.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Import Suggestions in Scala 3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 5 May 2020</p>
+						<p>Julien Richard-Foy, Scala Center</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2020/05/05/scala-3-import-suggestions.html">Import Suggestions in Scala 3</a></h2> -->
+					<p>Implicits let the compiler “write” significant parts of a program for you.
+For instance, the compiler can summon JSON serializers and deserializers for
+a complete type hierarchy.</p>
+
+<p>However, working with implicits can be a difficult experience. Thankfully, the
+Scala 3 compiler dramatically
+improves the quality of the error messages shown in case of missing implicits so
+that it is easier to see <em>where</em> an implicit argument could not be inferred
+by the compiler, and <em>how</em> to fix the problem.</p>
+
+<p>This article shows these improvements in action in concrete examples of code.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>In the <a href="https://contributors.scala-lang.org/t/preliminary-developer-survey-results/2681">2018 Scala developer survey</a>, the word “implicit” showed
+up in the question “In learning Scala, what was the biggest challenge you
+faced?”</p>
+
+<p><img src="/resources/img/blog/implicit-challenge.png" alt="cloud of words" /></p>
+
+<p>We also saw that 35% of the respondents of the <a href="https://scalacenter.github.io/scala-developer-survey-2019/#what-are-the-main-pain-points-in-your-daily-workflow">2019 developer survey</a> signaled
+that dealing with missing implicits was a main pain point in their daily
+workflow. Furthermore, they signaled that the two most painful issues they had
+when working with implicits were “finding which parameters have been inferred”,
+and “fixing ‘implicit not found’ errors”. Last but not least, the
+word that was most mentioned by the respondents to describe their other pain points
+related to implicits is the word “import”.</p>
+
+<p>A few months ago, Jamie Thompson engaged a <a href="https://contributors.scala-lang.org/t/better-implicit-search-errors-problematic-cases-wanted/3587">discussion with the community</a> to
+understand better the problem. We identified that “conditional” implicits
+were probably involved in most of the issues. Conditional implicits are
+implicit definitions that themselves take implicit parameters. For instance,
+an implicit <code class="language-plaintext highlighter-rouge">Ordering[List[A]]</code> instance requiring that there is an implicit
+<code class="language-plaintext highlighter-rouge">Ordering[A]</code> instance:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit def orderingList[A](implicit orderingA: Ordering[A]): Ordering[List[A]]
+</code></pre></div></div>
+
+<p>Consider what happens when you call a method that requires an implicit
+<code class="language-plaintext highlighter-rouge">Ordering[List[Int]]</code>. The compiler searches for such an implicit definition
+and finds that the implicit definition <code class="language-plaintext highlighter-rouge">orderingList</code> could be a good
+candidate provided that there is an implicit instance of type <code class="language-plaintext highlighter-rouge">Ordering[Int]</code>.
+The compiler searches for such an implicit definition (which it finds in the
+<code class="language-plaintext highlighter-rouge">Ordering</code> companion object) and summons the initial <code class="language-plaintext highlighter-rouge">Ordering[List[Int]]</code>
+implicit argument by supplying the <code class="language-plaintext highlighter-rouge">Ordering[Int]</code> instance to the implicit
+definition <code class="language-plaintext highlighter-rouge">orderingList</code>. In this example we have only two implicit
+definitions involved, but in practice conditional implicit definitions can
+form longer chains.</p>
+
+<p>Now, let’s have a look at what happens in Scala 2 if something fails somewhere
+in the chain. For example, when we call a method that requires an implicit
+<code class="language-plaintext highlighter-rouge">Ordering[List[Foo]]</code> but there is no implicit <code class="language-plaintext highlighter-rouge">Ordering[Foo]</code> instance:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Foo
+
+List(List(new Foo)).sorted
+</code></pre></div></div>
+
+<p>The Scala 2 compiler produces the following error:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No implicit Ordering defined for List[Foo].
+</code></pre></div></div>
+
+<p>The error message says that no implicit <code class="language-plaintext highlighter-rouge">Ordering</code> instance for type
+<code class="language-plaintext highlighter-rouge">List[Foo]</code> could be found. However, this message is not very
+precise. The actual reason of the failure is that there was no implicit
+<code class="language-plaintext highlighter-rouge">Ordering</code> instance for type <code class="language-plaintext highlighter-rouge">Foo</code>. Because of that, no implicit <code class="language-plaintext highlighter-rouge">Ordering</code>
+instance for type <code class="language-plaintext highlighter-rouge">List[Foo]</code> could be summoned by the compiler.</p>
+
+<p>This is the first concrete problem we identified: error messages don’t
+tell precisely <strong>where</strong> in the chain was the missing implicit.</p>
+
+<p>The second problem we identified is that issues related to implicits are
+often due to missing imports, but finding <strong>what</strong> to import is hard.</p>
+
+<p>The next sections show how Scala 3 addresses both issues by providing more
+detailed error messages and actionable feedback.</p>
+
+<h2 id="showing-where-the-problem-is">Showing Where the Problem Is</h2>
+
+<p>In case an implicit argument could not be found in a chain of implicit definitions,
+the Scala 3 compiler now shows the complete chain it could build until an argument
+could not be found. Here is an example that mimics the <code class="language-plaintext highlighter-rouge">Ordering[List[A]]</code> problem
+mentioned above:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// `Order` type class definition, similar to the `Ordering` type class of
+// the standard library
+trait Order[A] {
+  def compare(a1: A, a2: A): Int
+}
+
+object Order {
+  // Provides an implicit instance of type `Order[List[A]]` under the condition
+  // that there is an implicit instance of type `Order[A]`
+  implicit def orderList[A](implicit orderA: Order[A]): Order[List[A]] = ???
+}
+
+// Sorts a `list` of elements of type `A` with their implicit `order` relation
+def sort[A](list: List[A])(implicit order: Order[A]): List[A] = ???
+
+// A class `Foo`
+class Foo
+
+// Let’s try to sort a `List[List[Foo]]`
+sort(List(List(new Foo)))
+</code></pre></div></div>
+
+<p>The Scala 3 compiler gives the following error message:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error:
+|    sort(List(List(new Foo)))
+|                             ^
+|no implicit argument of type Order[List[Foo]] was found for parameter order of method sort.
+|I found:
+|
+|    Order.orderList[A](/* missing */implicitly[Order[Foo]])
+|
+|But no implicit values were found that match type Order[Foo].
+</code></pre></div></div>
+
+<p>The error message now shows how far the compiler went by chaining
+implicit definitions, and where it eventually stopped because an
+implicit argument could not be found. In our case, we see that the
+compiler tried the definition <code class="language-plaintext highlighter-rouge">orderList</code> but then didn’t find an
+implicit <code class="language-plaintext highlighter-rouge">Order[Foo]</code>. So, we know that to fix the problem we need
+to implement an implicit <code class="language-plaintext highlighter-rouge">Order[Foo]</code>.</p>
+
+<blockquote>
+  <p>For the record, the idea of showing the complete chain of implicits was
+pioneered by Torsten Schmits in the <a href="https://github.com/tek/splain">splain</a> compiler plugin, which is
+available in Scala 2.</p>
+</blockquote>
+
+<h2 id="suggesting-how-to-fix-the-problem">Suggesting How to Fix the Problem</h2>
+
+<p>In case the missing implicit arguments are defined somewhere but need to
+be imported, the Scala 3 compiler suggests to you <code class="language-plaintext highlighter-rouge">import</code> clauses that might
+fix the problem.</p>
+
+<p>Here is an example that illustrates this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// A class `Bar`
+class Bar
+
+// An implicit `Order[Bar]`
+// (note that it is _not_ in the `Bar` companion object)
+object Implicits {
+  implicit def orderBar: Order[Bar] = ???
+}
+
+// Let’s try to sort a `List[Bar]`
+sort(List(new Bar))
+</code></pre></div></div>
+
+<p>The compiler produces the following error:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error:
+|    sort(List(new Bar))
+|                       ^
+|no implicit argument of type Order[Bar] was found for parameter order of method sort
+|
+|The following import might fix the problem:
+|
+|  import Implicits.orderBar
+</code></pre></div></div>
+
+<p>Instead of just reporting that an implicit argument was not found, the Scala 3 compiler
+looks for implicit definitions that could have provided the missing argument. In our case,
+the compiler suggests importing <code class="language-plaintext highlighter-rouge">Implicits.orderBar</code>, which does fix the compilation error.</p>
+
+<h2 id="a-more-sophisticated-example">A More Sophisticated Example</h2>
+
+<p>An iconic example is the operation <code class="language-plaintext highlighter-rouge">traverse</code> from the library <a href="https://github.com/typelevel/cats">cats</a>. This
+operation is defined as a <em>conditional extension method</em> on any type <code class="language-plaintext highlighter-rouge">F[A]</code>
+for which there exists an implicit <code class="language-plaintext highlighter-rouge">Traverse[F]</code> instance. The operation
+takes a function <code class="language-plaintext highlighter-rouge">A =&gt; G[B]</code> and an implicit parameter of type <code class="language-plaintext highlighter-rouge">Applicative[G]</code>.</p>
+
+<p>In practice, this very generic operation is used in various specific contexts. For
+instance, to turn a list of validation results into a single validation result
+containing a list, or to turn an optional asynchronous result into an
+asynchronous optional result. However, because it is a conditional extension method,
+and because it takes an implicit parameter, finding the correct imports to make it work
+can be difficult.</p>
+
+<p>You don’t need to be familiar with the type classes <code class="language-plaintext highlighter-rouge">Traverse</code> and <code class="language-plaintext highlighter-rouge">Applicative</code> to
+understand the remaining of this article. There are only two things to know
+about the operation <code class="language-plaintext highlighter-rouge">traverse</code>:</p>
+
+<ol>
+  <li>it is available on a value of type <code class="language-plaintext highlighter-rouge">List[A]</code> if there is an
+implicit instance of type <code class="language-plaintext highlighter-rouge">Traverse[List]</code> (it is a <em>conditional</em> extension method),</li>
+  <li>the operation itself takes an implicit parameter of type <code class="language-plaintext highlighter-rouge">Applicative</code>.</li>
+</ol>
+
+<p>This can be modeled as follows in Scala 3, using <a href="https://dotty.epfl.ch/docs/reference/contextual/extension-methods.html">extension methods</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// The `Traverse` type class, which provides a `traverse` operation as an extension method
+trait Traverse[F[_]] {
+  def [G[_], A, B](fa: F[A]).traverse(f: A =&gt; G[B])(implicit applicative: Applicative[G]): G[B]
+}
+
+// The applicative type class (its actual definition does not matter for the example)
+trait Applicative[F[_]]
+</code></pre></div></div>
+
+<p>Let’s assume that a given instance of type <code class="language-plaintext highlighter-rouge">Traverse[List]</code> and a given instance
+of type <code class="language-plaintext highlighter-rouge">Applicative[Option]</code> are defined in an object <code class="language-plaintext highlighter-rouge">Givens</code> (given instances
+are the new way to define implicit instances in Scala 3):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>object Givens {
+  given traverseList as Traverse[List] = ???
+  given applicativeOption as Applicative[Option] = ???
+}
+</code></pre></div></div>
+
+<p>Now that we have set the context, let’s see a concrete example of use of <code class="language-plaintext highlighter-rouge">traverse</code>.</p>
+
+<p>First, consider a function <code class="language-plaintext highlighter-rouge">parseUser</code>, that parses a <code class="language-plaintext highlighter-rouge">User</code>
+from a <code class="language-plaintext highlighter-rouge">String</code> (e.g., containing a JSON object):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def parseUser(string: String): Option[User]
+</code></pre></div></div>
+
+<p>The return type of the function is <code class="language-plaintext highlighter-rouge">Option[User]</code>, which can represent a
+parsing failure with <code class="language-plaintext highlighter-rouge">None</code>, or a parsing success with <code class="language-plaintext highlighter-rouge">Some</code>.</p>
+
+<p>We can use the operation <code class="language-plaintext highlighter-rouge">traverse</code> and the function <code class="language-plaintext highlighter-rouge">parseUser</code> (which
+parses <em>one</em> user) to implement a function <code class="language-plaintext highlighter-rouge">parseUsers</code>, which parses
+a <em>list</em> of users. The signature of this function is the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def parseUsers(strings: List[String]): Option[List[User]]
+</code></pre></div></div>
+
+<p>Again, the result type is <code class="language-plaintext highlighter-rouge">Option[List[User]]</code> so that a parsing failure can
+be represented (it returns <code class="language-plaintext highlighter-rouge">None</code> if any of the strings failed to be parsed).</p>
+
+<p>The function can be implemented as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def parseUsers(strings: List[String]): Option[List[User]] =
+  strings.traverse(parseUser)
+</code></pre></div></div>
+
+<p>However, if we try to compile this code with Scala 2 we get the following
+error:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>value traverse is not a member of List[String]
+did you mean reverse?
+</code></pre></div></div>
+
+<p>The error message doesn’t help to find a solution.</p>
+
+<p>Compiling with Scala 3, on the other hand, provides much better assistance:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[E008] Not Found Error:
+|    strings.traverse(parseUser)
+|    ^^^^^^^^^^^^^^^^
+|value traverse is not a member of List[String], but could be made available as an extension method.
+|
+|The following import might make progress towards fixing the problem:
+|
+|  import Givens.traverseList
+</code></pre></div></div>
+
+<p>Let’s apply the suggestion and import <code class="language-plaintext highlighter-rouge">Givens.traverseList</code>. Now, the compiler
+provides the following error:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error:
+|    strings.traverse(parseUser)
+|                               ^
+|no implicit argument of type Applicative[Option] was found for parameter applicative of method traverse in trait Traverse
+|
+|The following import might fix the problem:
+|
+|  import Givens.applicativeOption
+</code></pre></div></div>
+
+<p>If we apply the new suggestion (importing <code class="language-plaintext highlighter-rouge">Givens.applicativeOption</code>) our
+program compiles!</p>
+
+<p>The Scala 3 compiler first suggested importing <code class="language-plaintext highlighter-rouge">Givens.traverseList</code>, so
+that the extension method <code class="language-plaintext highlighter-rouge">traverse</code> becomes available. Then, it suggested
+importing <code class="language-plaintext highlighter-rouge">Givens.applicativeOption</code>, which was required to call the <code class="language-plaintext highlighter-rouge">traverse</code>
+operation.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Dealing with “implicit not found” errors in Scala 2 can be difficult, in particular
+because developers don’t see precisely which implicit argument could not be found
+in a chain of implicit definitions, or because they don’t know what are the required
+imports to add to their program.</p>
+
+<p>Scala 3 addresses these two pain points by:</p>
+
+<ul>
+  <li>providing more precise error messages, showing exactly which implicit argument
+could not be found in a chain of implicit definitions,</li>
+  <li>providing actionable feedback, suggesting <code class="language-plaintext highlighter-rouge">import</code> clauses that might provide
+the missing implicits.</li>
+</ul>
+
+<p>You can already try this feature in Dotty 0.24.0-RC1.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2020-05-05-scala-3-import-suggestions.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

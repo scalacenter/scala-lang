@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 3.3.0 released! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 3.3.0 released!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2023/05/30/scala-3.3.0-released.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 3.3.0 released!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 30 May 2023</p>
+						<p>Paweł Marks, VirtusLab</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2023/05/30/scala-3.3.0-released.html">Scala 3.3.0 released!</a></h2> -->
+					<p><img src="/resources/img/scala-3.3_LTS-launch.png" alt="Scala 3.3" /></p>
+
+<p>We are thrilled to announce that after long months of work and careful testing, we have released Scala 3.3.0, the first release in the new 3.3.x LTS series.</p>
+
+<h2 id="what-does-lts-mean">What does “LTS” mean?</h2>
+
+<p>Scala 3.3.x is the first Long Term Support (LTS) release series. That means that it will be actively maintained for a period of at least three years. We have adopted a release model similar to the one that Java has successfully used for a long time.</p>
+
+<p>In the following years, there will be new minor releases (3.4, 3.5, and so on) that can bring new backward-compatible features. We are calling them Scala Next; they are equivalent to Java’s feature releases. Bug fixes and usability improvements from those releases will be back-ported and released as 3.3.x patches. Apart from those forward and backward-compatible changes, LTS will be feature frozen.</p>
+
+<p>The LTS model doesn’t change anything in our compatibility guarantees. Projects built with all future releases will be able to depend on any library compiled with Scala 3.3.x. This is just our standard guarantee that the newer compiler can always consume the output of the older version.</p>
+
+<p>LTS might be a great choice for library authors who can now receive constant bug fixes and developer experience improvements without forcing the users of the library to update the compiler version in their project.</p>
+
+<p>You can read more about our compatibility guarantees in <a href="https://virtuslab.com/blog/the-scala-3-compatibility-story/">the recent blog post</a>.</p>
+
+<h2 id="whats-new-in-scala-330">What’s new in Scala 3.3.0</h2>
+
+<h3 id="linting">Linting</h3>
+
+<p>Scala 3.3.0 brings back linting to the Scala compiler.  Right now, you can enable checking for unused symbols and discarded values. More linting options will come soon in the following Scala 3.3.x releases.</p>
+
+<h4 id="checking-for-unused-values">Checking for unused values</h4>
+
+<p>There is an entire family of compiler options added in 3.3.0 for checking and reporting different kinds of unused symbols:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-Wunused:imports</code> - for unused imports</li>
+  <li><code class="language-plaintext highlighter-rouge">-Wunused:privates</code> - for unused local definitions</li>
+  <li><code class="language-plaintext highlighter-rouge">-Wunused:locals</code>  - for unused local definitions</li>
+  <li><code class="language-plaintext highlighter-rouge">-Wunused:explicits</code> - for unused explicit parameters</li>
+  <li><code class="language-plaintext highlighter-rouge">-Wunused:implicits</code> - for unused implicit parameters (parameters in <code class="language-plaintext highlighter-rouge">using</code> clauses)</li>
+  <li><code class="language-plaintext highlighter-rouge">-Wunused:params</code> - for all unused method parameters</li>
+  <li><code class="language-plaintext highlighter-rouge">-Wunused:all</code> - for enabling all of the above lints</li>
+</ul>
+
+<h4 id="checking-for-discarded-values">Checking for discarded values</h4>
+
+<p>Discarding non-unit values is usually the symptom of subtle mistakes. The compiler can now warn you about all discarded values saving you from bugs resulting from those hard-to-spot mistakes.</p>
+
+<p>In the following simplified example</p>
+
+<pre><code class="language-Scala">def failure: Either[String, Nothing] = Left("something broke")
+
+def failedComputation: Either[String, Unit] =
+  Right(()).map(_ =&gt; failure)
+</code></pre>
+
+<p>the programmer, by mistake, used the <code class="language-plaintext highlighter-rouge">map</code> method instead of <code class="language-plaintext highlighter-rouge">flatMap</code>. The code still compiles, but due to value discarding, behaves unexpectedly, returning <code class="language-plaintext highlighter-rouge">Right(())</code> from the <code class="language-plaintext highlighter-rouge">failedComputation</code> method. If the <code class="language-plaintext highlighter-rouge">-Wvalue-discard</code> flag is enabled, the compiler will report the warning, saving the user from a potential bug.</p>
+
+<h3 id="more-consistent-braceless-syntax">More consistent braceless syntax</h3>
+
+<p>Braces around method parameters can now be replaced with a colon. This can lead to cleaner, shorter, and often more readable code in places like configuration DSLs or test case definitions.</p>
+
+<pre><code class="language-Scala">def canFail(input: String): Try[List[String]] = Try:
+  someComputation(input).flatMap: res =&gt;
+    val partial = moreComputation(res)
+    andEvenMore(partial)
+
+class TestSuite extends munit.FunSuite:
+  test("the job doesn't fail"):
+    val job = canFail("some data")
+    assert(job.isSuccess)
+</code></pre>
+
+<p>For the record, the braceless syntax has been introduced in Scala 3.0.0. However, braces were still needed to pass function arguments. Martin Odersky proposed to address this point in the proposal <a href="https://docs.scala-lang.org/sips/fewer-braces.html">SIP-44 - Fewer braces</a>, which was accepted by the SIP Committee in <a href="https://docs.scala-lang.org/sips/results/2022-08-26-meeting.html">August 2022</a>. The final implementation was released as an experimental feature in <a href="https://github.com/lampepfl/dotty/releases/tag/3.2.0">Scala 3.2.0</a> in September. Finally, in <a href="https://docs.scala-lang.org/sips/results/2022-10-21-meeting.html">October</a>, the SIP Committee voted to promote it to a stable feature.</p>
+
+<h3 id="boundary-and-break"><code class="language-plaintext highlighter-rouge">boundary</code> and <code class="language-plaintext highlighter-rouge">break</code></h3>
+
+<p>Two new methods were added to the standard library: <code class="language-plaintext highlighter-rouge">boundary</code> and <code class="language-plaintext highlighter-rouge">break</code>. They are safer and more expressive replacements for non-local returns, which were deprecated recently.</p>
+
+<p><code class="language-plaintext highlighter-rouge">break</code> allows for a type-safe early escape from anywhere inside the block delimited by <code class="language-plaintext highlighter-rouge">boundary</code> to its end, returning the passed value from the entire block.</p>
+
+<pre><code class="language-Scala">import util.boundary, boundary.break
+
+def sumOfRoots(numbers: List[Double]): Option[Double] = boundary:
+  val roots = numbers.map: n =&gt;
+    println(s" * calculating square root for $n*")
+    if n &gt;= 0 then Math.sqrt(n) else break(None)
+  Some(roots.sum)
+</code></pre>
+
+<p>When you run the above method, you will notice that it returns <code class="language-plaintext highlighter-rouge">None</code> when any of the input elements is negative. Moreover, thanks to <code class="language-plaintext highlighter-rouge">boundary</code>/<code class="language-plaintext highlighter-rouge">break</code>, you can see from the console output that it stops iterating after encountering the first negative element.</p>
+
+<p><code class="language-plaintext highlighter-rouge">break</code> can jump out of the <code class="language-plaintext highlighter-rouge">boundary</code> in the function deeper on the stack. To make it safe, only functions with a matching <code class="language-plaintext highlighter-rouge">Label</code> in their using clauses can break. This can be used to create isolated parts of an application with streamlined error handling. Library authors can abstract over <code class="language-plaintext highlighter-rouge">break</code> and <code class="language-plaintext highlighter-rouge">Label</code>, creating a nice API for error handling or dealing with uncertain data.</p>
+
+<h3 id="the-new-default-implementation-of-lazy-vals">The new default implementation of lazy vals</h3>
+
+<p>Last but not least, we have changed the default implementation of lazy vals. The new implementation has better performance and is safer under parallel access. This may result in improvements in the performance of effect systems.</p>
+
+<h2 id="should-i-update-to-scala-330">Should I update to Scala 3.3.0?</h2>
+
+<p>If you are maintaining a standalone Scala 3 project without external projects depending on it, feel free to switch to Scala 3.3.0 at any moment. You will enjoy all the improvements in the newest version of the compiler.</p>
+
+<p>If you are a library author following semantic versioning, we advise you to update to Scala 3.3.0 in the next minor release of your project. Users of your library would also need to bump their compiler version to use the newest version of your library. If you have already published a minor version on 3.3.0 but learned about a critical vulnerability in your library, you should release a new patch release for the previous minor version of your library using the Scala version you had used before the bump (e.g. 3.2.2 or older). This patch can be consumed by all the users of previous versions of the library, no matter if they have already switched to 3.3.0 or not.</p>
+
+<h3 id="known-incompatibility-stability-of-inline-parameters">Known incompatibility: Stability of inline parameters</h3>
+
+<p>In Scala, only stable paths can be used as prefix in path-dependent types.</p>
+
+<pre><code class="language-Scala">class Outer:
+  type Inner
+
+val a = new Outer
+val aInner: a.Inner = ???     // ok
+
+var b = new Outer
+// val bInner: b.Inner = ???  // error
+
+def c = new Outer
+// val cInner: c.Inner = ???  // error
+
+def method(param: Outer): param.Inner = ???  // ok
+</code></pre>
+
+<p>There was a bug that resulted in the compiler assuming that all inline parameters are stable references. This could have led to unsound code being accepted by the compiler and potential runtime crashes.</p>
+
+<pre><code class="language-Scala">inline def method(inline param: Outer): param.Inner // error in Scala 3.3.0
+</code></pre>
+
+<p>Such pieces of code are now rejected by the compiler. The migration for that change is simple, as it only requires removing the <code class="language-plaintext highlighter-rouge">inline</code> modifier <strong>from the parameter</strong>. If the path-dependent type was used, it is safe to say that the intended behavior was to inline the method without inlining the parameter.</p>
+
+<h2 id="contributors">Contributors</h2>
+
+<p>Thank you to all the contributors who made the release of 3.3.0 possible</p>
+
+<p>According to <code class="language-plaintext highlighter-rouge">git shortlog -sn --no-merges 3.2.2..3.3.0</code> these are:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   226 Martin Odersky
+   106 Szymon Rodziewicz
+    81 Dale Wijnand
+    56 Nicolas Stucki
+    52 Paul Coral
+    48 Kamil Szewczyk
+    45 Paweł Marks
+    28 Florian3k
+    28 Yichen Xu
+    15 Guillaume Martres
+    10 Michał Pałka
+     9 Kacper Korban
+     8 Fengyun Liu
+     7 Chris Birchall
+     7 rochala
+     6 Sébastien Doeraene
+     6 jdudrak
+     5 Seth Tisue
+     5 Som Snytt
+     5 nizhikov
+     4 Filip Zybała
+     4 Jan Chyb
+     4 Michael Pollmeier
+     4 Natsu Kagami
+     3 Anatolii Kmetiuk
+     3 Jamie Thompson
+     2 Adrien Piquerez
+     2 Alex
+     2 Dmitrii Naumenko
+     2 Lukas Rytz
+     2 Michael Pilquist
+     2 Vasil Vasilev
+     2 adampauls
+     2 yoshinorin
+     1 Alexander Slesarenko
+     1 Chris Kipp
+     1 Guillaume Raffin
+     1 Jakub Kozłowski
+     1 Jan-Pieter van den Heuvel
+     1 Julien Richard-Foy
+     1 Kenji Yoshida
+     1 Matt Bovel
+     1 Mohammad Yousuf Minhaj Zia
+     1 Philippus
+     1 Szymon R
+     1 Tim Spence
+     1 s.bazarsadaev
+</code></pre></div></div>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2023-05-30-scala-3.3.0-released.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

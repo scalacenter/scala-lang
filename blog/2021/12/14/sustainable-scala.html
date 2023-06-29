@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Sustainable Scala | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Sustainable Scala"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2021/12/14/sustainable-scala.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Sustainable Scala</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 14 December 2021</p>
+						<p>Julien Richard-Foy, Wojciech Mazur</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2021/12/14/sustainable-scala.html">Sustainable Scala</a></h2> -->
+					<p>To what extent do programming languages affect the energy consumption of 
+programs? How does Scala compare to the other programming languages? Does that 
+matter for building an environmentally sustainable digital world?</p>
+
+<p>We found out that the most important lever to reduce the energy 
+consumption of the IT sector is to <strong>extend the lifetime of hardware</strong>. 
+Nevertheless, the energy consumption due to <strong>running software</strong> is 
+important, and it <strong>varies significantly between programming languages</strong>.
+Scala is well positioned for a high-level language, and <strong>writing low-level 
+imperative code</strong> can make a difference.</p>
+
+<h2 id="the-world-is-warming-what-about-the-digital-world">The world is warming, what about the digital world?</h2>
+
+<p>According to <a href="https://www.ipcc.ch/sr15/chapter/spm/">climate experts</a>, it is urgent to assess the environmental 
+impact of our decisions (in all areas) to significantly reduce the 
+greenhouse-gas (GHG) emissions of human activities.</p>
+
+<p>In 2019, the sector of IT was responsible for 3.5% of the worldwide GHG 
+emissions <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>, which is similar to the aviation sector. More 
+importantly, this number is growing exponentially, and it is expected to 
+double between now and 2025 <sup id="fnref:1:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. This trajectory is obviously not 
+sustainable. The GHG emissions of the IT sector must decrease.</p>
+
+<p>In that regard, good news is that more and more IT companies are committing to 
+targeting carbon neutrality, including Scala companies such as <a href="https://about.netflix.com/en/news/net-zero-nature-our-climate-commitment">Netflix</a>, 
+<a href="https://corporate.zalando.com/en/newsroom/news-stories/zalando-goes-carbon-neutral">Zalando</a>, and <a href="https://stripe.com/blog/first-negative-emissions-purchases">Stripe</a>.</p>
+
+<p>Where do we start? If we break down the GHG emissions within the IT sector, 
+we observe that most of them happen during the manufacturing process of 
+hardware rather than during the usage of hardware <sup id="fnref:1:2" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> <sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">3</a></sup>. Therefore, the 
+first action point is to <strong>extend the lifetime of hardware</strong>.</p>
+
+<p>Then, we can have a look at the emissions due to using hardware, namely
+the emissions due to running software.</p>
+
+<h2 id="do-programming-languages-affect-energy-consumption">Do programming languages affect energy consumption?</h2>
+
+<p>The GHG emissions due to running software are caused by the energy 
+consumption of computers. Obviously, the more computations are performed, the 
+more energy is consumed. Said otherwise, the nature of the program is more 
+important than the language in which it is written.</p>
+
+<p>That being said, if we implemented the exact same program in various 
+languages, would we observe significant differences in energy consumption, 
+solely due to intrinsic <em>language overhead</em>? This is the question <a href="https://sites.google.com/view/energy-efficiency-languages">Rui 
+Pereira <em>et. al.</em> try to answer</a>.</p>
+
+<p>They compared the execution time, energy consumption, and memory consumption 
+of running 10 different programs each implemented in 27 programming languages
+<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">4</a></sup>. Caution needs to be taken when interpreting benchmark results, but 
+some general trends emerged.</p>
+
+<p>Notably, <strong>the energy consumption does vary by factors up to 80 between 
+programming languages</strong>. On average, C and Rust programs are the most energy 
+efficient. Java programs consume about 2 times more energy than C programs. 
+JavaScript/TypeScript programs consume between 4 to 20 times more energy 
+than C programs. Finally, Python programs are black sheeps, with an energy
+consumption 75 times higher than C programs.</p>
+
+<p>Where does Scala stand in this picture? Unfortunately, Scala was not 
+included in this study.</p>
+
+<h2 id="including-scala-in-the-energy-benchmarks">Including Scala in the energy benchmarks</h2>
+
+<p>The code used by the study is <a href="https://github.com/greensoftwarelab/Energy-Languages">open source</a>. It reuses 
+the benchmarks of the <a href="https://benchmarksgame-team.pages.debian.net/benchmarksgame/">Computer Language Benchmarks Game</a>, and measures not 
+only the execution time and memory consumption, but also the energy 
+consumption (via <a href="https://en.wikipedia.org/wiki/Perf_(Linux)">perf tools</a>).</p>
+
+<p>In order to include Scala, we had the following plan:</p>
+
+<ul>
+  <li>take <a href="https://salsa.debian.org/benchmarksgame-team/archive-alioth-benchmarksgame/-/tree/master/contributed-source-code/benchmarksgame">old Scala implementations</a> of the benchmarks (which were written at 
+a time where Scala was part of the Computer Language Benchmarks Game, and 
+which are now sitting in an archived Git repository),</li>
+  <li>adapt the infrastructure created by the study to run Java benchmarks to 
+also run Scala benchmarks.</li>
+</ul>
+
+<p>However, things were not that simple in practice. First, we discovered that the 
+existing infrastructure was not properly warming-up the JVM before running the 
+benchmarks, leading to an over-estimation of about 30% of their energy 
+consumption. Second, and more importantly, we noticed that the different 
+implementations of the same benchmarks (one per programming language) were 
+sometimes using different algorithms, making things obviously less comparable.</p>
+
+<p>We managed to find a solution to the first issue by implementing a <a href="https://github.com/WojciechMazur/Energy-Languages/blob/cd9a9d6d8e40911af6f823b1ecc4f6173c51c36c/Scala/sRAPL/sRAPL.scala#L9-L26">JVM-based 
+runner</a> for the benchmarks. Our runner implements the classic scheme of 
+running several warming-up iterations before doing measurements. It measures 
+the energy consumption by using <a href="https://github.com/WojciechMazur/jRAPL">jRAPL</a>.</p>
+
+<p>Dealing with the second issue was a bit less satisfactory. We don’t have the 
+capacity of checking and fixing the 50 benchmark implementations to use 
+comparable algorithms. Consequently, we only focused on the Java and Scala 
+benchmarks whose performance was too far behind their C counterpart. We 
+modified them, when necessary, to use the same algorithm as the C 
+implementation of the benchmark.</p>
+
+<p>After several days of work, we had 10 Scala implementations of the 
+benchmarks as well as an infrastructure properly warming-up the JVM before 
+measuring their execution time, memory consumption, and energy consumption.</p>
+
+<h2 id="what-about-day-to-day-code">What about day-to-day code?</h2>
+
+<p>Heavily optimized code may be different from idiomatic code 
+that we write day-to-day, and the results we would get from running the 
+benchmarks may not be applicable to idiomatic Scala code.</p>
+
+<p>For this reason, we also created “more idiomatic” versions of the Scala
+benchmarks. The usage of the double quotes is justified because 1) what is 
+qualified as idiomatic is fairly subjective, and 2) due to our limited 
+resources, we did not completely overhaul the implementations, but we 
+only changed some patterns that we believe are typically non-idiomatic.</p>
+
+<p>For instance, the “optimized” version of the <code class="language-plaintext highlighter-rouge">binary-trees</code> benchmark models 
+an empty tree as tree whose branches are <code class="language-plaintext highlighter-rouge">null</code>:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">final</span> <span class="k">case</span> <span class="k">class</span> <span class="nc">Tree</span><span class="o">(</span><span class="n">left</span><span class="k">:</span> <span class="kt">Tree</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">Tree</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">checkSum</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span>
+    <span class="n">left</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="kc">null</span> <span class="k">=&gt;</span> <span class="mi">1</span>
+      <span class="k">case</span> <span class="n">tl</span>   <span class="k">=&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="nv">tl</span><span class="o">.</span><span class="py">checkSum</span> <span class="o">+</span> <span class="nv">right</span><span class="o">.</span><span class="py">checkSum</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="k">object</span> <span class="nc">Tree</span> <span class="o">{</span>
+  <span class="k">final</span> <span class="k">val</span> <span class="nv">EmptyTree</span> <span class="k">=</span> <span class="nc">Tree</span><span class="o">(</span><span class="kc">null</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Whereas the idiomatic one uses a class hierarchy:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sealed</span> <span class="k">trait</span> <span class="nc">Tree</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">checkSum</span><span class="k">:</span> <span class="kt">Int</span>
+<span class="o">}</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">NonEmptyTree</span><span class="o">(</span><span class="n">left</span><span class="k">:</span> <span class="kt">Tree</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">Tree</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Tree</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">checkSum</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nv">left</span><span class="o">.</span><span class="py">checkSum</span> <span class="o">+</span> <span class="nv">right</span><span class="o">.</span><span class="py">checkSum</span>
+<span class="o">}</span>
+
+<span class="k">case</span> <span class="k">object</span> <span class="nc">EmptyTree</span> <span class="k">extends</span> <span class="nc">Tree</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">checkSum</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Does this change impact performance? Keep reading to know the answer.</p>
+
+<p>Another example of difference between idiomatic and optimized versions is the 
+usage of Scala collections instead of Java <code class="language-plaintext highlighter-rouge">Array</code>s, and the usage of <code class="language-plaintext highlighter-rouge">for</code> 
+loop instead of <code class="language-plaintext highlighter-rouge">while</code> loops.</p>
+
+<h3 id="protocol">Protocol</h3>
+
+<p>We compared the energy consumption of 10 benchmarks, each written in C, Scala, 
+Java, JavaScript, and Python. To achieve this, we executed each benchmark 10 
+times (after 5 warm-up iterations), on an Intel i9-7900X @ 3.30 GHz with 20 
+CPUs and 128 GB of memory, with OpenJDK 17, Node 10.19.0, and Python 3.8.10.</p>
+
+<p>You can find the source code of the benchmarks in the following Git repository:
+<a href="https://github.com/WojciechMazur/Energy-Languages/tree/feature/scala-develop">https://github.com/WojciechMazur/Energy-Languages</a>.</p>
+
+<h3 id="results">Results</h3>
+
+<p>To visualize better how the languages compare (regardless of the nature of 
+the benchmarks), we normalized the measurements, using C as a baseline.</p>
+
+<p>The figure below shows the normalized average energy consumption for each 
+benchmark, for the languages C, Java, and Scala (lower is better):</p>
+
+<p><img src="/resources/img/blog/sustainable-scala/c-java-scala-1.png" alt="" />
+<img src="/resources/img/blog/sustainable-scala/c-java-scala-2.png" alt="" /></p>
+
+<p>We observe that the Scala benchmarks were sometimes consuming a similar 
+amount of energy as the C benchmark (this is the case for <code class="language-plaintext highlighter-rouge">binary-trees</code>, 
+<code class="language-plaintext highlighter-rouge">fannkuch-redux</code>, <code class="language-plaintext highlighter-rouge">fasta</code>, and <code class="language-plaintext highlighter-rouge">n-body</code>), and sometimes a significantly higher 
+amount of energy (up to 12 times more energy for <code class="language-plaintext highlighter-rouge">regex-redux</code>).</p>
+
+<p>The figure below shows the same information, but it now includes JavaScript 
+and Python:</p>
+
+<p><img src="/resources/img/blog/sustainable-scala/c-java-scala-js-python-1.png" alt="" />
+<img src="/resources/img/blog/sustainable-scala/c-java-scala-js-python-2.png" alt="" /></p>
+
+<p>Compared to C, the Python benchmarks consumed between 4 to 339 times more 
+energy, and the JavaScript benchmarks consumed between 2 to 12 times 
+more energy.</p>
+
+<p>Last, the figure below compares C, Java, Scala, and “idiomatic” Scala 
+benchmarks:</p>
+
+<p><img src="/resources/img/blog/sustainable-scala/c-java-scala-idiomatic-1.png" alt="" />
+<img src="/resources/img/blog/sustainable-scala/c-java-scala-idiomatic-2.png" alt="" /></p>
+
+<p>For some benchmarks, the idiomatic version performs as well as the optimized 
+one (for <code class="language-plaintext highlighter-rouge">binary-trees</code>, the idiomatic version performs even slightly better 
+than the – supposedly – optimized one). However, for some other benchmarks,
+the idiomatic version consumes significantly more energy than the optimized 
+one (up to 7 times more energy for <code class="language-plaintext highlighter-rouge">k-nucleotide</code>).</p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>Within a language, we observe a high variability between benchmarks (e.g., 
+Python consumed between 4 to 300 times more energy than C, depending on 
+which benchmark we look at). This makes it hard to draw general conclusions 
+like “language X consumes N times more energy than language Y”. That being 
+said, we believe that computing, for every language, their average energy 
+consumption relative to C provides an order of magnitude of how the 
+language may perform. The table below shows the average energy consumption 
+relative to C, as well as the standard deviation:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Average energy consumption (normalized)</th>
+      <th>Standard Deviation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>C</td>
+      <td>1.00</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <td>Java</td>
+      <td>2.04</td>
+      <td>1.45</td>
+    </tr>
+    <tr>
+      <td><strong>Scala</strong></td>
+      <td><strong>3.71</strong></td>
+      <td><strong>3.67</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Scala (idiomatic)</strong></td>
+      <td><strong>6.99</strong></td>
+      <td><strong>4.87</strong></td>
+    </tr>
+    <tr>
+      <td>JavaScript</td>
+      <td>7.63</td>
+      <td>3.62</td>
+    </tr>
+    <tr>
+      <td>Python</td>
+      <td>89.33</td>
+      <td>113.79</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>A similar table was shown by Rui Pereira <em>et. al</em> <sup id="fnref:4:1" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">4</a></sup>. While we did not get 
+exactly the same numbers, the orders of magnitude remain the same.</p>
+
+<p>We now have an answer to our initial question, “where does Scala 
+stand in the picture?” According to these benchmarks, Scala is well positioned 
+within high-level programming languages.</p>
+
+<p>Also, we see that in Scala, two implementations of the same benchmark can 
+easily show different performances, depending on your code style. For 
+instance, the energy consumption of the <code class="language-plaintext highlighter-rouge">k-nucleotide</code> benchmark was between 
+2 to 13 times higher than the C implementation. The differences between both 
+versions are mainly the usage of immutable Scala collections and <code class="language-plaintext highlighter-rouge">for</code> loops in 
+the idiomatic version, as opposed to <code class="language-plaintext highlighter-rouge">Array</code>s and <code class="language-plaintext highlighter-rouge">while</code> loops in the 
+optimized version (this observation is consistent with the results of 
+another study ran by Rui Pereira <em>et. al.</em> <sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote" rel="footnote">5</a></sup>).</p>
+
+<p>We believe that the fact that Scala embraces several programming paradigms 
+is a strength. It makes it easy to write high-level code that reads well, 
+and it also makes it easy to write low-level code that performs well.</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>This work measured the performance of Scala on the JVM platform only. What 
+about Scala.js and Scala Native? Including those platforms could be 
+achieved in a follow-up study.</p>
+
+<p>The Scala Center started this work to get a first rough idea of what it 
+entails to reduce the GHG emissions of running software written in Scala, 
+but also, and more importantly, to see if there is any interest from 
+companies that use Scala into consolidating the methodology and <a href="https://github.com/WojciechMazur/Energy-Languages/blob/7cf02bffe6d3b9af39f23e1d0edc0cb24c1e450c/Scala/sRAPL/sRAPL.scala">tools</a> to 
+reach their <a href="https://www.un.org/sustainabledevelopment/">sustainable development goals</a>. Please get in touch with
+<a href="mailto:scala@epfl.ch?subject=Sustainable%20Scala">us</a> if you want to be 
+part of it!</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>The Shift Project. (2021, March). Impact environnemental du numérique. https://theshiftproject.org/article/impact-environnemental-du-numerique-5g-nouvelle-etude-du-shift/ <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a> <a href="#fnref:1:2" class="reversefootnote" role="doc-backlink">&#8617;<sup>3</sup></a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>Freitag, C., Berners-Lee, M., Widdicks, K., Knowles, B., Blair, G., &amp; Friday, A. (2021). The climate impact of ICT: A review of estimates, trends and regulations. arXiv preprint arXiv:2102.02622. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>Gupta, U., Kim, Y. G., Lee, S., Tse, J., Lee, H. H. S., Wei, G. Y., … &amp; Wu, C. J. (2021, February). Chasing Carbon: The Elusive Environmental Footprint of Computing. In 2021 IEEE International Symposium on High-Performance Computer Architecture (HPCA) (pp. 854-867). IEEE. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Rui Pereira, Marco Couto, Francisco Ribeiro, Rui Rua, Jácome Cunha, João Paulo Fernandes, and João Saraiva. 2017. Energy efficiency across programming languages: how do energy, time, and memory relate? In Proceedings of the 10th ACM SIGPLAN International Conference on Software Language Engineering (SLE 2017). Association for Computing Machinery, New York, NY, USA, 256–267. DOI:https://doi.org/10.1145/3136014.3136031 <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:4:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:5" role="doc-endnote">
+      <p>Pereira, R., Couto, M., Ribeiro, F., Rua, R., Cunha, J., Fernandes, J. P., &amp; Saraiva, J. (2021). Ranking programming languages by energy efficiency. Science of Computer Programming, 205, 102609. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2021-12-14-sustainable-scala.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

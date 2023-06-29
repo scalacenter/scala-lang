@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Finding awesome Scala libraries | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Finding awesome Scala libraries"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2022/03/08/finding-awesome-libraries.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Finding awesome Scala libraries</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 8 March 2022</p>
+						<p>Adrien Piquerez, Scala Center</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2022/03/08/finding-awesome-libraries.html">Finding awesome Scala libraries</a></h2> -->
+					<p>The Scala ecosystem is vast. It contains many tools, libraries and frameworks built over many years by numerous organizations, companies and individuals.
+Their availability empowers Scala programmers to build fast, safe and scalable applications.</p>
+
+<p>The Scala Center aims to help Scala programmers find the tools and libraries that are right for you. In this blog post we introduce the new “Awesome Scala” page, powered by Scaladex.
+Check it out here: <a href="https://index.scala-lang.org/awesome">https://index.scala-lang.org/awesome</a>.</p>
+
+<p><img src="/resources/img/blog/scaladex/awesome-scala.png" alt="Awesome Scala" /></p>
+
+<p>Our aim is to give newcomers a good understanding of the state of the Scala ecosystem: what they can build, on which platform, using which version of the language.
+We also hope that it will be used by experienced Scala programmers to refresh their knowledge of the ecosystem and discover some new promising libraries.</p>
+
+<p>Library authors can actively contribute to this Awesome Scala list by tagging their projects in Scaladex.</p>
+
+<h2 id="a-multi-dimensional-ecosystem">A multi-dimensional ecosystem</h2>
+
+<p>Over the years, the Scala ecosystem has grown from a few powerful frameworks like Spark, Play and Akka to a vast collection of thousands of libraries solving a large spectrum of problems in many domains.</p>
+
+<p>At the same time, the Scala language itself has evolved quite rapidly.
+New programming constructs inspired the community to build new libraries with more expressive APIs, as much as new libraries pushed the boundaries of the language, encouraging the experimentation of new language features.
+In the process, some libraries that paved the way of what the ecosystem is today were left behind by their authors and replaced by simpler, more expressive libraries.</p>
+
+<p>In recent years, the ecosystem has become multi-platform.
+Scala.js and Scala Native make existing libraries usable in more scenarios and have inspired the creation of brand new libraries too.</p>
+
+<p>The ecosystem is a multi-dimensional space:</p>
+<ul>
+  <li>Some libraries are generic to all kinds of applications and others are very use-case specific.</li>
+  <li>Some libraries support all the versions of the language while some others are completely new in Scala 3.</li>
+  <li>Some libraries support all three platforms while some others are specific to one or two. For instance web frontend libraries only support Scala.js.</li>
+</ul>
+
+<p>How can we make it easier for newcomers to discover the Scala ecosystem in all its dimensions?
+How can we help experienced Scala programmers find new libraries that solve their problems in different ways?</p>
+
+<h2 id="awesome-scala">Awesome Scala</h2>
+
+<p>Open source software, similarly to commercial ones, will not thrive unless it reaches new users, sponsors and contributors.
+Aware of this issue, open source communities started to compile “awesome” lists of open source projects organized by topics.
+Some examples are <a href="https://github.com/vinta/awesome-python">vinta/awesome-python</a>, <a href="https://github.com/akullpp/awesome-java">akullp/awesome-java</a>, <a href="https://github.com/veggiemonk/awesome-docker">veggiemonk/awesome-docker</a> and many many more (see <a href="http://bayandin/awesome-awesomeness">bayandin/awesome-awesomeness</a>).</p>
+
+<p>The high number of stars of these GitHub repositories show how popular they are in the world of open source software.</p>
+
+<p>The Scala ecosystem is no exception, it has its own very popular awesome repository.
+Created by Lauris Dzilums in 2014 and maintained by a few community members, <a href="https://github.com/lauris/awesome-scala">lauris/awesome-scala</a> has accumulated more than 8.3K stargazers over 8 years.
+That makes it one of the top 20 Scala projects on GitHub!</p>
+
+<p>So why build a new Awesome Scala?</p>
+
+<p>First, because it is really hard to map the full picture of the Scala ecosystem, its richness and complexity, in a static page.
+Second, because we want to reduce the maintenance burden of gathering new libraries, updating old ones and re-organizing the list in a meaningful way.</p>
+
+<p>We believe we can achieve these goals using Scaladex.</p>
+
+<p>Scaladex is powered by a database of more than 7000 Scala projects, allowing us to explore them with filters (e.g., Scala versions and platforms) and sorting criteria (e.g., GitHub stars).</p>
+
+<p>In addition, it is fully automated: it receives new Scala POMs from Maven Central and fetches their corresponding projects from GitHub.
+It is also connected to the GitHub authentication service to grant library authors the permission to edit their project settings.
+Thus we were able to integrate an “Awesome Scala” experience in Scaladex, that is updated automatically, loaded dynamically and managed by the library authors (with no intervention from the administrators).</p>
+
+<h2 id="call-to-action">Call to action</h2>
+
+<p>As a library author, you can help people find your library in the “Awesome Scala” tool by tagging your project with one of the proposed categories.</p>
+
+<p>To do so, log in with your GitHub credentials, go to your project page and click the “Edit” button.</p>
+
+<p>The list of categories was largely inspired by <a href="https://github.com/lauris/awesome-scala">lauris/awesome-scala</a> but also by some “awesome” lists of other popular languages.
+We tested it on more than 800 projects.</p>
+
+<p>Nonetheless, it is likely that some projects will not fall into any of these categories.
+If that is the case please open an issue on <a href="https://github.com/scalacenter/scaladex/issues">scalacenter/scaladex</a> describing the main purpose of your library.</p>
+
+<p>For general discussions and feedback about the categorization, you are invited to open a discussion in <a href="https://github.com/scalacenter/scaladex/discussions">scalacenter/scaladex/discussions</a>.</p>
+
+<h2 id="limitations-and-going-further">Limitations and going further</h2>
+
+<h3 id="learning-resources">Learning resources</h3>
+
+<p>In contrast with <a href="https://github.com/lauris/awesome-scala">lauris/awesome-scala</a>, Scaladex does not list any learning resources like books, courses, tutorials, blogs, videos and podcasts.
+This is a limitation of the current nature of Scaladex: an index of GitHub repositories and Maven Central artifacts.</p>
+
+<p>It is in part compensated by the list of <a href="https://scala-lang.org/community/#community-powered-learning-resources">Community-Powered Learning Resources</a> on scala-lang.org.
+We encourage community members to submit pull requests with additions and updates to that page.</p>
+
+<h3 id="trending-libraries">Trending libraries</h3>
+
+<p>We use GitHub stars as our primary sorting criteria in Scaladex.
+But this metric can only grow over time and consequently it favors old projects over new ones.</p>
+
+<p>To also promote new libraries we would like to use some time-framed metrics such as the number of downloads or the number of new GitHub stars over a sliding period of time.
+Thus we would be able to show trending libraries over a month or a year.</p>
+
+<p>This is the next feature in the pipeline.
+We hope it will be powerful enough for new libraries to gain traction from the community and be more successful.</p>
+
+<h2 id="wrapping-up">Wrapping up</h2>
+
+<p>Check out the new <a href="https://index.scala-lang.org/awesome">Awesome Scala page</a> in Scaladex and let us know what you think at <a href="https://github.com/scalacenter/scaladex/discussions">scalacenter/scaladex/discussions</a>.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2022-03-08-finding-awesome-libraries.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

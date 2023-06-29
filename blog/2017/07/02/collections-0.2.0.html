@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Redesigned collections v0.2.0 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Redesigned collections v0.2.0"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/07/02/collections-0.2.0.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Redesigned collections v0.2.0</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Sunday 2 July 2017</p>
+						<p>Julien Richard-Foy</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2017/07/02/collections-0.2.0.html">Redesigned collections v0.2.0</a></h2> -->
+					<p>We are happy to announce the
+<a href="https://index.scala-lang.org/scala/collection-strawman/collection-strawman/0.2.0">0.2.0 release</a>
+of the collection strawman!</p>
+
+<p>The collection strawman aims to be a replacement of the existing collections for the
+Scala 2.13 standard library. Essentially, the goal is to make the API simpler, the
+implementation more maintainable and to have better lazy collections. You can read more
+about this effort in
+<a href="https://www.scala-lang.org/blog/2017/02/28/collections-rework.html">this blog post</a>.</p>
+
+<h2 id="current-status">Current status</h2>
+
+<p>The goal of this milestone is to be feature compatible with the current collections
+for the most common use cases.</p>
+
+<p>The following collection types are implemented:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">List</code> and <code class="language-plaintext highlighter-rouge">ListBuffer</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">Vector</code> and <code class="language-plaintext highlighter-rouge">ArrayBuffer</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">Range</code> and <code class="language-plaintext highlighter-rouge">NumericRange</code>,</li>
+  <li><code class="language-plaintext highlighter-rouge">LazyList</code> (equivalent to the existing <code class="language-plaintext highlighter-rouge">Stream</code>),</li>
+  <li>mutable and immutable <code class="language-plaintext highlighter-rouge">HashSet</code> and <code class="language-plaintext highlighter-rouge">BitSet</code>,</li>
+  <li>mutable and immutable <code class="language-plaintext highlighter-rouge">HashMap</code>,</li>
+  <li>mutable and immutable <code class="language-plaintext highlighter-rouge">TreeSet</code> and <code class="language-plaintext highlighter-rouge">TreeMap</code>.</li>
+</ul>
+
+<p>Also, most of the operations of the current <code class="language-plaintext highlighter-rouge">Traversable</code>, <code class="language-plaintext highlighter-rouge">Iterable</code>, <code class="language-plaintext highlighter-rouge">Seq</code>
+and <code class="language-plaintext highlighter-rouge">Set</code> collection types are implemented in the strawman.</p>
+
+<p>For reference, a detailed list of the current implementation status is available
+<a href="https://github.com/scala/collection-strawman#implemented-collection-types">here</a>.</p>
+
+<p>To experiment with this milestone, just add the following dependency:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"ch.epfl.scala"</span> <span class="o">%%</span> <span class="s">"collection-strawman"</span> <span class="o">%</span> <span class="s">"0.2.0"</span>
+</code></pre></div></div>
+
+<p>The collection strawman is compatible with Scala 2.13 and Dotty (Scala 2.12 is
+also supported though you might encounter type inference issues with it).</p>
+
+<p>Since these collections have to coexist with the actual standard collections, they live in
+a separate package, <code class="language-plaintext highlighter-rouge">strawman.collection</code> (instead of <code class="language-plaintext highlighter-rouge">scala.collection</code>):</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">strawman.collection.immutable.List</span>
+
+<span class="nf">println</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">).</span><span class="py">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>In order to make this release a real “drop-in” replacement of the current collections,
+we are working on a
+<a href="https://github.com/scala/collection-strawman/compare/master...olafurpg:scalafix">rewrite tool</a>
+(available soon) that takes care of changing the imports of an existing project to use
+the <code class="language-plaintext highlighter-rouge">strawman</code> namespace. This tool should automate most of the adaptation work by
+unimporting the existing collections and importing the strawman instead, by
+renaming collection types that have changed (e.g. <code class="language-plaintext highlighter-rouge">Stream</code> into <code class="language-plaintext highlighter-rouge">LazyList</code>), and by
+adapting some constructs that are not yet supported in the strawman (e.g. <code class="language-plaintext highlighter-rouge">0 until 10</code>
+has to be written <code class="language-plaintext highlighter-rouge">Range(0, 10)</code>).</p>
+
+<h2 id="next-steps">Next steps</h2>
+
+<p>We encourage you to give a try to the new collections and to
+<a href="https://github.com/scala/collection-strawman/issues">report</a> any issue you encounter.
+We expect common usage to still work with the strawman with no or little modifications
+on your code.</p>
+
+<p>Because the internal implementation is different from the existing collections, you
+might get some surprises in advanced use cases: for instance, now the <code class="language-plaintext highlighter-rouge">view</code> method
+returns a <code class="language-plaintext highlighter-rouge">View[A]</code> type ; there is no <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>. We will explain these
+undocumented (yet) changes in future posts.</p>
+
+<p>From now on, we will cut new releases every month. The goals of the
+<a href="https://github.com/scala/collection-strawman/milestone/2">next release</a> are to
+implement a little bit more operations, to polish some internal implementation details,
+and to integrate a stronger test suite.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2017-07-02-collections-0.2.0.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

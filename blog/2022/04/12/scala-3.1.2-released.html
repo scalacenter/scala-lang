@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 3.1.2 released! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 3.1.2 released!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2022/04/12/scala-3.1.2-released.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 3.1.2 released!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 12 April 2022</p>
+						<p>Paweł Marks, VirtusLab</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2022/04/12/scala-3.1.2-released.html">Scala 3.1.2 released!</a></h2> -->
+					<p>We are happy to announce the release of Scala 3.1.2. This new release brings a few significant improvements awaited by the community.</p>
+
+<h2 id="configurable-scala-output-version">Configurable Scala output version</h2>
+
+<p><strong>August 2022 Update:</strong> configurable Scala output version turned out to be really hard to maintain and is not solving some of problems it was intended to solve. We have decided to drop it in 3.2 and propose long term support versions instead. You can read more in <a href="/blog/2022/08/17/long-term-compatibility-plans.html">the dedicated post</a>.</p>
+
+<p>First and foremost, after months of brainstorming and testing, we are bringing an experimental possibility to configure the Scala output version. This means that the compiler can now generate TASTy files and classfiles in a format used by an older minor version of Scala (which can currently be only 3.0.x) effectively specifying the minimum version of the compiler that is able to read your compiled code.</p>
+
+<p>If you are a library maintainer, you may have faced a dilemma, should you update the Scala version to 3.1 or stay on 3.0. On the one hand, updating would bring you all bug fixes and enhancements from the newest version of the compiler. On the other, all new releases of your library would be unusable for all the users that are, for some reason, stuck on Scala 3.0.</p>
+
+<p>Now, this tradeoff is no more. When compiling your library with Scala 3.1.2, you can set your output version to Scala 3.0. Then your library can be used by code compiled with Scala 3.0, 3.1, or any future version. All produced TASTy files will be compatible with Scala 3.0 and newer.</p>
+
+<p>While the compiler setting itself is not explicitly marked as experimental (its corresponding flag doesn’t have a <code class="language-plaintext highlighter-rouge">-X</code> or <code class="language-plaintext highlighter-rouge">-Y</code> prefix in its name), its role in the broader ecosystem of Scala libraries is yet to be determined. We are eagerly awaiting feedback from the maintainers of libraries. Hearing your opinions will allow us to choose the right strategy for supporting code compiled for previous Scala versions so that we can find a balance between compatibility and a possibility for the language to evolve.</p>
+
+<h3 id="current-support">Current support</h3>
+
+<p>You can set the Scala output version by using a new compiler flag named <code class="language-plaintext highlighter-rouge">-scala-output-version</code> with a minor release version as an argument. You may remember this flag as <code class="language-plaintext highlighter-rouge">-scala-target</code> or <code class="language-plaintext highlighter-rouge">-Xscala-release</code> in design discussions and unstable builds. Those names are not supported in the stable release.</p>
+
+<p>Sbt, starting from version 1.7.0-M1, has a setting <code class="language-plaintext highlighter-rouge">scalaOutputVersion</code> that not only sets the compiler flag mentioned above but also determines which version of the standard library will be specified as a dependency of your project. For example, adding</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ThisBuild</span> <span class="o">/</span> <span class="n">scalaVersion</span>       <span class="o">:=</span> <span class="s">"3.1.2"</span>
+<span class="nc">ThisBuild</span> <span class="o">/</span> <span class="n">scalaOutputVersion</span> <span class="o">:=</span> <span class="s">"3.0.2"</span>
+</code></pre></div></div>
+
+<p>to your build definition will make your project be compiled using the latest currently available version of the compiler but it will be available as a dependency for other projects compiled with both 3.1.x and 3.0.x. Also the standard library from Scala 3.0.2 will be used at runtime when you use <code class="language-plaintext highlighter-rouge">sbt run</code> or <code class="language-plaintext highlighter-rouge">sbt test</code>. This should help you find possible runtime issues earlier when you intend your library to be compatible with earlier compilers.</p>
+
+<p><code class="language-plaintext highlighter-rouge">scalaOutputVersion</code> was designed to work smoothly also in cases when you’re still forced to cross-compile anyway (e.g. if your project contains macros but you want to support both Scala 2 and 3). In such situation you should only make sure that <code class="language-plaintext highlighter-rouge">scalaOutputVersion</code> is set to the same value as <code class="language-plaintext highlighter-rouge">scalaVersion</code> (which is equivalent to leaving <code class="language-plaintext highlighter-rouge">scalaOutputVersion</code> undefined) if the compiler in <code class="language-plaintext highlighter-rouge">scalaVersion</code> doesn’t yet support the <code class="language-plaintext highlighter-rouge">-scala-output-version</code> flag. E.g.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">ThisBuild</span> <span class="o">/</span> <span class="n">scalaVersion</span> <span class="o">:=</span> <span class="s">"3.1.2"</span>
+<span class="nc">ThisBuild</span> <span class="o">/</span> <span class="n">crossScalaVersions</span> <span class="o">:=</span> <span class="nc">List</span><span class="o">(</span><span class="s">"2.13.8"</span><span class="o">,</span> <span class="s">"3.1.2"</span><span class="o">)</span>
+<span class="nc">ThisBuild</span> <span class="o">/</span> <span class="n">scalaOutputVersion</span> <span class="o">:=</span> <span class="o">{</span>
+  <span class="nv">CrossVersion</span><span class="o">.</span><span class="py">partialVersion</span><span class="o">(</span><span class="nv">scalaVersion</span><span class="o">.</span><span class="py">value</span><span class="o">)</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Some</span><span class="o">((</span><span class="mi">3</span><span class="o">,</span> <span class="k">_</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="s">"3.0.2"</span>
+    <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="nv">scalaVersion</span><span class="o">.</span><span class="py">value</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="changes-to-other-compatibility-flags">Changes to other compatibility flags</h3>
+
+<p>We realized that there is some confusion about current output compatibility flags, and adding a new one would only make it worse. So, we have decided to rename existing flags. <code class="language-plaintext highlighter-rouge">-release</code> is now <code class="language-plaintext highlighter-rouge">-java-output-version</code>, and <code class="language-plaintext highlighter-rouge">-Xtarget</code> is <code class="language-plaintext highlighter-rouge">-Xunchecked-java-output-version</code>. The old names are left as aliases for the sake of compatibility.</p>
+
+<h2 id="other-improvements">Other improvements</h2>
+
+<ul>
+  <li>
+    <p>You can now pass <code class="language-plaintext highlighter-rouge">-Xmacro-settings</code> flag during the compilation to customize the behavior of macros in your code. This feature is still experimental.
+For example, you can compile following code with <code class="language-plaintext highlighter-rouge">-Xmacro-settings:present,key=value</code>:</p>
+
+    <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//&gt; using options "-Xmacro-settings:present,key=value"</span>
+
+<span class="k">import</span> <span class="nn">scala.quoted.</span><span class="o">*</span>
+
+<span class="n">inline</span> <span class="k">def</span> <span class="nf">customizable</span> <span class="k">=</span> <span class="n">$</span><span class="o">{</span> <span class="n">customizableImpl</span> <span class="o">}</span>
+
+<span class="k">def</span> <span class="nf">customizableImpl</span><span class="o">(</span><span class="n">using</span> <span class="nc">Quotes</span><span class="o">)</span> <span class="k">=</span>
+  <span class="k">import</span> <span class="nn">quotes.reflect.</span><span class="o">*</span>
+  <span class="k">val</span> <span class="nv">settings</span> <span class="k">=</span> <span class="nv">CompilationInfo</span><span class="o">.</span><span class="py">XmacroSettings</span>
+
+  <span class="k">val</span> <span class="nv">present</span>    <span class="k">=</span> <span class="nv">settings</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="s">"present"</span><span class="o">)</span>       <span class="c1">// true</span>
+  <span class="k">val</span> <span class="nv">notPresent</span> <span class="k">=</span> <span class="nv">settings</span><span class="o">.</span><span class="py">contains</span><span class="o">(</span><span class="s">"not-present"</span><span class="o">)</span>   <span class="c1">// false</span>
+  <span class="k">val</span> <span class="nv">withValue</span>  <span class="k">=</span> <span class="nv">settings</span><span class="o">.</span><span class="py">collectFirst</span> <span class="o">{</span>            <span class="c1">// Some("value")</span>
+    <span class="k">case</span> <span class="n">s</span><span class="s">"key=$value"</span> <span class="k">=&gt;</span> <span class="n">value</span>
+  <span class="o">}</span>
+
+  <span class="o">???</span> <span class="c1">// Do something fancy with your settings</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>You can run <code class="language-plaintext highlighter-rouge">scala</code> command with <code class="language-plaintext highlighter-rouge">-e</code> flag to quickly execute a Scala statement from the command line.</p>
+
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  scala <span class="nt">-e</span> <span class="s2">"println(22*38)"</span>
+</code></pre></div>    </div>
+
+    <p>will print <code class="language-plaintext highlighter-rouge">836</code> on standard output and exit the Scala process.</p>
+  </li>
+  <li>
+    <p>There are new optimizations in the typer that may results in significant speedups in some cases. You can find more information and benchmark results in <a href="https://github.com/lampepfl/dotty/pull/13637">the related pull request</a>.</p>
+  </li>
+</ul>
+
+<h2 id="contributors">Contributors</h2>
+
+<p>Thank you to all the contributors who made this release possible.</p>
+
+<p>According to <code class="language-plaintext highlighter-rouge">git shortlog -sn --no-merges 3.1.1..3.1.2</code> these are:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  57  Martin Odersky
+  44  Nicolas Stucki
+  28  Dale Wijnand
+  20  Paweł Marks
+  18  Jamie Thompson
+  16  Andrzej Ratajczak
+  16  Filip Zybała
+  16  Guillaume Martres
+  15  Michał Pałka
+  10  Olivier Blanvillain
+   9  Som Snytt
+   8  Matt Bovel
+   7  Fengyun Liu
+   7  Tomasz Godzik
+   6  danicheg
+   6  Sébastien Doeraene
+   6  Gagandeep Kalra
+   6  oronpo
+   5  Seth Tisue
+   5  Arman Bilge
+   4  Stephane MICHELOUD
+   4  noti0na1
+   3  Phil
+   3  adampauls
+   3  ghostbuster91
+   3  Eric Torreborre
+   2  Matthieu Bovel
+   2  philwalk
+   2  Kacper Korban
+   2  Ruslan Shevchenko
+   2  Oron Port
+   2  Chris Kipp
+   1  Andrzej Ressel
+   1  Anatolii Kmetiuk
+   1  Arthur Sengileyev
+   1  Cédric Chantepie
+   1  Denis Zolkin
+   1  Georgi Krastev
+   1  Hugo van Rijswijk
+   1  Jakob Odersky
+   1  Julien Richard-Foy
+   1  Kien Dang
+   1  Natsu Kagami
+   1  Ondrej Lhotak
+   1  Ondřej Lhoták
+   1  Rikito Taniguchi
+   1  SDSR
+   1  Tom Grigg
+   1  Yang, Bo
+   1  comcx
+   1  kenji yoshida
+   1  mzcu
+   1  soronpo
+   1  Łukasz Wroński
+   1  Adrien Piquerez
+</code></pre></div></div>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2022-04-12-scala-3.1.2-released.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

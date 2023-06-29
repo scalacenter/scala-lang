@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>2016 Scala Release Schedule update | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="2016 Scala Release Schedule update"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/news/2016-schedule.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>2016 Scala Release Schedule update</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 9 December 2015</p>
+						<p></p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">ANNOUNCEMENT</div>
+					<!-- <h2><a href="/news/2016-schedule.html">2016 Scala Release Schedule update</a></h2> -->
+					<p>With 2016 rapidly approaching, it’s time for an update on our plans for Scala next year!</p>
+
+<p><strong>Scala 2.11:</strong> We expect to conclude the 2.11.x series with 2.11.8 in Q1 2016 and 2.11.9 in Q3 2016.</p>
+
+<p><strong>Scala 2.12:</strong> Our current focus is to have 2.12.0-RC1 out by the end of Q2. First, we’ll have two more 2.12 milestones:
+M4 by the end of January (new trait encoding!), and M5 before Scala Days NYC (feature freeze).
+Our <a href="https://github.com/scala/scala/milestones">GitHub milestones page</a> has projected dates,
+and will be updated with milestone details as they develop.</p>
+
+<p><a href="https://scala-lang.org/news/2.12-roadmap">Big compiler changes</a> are underway, between the new encodings for
+lambdas and traits that take full advantage of Java 8, and the new optimizer. Both milestones will be an excellent
+opportunity to give 2.12 a spin before we cut RC1 (expected end of May). We’re eager to hear your experience with 2.12,
+both online and in person at Scala Days NYC and Berlin!</p>
+
+<h2 id="participation">Participation</h2>
+<p>As always, getting new Scala versions out the door is a collective effort between Typesafe, EPFL, and the Scala user community.</p>
+
+<p>Areas where participation is welcome include:</p>
+
+<ul>
+  <li>Library authors: we encourage you to publish your libraries for 2.12.0-M3 and later milestones.
+ If you do publish, please <a href="https://github.com/scala/make-release-notes/blob/2.12.x/projects-2.12.md">list your library</a>.</li>
+  <li>Library authors: if (the latest version of) your library isn’t included in the 2.12 community build,
+ we have <a href="https://github.com/scala/community-build/wiki">documented</a> how to add it. We’ll be happy to help,
+ as the community build is helping us catch more regressions than ever. As always, we’re counting on your help with testing
+ before we go into RC mode! (The 2.12 community build config
+ lists which version of each built project, and whether its test suite is being exercised.)</li>
+  <li>Reviewing <a href="https://github.com/scala/scala/pulls">pull requests in the Scala repository</a>, where 2.12.x is now the default branch.
+ Strong motivation will be needed before we merge anything but important bug fixes to the 2.11.x branch.</li>
+  <li>Documentation updates and reviewing help are much appreciated at the <a href="https://github.com/scala/scala-lang/pulls">scala-lang</a> 
+ and <a href="https://github.com/scala/scala.github.com/pulls">docs.scala-lang</a> repos.</li>
+</ul>
+
+<p>You can talk to us about 2.12 on the <a href="https://groups.google.com/forum/#!forum/scala-internals">scala-internals mailing list</a> 
+and the scala/contributors chat room.
+(An <a href="https://www.scala-lang.org/community/">expanded community page</a> on the Scala site lists these and other forums and resources.)</p>
+
+<p>Your feedback will inform any revisions needed to the schedule described here.
+We’ll keep you informed as we continue to refine <a href="https://github.com/scala/scala/milestones">our release schedule</a>.</p>
+
+<h2 id="timing">Timing</h2>
+<p>Below is a recap of our timeline, future and past. The 2.12.x milestones follow 2.11.x’s schedule,
+with about a year for development between M1 and RC1. Because 2.11.x will be the last release that supports Java 6,
+we’ve worked extra hard to improve 2.11.x before shifting our focus to 2.12.x, with a half dozen releases in one year
+(the same number of 2.10.x releases took twice as long). For a while now, 2.11.x has had to take a back seat while we
+make the last push to complete 2.12.0-RC1 according to this schedule.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Future 2.12.x</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.12.0-M4</td>
+      <td><em>Jan 25, 2016</em></td>
+      <td>ca. 12 work-weeks after M3</td>
+    </tr>
+    <tr>
+      <td>2.12.0-M5</td>
+      <td><em>Apr 25, 2016</em></td>
+      <td>one year after M1, as in 2.11.x</td>
+    </tr>
+    <tr>
+      <td>2.12.0-RC1</td>
+      <td><em>May 30, 2016</em></td>
+      <td>one month after last milestone</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Future 2.11.x</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.11.8    </td>
+      <td><em>Feb 8, 2016</em></td>
+      <td>between 2.12.0-M4 and M5</td>
+    </tr>
+    <tr>
+      <td>2.11.9    </td>
+      <td><em>Q3, 2016</em></td>
+      <td>last planned 2.11.x release, &gt;2 years after 2.11.1</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Past 2.12.x</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.12.0-M1  </td>
+      <td><em>May 4, 2015</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.12.0-M2  </td>
+      <td><em>Jul 15, 2015</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.12.0-M3  </td>
+      <td><em>Oct 6, 2015</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>Past 2.11.x</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.11.0-M1  </td>
+      <td><em>Jan 7, 2013</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.11.0-M7  </td>
+      <td><em>Nov 18, 2013</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.11.0-M8  </td>
+      <td><em>Jan 21, 2014</em></td>
+      <td>one year after M1</td>
+    </tr>
+    <tr>
+      <td>2.11.0-RC1  </td>
+      <td><em>Feb 28, 2014</em></td>
+      <td>one month after last milestone</td>
+    </tr>
+    <tr>
+      <td>2.11.0      </td>
+      <td><em>Apr 16, 2014</em></td>
+      <td>six weeks after RC1</td>
+    </tr>
+    <tr>
+      <td>2.11.1      </td>
+      <td><em>May 20, 2014</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.11.7      </td>
+      <td><em>Jun 23, 2015</em></td>
+      <td>just 1 year after 2.11.1! (2.10.1-2.10.5 took two years)</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><strong>2.10.x</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.10.0</td>
+      <td><em>Dec 19, 2012</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.10.1</td>
+      <td><em>Mar 12, 2013</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.10.2</td>
+      <td><em>Jun 6, 2013</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.10.3</td>
+      <td><em>Sep 27, 2013</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.10.4</td>
+      <td><em>Mar 18, 2014</em></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2.10.5</td>
+      <td><em>Mar 4, 2015</em></td>
+      <td>EOL two years after 2.10.1</td>
+    </tr>
+    <tr>
+      <td>2.10.6</td>
+      <td><em>Sep 18, 2015</em></td>
+      <td>resolve license incompatibility</td>
+    </tr>
+  </tbody>
+</table>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2015-12-09-schedule-update.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

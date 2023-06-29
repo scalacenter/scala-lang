@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>GSOC - Connecting Contributors with Projects | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="GSOC - Connecting Contributors with Projects"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/08/28/gsoc-connecting-contributors-with-projects.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>GSOC - Connecting Contributors with Projects</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 28 August 2017</p>
+						<p>Michael Viveros</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2017/08/28/gsoc-connecting-contributors-with-projects.html">GSOC - Connecting Contributors with Projects</a></h2> -->
+					<h2 id="introduction">Introduction</h2>
+
+<p>One problem with open-source software is that it can be difficult to find a project to contribute to and actually get started contributing to it. Some open-source projects can seem very intimidating to newcomers since they have a very large code base and minimal documentation about how to get involved with the project. Other projects make it easier for prospective contributors to localize and figure out how to participate in a project, having for example:</p>
+<ul>
+  <li><strong>a contributing guide</strong> with specific steps that potential contributors can follow to get involved</li>
+  <li>some well-documented, easy to fix, <strong>beginner-friendly issues</strong> which are great places to learn about the project and get started contributing</li>
+  <li><strong>a chatroom/forum</strong> like gitter where anyone can come and easily ask questions</li>
+</ul>
+
+<p>For Google Summer of Code 2017, my <a href="https://summerofcode.withgoogle.com/projects/#5367340028919808">project</a> was to make it easier for potential contributors to both find projects to contribute to and to get started contributing to projects, all through <a href="https://index.scala-lang.org/">Scaladex</a> (the Scala Library Index). I accomplished this by highlighting projects that have Contributing Info (contributing guide, beginner-friendly issues and chatroom) on the <a href="https://index.scala-lang.org/">front page</a> of Scaladex so that potential contributors can easily view projects that they could contribute to and see all the information necessary for contributing in one place. I also added a <a href="https://index.scala-lang.org/search?q=&amp;contributingSearch=true">Contributing Search page</a> which can be used to query these projects.</p>
+
+<p><a href="/resources/img/blog/scaladex/front-page-contributing.png"><img src="/resources/img/blog/scaladex/front-page-contributing.png" alt="front-page-contributing" /></a>
+<em>Highlighted projects with Contributing Info on the front page of Scaladex</em></p>
+
+<p>Furthermore, I improved the search feature of Scaladex by adding <a href="https://github.com/blog/2309-introducing-topics">GitHub Topics</a> to the projects stored in Scaladex so that users can search projects based on Topics. Topics are essentially categories that open-source projects belong to like android, databases, json, …</p>
+
+<p><a href="/resources/img/blog/scaladex/front-page-topics.png"><img src="/resources/img/blog/scaladex/front-page-topics.png" alt="front-page-topics" /></a>
+<em>Topics for projects on the front page of Scaladex</em></p>
+
+<h2 id="how-to-add-your-project">How to Add Your Project</h2>
+<p>If you’re a project maintainer and want to add Contributing Info to your project so that it can show up on the front page of Scaladex and in the Contributing Search page, do the following:</p>
+<ol>
+  <li>Login to GitHub in Scaladex</li>
+  <li>Go to your project’s page in Scaladex and click Edit</li>
+  <li>Set the Beginner Issues Label field</li>
+  <li>Set the Chatroom field (if it hasn’t been auto-populated)</li>
+  <li>Set the Contributing Guide field (if it hasn’t been auto-populated)</li>
+</ol>
+
+<h2 id="contributing-info">Contributing Info</h2>
+<h3 id="how-it-works">How it Works</h3>
+<p>To Scaladex, Contributing Info consists of the three pieces of information mentioned above: a contributing guide, a collection of beginner-friendly issues, and a link to a chatroom/forum for the project where newcomers can come to easily ask questions. And perhaps most importantly; Scaladex can automatically obtain much of this info for your project! It’s also possible for a project maintainer to manually set this information on their project’s edit page in Scaladex.</p>
+
+<p>Here’s some more info about how each piece of contributing info gets set:</p>
+<ul>
+  <li>beginner-friendly label/issues - first the label used to identify beginner-friendly issues has to be manually set in the edit page, then Scaladex will fetch the corresponding issues</li>
+  <li>chatroom - auto-populated to a project’s gitter room if it has one</li>
+  <li>contributing guide - auto-populated to a project’s CONTRIBUTING.md if it has one</li>
+</ul>
+
+<p>As an example, the <a href="https://github.com/scalacenter/scaladex">Scaladex project</a> (for the code behind the website) uses the label “low-hanging fruit” to mark beginner-friendly issues in GitHub so this label can be set by the maintainer in the edit project page and all the <a href="https://github.com/scalacenter/scaladex/labels/low-hanging%20fruit">issues with this label</a> will be stored for this project. It also has a <a href="https://gitter.im/scalacenter/scaladex">gitter room</a> for chatting and a <a href="https://github.com/scalacenter/scaladex/blob/master/CONTRIBUTING.md">contributing guide</a> which will be auto-populated for the project when all the projects are indexed.</p>
+
+<p>Scaladex uses GitHub’s GraphQL API to get a project’s beginner-friendly issues, see the <a href="#github-topics">GitHub Topics</a> section below for more info about GitHub’s GraphQL API. To get a project’s contributing guide, Scaladex uses GitHub’s REST API to send a GET request to the Community Profile API which will return links to a project’s contributing guide, code of conduct and license. Lastly, to get a project’s chatroom, Scaladex generates a URL for a project’s gitter room based on the project’s repository name and the organization it belongs to (Ex. <a href="https://gitter.im/scalacenter/scaladex">https://gitter.im/scalacenter/scaladex</a>) and checks if that URL exists.</p>
+
+<p>You can also find Contributing Info on the front page of Scaladex. Now, Scaladex highlights a random subset of projects which have Contributing Info on the front page of Scaladex. It picks a random selection of projects each time the page is loaded to give the same amount of exposure to all projects with Contributing Info. We hope to highlight and better guide potential contributors to projects and issues that are of interest to them!</p>
+
+<p>The Contributing Search page is similar to the normal search page in Scaladex where you can search projects based on keywords but it only shows projects that have Contributing Info and instead of just showing a project’s description in the search results, it shows Contributing Info for each result. Additionally, the Contributing Search page does filtering on a project’s beginner-friendly issues. For example, if you enter a search term related to documentation like “docs”, the <a href="https://index.scala-lang.org/search?q=docs&amp;contributingSearch=true">search results</a> will contain issues related to documentation for each project.</p>
+
+<p><a href="/resources/img/blog/scaladex/contributing-search.png"><img src="/resources/img/blog/scaladex/contributing-search.png" alt="contributing-search" /></a>
+<em>The Contributing Search page in Scaladex which shows Contributing Info like beginner-friendly issues for each result</em></p>
+
+<h3 id="code">Code</h3>
+<p>The code for Contributing Info was committed in 2 pull requests, 1 for the <a href="https://github.com/scalacenter/scaladex/pull/448">back-end</a> and 1 for the <a href="https://github.com/scalacenter/scaladex/pull/467">front-end</a>.</p>
+
+<h3 id="challenge">Challenge</h3>
+<p>One interesting challenge I ran into was filtering a project’s issues based on a search term. For example, say a user is searching for all issues related to documentation so they enter “docs” as a search term in the Contributing Search page. A project called akka-http has some beginner-friendly issues, one of which is related to documentation with the title “#22874 - Add examples to Sink.actorRefWithAck and Source.queue docs”. Since this is the only issue for akka-http that has “docs” in its title, it should be the only issue that shows up for akka-http in the search results.</p>
+
+<p>All the projects in Scaladex are stored in an <a href="https://www.elastic.co/blog/what-is-an-elasticsearch-index">Elasticsearch index</a> which is like a database in a relational database. Each project stored in Elasticsearch has the following fields:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name: Text
+description: Text
+isDeprecated: Boolean
+github: Object
+	readme: Text
+	commits: Long
+	beginnerIssues: Nested
+		number: Long
+		title: Text
+...
+</code></pre></div></div>
+<p>Each project has a <code class="language-plaintext highlighter-rouge">github</code> field of type <code class="language-plaintext highlighter-rouge">Object</code> containing GitHub info like a project’s readme and its number of commits. The <code class="language-plaintext highlighter-rouge">github</code> field has a <code class="language-plaintext highlighter-rouge">beginnerIssues</code> field which is a list of a project’s beginner-friendly issues. The <code class="language-plaintext highlighter-rouge">beginnerIssues</code> field is of type Nested, which is a special version of the <code class="language-plaintext highlighter-rouge">Object</code> type used for lists of <code class="language-plaintext highlighter-rouge">Object</code>s. Each issue in <code class="language-plaintext highlighter-rouge">beginnerIssues</code> is of type <code class="language-plaintext highlighter-rouge">Object</code> and it has a <code class="language-plaintext highlighter-rouge">number</code> field and a <code class="language-plaintext highlighter-rouge">title</code> field.</p>
+
+<p>When Scaladex generates a search query to match the input search term (“docs” from the example above) to an Elasticsearch query, all you have to do to match the search term against a project’s beginner-friendly issues is add a Nested Query against the <code class="language-plaintext highlighter-rouge">github.beginnerIssues</code> field and specify you want to match the search term against the issue’s <code class="language-plaintext highlighter-rouge">title</code> field. So this is the Nested Query I added to <a href="https://github.com/scalacenter/scaladex/pull/467/commits/5bcecb58e91c52590e4460189d0415db4d4d2e1f#diff-c5de88d14364dfaadbdecdc462d6c7d1R254">DataRepository.scala</a> which generates the Elasticsearch query:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nestedQuery("github.beginnerIssues",
+	termQuery("github.beginnerIssues.title", searchTerm))
+</code></pre></div></div>
+
+<p>This sort of worked. It would return the correct projects that have issues matching the search term, but instead of returning only the issues related to the search term, it would return all the issues. So in the example with the “docs” search term, all of akka-http’s issues would be returned, not just the one related to documentation.</p>
+
+<p>After looking through the Elasticsearch documentation for a while, I came across Inner Hits which can be used with Nested Queries to select out the nested inner objects that matched the query. So inner hits would return only the beginner-friendly issues that matched the search term. So I updated the code that creates the Nested Query to also extract the inner hits that get returned:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nestedQuery("github.beginnerIssues",
+	termQuery("github.beginnerIssues.title", searchTerm))
+.inner(innerHits("issues").size(7))
+</code></pre></div></div>
+
+<p>And then I added the filtered beginner-friendly issues from inner hits to the project that gets created from the results of the Elasticsearch query. I did this by updating the code in <a href="https://github.com/scalacenter/scaladex/pull/467/commits/5bcecb58e91c52590e4460189d0415db4d4d2e1f#diff-0aa128fca8ddf4b576663970f7fc4940R39">package.scala</a> that reads in each result of the Elasticsearch query (<code class="language-plaintext highlighter-rouge">hit</code>) and converts it to a Scala <code class="language-plaintext highlighter-rouge">Project</code> object which is used by the server elsewhere.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit object ProjectAs extends HitReader[Project] {
+  override def read(hit: Hit): Either[Throwable, Project] = {
+    val project = nread[Project](hit.sourceAsString).copy(id = Some(hit.id))
+
+    val projectWithFilteredIssues = hit.asInstanceOf[RichSearchHit].innerHits
+      .get("issues")
+      .collect {
+        case searchHits if searchHits.totalHits &gt; 0 =&gt; {
+          p.copy(
+            github = p.github.map { github =&gt;
+              github.copy(
+                beginnerIssues = searchHits
+                  .getHits()
+                  .map { hit =&gt;
+                    nread[GithubIssue](hit.getSourceAsString)
+                  }
+                  .toList
+              )
+            }
+          )
+        }
+      }
+      .getOrElse(p)
+
+    tryEither(projectWithFilteredIssues))
+  }
+}
+</code></pre></div></div>
+
+<h2 id="github-topics">GitHub Topics</h2>
+<h3 id="how-it-works-1">How it Works</h3>
+<p>To categorize projects in Scaladex, the old process was for project maintainers to manually set keywords for their project in Scaladex. Users could then search for projects based on keywords.</p>
+
+<p>GitHub recently added <a href="https://github.com/blog/2309-introducing-topics">“topics”</a> to projects stored in GitHub which are labels that can be set for a project corresponding to categories that a project belongs to. Topics are essentially the same as keywords in Scaladex but maintainers could set them for their project in GitHub instead of having to do so in Scaladex.</p>
+
+<p>Topics are part of GitHub’s new <a href="https://docs.github.com/en/graphql">GraphQL API</a> which is meant to eventually replace their old <a href="https://docs.github.com/en/rest">REST API</a>. <a href="https://graphql.org/">GraphQL</a> is a “A query language for your API”. It is both a query language and a graph-structured schema which stores data with nodes as objects and edges as relationships between objects. It was developed by Facebook and is different from a traditional REST API by having all API requests go to one route and having a query defined in the request body to specify precisely what data you want.</p>
+
+<p>With GitHub’s REST API, you have to make multiple requests to different routes to get project info about multiple projects. And when you make a request, all the data related to that request would be returned. For example, if you wanted to get the most recent 3 issues created for 5 different projects, you would make 5 requests to 5 different routes for each project. Each request would return all the project’s issues. With the GraphQL API, all requests are made to the same route and in the body of the request you input a GraphQL query which specifies exactly what information you want and for which projects. So for the example above of getting the most recent 3 issues created for 5 projects, you would make 1 request to 1 route containing a query to get only the 3 most recent issues for the 5 projects and only those 3 issues for each of the projects would be returned. This results in less requests to GitHub’s API and less data returned in each response.</p>
+
+<p>So I replaced keywords with topics for projects in Scaladex and used GitHub’s new GraphQL API to fetch the topics. These topics are fetched for all projects when the server is indexed. A lot more projects have topics than keywords (which had to manually be set by maintainers in Scaladex), so this greatly improved the ability to search for projects based on categories in Scaladex since there are a lot more projects with categories.</p>
+
+<p>Here’s the code I added to <a href="https://github.com/scalacenter/scaladex/commit/a771d7a70fdb7aaa0003abf48aaa87a622d89f03#diff-e03c541cf1bd7ec0322a9a6571160bebR339">GithubDownload.scala</a> which contains the GraphQL query that is put in the POST body of the request sent to GitHub’s GraphQL API to fetch topics for a project. You can see the graph-structure of GraphQL in the query. The query first gets a <code class="language-plaintext highlighter-rouge">repository</code> node and then accesses its topics through the <code class="language-plaintext highlighter-rouge">repositoryTopics</code> edge/connection. Then it selects the names of the topics belonging to that repository.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private def topicQuery(repo: GithubRepo): JsObject = {
+
+  val query =
+    """
+      query($owner:String!, $name:String!) {
+        repository(owner: $owner, name: $name) {
+          repositoryTopics(first: 50) {
+            nodes {
+              topic {
+                name
+              }
+            }
+          }
+        }
+      }
+    """
+  Json.obj(
+    "query" -&gt; query,
+    "variables" -&gt; s"""{ "owner": "${repo.organization}", "name": "${repo.repository}" }"""
+  )
+}
+</code></pre></div></div>
+<p>If you run that query for the <a href="https://github.com/akka/akka">akka</a> project, this is what gets returned from the GitHub API:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "data": {
+    "repository": {
+      "repositoryTopics": {
+        "nodes": [
+          {
+            "topic": {
+              "name": "reactive"
+            }
+          },
+          {
+            "topic": {
+              "name": "distributed-systems"
+            }
+          },
+          {
+            "topic": {
+              "name": "concurrency"
+            }
+          },
+          {
+            "topic": {
+              "name": "high-performance"
+            }
+          },
+          {
+            "topic": {
+              "name": "akka"
+            }
+          },
+          {
+            "topic": {
+              "name": "actor-model"
+            }
+          },
+          {
+            "topic": {
+              "name": "distributed-actors"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div></div>
+
+<h3 id="code-1">Code</h3>
+<p>The code for GitHub Topics was committed in <a href="https://github.com/scalacenter/scaladex/pull/421">one pull request</a>.</p>
+
+<h2 id="closing-remarks">Closing Remarks</h2>
+<p>Huge thanks to my mentor Heather Miller who was very approachable and always took the time to discuss the best way to implement this project.</p>
+
+<p>Also thanks to Guillame Massé for being a super dev teammate and to Julien Richard-Foy for providing great feedback on my pull requests.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2017-08-28-gsoc-connecting-contributors-with-projects.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Write Scala in VS Code, Vim, Emacs, Atom and Sublime Text with Metals | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Write Scala in VS Code, Vim, Emacs, Atom and Sublime Text with Metals"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/2019/04/16/metals.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Write Scala in VS Code, Vim, Emacs, Atom and Sublime Text with Metals</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 16 April 2019</p>
+						<p>Ólafur Páll Geirsson, Gabriele Petronella, Jorge Vicente Cantero</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/2019/04/16/metals.html">Write Scala in VS Code, Vim, Emacs, Atom and Sublime Text with Metals</a></h2> -->
+					<p>We are excited to announce the release of
+<a href="https://scalameta.org/metals/blog/2020/04/12/mercury.html">Metals v0.5</a>. Metals
+is a Scala language server that supports code completions, type at point, goto
+definition, fuzzy symbol search and other advanced code editing and navigation
+capabilities.</p>
+
+<p>Metals can be used in VS Code, Vim, Emacs, Atom and Sublime Text as well as any
+other
+<a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a>
+compatible editor. Metals works with sbt, Gradle, Maven and Mill thanks to
+<a href="https://scalacenter.github.io/bloop/">Bloop</a>, a fast Scala build server. Adding
+support for other build tools is possible through the
+<a href="https://build-server-protocol.github.io">Build Server Protocol</a>.</p>
+
+<p>Metals is developed at the <a href="https://scala.epfl.ch/">Scala Center</a> along with
+contributors from the community.</p>
+
+<h2 id="features">Features</h2>
+
+<p>In this post we are going to demonstrate how to use Metals with VS Code. To get
+started, install the
+<a href="https://marketplace.visualstudio.com/items?itemName=scalameta.metals">Scala (Metals)</a>
+extension on the VS Code Marketplace and open an sbt project directory. The
+Metals extension will prompt you to import the build.</p>
+
+<p><img src="https://i.imgur.com/0VqZWay.png" alt="Import sbt build" /></p>
+
+<p>The build import step can take a while to run and once complete, you can enjoy
+the features of Metals.</p>
+
+<h3 id="diagnostics">Diagnostics</h3>
+
+<p>Syntax errors update as you type and type errors are published on file save.</p>
+
+<p><img src="https://i.imgur.com/JYLQGrc.gif" alt="" /></p>
+
+<p>A
+<a href="https://scalacenter.github.io/bloop/setup">separate <code class="language-plaintext highlighter-rouge">bloop</code> command-line interface</a>
+can be installed to test and run programs from a terminal using the same
+compilation artifacts as Metals.</p>
+
+<h3 id="type-at-point">Type at point</h3>
+
+<p>Hover over an identifier to see its expression type, symbol signature and
+documentation.</p>
+
+<p><img src="https://i.imgur.com/vANZ0Xh.gif" alt="Type at point" /></p>
+
+<p>Observe how the active expression is highlighted as the cursor moves.</p>
+
+<h3 id="code-completions">Code completions</h3>
+
+<p>As you type, code completions are suggested for a range of use-cases such as
+overriding a method from a superclass or generating an exhaustive pattern match
+for a sealed type.</p>
+
+<p><img src="https://user-images.githubusercontent.com/1408093/56036958-725bac00-5d2e-11e9-9cf7-46249125494a.gif" alt="Code completions" /></p>
+
+<p>Observe that imports are automatically inserted as you complete symbols that are
+not present in the scope.</p>
+
+<h3 id="parameter-hints">Parameter hints</h3>
+
+<p>When writing arguments for a method call, use parameter hints to see the method
+signature and available method overloads.</p>
+
+<p><img src="https://i.imgur.com/TzLelzP.gif" alt="Parameter hints" /></p>
+
+<h3 id="goto-definition">Goto definition</h3>
+
+<p>Jump to symbol definitions in your project sources and Scala/Java library
+dependencies.</p>
+
+<p><img src="https://i.imgur.com/bCIhFof.gif" alt="Goto definition" /></p>
+
+<h3 id="find-references">Find references</h3>
+
+<p>Find all usages of a symbol in the workspace, including implicits and <code class="language-plaintext highlighter-rouge">apply</code>
+methods.</p>
+
+<p><img src="https://user-images.githubusercontent.com/1408093/51089190-75fc8880-1769-11e9-819c-95262205e95c.png" alt="Find references" /></p>
+
+<h3 id="and-more">And more</h3>
+
+<p>Visit the
+<a href="https://scalameta.org/metals/docs/editors/overview.html">Metals documentation</a>
+to learn more about other supported features. The website also includes
+instructions for how to use Metals with the editors Vim, Emacs, Atom and Sublime
+Text. However, note that the best supported editor is VS Code.</p>
+
+<h2 id="collaboration-with-virtuslab">Collaboration with VirtusLab</h2>
+
+<p>As part of a new collaboration between the Scala Center and
+<a href="https://virtuslab.com/">VirtusLab</a>, VirtusLab will be contributing engineers to
+work on Metals over the coming months. The VirtusLab engineers
+Marek Żarnowski and
+<a href="https://github.com/tgodzik">Tomasz Godzik (@tgodzik)</a> have already contributed
+several impressive pull requests:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">textDocument/foldingRange</code>
+(<a href="https://github.com/scalameta/metals/pull/632">#632</a>): code folding that
+understands Scala syntax.</li>
+  <li><code class="language-plaintext highlighter-rouge">textDocument/documentHighlight</code>
+(<a href="https://github.com/scalameta/metals/pull/621">#621</a>): highlight occurrences
+of a symbol in the current file.</li>
+  <li><code class="language-plaintext highlighter-rouge">textDocument/completion</code>
+(<a href="https://github.com/scalameta/metals/pull/640">#640</a>): override def
+completions without the need to type “override def “.</li>
+</ul>
+
+<p>It is our pleasure to welcome Marek and Tomasz to the team and we look forward
+to working together with them to improve the Scala code editing experience.</p>
+
+<h2 id="future-work">Future work</h2>
+
+<p>Metals currently does not support several common IDE features:</p>
+
+<ul>
+  <li>Refactorings such as rename symbol, add missing import, add inferred result
+type, move class, extract value.</li>
+  <li>Running a main function or unit test with attached debugger.</li>
+  <li>Triggering code completions, type at point and goto definition in <code class="language-plaintext highlighter-rouge">*.sbt</code>
+files.</li>
+  <li>Working with hybrid <code class="language-plaintext highlighter-rouge">*.scala</code> and <code class="language-plaintext highlighter-rouge">*.java</code> projects, although you can try
+using the
+<a href="https://github.com/eclipse/eclipse.jdt.ls">Eclipse Java Language Server</a> for
+editing <code class="language-plaintext highlighter-rouge">*.java</code> only projects.</li>
+</ul>
+
+<p>Metals may not be a good fit if you frequently rely on these features. You might
+want to try <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> instead, which has
+great Scala support and implements all of the features listed above.</p>
+
+<h2 id="share-your-feedback">Share your feedback</h2>
+
+<p>Please give Metals a try and share your feedback on
+<a href="https://gitter.im/scalameta/metals">Gitter</a> or by reporting issues to the
+<a href="https://github.com/scalameta/metals/">Metals GitHub repository</a>.</p>
+
+<h2 id="credits">Credits</h2>
+
+<p>Code completions, type at point and parameter hints are implemented using the
+Scala presentation compiler, which is maintained by the Scala compiler team at
+Lightbend.</p>
+
+<p>Metals started as a fork of the
+<a href="https://github.com/dragos/dragos-vscode-scala">dragos-vscode-scala</a> repository
+in late 2017 and has since then grown into a project with over 40 contributors:
+Ólafur Páll Geirsson, Gabriele Petronella, Alexey Alekhin, Marek Żarnowski,
+Iulian Dragos, JesusMtnez, Johan Muedsam, Ben Hutchison, Jonathan Shen, Martin
+Duhem, PanAeon, Ayoub Benali, Gabriel Volpe, Shane Delmore, Tomasz Godzik, fc,
+Carlo Sana, Jakub Kozłowski, Eugene Melekhov, Jesús Martínez, Corey O’Connor,
+Eugene Burmako, Pavel Logvinov, Yashwanth Yadavalli, Arnout Engelen, Carlos
+Quiroz, Chris, Cody Allen, David Strawn, Edoardo Vacchi, Eric Peters, Evgeniy
+Tokarev, Joe Ferris, Jozef Koval, Martijn Hoekstra, Michael Pollmeier, Rory
+Graves, Ross A. Baker, Tim Nieradzik, Alexandre Archambault, keiSunagawa.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2019-04-16-metals.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

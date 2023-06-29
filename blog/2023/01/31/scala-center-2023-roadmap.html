@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala Center Roadmap for 2023 and Beyond | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala Center Roadmap for 2023 and Beyond"/>
+    
+    
+    <meta name="description" content="Highlights of the achievements of the Scala Center in 2022, and roadmap for 2023."/>
+    <meta property="og:description" content="Highlights of the achievements of the Scala Center in 2022, and roadmap for 2023."/>
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2023/01/31/scala-center-2023-roadmap.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala Center Roadmap for 2023 and Beyond</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 31 January 2023</p>
+						<p>Julien Richard-Foy and the Scala Center team</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2023/01/31/scala-center-2023-roadmap.html">Scala Center Roadmap for 2023 and Beyond</a></h2> -->
+					<p>In this post, we summarize the achievements of the Scala Center in 2022, and share our plans going forward to
+ensure the longevity of Scala.</p>
+
+<h2 id="role-of-the-scala-center-in-the-scala-ecosystem">Role of the Scala Center in the Scala Ecosystem</h2>
+
+<p>Overall, the mission of the Scala Center is to <strong>improve the experience of becoming and being a Scala developer</strong>, and
+to <strong>help the community to build a rich ecosystem of libraries</strong>.</p>
+
+<p>The Scala ecosystem is made of the following pillars:</p>
+
+<ul>
+  <li><strong>Language, compiler, standard library:</strong> they are the core tools that all programmers interact with when they
+work in Scala. The role of the Scala Center is to reduce the number of bugs in the compiler implementation, to help
+the community to contribute to these tools, and to make sure they evolve in a way that takes into account the needs
+of the community.</li>
+  <li><strong>Documentation and MOOCs:</strong> this website is the entry point to the ecosystem. It showcases the strengths of the
+language and its use-cases, and it hosts all its documentation. The role of the Scala Center is to simplify the
+structure and the content of the website, to create and maintain high-quality online educational content (including
+online courses), and to help the community to contribute to the website.</li>
+  <li><strong>Developer experience:</strong> Scala programmers often don’t interact directly with the compiler, but they use a tool
+(build tool, compile server) that does that for them. They also use tools to edit, analyze, navigate through,
+transform, compile, run, and debug Scala programs. The role of the Scala Center is to make sure these tools are as
+easy to use as possible, that they work reliably for everyone, and deliver a great developer experience.</li>
+  <li><strong>Community and contributor experience:</strong> the last pillar is the result of the work done <em>outside</em> the Scala Center.
+The community has created thousands of projects that bring simple solutions to complex problems. The role of the
+Scala Center is to create the best environment for the emergence of such libraries.</li>
+</ul>
+
+<p>The remainder of this article summarizes our achievements in those four areas in 2022, and then presents our goals
+going forward.</p>
+
+<h2 id="highlights-of-2022">Highlights of 2022</h2>
+
+<p>In this section, we highlight our main achievements in 2022. You can find our complete activity reports on
+<a href="https://scala.epfl.ch/records.html">our website</a>.</p>
+
+<h3 id="language-compiler-standard-library">Language, Compiler, Standard Library</h3>
+
+<p><strong>We overhauled and restarted the <a href="https://docs.scala-lang.org/sips/">Scala Improvement Process</a>.</strong> Since last
+summer, the SIP Committee members meet monthly to decide the evolution of the language. As we explained
+in the <a href="/blog/2022/07/13/scala-improvement-process-reloaded.html">announcement</a>, the main changes of
+the new process are the following. Firstly, the proposals are thoroughly discussed by a team of three reviewers, publicly
+on <a href="https://github.com/scala/improvement-proposals">GitHub</a> before the whole Committee votes on them during their
+monthly meetings. Second, there is a new stage where proposals are accepted as experimental features before the Committee
+votes again to promote them to stable features. The new Scala Improvement Process is the first result of our governance
+strategy whose goal is to establish all the necessary decision-making processes for the community, by the community.</p>
+
+<p><strong>We improved meta-programming, especially <a href="https://docs.scala-lang.org/scala3/reference/contextual/derivation.html#mirror">generic Mirror</a>
+synthesis.</strong> Mirrors are critical to metaprogramming in Scala 3, they enable implementation of type class derivation without
+advanced metaprogramming techniques such as macros. Mirror synthesis now supports more cases
+(<a href="https://github.com/lampepfl/dotty/pull/15250">generic tuples</a>,
+<a href="https://github.com/lampepfl/dotty/pull/15847">local and inner classes</a>), is more reliable
+(<a href="https://github.com/lampepfl/dotty/pull/15279">dotty#15279</a>,
+<a href="https://github.com/lampepfl/dotty/pull/15404">dotty#15404</a>,
+<a href="https://github.com/lampepfl/dotty/pull/15814">dotty#15814</a>), and provides
+<a href="https://github.com/lampepfl/dotty/pull/15164">more detailed explanations in case of failure</a>.</p>
+
+<p><strong>We generalized the definition of methods in Scala</strong> by allowing type parameters to be interleaved with regular parameters.
+This change notably allows methods to take type parameters whose bounds depend on value parameters. You can learn more
+about the motivation behind this change in the proposal document:
+<a href="https://docs.scala-lang.org/sips/clause-interleaving.html">SIP-47 - Clause Interleaving</a>. Lastly, we lifted a current
+language restriction that prevents eta-expansion to be applied to polymorphic methods. You can learn more about this
+change in the proposal document:
+<a href="https://docs.scala-lang.org/sips/polymorphic-eta-expansion.html">SIP-49 - Polymorphic Eta-Expansion</a>. Both proposals
+have been accepted by the SIP Committee and are under development in the compiler.</p>
+
+<h3 id="documentation-and-moocs">Documentation and MOOCs</h3>
+
+<p><strong>We improved the usability of the Scala website (this website).</strong> The website had not seen a major rework since 2013,
+and it does not represent the full picture that we would like Scala newcomers to see. To this effect, we have removed
+the split of Scala 2 vs Scala 3 on <a href="https://github.com/scala/scala-lang/pull/1344">the landing page</a> and in
+<a href="https://github.com/scala/docs.scala-lang/pull/2430">the documentation</a>, consolidated the “Getting Started” instructions
+(<a href="https://github.com/scala/scala-lang/pull/1344">scala-lang#1344</a>,
+<a href="https://github.com/scala/scala-lang/pull/1348">scala-lang#1348</a>,
+<a href="https://github.com/scala/scala-lang/pull/1352">scala-lang#1352</a>,
+<a href="https://github.com/scala/scala-lang/pull/1373">scala-lang#1373</a>,
+<a href="https://github.com/scala/docs.scala-lang/pull/2388">docs.scala-lang#2388</a>,
+<a href="https://github.com/scala/docs.scala-lang/pull/2520">docs.scala-lang#2520</a>), improved the
+<a href="https://github.com/scala/docs.scala-lang/pull/2350">contributing guide</a>, and created an infrastructure to show both
+Scala 2 and Scala 3 versions of code examples in the documentation
+(<a href="https://github.com/scala/docs.scala-lang/pull/2450">docs.scala-lang#2450</a>). We created an
+<a href="https://github.com/scala/docs.scala-lang/issues/2481">issue</a> to coordinate the update of the whole documentation to
+always show both Scala 2 and Scala 3 code examples when possible.</p>
+
+<p><strong>We offered individualized support to our MOOCs’ learners.</strong> We published the course “Effective Programming in Scala”
+to the <a href="https://www.extensionschool.ch/learn/effective-programming-in-scala">Extension School platform</a>. This
+platform allows the learners to have regular 1-on-1 meetings with our instructors along their learning journey. If you
+need to learn Scala, or if your company needs to train developers, the Extension School provides a cost-effective way
+to be trained by the Scala Center team. Learn
+more about the motivation in the previous <a href="/blog/2022/06/08/learn-scala-at-epfl-extension-school.html">announcement</a>.</p>
+
+<h3 id="developer-experience">Developer Experience</h3>
+
+<p><strong>We improved the debugger for Scala 3.</strong> The Metals’ debugger is now able to evaluate arbitrary Scala 3 expressions
+while the debugger is paused in the middle of a program. Step-by-step execution now automatically skips the methods
+generated by the compiler (e.g. mix-in forwarders, getters, setters, bridge methods, and synthetic methods of case
+classes). Learn more in <a href="https://www.youtube.com/watch?v=UePrOa_1Am8">this video</a>.</p>
+
+<p><strong>We fixed the apps installed by the <a href="https://docs.scala-lang.org/getting-started">setup instructions</a>.</strong> The
+command-line apps <code class="language-plaintext highlighter-rouge">sbt</code> and <code class="language-plaintext highlighter-rouge">scala</code> now behave consistently regardless of the installation process (<code class="language-plaintext highlighter-rouge">cs install</code> vs
+manual download of the release artifacts).</p>
+
+<h3 id="community-and-contributor-experience">Community and Contributor Experience</h3>
+
+<p><strong>We co-organized the <a href="https://www.scalacon.org/">ScalaCon</a> online conference and participated in several in-person community
+events.</strong> In April 2022, for the first time in 2.5 years, events could finally take place in person. Our team encouraged
+many Scala User Groups to restart their regular Scala Meetups. We gave talks and organized <a href="https://github.com/scalacenter/sprees">Open-Source Sprees</a>
+at local events in Europe. We were also involved in the online conference ScalaCon: we were in charge of the program and
+the program committee, and we presented several talks including a keynote <a href="https://youtu.be/svWnwU5PXxE">Towards a Healthy &amp; Resilient Scala Community</a>
+where we presented our strategy for the governance of Scala. The talk videos of the whole conference are available online
+<a href="https://www.youtube.com/playlist?list=PL3t6y1EktOPhflaXB28Kw7kwRb30K0W-P">here</a>.</p>
+
+<p><strong>We published videos about Scala 3.</strong> <a href="https://www.youtube.com/playlist?list=PLTx-VKTe8yLxYQfX_eGHCxaTuWvvG28Ml">Let’s Talk About Scala 3</a>
+is a series of videos where we share interesting, useful, and cool things related to Scala 3. We published 4 new
+videos in 2022.</p>
+
+<p><strong>We improved the code editing experience in <a href="https://scastie.scala-lang.org">Scastie</a>.</strong> Scastie is the online Scala
+code editor that is used every day by one thousand developers to share code snippets in the community. We have 
+implemented “IDE features” such as autocompletion and showing type information under the mouse pointer. Under the hood,
+we reused some components of Metals.</p>
+
+<p><strong>We mentored new contributors to the Scala 3 compiler.</strong> The Compiler
+Academy organizes online pair-programming events to mentor new contributors on the compiler codebase. You can learn
+more about the Compiler Academy in <a href="/blog/2022/11/02/compiler-academy.html">this blog article</a>.</p>
+
+<p><strong>We implemented the building blocks of a new tool to detect incompatibilities between programs.</strong> Guaranteeing the
+absence of incompatibilities between library dependencies is the cornerstone of a seamless Scala ecosystem. We have
+implemented a prototype of a new tool to detect incompatibilities between two versions of a program (like
+<a href="https://github.com/lightbend/mima">MiMa</a>, but based on the TASTy representation of programs instead of JVM bytecode).
+We explained <a href="https://github.com/scalacenter/tasty-mima#motivation">here</a> why we need this tool in addition to the
+classic MiMa.
+Our work is based on <a href="https://github.com/scalacenter/tasty-query">TASTy Query</a>, which will be the basis of tools to
+perform static analysis of Scala programs (it is already used by the Metals debugger).</p>
+
+<h2 id="roadmap-for-2023-and-beyond">Roadmap for 2023 (and Beyond)</h2>
+
+<p>It is now time to look forward and present our goals for 2023. Our mission remains the same: improve the experience of
+becoming and being a Scala developer, and help the community to build a rich ecosystem of libraries. Ultimately, our
+work will ensure the longevity of Scala by creating a reliable and resilient ecosystem.</p>
+
+<p>We have identified the priorities for 2023 through our discussions with the community (online or at conferences),
+with our <a href="https://scala.epfl.ch/#advisory-board-member-list">Advisory Board members</a>, and with the
+main organizations that are <a href="https://www.scala-lang.org/community/#whos-behind-scala">behind Scala</a>
+(<a href="https://lamp.epfl.ch">LAMP</a>, <a href="https://lightbend.com">Lightbend</a>, and <a href="https://virtuslab.com">VirtusLab</a>). We are
+grateful to all of them.</p>
+
+<p>In the following subsections we remind you of our ongoing and recurring projects, and we present our most important goals as
+well as some additional stretch goals that would need more resources.</p>
+
+<p>The roadmap we present here is of course subject to adjustments throughout the year.</p>
+
+<h3 id="language-compiler-standard-library-1">Language, Compiler, Standard Library</h3>
+
+<p>In addition to keeping the Scala Improvement Process ongoing, and reducing the number of bugs in the compiler and standard
+library, we will:</p>
+
+<ul>
+  <li><strong>Make the compiler error messages clearer and more actionable.</strong> The compiler should help developers write correct code
+instead of “just complaining” about incorrect code. The compiler should also guide you to write maintainable code (ie,
+it should provide linting features). You can find a list of related issues
+<a href="https://github.com/lampepfl/dotty/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%3Areporting">here</a>.</li>
+  <li><strong>Bring the compiler’s suggestions into the IDEs.</strong> Instead of emitting only text output, the compiler
+will produce structured output that IDEs (Metals and IntelliJ) will be able to read to automatically provide “quick
+fixes” to the users. This should reduce the implementation (and maintenance) costs on the IDE side.</li>
+  <li><strong>Unfreeze the Scala standard library.</strong> The standard library has not changed (except for bug fixes or some performance
+improvements) since Scala 2.13, which was released almost four years ago. <a href="https://github.com/scala/improvement-proposals/pull/54">Dropping the forwards binary compatibility
+requirement</a> would be a first step to allow the introduction
+of new classes or the addition of new members to the existing classes. Then, we will create a process to validate
+what should be in the standard library and what should stay outside of it.</li>
+  <li><strong>Clarify and communicate the Scala 3 roadmap.</strong> We will coordinate with the compiler team to clarify what will
+go into the <a href="/blog/2022/08/17/long-term-compatibility-plans.html">Long-Term Support version</a>
+of Scala 3, and make sure that roadmap is well communicated. We will focus primarily on the items that will
+enable more users to migrate from Scala 2 to Scala 3 (e.g., missing compiler options).</li>
+</ul>
+
+<p>Our stretch goals include: publish a formal specification for Scala 3, investigate opportunities for reducing
+compilation times, implement multi-threading in Scala Native, and remove the dependency to the Google Closure
+Compiler in Scala.js.</p>
+
+<h3 id="documentation-and-moocs-1">Documentation and MOOCs</h3>
+
+<p>In addition to maintaining the Scala website and managing our online course learners, we will:</p>
+
+<ul>
+  <li><strong>Add “task-oriented” content to the documentation.</strong> Currently, the documentation is rather “language features oriented”,
+but it does not really help solve concrete problems. We will select a set of libraries (the “Scala Toolkit”) and we
+will write tutorials showing how to perform common programming tasks (working with JSON, writing tests, etc.).
+We will use libraries created by the community and that do not require advanced knowledge of Scala. Lastly, we will
+help the authors of those libraries to perform the usual maintenance tasks.</li>
+  <li><strong>Improve the content of the course
+<a href="https://docs.scala-lang.org/online-courses.html#effective-programming-in-scala">Effective Programming in Scala</a>.</strong>
+We will address the feedback we received from the learners of the course to smooth the learning curve.</li>
+</ul>
+
+<p>Our stretch goals include: update our <a href="https://docs.scala-lang.org/online-courses.html#scala-specialization">Spark course</a>,
+teach Scala to first year Bachelor students at EPFL, and create a new Scala course for beginners (with no experience at
+all in programming).</p>
+
+<h3 id="developer-experience-1">Developer Experience</h3>
+
+<p>In addition to maintaining some core tools of the ecosystem (Bloop, Coursier, sbt, scala-debug-adapter), we will:</p>
+
+<ul>
+  <li><strong>Streamline the distribution of <code class="language-plaintext highlighter-rouge">cs</code> (Coursier).</strong> The current setup process is not well integrated with the various
+operating systems. There are no packages for Linux distributions, no MSI installer for Windows, and no PKG or DMG
+installer for macOS.</li>
+  <li><strong>Reduce the number of ways to import Scala projects in IDEs.</strong> Currently, IDEs support several ways for importing
+Scala projects (via sbt or via a build server, which itself can be provided by bloop or the underlying build tool).
+This is a source of confusion for the users, and it increases the maintenance costs.</li>
+  <li><strong>Make Metals work with more versions of Scala.</strong> By creating a stable interface for the presentation compiler,
+Metals will be less tied to the release cycles of the compiler, and it will easier to use it to develop the
+compiler itself.</li>
+  <li><strong>Improve the Scala 3 support on Metals and IntelliJ.</strong> We heard many developers stating that the Scala 3 support
+in IDEs was not at the same level as Scala 2, and that is one of the blockers to migrate to Scala 3. We will
+identify and put weigh on the main issues that currently degrade the developer experience on Scala 3 projects.</li>
+</ul>
+
+<p>Our stretch goals include: support standalone .scala files out of the box in Metals and IntelliJ (including support
+for Scala CLI configuration directives), investigate opportunities to reduce build times, reduce the maintenance costs
+of implementing the <code class="language-plaintext highlighter-rouge">debugSession/start</code> endpoint in all the build servers by running the debug server in Metals,
+update scalameta to Scala 3, publishing sbt 2, implement a Scala 2 expression evaluator in scala-debug-adapter,
+be able to choose a specific build target in Metals, make sure Scala programs are easy to deploy especially in IaaS,
+and provide TASTy trees to semantic rules in Scalafix.</p>
+
+<h3 id="community-and-contributor-experience-1">Community and Contributor Experience</h3>
+
+<p>In addition to participating to events, encouraging and supporting local Scala user groups and Scala conferences around
+the world, publishing positive content about Scala, leading the Compiler Academy, coordinating the Google Summer of
+Code, and maintaining tools for contributors (<a href="https://scastie.scala-lang.org">Scastie</a>,
+<a href="https://index.scala-lang.org">Scaladex</a>, <a href="https://scalacenter.github.io/scalafix/">scalafix</a>), we will:</p>
+
+<ul>
+  <li><strong>Co-organize <a href="https://scaladays.org/">Scala Days</a>.</strong> We will be responsible for the program and co-located events,
+such as ScalaBridge, Scala Spree, and other community summits. The conference will take place June 4th-7th in Seattle,
+USA, and September 11th-14th in Madrid, Spain.</li>
+  <li><strong>Organize a Tooling Summit.</strong> We will bring together the main actors of the tooling ecosystem (IntelliJ team, Metals
+team, compiler team, build tools maintainers), and agree on the next steps for a reliable and seamless integration
+of the pieces of the tooling ecosystem.</li>
+  <li><strong>Add support for standalone Scala programs in Scastie.</strong> Currently, Scastie creates an sbt project for every snippet.
+This adds a performance overhead, and makes it impossible to just copy-paste a snippet to run it locally (because
+you also need to re-create the sbt configuration locally). We will fix this issue by supporting a “standalone” mode
+where the configuration will be defined via Scala CLI directives.</li>
+  <li><strong>Publish TASTy-MiMa.</strong> This tool will be able to detect incompatibilities between two versions of a program, based
+on their TASTy representation. We will complete its implementation and make it available to the community.</li>
+</ul>
+
+<p>Our stretch goals include: create a Scala Center online shop, finalize the training materials for Scala moderators, revise
+and update the Scala Center bylaws, stabilize and document the HTTP API of Scaladex, make it easy to find projects to
+contribute to in Scaladex, streamline the way to publish the documentation of Scala libraries, implement GitHub <a href="https://docs.github.com/en/repositories/working-with-files/using-files/navigating-code-on-github#precise-and-search-based-navigation">precise code
+navigation</a>
+for Scala, and simplify the usage of remote caching techniques in continuous integration systems.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this article, we have looked at the pillars of the Scala ecosystem, and for each of them we have listed the main
+outcome of our work in 2022, and our main goals for 2023.</p>
+
+<p>Thanks to your support, and with the help of all the <a href="https://www.scala-lang.org/community/#whos-behind-scala">people behind Scala</a>,
+we came this far! Help us go even further by <a href="https://scala.epfl.ch/faqs.html">supporting the Scala Center</a>.</p>
+
+<p>You can find our detailed roadmap for the current quarter <a href="https://scala.epfl.ch/projects.html">here</a>,
+and track our progress by looking at our <a href="https://scala.epfl.ch/records.html">quarterly reports</a>, or by browsing the
+<a href="https://contributors.scala-lang.org/c/scala-center/25">Scala Center Updates</a> category of the Scala Contributors forum.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2023-01-31-scala-center-2023-roadmap.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

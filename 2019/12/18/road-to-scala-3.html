@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 2 Roadmap Update: the Road to Scala 3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 2 Roadmap Update: the Road to Scala 3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/2019/12/18/road-to-scala-3.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 2 Roadmap Update: the Road to Scala 3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 18 December 2019</p>
+						<p>Lukas Rytz, Adriaan Moors, Martin Odersky</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/2019/12/18/road-to-scala-3.html">Scala 2 Roadmap Update: the Road to Scala 3</a></h2> -->
+					<p>Together with the Scala 3 team at EPFL (aka the Dotty team), led by Martin Odersky, we have decided that, rather than developing Scala 2.14, our efforts should go to Scala 3 instead.</p>
+
+<p>While we’re very excited to shift our focus to Scala 3, we will continue to maintain Scala 2.13 to ensure the community has ample time to carefully transition to Scala 3.</p>
+
+<p>We had long assumed that a 2.14 release would be necessary to assure a smooth transition to 3. After a great deal of study and discussion, we are now confident that 2.14 simply isn’t needed. We believe that’s good news for everyone! The benefit we see is twofold:</p>
+
+<ul>
+  <li>
+    <p>Scala 3 will be ready for production faster! There’s a lot of work to be done on polishing the compiler and upgrading our tooling. We will also help the ecosystem upgrade.</p>
+  </li>
+  <li>
+    <p>The Scala library and tooling ecosystem will not need to be rebuilt for 2.14, freeing up maintainers’ time to prepare for Scala 3 instead.</p>
+  </li>
+</ul>
+
+<p>Our primary goal is to provide a smooth and incremental migration path from Scala 2 to 3. To accomplish this, Scala 2.13 and 3.0 will use the same standard library, and their compiler back-ends will emit bytecode in the same way. The following paragraphs explain these features in a bit more detail.</p>
+
+<p><strong>Shared standard library</strong></p>
+
+<p>Sharing the standard library eliminates a major potential difference between Scala 2.13 and 3 and helps migration.</p>
+
+<p>However, it also means that binary incompatible changes to the standard library will have to wait until later in the Scala 3.x series, when we have tooling to remedy binary incompatibilities (see notes on TASTy below). More specifically, since Scala 2.13 is, and will remain, forwards and backwards binary compatible within its series, no classes or methods can be added or removed.</p>
+
+<p>We might eventually still opt to release a Scala 2.14, if during the Scala 2 to 3 migration period, there’s a compelling need for evolving the standard library outside of these constraints.</p>
+
+<p><strong>Shared ABI</strong></p>
+
+<p>By also sharing the “ABI” (the “application binary interface”, that is, the way traits, lazy vals, etc. are represented in bytecode and the IR of Scala.js/Native), Scala 3.0 and 2.13 artifacts can co-exist on the classpath and interoperate seamlessly. This enables gradual migration and simplifies testing.</p>
+
+<p>Scala 3 is already backwards compatible today: it can consume libraries built with Scala 2.13 (except for libraries that define macros, see the Q&amp;A on macros below). To achieve forwards compatibility, the Scala 3 compiler will provide a mechanism to ensure that the public interface is in the common language subset, so that it can be consumed from Scala 2.13. This means that, as a library author, you can adopt (some of) Scala 3 without requiring your users to upgrade from Scala 2.13.</p>
+
+<p>Besides technical interoperability, we will invest in testing and improve tooling to ensure a smooth migration. For example, migration warnings originally scheduled for 2.14 will be implemented in 2.13. We do not rule out backporting certain Scala 3 features to 2.13 under a flag, but this will not be a priority. For more details, read the Q&amp;A section below.</p>
+
+<p>We’re looking forward to an exciting 2020, working with all of the community to make Scala 3 a success!</p>
+
+<h2 id="qa">Q&amp;A</h2>
+
+<ul>
+  <li><a href="#when-will-scala-30-be-released">When will Scala 3.0 be released?</a></li>
+  <li><a href="#how-is-the-standard-library-going-to-evolve">How is the standard library going to evolve?</a></li>
+  <li><a href="#what-is-tasty">What is TASTy?</a></li>
+  <li><a href="#how-is-binary-compatibility-handled-in-scala-3">How is binary compatibility handled in Scala 3?</a></li>
+  <li><a href="#what-about-macros">What about macros?</a></li>
+  <li><a href="#what-breaking-changes-are-in-scala-3-besides-macros">What breaking changes are in Scala 3, besides macros?</a></li>
+  <li><a href="#what-about-performance">What about performance?</a></li>
+  <li><a href="#what-can-i-expect-from-tooling">What can I expect from tooling?</a></li>
+  <li><a href="#im-reminded-of-python-2--3-should-i-be-worried">I’m reminded of Python 2 / 3. Should I be worried?</a></li>
+  <li><a href="#how-can-i-contribute">How can I contribute?</a></li>
+</ul>
+
+<h3 id="when-will-scala-30-be-released">When will Scala 3.0 be released?</h3>
+
+<p>We’re working towards a first release candidate by the end of 2020. We’ll have regular milestones throughout the year. Your feedback and our experience in testing, benchmarking and helping port the ecosystem will guide the decision on when to cut the first release candidate. We will keep you informed as we refine the release timeline.</p>
+
+<h3 id="how-is-the-standard-library-going-to-evolve">How is the standard library going to evolve?</h3>
+
+<p>Scala 3.0 will use the same standard library as Scala 2.13.x, the same binary jar. This simplifies the migration to Scala 3 by avoiding an entire area of potential differences, and it enables Scala 3.0 and 2.13 artifacts to co-exist on the classpath.</p>
+
+<p>Like any Scala 2 release, the Scala 2.13 standard library is, and will remain, backwards and forwards binary compatible. This restricts the changes that can be performed: no public classes or methods can be added or removed. (Backwards compat prevents removals; forward compat prevents additions.)</p>
+
+<p>Nevertheless, it is possible to implement significant improvements in the implementation of existing classes while remaining binary compatible. For example, there is an <a href="https://github.com/scala/scala/pull/8534">open pull request</a> with a complete rewrite of <code class="language-plaintext highlighter-rouge">collection.immutable.Vector</code> that is binary compatible. Currently, adding overrides in the collections library often leads to binary incompatibilities, but there is <a href="https://github.com/scala/bug/issues/11804">a proposal</a> to address this issue.</p>
+
+<p>Using the Scala 2.13 standard library is only a starting point. It does not apply to the entire Scala 3.x series. A later Scala 3 release, perhaps 3.2, will ship with its own standard library. From this point on, Scala 3.x releases will only be backwards compatible. This will allow adding new classes and methods in minor releases. Even before that, it is possible to release extensions of the 2.13 library in 3.0 or 3.1. Libraries using these extensions would be restricted to Scala 3 users.</p>
+
+<p>Every library compiled with Scala 3 includes TASTy, which allows bridging binary encoding changes between minor versions (see Q&amp;A on TASTy below). This enables code compiled with the eventual Scala 3-only standard library to work with any newer Scala 3.x. This improves the maintainability of the standard library. Instead of requiring binary compatibility (which depends on bytecode encoding details), changes to existing classes only have to be TASTy API compatible.</p>
+
+<p>Any semantic and structural change to the standard library has to wait until Scala 4. But that day needn’t be far in the future. New major releases will become more frequent, mainly driven by improvements to the standard library that cannot be implemented in a backwards-compatible fashion.</p>
+
+<h3 id="what-is-tasty">What is TASTy?</h3>
+
+<p>The Scala 3 compiler serializes every program that it compiles in a compact representation called TASTy. The name TASTy stands for “Typed Abstract Syntax Trees (y)”, which hints at the representation format: it is the full program code in the form of syntax trees, which is what the compiler uses internally, and it’s fully typed. This means that names are resolved, types are inferred and checked, overloads are resolved, and implicits are inserted. All of this information is serialized.</p>
+
+<p>Today, TASTy is used for separate compilation: when a source file uses <code class="language-plaintext highlighter-rouge">Foo.method</code> where <code class="language-plaintext highlighter-rouge">Foo</code> is a class on the classpath, the compiler will read the TASTy of <code class="language-plaintext highlighter-rouge">Foo</code> in order to know what is the type of <code class="language-plaintext highlighter-rouge">method</code>. Looking at the class file <code class="language-plaintext highlighter-rouge">Foo.class</code> would not work because Scala-specific features such as union types cannot be represented in class files. Scala 2 uses a very similar mechanism, but instead of serializing the full program code, it only serializes the types, which is sufficient for separate compilation.</p>
+
+<p>In the future, TASTy mitigates “accidental” binary incompatibilities caused by the way Scala-specific features must be encoded in JVM class files. Because TASTy precisely captures the result of the frontend (after the typechecker has fully qualified all names, inferred types and implicits, resolved overloads, expanded syntactic sugar, etc), the Scala compiler backend can be rerun automatically to derive new class files from TASTy serialized by a previous run. It’s a promising compromise between the brittleness of bytecode and the complexity of recompiling from source. See also the Q&amp;A on binary compatibility.</p>
+
+<p>TASTy will also serve as a basis for new or updated tooling in the future (code analysis, IDE support, generating documentation).</p>
+
+<h3 id="how-is-binary-compatibility-handled-in-scala-3">How is binary compatibility handled in Scala 3?</h3>
+
+<p>Evolving Scala libraries in a binary compatible fashion is difficult because Scala features have to be encoded in JVM class files. In Java, there’s a direct correspondence between source and binary compatibility. TASTy aims to bring the same to Scala, without developing a Scala specific VM, by determining compatibility at the level of (fully-typed and elaborated) sources, rather than compiled binaries. Currently, the nature of the class file encoding means that backwards compatible changes at the source level, such as adding a field to a trait, actually break binary compatibility.</p>
+
+<p>It’s important to note that TASTy is not a silver bullet: it cannot fix breaking changes to APIs – those can only be resolved by (potentially automated) refactorings.</p>
+
+<p>By re-compiling an existing library from its TASTy, its class files are regenerated to work correctly with a new version of its dependencies. For example, a library that was compiled against the Scala 3.2 standard library can be safely used with Scala 3.4. There is no need for library maintainers to re-publish when a new Scala 3.x minor release becomes available.</p>
+
+<h3 id="what-about-macros">What about macros?</h3>
+
+<p>While Scala 3 can generally consume libraries built with Scala 2.13, this does not work for macros. Macro methods defined in 2.13 libraries cannot be used in Scala 3, because the Scala 3 compiler cannot execute the macro at compile-time.</p>
+
+<p>The macro system from Scala 2 is deeply tied to the internals of the Scala 2 compiler and cannot be migrated in a compatible fashion to Scala 3. Instead, Scala 3 ships with a <a href="https://docs.scala-lang.org/scala3/reference/metaprogramming.html">new macro system</a>. This means that macro definitions have to be re-written when migrating a codebase to Scala 3. Cross-building is possible by having separate source files for Scala 2 and 3 macro definitions.</p>
+
+<p>Libraries that define macros can be made available for both Scala 2.13 and Scala 3 by cross-compiling.</p>
+
+<h3 id="what-breaking-changes-are-in-scala-3-besides-macros">What breaking changes are in Scala 3, besides macros?</h3>
+
+<p>The Scala 3 compiler supports almost all of the Scala 2 language. For a detailed overview, see <a href="https://dotty.epfl.ch/docs/reference/features-classification.html#dropped-constructs">this page</a>. Language features that have been dropped are <a href="https://dotty.epfl.ch/docs/reference/dropped-features/early-initializers.html">early initializers</a>, <a href="https://dotty.epfl.ch/docs/reference/dropped-features/existential-types.html">existential types</a>, <a href="https://dotty.epfl.ch/docs/reference/dropped-features/weak-conformance.html">weak conformance</a> and <a href="https://dotty.epfl.ch/docs/reference/dropped-features/delayed-init.html"><code class="language-plaintext highlighter-rouge">DelayedInit</code></a>. (Some of these removals are still pending SIP committee approval.)</p>
+
+<h3 id="what-about-performance">What about performance?</h3>
+
+<p>There are multiple aspects of performance:</p>
+
+<ul>
+  <li>
+    <p><strong>Compiler performance</strong>. The performance of the Scala 3 compiler is being monitored continuously to prevent regressions (https://dotty-bench.epfl.ch). We will work on enabling benchmarks that compare the compiler performance between Scala 2.13 and Scala 3.</p>
+  </li>
+  <li>
+    <p><strong>Runtime performance of generated code</strong>. The code generation phase of the Scala 3 compiler is the same as in Scala 2.13, and also the ABI (the way Scala features are encoded in class files) in Scala 3.0 will be the same. We expect that code compiled with Scala 3 will perform the same, and we will work with the community to verify that this is the case. The Scala 2 optimizer will also be available in Scala 3.</p>
+  </li>
+  <li>
+    <p><strong>Performance-oriented language features</strong>. While value classes continue to work, Scala 3 brings <a href="https://dotty.epfl.ch/docs/reference/other-new-features/opaques.html">opaque type aliases</a> that provide type abstraction without any overhead. <a href="https://dotty.epfl.ch/docs/reference/metaprogramming/inline.html">Inline methods</a> can be used for methods that are guaranteed to be inlined at compile-time. Scala 3 currently does not implement specialization. We will work with maintainers of performance-sensitive projects to find out what variants of specialization need to be supported. This work will likely land in a Scala 3.x minor release.</p>
+  </li>
+</ul>
+
+<h3 id="what-can-i-expect-from-tooling">What can I expect from tooling?</h3>
+
+<p>We consider the availability of core tooling to be an integral part of the Scala 3 release.</p>
+
+<ul>
+  <li>
+    <p><strong>Build tools</strong>: incremental compilation through zinc is supported already, sbt support is currently implemented in a plugin. Additional work will be needed to support re-compilation of libraries from TASTy.</p>
+  </li>
+  <li>
+    <p><strong>Compatibility Checker</strong>: <a href="https://github.com/lightbend/migration-manager">MiMa</a> is a tool used by library authors to verify binary compatibility of new releases. For Scala 3, once TASTy support has matured, binary compatibility will no longer be relevant. Instead, a new tool will check TASTy API compatibility.</p>
+  </li>
+  <li>
+    <p><strong>IDEs</strong>: The support for Scala 3 in Visual Studio Code is available and used by the compiler developers, and we will continue to improve it. IntelliJ has been experimenting with Dotty support <a href="https://blog.jetbrains.com/scala/2017/03/23/scala-plugin-for-intellij-idea-2017-1-cleaner-ui-sbt-shell-repl-worksheet-akka-support-and-more/">for a while</a> and their team is determined to support Scala 3 when it becomes available.</p>
+  </li>
+  <li>
+    <p><strong>Syntax</strong>: Scala 3 might allow <a href="https://dotty.epfl.ch/docs/reference/other-new-features/indentation.html">optional braces</a> and <a href="https://dotty.epfl.ch/docs/reference/other-new-features/control-syntax.html">a new syntax for control structures</a> – these features are currently labelled experimental and being evaluated. To ensure a consistent code style, we will ensure the release includes a robust formatting and syntax conversion tools.</p>
+  </li>
+</ul>
+
+<h3 id="im-reminded-of-python-2--3-should-i-be-worried">I’m reminded of Python 2 / 3. Should I be worried?</h3>
+
+<p>In a word, “no”. We believe that Scala’s static type system and the compatibility decisions and guarantees described in this document will allow the transition to Scala 3 to be both quicker and less painful than Python’s was.</p>
+
+<p>However, we remain vigilant and appreciate any feedback on how we can improve our upgrade strategy.</p>
+
+<p>Our strategy for making your upgrade predictable and manageable comprises:</p>
+
+<ol>
+  <li>
+    <p>There will be no “silent” breaking changes in run-time behavior. The standard library is shared. The ABI of Scala 2.13 and 3.0 will be the same: the encoding of key language constructs, such as traits and lazy vals, are shared.</p>
+  </li>
+  <li>
+    <p>Scala 3 is backwards compatible with Scala 2, except for a few deprecated features that are being dropped. The Scala standard library already cross-compiles between the two versions. So can your project.</p>
+  </li>
+  <li>
+    <p>As always, the type checker has your back: changes are often caught by the compiler as type errors or migration warnings.</p>
+  </li>
+</ol>
+
+<h3 id="how-can-i-contribute">How can I contribute?</h3>
+
+<p>Perhaps you’ve been waiting for the design of Scala 3 to settle down before diving in.  That settling-down is now largely complete, so now is an excellent time to get involved. If you’re a Dotty first-timer, read the getting started page on the Dotty site.</p>
+
+<p>There are two basic ways you can help Scala 3 happen:</p>
+
+<ol>
+  <li>
+    <p>Help the ecosystem migrate.</p>
+  </li>
+  <li>
+    <p>Participate in the development of Scala itself.</p>
+  </li>
+</ol>
+
+<p>Details on both options follow.</p>
+
+<h4 id="migrating-the-ecosystem">Migrating the ecosystem</h4>
+
+<p>The biggest thing Scala 3 needs from the community is for everyone to begin porting their code. For established projects, the logical first step would be to start cross-building against the latest  Scala 3 milestone, when they become available (or use a Dotty milestone right now!). We expect this to be a common scenario during the transition period. Or, you can jump straight in and upgrade your code to Scala 3 and try out some of the new features!</p>
+
+<p>We’re especially interested in knowing if something blocks you completely, but other kinds of feedback are welcome as well.</p>
+
+<p>Every Scala user can participate, but it’s especially helpful for maintainers of open-source libraries and tooling to begin moving.  If you are a maintainer, then as an initial step, please consider adding Dotty to your project’s cross-build.</p>
+
+<p>In the simplest cases, you just need to:</p>
+
+<ul>
+  <li>
+    <p>add sbt-dotty to <code class="language-plaintext highlighter-rouge">project/plugins.sbt</code></p>
+  </li>
+  <li>
+    <p>add the latest Dotty version to <code class="language-plaintext highlighter-rouge">crossScalaVersions</code> and <code class="language-plaintext highlighter-rouge">.travis.yml</code></p>
+  </li>
+  <li>
+    <p>perhaps adjust your compiler flags, according to <code class="language-plaintext highlighter-rouge">isDotty.value</code>, e.g. to pass <code class="language-plaintext highlighter-rouge">-language:Scala2</code> to Dotty</p>
+  </li>
+</ul>
+
+<p>If you have upstream dependencies, there is an easy way to use the Scala 2.13 binaries. The <a href="https://github.com/lampepfl/dotty-example-project#getting-your-project-to-compile-with-dotty">dotty-example-project explains how to do this</a>.</p>
+
+<p>If you don’t have time to do a cross-build yourself, consider asking your users and contributors to volunteer.</p>
+
+<h4 id="working-on-scala-itself">Working on Scala itself</h4>
+
+<p>The Dotty team welcomes contributors, including first-time Scala contributors.  Scala 3 has already benefited considerably from years of active external participation <a href="https://github.com/lampepfl/dotty">on GitHub</a>. For guidance and getting-started help, there is an active <a href="https://gitter.im/lampepfl/dotty">chat room on Gitter</a>.  There are many ways to be helpful that don’t require large time outlays or a background in compiler hacking.</p>
+
+<p>If you are already a Scala 2 contributor, you are welcome to move to the new repo, but you might also choose to stay focused on Scala 2 for now if you prefer. Scala 2 will be maintained for several more years, and many kinds of improvements remain possible and desirable in the 2.13 series, subject to the usual compatibility constraints.  Standard library fixes are directly applicable to both versions; back end improvements benefit both compilers; improved linting could help Scala 2 users get their codebases ready for 3.</p>
+
+<p>As always when a compiler version is in maintenance mode, we will not accept changes to the language in 2.13.x. Due to our focus on migration, we will be stricter than usual in the assessment of the potential for regression, and changes must decrease the gap between 2 and 3. We continue to welcome changes to the user experience outside of the language definition (e.g., the REPL). Generally speaking, whenever possible, enhancements should first happen in Scala 3 and then be backported to 2.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2019-12-18-road-to-scala-3.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

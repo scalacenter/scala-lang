@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 2.13’s Collections | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 2.13’s Collections"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2018/06/13/scala-213-collections.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 2.13’s Collections</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 13 June 2018</p>
+						<p>Julien Richard-Foy</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2018/06/13/scala-213-collections.html">Scala 2.13’s Collections</a></h2> -->
+					<p>One more article about the standard collections, really? Indeed, during the last
+18 months a lot of work has been done on the collections side and we’ve published
+several blog articles and given several talks to explain the various changes or
+challenges we were facing. This article summarizes <strong>what is going
+to change from an end-user perspective</strong>.</p>
+
+<p>In case you’ve thoroughly followed our previous blog posts and talks, you might
+not learn much from this article. Otherwise, this is the perfect opportunity
+to catch up on the topic in a few minutes!</p>
+
+<p>The next section presents the changes that are internal to the collections implementation
+but that might have some visible impact on the surface. Then, I will show why I think
+that the removal of <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> made the API more beginner friendly. Next, I
+will introduce some new operations available in the collections. Finally, I
+will mention the main deprecations, the motivations behind them, and their
+recommended replacements.</p>
+
+<h2 id="under-the-hood-a-cleaner-ground">Under The Hood: A Cleaner Ground</h2>
+
+<p><img src="/resources/img/blog/iceberg.jpeg" alt="iceberg" /></p>
+
+<p>The most important change in the new collections framework is that transformation
+operations (such as <code class="language-plaintext highlighter-rouge">map</code> or <code class="language-plaintext highlighter-rouge">filter</code>) are now implemented in a way that works with both
+strict collections (such as <code class="language-plaintext highlighter-rouge">List</code>) and non-strict collections (such as <code class="language-plaintext highlighter-rouge">Stream</code>).
+This is a change because this was not the case before. Indeed, the previous
+implementations were strict (they eagerly evaluated the collection elements) and had
+to be overridden by non-strict collection types. You can find more details about that in
+<a href="/blog/2017/11/28/view-based-collections.html">this blog post</a>.</p>
+
+<p>The good news is that the new design is more <strong>correct</strong> in the sense that you can
+now implement custom non-strict collection types without having to worry about
+re-implementing a ton of operations. (Some operations, though, still eagerly evaluate
+the collection elements (e.g. <code class="language-plaintext highlighter-rouge">groupBy</code>) and will be clearly documented.) Another benefit
+is that transformation operations defined outside of the collections (like in the
+<a href="https://github.com/cvogt/scala-extensions">cvogt/scala-extensions</a> project)
+now work with non-strict collections (such as <code class="language-plaintext highlighter-rouge">View</code> or <code class="language-plaintext highlighter-rouge">Stream</code>).</p>
+
+<p>Speaking of non-strict collections, the <code class="language-plaintext highlighter-rouge">View</code> type has been redesigned and
+views should behave in a more predictable way. Also, <code class="language-plaintext highlighter-rouge">Stream</code> has been
+deprecated in favor of <code class="language-plaintext highlighter-rouge">LazyList</code> (see the last section).</p>
+
+<h2 id="life-without-canbuildfrom">Life Without <code class="language-plaintext highlighter-rouge">CanBuildFrom</code></h2>
+
+<p>I think the most visible change for end-users is that transformation operations
+don’t use <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> anymore. I believe this will be quite visible despite our previous
+efforts to <em>hide</em> <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> from the API documentation of the collections.
+Indeed, if you take a look at the
+<a href="https://www.scala-lang.org/api/2.12.6/scala/collection/immutable/List.html">old 2.12 <code class="language-plaintext highlighter-rouge">List</code> API</a>, the signature
+shown for the <code class="language-plaintext highlighter-rouge">map</code> operation does not mention <code class="language-plaintext highlighter-rouge">CanBuildFrom</code>:</p>
+
+<p><img src="/resources/img/blog/scaladoc-list-map.png" alt="there is no CanBuildFrom" /></p>
+
+<p>However, if you use this operation in your code, then your IDE reveals its actual signature:</p>
+
+<p><img src="/resources/img/blog/ij-list-map.png" alt="what is That" /></p>
+
+<p>As you can see, the type signature shown in the API documentation has been “simplified”
+to make it more approachable, but I believe that this is probably introducing more
+confusion to the users. Especially when you look at the
+<a href="https://www.scala-lang.org/api/2.12.6/scala/collection/immutable/TreeMap.html"><code class="language-plaintext highlighter-rouge">TreeMap[A, B]</code> API</a>:</p>
+
+<p><img src="/resources/img/blog/scaladoc-treemap-map.png" alt="wtf" /></p>
+
+<p>This type signature makes no sense: the result type can not be <code class="language-plaintext highlighter-rouge">TreeMap[B]</code> since
+<code class="language-plaintext highlighter-rouge">TreeMap</code> takes <em>two</em> type parameters (the type of keys and the type
+of values). Also, the function <code class="language-plaintext highlighter-rouge">f</code> actually takes a <em>key-value pair</em> as parameter,
+not just a key (as incorrectly indicated by the type <code class="language-plaintext highlighter-rouge">A</code>).</p>
+
+<p><code class="language-plaintext highlighter-rouge">CanBuildFrom</code> was used for good reasons, in particular the type <code class="language-plaintext highlighter-rouge">That</code> shown
+in the above screenshot was <em>computed</em> according to the type of the source
+collection and the type of elements of the new collection. The case of <code class="language-plaintext highlighter-rouge">TreeMap</code>
+is compelling: in case you transform your key-value pairs into other key-value
+pairs for which the type of keys has an implicit <code class="language-plaintext highlighter-rouge">Ordering</code> instance, then <code class="language-plaintext highlighter-rouge">map</code>
+returns a <code class="language-plaintext highlighter-rouge">TreeMap</code>, but if there is no such <code class="language-plaintext highlighter-rouge">Ordering</code> instance then the best
+collection type that can be returned is <code class="language-plaintext highlighter-rouge">Map</code>. And if you transform the key-value
+pairs into something that is not even a pair, then the best collection type
+that can be returned is <code class="language-plaintext highlighter-rouge">Iterable</code>. These three cases were supported by
+a single operation implementation, and <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> was used to abstract over
+the various possible return types.</p>
+
+<p>In the new collections we wanted to have simpler type signatures so that we
+can show their actual signature in the API documentation, and auto-completion
+provided by IDEs is not scary. We achieve that by using overloading, as
+explained in more detail in
+<a href="/blog/2017/05/30/tribulations-canbuildfrom.html">this blog article</a>.</p>
+
+<p>In practice, this means that the new <code class="language-plaintext highlighter-rouge">TreeMap</code> has three overloads of the
+<code class="language-plaintext highlighter-rouge">map</code> operation:</p>
+
+<p><img src="/resources/img/blog/scaladoc-new-treemap-map.png" alt="" /></p>
+
+<p>These type signatures are the actual ones and they essentially translate
+“in types” what I’ve written above about the possible result types of <code class="language-plaintext highlighter-rouge">map</code>
+according to the type of elements returned by the transformation function <code class="language-plaintext highlighter-rouge">f</code>.
+We believe that the new API is simpler to understand.</p>
+
+<h2 id="new-and-noteworthy">New And Noteworthy</h2>
+
+<p>We have introduced a few new operations. The following sections
+present some of them.</p>
+
+<h3 id="groupmap"><code class="language-plaintext highlighter-rouge">groupMap</code></h3>
+
+<p>A common pattern with the old 2.12 collections is to use <code class="language-plaintext highlighter-rouge">groupBy</code>
+followed by <code class="language-plaintext highlighter-rouge">mapValues</code> to transform the groups. For instance,
+this is how we can index the names of a collection of users by
+their age:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">case</span> <span class="k">class</span> <span class="nc">User</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">age</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+
+<span class="k">def</span> <span class="nf">namesByAge</span><span class="o">(</span><span class="n">users</span><span class="k">:</span> <span class="kt">Seq</span><span class="o">[</span><span class="kt">User</span><span class="o">])</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">Int</span>, <span class="kt">Seq</span><span class="o">[</span><span class="kt">String</span><span class="o">]]</span> <span class="k">=</span>
+  <span class="nv">users</span><span class="o">.</span><span class="py">groupBy</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">age</span><span class="o">).</span><span class="py">mapValues</span><span class="o">(</span><span class="n">users</span> <span class="k">=&gt;</span> <span class="nv">users</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">name</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>There is a subtlety in this code. The static return type is <code class="language-plaintext highlighter-rouge">Map</code>
+but the <code class="language-plaintext highlighter-rouge">Map</code> implementation actually returned is lazy and evaluates
+its elements each time it is traversed (ie the <code class="language-plaintext highlighter-rouge">users =&gt; users.map(_.name)</code>
+function is evaluated each time the <code class="language-plaintext highlighter-rouge">Map</code> is traversed).</p>
+
+<p>In the new collections the return type of <code class="language-plaintext highlighter-rouge">mapValues</code> is a <code class="language-plaintext highlighter-rouge">MapView</code> instead
+of a <code class="language-plaintext highlighter-rouge">Map</code>, to clearly indicate that its contents is evaluated each time it
+is traversed.</p>
+
+<p>Furthermore, we have introduced an operation named <code class="language-plaintext highlighter-rouge">groupMap</code>
+that both groups elements and transforms the groups. The above code
+can be rewritten as follows to take advantage of <code class="language-plaintext highlighter-rouge">groupMap</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def namesByAge(users: Seq[User]): Map[Int, Seq[String]] =
+  users.groupMap(_.age)(_.name)
+</code></pre></div></div>
+
+<p>The returned <code class="language-plaintext highlighter-rouge">Map</code> is strict: it eagerly evaluates its elements
+once. Also, the fact that it is implemented as a single operation
+makes it possible to apply some optimizations that make it
+~1.3x faster than the version that uses <code class="language-plaintext highlighter-rouge">mapValues</code>.</p>
+
+<h3 id="inplace-transformation-operations"><code class="language-plaintext highlighter-rouge">InPlace</code> Transformation Operations</h3>
+
+<p>Mutable collections have a couple of new operations for transforming
+their elements in place: instead of returning a new collection (like
+<code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">filter</code> do) they mutate the source collection. These
+operations are suffixed with <code class="language-plaintext highlighter-rouge">InPlace</code>. For instance, to remove
+users whose name start with the letter <code class="language-plaintext highlighter-rouge">J</code> from a buffer and then
+increment their age, one can now write:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">users</span> <span class="k">=</span> <span class="nc">ArrayBuffer</span><span class="o">(</span><span class="err">…</span><span class="o">)</span>
+<span class="n">users</span>
+  <span class="o">.</span><span class="py">filterInPlace</span><span class="o">(</span><span class="n">user</span> <span class="k">=&gt;</span> <span class="o">!</span><span class="nv">user</span><span class="o">.</span><span class="py">name</span><span class="o">.</span><span class="py">startsWith</span><span class="o">(</span><span class="s">"J"</span><span class="o">))</span>
+  <span class="o">.</span><span class="py">mapInPlace</span><span class="o">(</span><span class="n">user</span> <span class="k">=&gt;</span> <span class="nv">user</span><span class="o">.</span><span class="py">copy</span><span class="o">(</span><span class="n">age</span> <span class="k">=</span> <span class="nv">user</span><span class="o">.</span><span class="py">age</span> <span class="o">+</span> <span class="mi">1</span><span class="o">))</span>
+</code></pre></div></div>
+
+<h2 id="deprecations-for-less-confusion">Deprecations For Less Confusion</h2>
+
+<p>A consequence of cleaning and simplifying the collections framework
+is that several types or operations have been deprecated in Scala 2.13
+and will be removed in 2.14.</p>
+
+<h3 id="iterable-is-the-top-collection-type"><code class="language-plaintext highlighter-rouge">Iterable</code> Is The Top Collection Type</h3>
+
+<p>We felt that having a distinction between <code class="language-plaintext highlighter-rouge">Traversable</code> and <code class="language-plaintext highlighter-rouge">Iterable</code> was not
+worth it, so we removed <code class="language-plaintext highlighter-rouge">Traversable</code> (it is now an alias to <code class="language-plaintext highlighter-rouge">Iterable[A]</code>).</p>
+
+<p><code class="language-plaintext highlighter-rouge">Iterable[A]</code> is now the collection type at the top of the hierarchy.
+Its only abstract member is <code class="language-plaintext highlighter-rouge">def iterator: Iterator[A]</code>.</p>
+
+<h3 id="lazylist-is-preferred-over-stream"><code class="language-plaintext highlighter-rouge">LazyList</code> Is Preferred Over <code class="language-plaintext highlighter-rouge">Stream</code></h3>
+
+<p><code class="language-plaintext highlighter-rouge">Stream</code> is deprecated in favor of <code class="language-plaintext highlighter-rouge">LazyList</code>. As its name suggests,
+a <code class="language-plaintext highlighter-rouge">LazyList</code> is a linked list whose elements are lazily evaluated. An
+important semantic difference with <code class="language-plaintext highlighter-rouge">Stream</code> is that in <code class="language-plaintext highlighter-rouge">LazyList</code> both
+the head and the tail are lazy, whereas in <code class="language-plaintext highlighter-rouge">Stream</code> only the tail is lazy.</p>
+
+<h3 id="insertion-and-removal-operations-are-not-available-on-generic-collections">Insertion And Removal Operations Are Not Available On Generic Collections</h3>
+
+<p>In the old 2.12 framework, the <code class="language-plaintext highlighter-rouge">scala.collection.Map</code> type has a <code class="language-plaintext highlighter-rouge">+</code> and a <code class="language-plaintext highlighter-rouge">-</code> operations
+to add and remove entries. The semantics of these operations is to return a new collection
+with the added or removed entries, without changing the source collection.</p>
+
+<p>These operations are then inherited by the mutable branch of the collections. But the mutable
+collection types also introduce their own insertion and removal operations, namely <code class="language-plaintext highlighter-rouge">+=</code> and <code class="language-plaintext highlighter-rouge">-=</code>,
+which modify the source collection in place. This means that the <code class="language-plaintext highlighter-rouge">scala.collection.mutable.Map</code> type
+has <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">+=</code>, as well as <code class="language-plaintext highlighter-rouge">-</code> and <code class="language-plaintext highlighter-rouge">-=</code>.</p>
+
+<p>Having all these operations can be handy in some cases but can also introduce confusion. If you want
+to use <code class="language-plaintext highlighter-rouge">+</code> or <code class="language-plaintext highlighter-rouge">-</code>, then you probably wanted to use an immutable collection type in the first place…
+Consequently, <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code> and <code class="language-plaintext highlighter-rouge">updated</code> have been moved from <code class="language-plaintext highlighter-rouge">scala.collection.Map</code> to <code class="language-plaintext highlighter-rouge">scala.collection.immutable.Map</code>,
+and <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> have been moved from <code class="language-plaintext highlighter-rouge">scala.collection.Set</code> to <code class="language-plaintext highlighter-rouge">scala.collection.immutable.Set</code></p>
+
+<p>We think that by deprecating these insertion and removal operations from generic collection
+types and by having distinct operations between the <code class="language-plaintext highlighter-rouge">mutable</code> and <code class="language-plaintext highlighter-rouge">immutable</code> branches we make
+the situation clearer.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In summary, the changes for end-users are the following:</p>
+
+<ul>
+  <li>non-strict collections (such as views) are safer to use and simpler implement,</li>
+  <li>type signatures of transformation operations (such as <code class="language-plaintext highlighter-rouge">map</code>) are simpler
+(no implicit <code class="language-plaintext highlighter-rouge">CanBuildFrom</code> parameter),</li>
+  <li>new cool operations have been added,</li>
+  <li>the type hierarchy is simpler (no <code class="language-plaintext highlighter-rouge">Traversable</code>),</li>
+  <li>mutable collection types do not inherit immutable insertion and removal operations.</li>
+</ul>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2018-06-13-scala-213-collections.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

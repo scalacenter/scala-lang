@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Implicit Function Types | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Implicit Function Types"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2016/12/07/implicit-function-types.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Implicit Function Types</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 7 December 2016</p>
+						<p>Martin Odersky</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2016/12/07/implicit-function-types.html">Implicit Function Types</a></h2> -->
+					<p>I just made the <a href="https://github.com/lampepfl/dotty/pull/1775">first pull request</a> to add <em>implicit function types</em> to
+Scala. I am pretty excited about it, because - citing the explanation
+of the pull request - “<em>This is the first step to bring contextual
+abstraction to Scala</em>”. What do I mean by this?</p>
+
+<p><strong>Abstraction</strong>: The ability to name a concept and use just the name afterwards.</p>
+
+<p><strong>Contextual</strong>: A piece of a program produces results or outputs in
+some context. Our programming languages are very good in describing
+and abstracting what outputs are produced. But there’s hardly anything
+yet available to abstract over the inputs that programs get from their
+context. Many interesting scenarios fall into that category,
+including:</p>
+
+<ul>
+  <li>passing configuration data to the parts of a system that need them,</li>
+  <li>managing capabilities for security critical tasks,</li>
+  <li>wiring components up with dependency injection,</li>
+  <li>defining the meanings of operations with type classes,</li>
+  <li>more generally, passing any sort of context to a computation.</li>
+</ul>
+
+<p>Implicit function types are a surprisingly simple and general way to
+make coding patterns solving these tasks abstractable, reducing
+boilerplate code and increasing applicability.</p>
+
+<p><strong>First Step</strong>: My pull request is a first implementation. It solves the
+ problem in principle, but introduces some run-time overhead. The
+ next step will be to eliminate the run-time overhead through some
+ simple optimizations.</p>
+
+<h2 id="implicit-parameters">Implicit Parameters</h2>
+
+<p>In a functional setting, the inputs to a computation are most
+naturally expressed as <em>parameters</em>. One could simply augment
+functions to take additional parameters that represent configurations,
+capabilities, dictionaries, or whatever contextual data the functions
+need. The only downside with this is that often there’s a large
+distance in the call graph between the definition of a contextual
+element and the site where it is used. Consequently, it becomes
+tedious to define all those intermediate parameters and to pass them
+along to where they are eventually consumed.</p>
+
+<p><em>Implicit parameters</em> solve one half of the problem. They do not have to
+be propagated using boilerplate code; the compiler takes care of
+that. This makes them practical in many scenarios where plain
+parameters would be too cumbersome. For instance, type classes would
+be a lot less popular if one would have to pass all dictionaries by
+hand. Implicit parameters are also very useful as a general context
+passing mechanism. For instance in the <em>dotty</em> compiler, almost every
+function takes an implicit context parameter which defines all
+elements relating to the current state of the compilation. This is in
+my experience much better than the cake pattern because it is
+lightweight and can express context changes in a purely functional
+way.</p>
+
+<p>The main downside of implicit parameters is the verbosity of their
+declaration syntax. It’s hard to illustrate this with a smallish example,
+because it really only becomes a problem at scale, but let’s try anyway.</p>
+
+<p>Let’s say we want to write some piece of code that’s designed to run
+in a transaction. For the sake of illustration here’s a simple transaction class:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Transaction {
+  private val log = new ListBuffer[String]
+  def println(s: String): Unit = log += s
+
+  private var aborted = false
+  private var committed = false
+
+  def abort(): Unit = { aborted = true }
+  def isAborted = aborted
+
+  def commit(): Unit =
+    if (!aborted &amp;&amp; !committed) {
+      Console.println("******* log ********")
+      log.foreach(Console.println)
+      committed = true
+    }
+}
+</code></pre></div></div>
+
+<p>The transaction encapsulates a log, to which one can print messages.
+It can be in one of three states: running, committed, or aborted.
+If the transaction is committed, it prints the stored log to the console.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">transaction</code> method lets one run some given code <code class="language-plaintext highlighter-rouge">op</code> inside
+a newly created transaction:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def transaction[T](op: Transaction =&gt; T) = {
+    val trans: Transaction = new Transaction
+    op(trans)
+    trans.commit()
+  }
+</code></pre></div></div>
+
+<p>The current transaction needs to be passed along a call chain to all
+the places that need to access it. To illustrate this, here are three
+functions <code class="language-plaintext highlighter-rouge">f1</code>, <code class="language-plaintext highlighter-rouge">f2</code> and <code class="language-plaintext highlighter-rouge">f3</code> which call each other, and also access
+the current transaction. The most convenient way to achieve this is
+by passing the current transaction as an implicit parameter.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def f1(x: Int)(implicit thisTransaction: Transaction): Int = {
+    thisTransaction.println(s"first step: $x")
+    f2(x + 1)
+  }
+  def f2(x: Int)(implicit thisTransaction: Transaction): Int = {
+    thisTransaction.println(s"second step: $x")
+    f3(x * x)
+  }
+  def f3(x: Int)(implicit thisTransaction: Transaction): Int = {
+    thisTransaction.println(s"third step: $x")
+    if (x % 2 != 0) thisTransaction.abort()
+    x
+  }
+</code></pre></div></div>
+
+<p>The main program calls <code class="language-plaintext highlighter-rouge">f1</code> in a fresh transaction context and prints
+its result:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def main(args: Array[String]) = {
+    transaction {
+      implicit thisTransaction =&gt;
+        val res = f1(args.length)
+        println(if (thisTransaction.isAborted) "aborted" else s"result: $res")
+    }
+  }
+</code></pre></div></div>
+
+<p>Two sample calls of the program (let’s call it <code class="language-plaintext highlighter-rouge">TransactionDemo</code>) are here:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scala TransactionDemo 1 2 3
+result: 16
+******* log ********
+first step: 3
+second step: 4
+third step: 16
+
+scala TransactionDemo 1 2 3 4
+aborted
+</code></pre></div></div>
+
+<p>So far, so good. The code above is quite compact as far as expressions
+are concerned. In particular, it’s nice that, being implicit
+parameters, none of the transaction values had to be passed along
+explicitly in a call. But on the definition side, things are less
+rosy: Every one of the functions <code class="language-plaintext highlighter-rouge">f1</code> to <code class="language-plaintext highlighter-rouge">f3</code> needed an additional
+implicit parameter:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(implicit thisTransaction: Transaction)
+</code></pre></div></div>
+
+<p>Having to repeat three-times might not look so bad here, but it certainly
+smells of boilerplate. In real-sized projects, this can get much worse.
+For instance, the <em>dotty</em> compiler uses implicit abstraction
+over contexts for most of its parts. Consequently it ends up with currently
+no fewer than 2641 occurrences of the text string</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(implicit ctx: Context)
+</code></pre></div></div>
+
+<p>It would be nice if we could get rid of them.</p>
+
+<h2 id="implicit-functions">Implicit Functions</h2>
+
+<p>Let’s massage the definition of <code class="language-plaintext highlighter-rouge">f1</code> a bit by moving the last parameter section to the right of the equals sign:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def f1(x: Int) = { implicit thisTransaction: Transaction =&gt;
+    thisTransaction.println(s"first step: $x")
+    f2(x + 1)
+  }
+</code></pre></div></div>
+
+<p>The right hand side of this new version of <code class="language-plaintext highlighter-rouge">f1</code> is now an implicit
+function value. What’s the type of this value? Previously, it was
+<code class="language-plaintext highlighter-rouge">Transaction =&gt; Int</code>, that is, the knowledge that the function has an
+implicit parameter got lost in the type. The main extension implemented by
+the pull request is to introduce implicit function types that mirror
+the implicit function values which we have already. Concretely, the new
+type of <code class="language-plaintext highlighter-rouge">f1</code> is:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit Transaction =&gt; Int
+</code></pre></div></div>
+
+<p>Just like the normal function type syntax <code class="language-plaintext highlighter-rouge">A =&gt; B</code>, desugars to <code class="language-plaintext highlighter-rouge">scala.Function1[A, B]</code>
+the implicit function type syntax <code class="language-plaintext highlighter-rouge">implicit A =&gt; B</code> desugars to <code class="language-plaintext highlighter-rouge">scala.ImplicitFunction1[A, B]</code>.
+The same holds at other function arities. With dotty’s <a href="https://github.com/lampepfl/dotty/pull/1758">pull request #1758</a>
+merged there is no longer an upper limit of 22 for such functions.</p>
+
+<p>The type <code class="language-plaintext highlighter-rouge">ImplicitFunction1</code> can be thought of being defined as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>trait ImplicitFunction1[-T0, R] extends Function1[T0, R] {
+  override def apply(implicit x: T0): R
+}
+</code></pre></div></div>
+
+<p>However, you won’t find a classfile for this trait because all implicit function traits
+get mapped to normal functions during type erasure.</p>
+
+<p>There are two rules that guide type checking of implicit function types.
+The first rule says that an implicit function is applied to implicit arguments
+in the same way an implicit method is. More precisely, if <code class="language-plaintext highlighter-rouge">t</code> is an expression
+of an implicit function type</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t: implicit (T1, ..., Tn) =&gt; R
+</code></pre></div></div>
+
+<p>such that <code class="language-plaintext highlighter-rouge">t</code> is not an implicit closure itself and <code class="language-plaintext highlighter-rouge">t</code> is not the
+prefix of a call <code class="language-plaintext highlighter-rouge">t.apply(...)</code>, then an <code class="language-plaintext highlighter-rouge">apply</code> is implicitly
+inserted, so <code class="language-plaintext highlighter-rouge">t</code> becomes <code class="language-plaintext highlighter-rouge">t.apply</code>. We have already seen that the
+definition of <code class="language-plaintext highlighter-rouge">t.apply</code> is an implicit method as given in the
+corresponding implicit function trait. Hence, it will in turn be
+applied to a matching sequence of implicit arguments. The end effect is
+that references to implicit functions get applied to implicit arguments in the
+same way as references to implicit methods.</p>
+
+<p>The second rule is the dual of the first. If the expected type
+of an expression <code class="language-plaintext highlighter-rouge">t</code> is an implicit function type</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit (T1, ..., Tn) =&gt; R
+</code></pre></div></div>
+
+<p>then <code class="language-plaintext highlighter-rouge">t</code> is converted to an implicit closure, unless it is already one.
+More precisely, <code class="language-plaintext highlighter-rouge">t</code> is mapped to the implicit closure</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implicit ($ev1: T1, ..., $evn: Tn) =&gt; t
+</code></pre></div></div>
+
+<p>The parameter names of this closure are compiler-generated identifiers
+which should not be accessed from user code. That is, the only way to
+refer to an implicit parameter of a compiler-generated function is via
+<code class="language-plaintext highlighter-rouge">implicitly</code>.</p>
+
+<p>It is important to note that this second conversion needs to be applied
+<em>before</em> the expression <code class="language-plaintext highlighter-rouge">t</code> is typechecked. This is because the
+conversion establishes the necessary context to make type checking <code class="language-plaintext highlighter-rouge">t</code>
+succeed by defining the required implicit parameters.</p>
+
+<p>There is one final tweak to make this all work: When using implicit parameters
+for nested functions it was so far necessary to give all implicit parameters
+of the same type the same name, or else one would get ambiguities. For instance, consider the
+following fragment:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(implicit c: C) = {
+  def g(implicit c: C) = ... implicitly[C] ...
+  ...
+}
+</code></pre></div></div>
+
+<p>If we had named the inner parameter <code class="language-plaintext highlighter-rouge">d</code> instead of <code class="language-plaintext highlighter-rouge">c</code> we would
+have gotten an implicit ambiguity at the call of <code class="language-plaintext highlighter-rouge">implicitly</code> because
+both <code class="language-plaintext highlighter-rouge">c</code> and <code class="language-plaintext highlighter-rouge">d</code> would be eligible:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def f(implicit c: C) = {
+  def g(implicit d: C) = ... implicitly[C] ... // error!
+  ...
+}
+</code></pre></div></div>
+
+<p>The problem is that parameters in implicit closures now have
+compiler-generated names, so the programmer cannot enforce the proper
+naming scheme to avoid all ambiguities. We fix the problem by
+introducing a new disambiguation rule which makes nested occurrences
+of an implicit take precedence over outer ones. This rule, which
+applies to all implicit parameters and implicit locals, is conceptually
+analogous to the rule that prefers implicits defined in companion
+objects of subclasses over those defined in companion objects of
+superclass. With that new disambiguation rule the example code above
+now compiles.</p>
+
+<p>That’s the complete set of rules needed to deal with implicit function types.</p>
+
+<h2 id="how-to-remove-boilerplate">How to Remove Boilerplate</h2>
+
+<p>The main advantage of implicit function types is that, being types,
+they can be abstracted. That is, one can define a name for an implicit
+function type and then use just the name instead of the full type.
+Let’s revisit our previous example and see how it can be made more
+concise using this technique.</p>
+
+<p>We first define a type <code class="language-plaintext highlighter-rouge">Transactional</code> for functions that take an implicit parameter of type <code class="language-plaintext highlighter-rouge">Transaction</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type Transactional[T] = implicit Transaction =&gt; T
+</code></pre></div></div>
+
+<p>Making the return type of <code class="language-plaintext highlighter-rouge">f1</code> to <code class="language-plaintext highlighter-rouge">f3</code> a <code class="language-plaintext highlighter-rouge">Transactional[Int]</code>, we can
+eliminate their implicit parameter sections:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def f1(x: Int): Transactional[Int] = {
+    thisTransaction.println(s"first step: $x")
+    f2(x + 1)
+  }
+  def f2(x: Int): Transactional[Int] = {
+    thisTransaction.println(s"second step: $x")
+    f3(x * x)
+  }
+  def f3(x: Int): Transactional[Int] = {
+    thisTransaction.println(s"third step: $x")
+    if (x % 2 != 0) thisTransaction.abort()
+    x
+  }
+</code></pre></div></div>
+
+<p>You might ask, how does <code class="language-plaintext highlighter-rouge">thisTransaction</code> typecheck, since there is no
+longer a parameter with that name? In fact, <code class="language-plaintext highlighter-rouge">thisTransaction</code> is now a
+global definition:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def thisTransaction: Transactional[Transaction] = implicitly[Transaction]
+</code></pre></div></div>
+
+<p>You might ask: a <code class="language-plaintext highlighter-rouge">Transactional[Transaction]</code>, is that not circular? To see more clearly, let’s expand
+the definition according to the rules given in the last section. <code class="language-plaintext highlighter-rouge">thisTransaction</code>
+is of implicit function type, so the right hand side is expanded to the
+implicit closure</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  implicit ($ev0: Transaction) =&gt; implicitly[Transaction]
+</code></pre></div></div>
+
+<p>The right hand side of this closure, <code class="language-plaintext highlighter-rouge">implicitly[Transaction]</code>, needs
+an implicit parameter of type <code class="language-plaintext highlighter-rouge">Transaction</code>, so the closure is further
+expanded to</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  implicit ($ev0: Transaction) =&gt; implicitly[Transaction]($ev0)
+</code></pre></div></div>
+
+<p>Now, <code class="language-plaintext highlighter-rouge">implicitly</code> is defined in <code class="language-plaintext highlighter-rouge">scala.Predef</code> like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def implicitly[T](implicit x: T) = x
+</code></pre></div></div>
+
+<p>If we plug that definition into the closure above and simplify, we get:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  implicit ($ev0: Transaction) =&gt; $ev0
+</code></pre></div></div>
+
+<p>So, <code class="language-plaintext highlighter-rouge">thisTransaction</code> is just the implicit identity function on <code class="language-plaintext highlighter-rouge">transaction</code>!
+In other words, if we use <code class="language-plaintext highlighter-rouge">thisTransaction</code> in the body of <code class="language-plaintext highlighter-rouge">f1</code> to <code class="language-plaintext highlighter-rouge">f3</code>, it will
+pick up and return the unnamed implicit parameter that’s in scope.</p>
+
+<p>Finally, here are the <code class="language-plaintext highlighter-rouge">transaction</code> and <code class="language-plaintext highlighter-rouge">main</code> method that complete
+the example.  Since <code class="language-plaintext highlighter-rouge">transactional</code>’s parameter <code class="language-plaintext highlighter-rouge">op</code> is now a
+<code class="language-plaintext highlighter-rouge">Transactional</code>, we can eliminate the <code class="language-plaintext highlighter-rouge">Transaction</code> argument to <code class="language-plaintext highlighter-rouge">op</code>
+and the <code class="language-plaintext highlighter-rouge">Transaction</code> lambda in <code class="language-plaintext highlighter-rouge">main</code>; both will be added by the compiler.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  def transaction[T](op: Transactional[T]) = {
+    implicit val trans: Transaction = new Transaction
+    op
+    trans.commit()
+  }
+  def main(args: Array[String]) = {
+    transaction {
+      val res = f1(args.length)
+      println(if (thisTransaction.isAborted) "aborted" else s"result: $res")
+    }
+  }
+</code></pre></div></div>
+
+<h2 id="categorically-speaking">Categorically Speaking</h2>
+
+<p>There are many interesting connections with category theory to explore
+here. On the one hand, implicit functions are used for tasks that are
+sometimes covered with monads such as the reader monad. There’s an
+argument to be made that implicits have better composability than
+monads and why that is.</p>
+
+<p>On the other hand, it turns out that implicit functions can also be
+given a co-monadic interpretation, and the interplay between monads and
+comonads is very interesting in its own right.</p>
+
+<p>But these discussions will have to wait for another time, as
+this blog post is already too long.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Implicit function types are a unique way to abstract over the context
+in which some piece of code is run. I believe they will deeply
+influence the way we write Scala in the future. They are very powerful
+abstractions, in the sense that just declaring a type of a function
+will inject certain implicit values into the scope of the function’s
+implementation. Many use cases can profit from this power to
+eliminate boilerplate and make code clearer. Can this be abused,
+making code more obscure?  Absolutely, like every other powerful
+abstraction technique. To keep your code sane, please keep the
+<a href="https://www.lihaoyi.com/post/StrategicScalaStylePrincipleofLeastPower.html">Principle of Least
+Power</a>
+in mind.</p>
+
+<h2 id="comments">Comments?</h2>
+
+<p>If you have comments or questions, I suggest you head over to the
+<a href="https://contributors.scala-lang.org/t/implicit-function-types/219">Scala
+Contributors</a>
+discourse discussion thread. It would be great to go more into depth there.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2016-12-07-implicit-function-types.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

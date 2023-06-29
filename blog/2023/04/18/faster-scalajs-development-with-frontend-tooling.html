@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Faster Scala.js development with front-end tooling and new tutorials | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Faster Scala.js development with front-end tooling and new tutorials"/>
+    
+    
+    <meta name="description" content="Using the new vite-plugin-scalajs to better integrate Scala.js with the Vite build tool, and announcing new tutorials for front-end development with Scala.js."/>
+    <meta property="og:description" content="Using the new vite-plugin-scalajs to better integrate Scala.js with the Vite build tool, and announcing new tutorials for front-end development with Scala.js."/>
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2023/04/18/faster-scalajs-development-with-frontend-tooling.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Faster Scala.js development with front-end tooling and new tutorials</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Tuesday 18 April 2023</p>
+						<p>Sébastien Doeraene</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2023/04/18/faster-scalajs-development-with-frontend-tooling.html">Faster Scala.js development with front-end tooling and new tutorials</a></h2> -->
+					<p>In front-end work, it’s frustrating if you cannot immediately try out your changes.
+In this post, we introduce <a href="https://github.com/scala-js/vite-plugin-scalajs"><code class="language-plaintext highlighter-rouge">vite-plugin-scalajs</code></a>, a new plugin that can reduce your Scala.js turnaround time from 10 seconds to under one.</p>
+
+<p>The release of <code class="language-plaintext highlighter-rouge">vite-plugin-scalajs</code> is part of a larger goal to simplify the developer experience in Scala.js.
+The JavaScript ecosystem features a lot of great tooling in that respect.
+Together with the release of the plugin, we are publishing a new <a href="https://www.scala-js.org/doc/tutorial/">tutorial series to get started with Scala.js</a>, in order to best leverage front-end tooling with Scala.js.</p>
+
+<p><img src="/resources/img/blog/vite-plugin-scalajs-screencast.gif" alt="vite-plugin-scalajs in action" /></p>
+
+<h2 id="past-approach-scalajs-bundler">Past approach: scalajs-bundler</h2>
+
+<p>Several years ago, the Scala Center first developed <a href="https://scalacenter.github.io/scalajs-bundler/index.html">scalajs-bundler</a>.
+Broadly, its goal was similar to what we present today: to integrate Scala.js with JavaScript tooling, in particular <a href="https://www.npmjs.com/">npm</a> and <a href="https://webpack.js.org/">webpack</a>.</p>
+
+<p>scalajs-bundler is an sbt plugin that provides settings and tasks to orchestrate npm and webpack invocations.
+The main premise was that Scala.js developers would be using Scala tooling first.
+JavaScript tooling would only handle dependency management and bundling.
+With that premise, scalajs-bundler abstracts away npm and webpack to some extent, and is intended to be used from sbt.</p>
+
+<p>While that approach works well for a while, it does not scale well to deeper front-end development requirements.
+Soon enough, scalajs-bundler had to add support for custom webpack configuration files.
+Unfortunately, using that feature meant that the webpack configuration was actually spread across sbt- and webpack-style configuration.</p>
+
+<p>Moreover, scalajs-bundler was designed when Scala.js was only able to emit a single JS module.
+Supporting a fast refresh cycle required hacks.
+Therefore, it was used mainly to produce the final, minified, browser-compatible, bundle.</p>
+
+<p>As time passed, Scala.js got more features, and best practices for Scala.js development evolved.
+In particular, the introduction of <a href="http://www.scala-js.org/doc/project/module.html#module-splitting">module splitting</a> in Scala.js opened the possibility to leverage tools like Vite.
+It became more common for Scala.js developers to use front-end tooling first.</p>
+
+<h2 id="vite-and-its-usage-in-the-scalajs-community">Vite and its usage in the Scala.js community</h2>
+
+<p>Last year, we surveyed what the best practices were among professional Scala.js users.
+Several front-end build tools were mentioned, but <a href="https://vitejs.dev/">Vite</a> seemed to be a popular choice.
+Vite leverages native support of ECMAScript Modules in browsers to provide fast edit-refresh cycles.
+When saving a <code class="language-plaintext highlighter-rouge">.js</code> source file, Vite detects the change and sends a refresh command to the browser, which only needs to parse the changed files.</p>
+
+<p>Building on ES Modules in this way provides a particularly nice opportunity for integration with Scala.js.
+Indeed, Scala.js can turn Scala code into small ES modules.
+Even better, we can configure it to provide few large modules for dependencies (which rarely change), and small modules for the application code (which changes often).
+Assuming the application lives in the package <code class="language-plaintext highlighter-rouge">my.app</code>, the required configuration is</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scalaJSLinkerConfig</span> <span class="o">~=</span> <span class="o">{</span>
+  <span class="nv">_</span><span class="o">.</span><span class="py">withModuleKind</span><span class="o">(</span><span class="nv">ModuleKind</span><span class="o">.</span><span class="py">ESModule</span><span class="o">)</span>
+    <span class="o">.</span><span class="py">withModuleSplitStyle</span><span class="o">(</span>
+      <span class="nv">ModuleSplitStyle</span><span class="o">.</span><span class="py">SmallModulesFor</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="s">"my.app"</span><span class="o">)))</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>When we edit and save a <code class="language-plaintext highlighter-rouge">.scala</code> file, a chain of incremental build steps is triggered:</p>
+
+<ol>
+  <li>The Scala incremental compiler recompiles only that <code class="language-plaintext highlighter-rouge">.scala</code> file and produces the corresponding <code class="language-plaintext highlighter-rouge">.sjsir</code> files (the <code class="language-plaintext highlighter-rouge">.class</code> files of Scala.js).</li>
+  <li>The Scala.js incremental linker picks up the new <code class="language-plaintext highlighter-rouge">.sjsir</code> files, incrementally re-optimizes the application, and rewrites only the target <code class="language-plaintext highlighter-rouge">.js</code> modules that have changed.</li>
+  <li>Vite picks up the changed <code class="language-plaintext highlighter-rouge">.js</code> files and asks the browser to reload them.</li>
+</ol>
+
+<p>In order to reinforce that effect, we brought significant performance improvements to the Scala.js linker in <a href="https://www.scala-js.org/news/2023/04/10/announcing-scalajs-1.13.1/">version 1.13.1</a>, in particular in the incremental case.
+Together with all the steps above being fully incremental, updating the UI of your application usually takes less than a second.</p>
+
+<p>Of course, <a href="https://xkcd.com/1172/">even performance improvements can break someone’s workflow</a>.
+One user complained that they “don’t even have time to take a sip of coffee between compiles” anymore.</p>
+
+<h2 id="introducing-vite-plugin-scalajs">Introducing vite-plugin-scalajs</h2>
+
+<p>To configure Vite to pick up the output of Scala.js, in <code class="language-plaintext highlighter-rouge">fastLinkJS</code> for development mode and <code class="language-plaintext highlighter-rouge">fullLinkJS</code> for production mode, we released <a href="https://github.com/scala-js/vite-plugin-scalajs"><code class="language-plaintext highlighter-rouge">vite-plugin-scalajs</code></a>.
+It is a plugin for Vite that directly connects it with a Scala.js sbt project (support for other Scala build tools will come later).</p>
+
+<p>After installing with</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">-D</span> @scala-js/vite-plugin-scalajs@1.0.0
+</code></pre></div></div>
+
+<p>and enabling it in <code class="language-plaintext highlighter-rouge">vite.config.js</code> as follows:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">defineConfig</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vite</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">scalaJSPlugin</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@scala-js/vite-plugin-scalajs</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">defineConfig</span><span class="p">({</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="nx">scalaJSPlugin</span><span class="p">()],</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>we can import the output of Scala.js from <code class="language-plaintext highlighter-rouge">.js</code> or <code class="language-plaintext highlighter-rouge">.ts</code> files as follows:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">scalajs:main.js</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">npm run dev</code>, the development mode of Vite, will automatically use the output of <code class="language-plaintext highlighter-rouge">fastLinkJS</code> in the Scala.js project.
+Its production commands <code class="language-plaintext highlighter-rouge">npm run build</code> and <code class="language-plaintext highlighter-rouge">npm run preview</code> will use the output of <code class="language-plaintext highlighter-rouge">fullLinkJS</code>.</p>
+
+<p>With this first version, a separate shell must be opened with sbt running <code class="language-plaintext highlighter-rouge">~fastLinkJS</code> for development mode.
+As the plugin gets more usage, we will enhance it so that it can keep the <code class="language-plaintext highlighter-rouge">~fastLinkJS</code> itself in the background.</p>
+
+<h2 id="new-tutorial-series">New tutorial series</h2>
+
+<p>Together with the release of the plugin, we are also publishing a new <a href="https://www.scala-js.org/doc/tutorial/">tutorial series to get started with Scala.js</a>.
+This series covers the basics of starting a Scala.js project using Vite and the following technologies:</p>
+
+<ul>
+  <li><a href="https://laminar.dev/">Laminar</a>, a UI framework for Scala.js based on Functional Reactive Programming, and</li>
+  <li><a href="https://scalablytyped.org/">ScalablyTyped</a>, a tool to automatically leverage TypeScript type definitions from Scala.js code.</li>
+</ul>
+
+<p>If you prefer to watch content in video format, we have you covered:</p>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=dv7fPmgFTNA">Getting started with Scala js and Vite</a></li>
+  <li><a href="https://www.youtube.com/watch?v=UePrOa_1Am8">Getting started with Scala.js, Laminar and ScalablyTyped</a></li>
+</ul>
+
+<p>If you always wanted to test Scala.js but were afraid of getting started, now is a good time to try!
+We also have a community of friendly and helpful people in the <code class="language-plaintext highlighter-rouge">#scala-js</code> channel of the <a href="https://discord.com/invite/scala">Scala Discord server</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We presented <a href="https://github.com/scala-js/vite-plugin-scalajs"><code class="language-plaintext highlighter-rouge">vite-plugin-scalajs</code></a>, a new plugin for Vite that wires it up with a Scala.js application.
+Through nothing more than enabling the plugin in the Vite configuration, we can <code class="language-plaintext highlighter-rouge">import 'scalajs:main.js'</code> to get access to the output of Scala.js.
+Vite’s focus on module-based incremental updates combines particularly well with Scala’s and Scala.js’ own focus on incremental compilation and linking.
+Together, they provide sub-second save-to-refresh cycles.</p>
+
+<p>In order to help users get started with Scala.js and Vite, we published a <a href="https://www.scala-js.org/doc/tutorial/">new tutorial series</a>.
+It shows step by step how to integrate Vite, Scala.js, Laminar and ScalablyTyped to build a front-end application.</p>
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2023-04-18-faster-scalajs-development-with-frontend-tooling.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

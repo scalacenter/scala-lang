@@ -1,0 +1,1939 @@
+[
+  
+    {
+      "title"    : "sbt Plugins Community Repository",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2023/04/20/sbt-plugins-community-repository.html",
+      "date"     : "2023-04-20 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Faster Scala.js development with front-end tooling and new tutorials",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2023/04/18/faster-scalajs-development-with-frontend-tooling.html",
+      "date"     : "2023-04-18 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "March 2023 - Scala Tooling Summit",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2023/04/11/march-2023-scala-tooling-summit.html",
+      "date"     : "2023-04-11 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Contribution Equals Impact – Towards a Responsible, Sustainable, and Resilient Open Source Ecosystem for Scala",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2023/03/02/sustainability.html",
+      "date"     : "2023-03-02 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala Center Is Accepted as a Mentor Organization for GSoC 2023!",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2023/02/28/acceptd-to-gsoc-2023.html",
+      "date"     : "2023-02-28 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "10 years of Scala.js",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2023/02/05/ten-years-of-scala-js.html",
+      "date"     : "2023-02-05 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 3.2.2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/3.2.2",
+      "date"     : "2023-02-01 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala Center Roadmap for 2023 and Beyond",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2023/01/31/scala-center-2023-roadmap.html",
+      "date"     : "2023-01-31 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Call for Scala GSoC 2023 projects!",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2023/01/23/gsoc-2023.html",
+      "date"     : "2023-01-23 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Eugene Yokota Joins the Scala Center’s Advisory Board as a new Community Representative",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2023/01/10/new-ab-community-rep.html",
+      "date"     : "2023-01-10 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Thank you for taking part in Advent of Code 2022!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2023/01/06/advent-of-code-recap.html",
+      "date"     : "2023-01-06 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala Developer Survey 2022 Results",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/12/14/scala-developer-survey-results-2022.html",
+      "date"     : "2022-12-14 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Advent of Code 2022",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/12/12/advent-of-code.html",
+      "date"     : "2022-12-12 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Google Summer of Code 2022: How It Was",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/11/15/gsoc-report.html",
+      "date"     : "2022-11-15 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 3.2.1 released!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/11/07/scala-3.2.1-released.html",
+      "date"     : "2022-11-07 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "The Scala 3 Compiler Academy moves to Discord",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/11/02/compiler-academy.html",
+      "date"     : "2022-11-02 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.10 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.10",
+      "date"     : "2022-10-13 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Participate in the Scala Survey 2022!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/09/29/scala-survey-2022-announcement.html",
+      "date"     : "2022-09-29 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.9 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.9",
+      "date"     : "2022-09-21 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.17 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.17",
+      "date"     : "2022-09-16 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 3.2.0 released!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/09/05/scala-3.2.0-released.html",
+      "date"     : "2022-09-05 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Long-term compatibility plans for Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/08/17/long-term-compatibility-plans.html",
+      "date"     : "2022-08-17 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Teach Programming with Scala",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/07/26/teach-programming-with-scala.html",
+      "date"     : "2022-07-26 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Secure the Dependencies of your Scala Project on GitHub",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/07/18/secure-your-dependencies-on-github.html",
+      "date"     : "2022-07-18 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala Improvement Process - Evolving Scala openly and collaboratively",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/07/13/scala-improvement-process-reloaded.html",
+      "date"     : "2022-07-13 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 3.1.3 released!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/06/21/scala-3.1.3-released.html",
+      "date"     : "2022-06-21 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.16 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.16",
+      "date"     : "2022-06-10 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Learn Scala Online at the EPFL Extension School",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/06/08/learn-scala-at-epfl-extension-school.html",
+      "date"     : "2022-06-08 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 3.1.2 released!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/04/12/scala-3.1.2-released.html",
+      "date"     : "2022-04-12 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "The Inclusive Language Guide for the Scala community",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2022/04/05/inclusive-language-guide.html",
+      "date"     : "2022-04-05 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "2022 Scala GSoC Applications Open!",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2022/03/24/gsoc2022.html",
+      "date"     : "2022-03-24 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Finding awesome Scala libraries",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/03/08/finding-awesome-libraries.html",
+      "date"     : "2022-03-08 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "In support of Ukraine",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2022/03/04/in-support-of-ukraine.html",
+      "date"     : "2022-03-04 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 3.1.1 and forward compatibility news",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/02/01/scala-3.1.1-released.html",
+      "date"     : "2022-02-01 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Learn Scala with Online Courses",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2022/01/19/learn-scala-with-online-courses.html",
+      "date"     : "2022-01-19 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.8 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.8",
+      "date"     : "2022-01-12 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala Chat: Hello Discord (So Long, Gitter)",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/12/21/discord.html",
+      "date"     : "2021-12-21 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "The state of the log4j CVE in the Scala ecosystem",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2021/12/16/state-of-log4j-in-scala-ecosystem.html",
+      "date"     : "2021-12-16 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Sustainable Scala",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/12/14/sustainable-scala.html",
+      "date"     : "2021-12-14 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.7 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.7",
+      "date"     : "2021-11-01 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 3.1.0 released!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/10/21/scala-3.1.0-released.html",
+      "date"     : "2021-10-21 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala GSoC 2021 is finished: meet the team!",
+      "category" : "blog-detail",
+      "tags"     : "",
+      "url"      : "/blog-detail/2021/09/27/gsoc-conclusion.html",
+      "date"     : "2021-09-27 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.15 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.15",
+      "date"     : "2021-09-14 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 3.0.2 released!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/09/07/scala-3.0.2-released.html",
+      "date"     : "2021-09-07 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 3.0.1 and 3.0.2-RC1 are here!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/07/21/scala-3.0.2RC1-is-here.html",
+      "date"     : "2021-07-21 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.14 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.14",
+      "date"     : "2021-05-28 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "New Online Course: Effective Programming in Scala",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/05/17/effective-programming-scala-course.html",
+      "date"     : "2021-05-17 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.6 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.6",
+      "date"     : "2021-05-17 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 3 is here!🎉🎉🎉",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/05/14/scala3-is-here.html",
+      "date"     : "2021-05-14 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "The Scala Center Action Towards a More Safe and Respectful Community  Environment",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/05/11/scala-center-action-towards-safe-respectful-env.html",
+      "date"     : "2021-05-11 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 3 in sbt 1.5",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/04/08/scala-3-in-sbt.html",
+      "date"     : "2021-04-08 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "GSoC 2021 Here we come!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2021/03/11/gsoc-2021-here-we-come.html",
+      "date"     : "2021-03-11 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 3 Developer’s Preview Survey Results",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2021/03/08/scala-3-developers-preview-survey-results.html",
+      "date"     : "2021-03-08 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Tuples bring generic programming to Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2021/02/26/tuples-bring-generic-programming-to-scala-3.html",
+      "date"     : "2021-02-26 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.5 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.5",
+      "date"     : "2021-02-22 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Preventing Version Conflicts with versionScheme",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/02/16/preventing-version-conflicts-with-versionscheme.html",
+      "date"     : "2021-02-16 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala Native 0.4.0 is here!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2021/01/19/scala-native-0.4-release.html",
+      "date"     : "2021-01-19 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.13 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.13",
+      "date"     : "2021-01-12 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Configuring and suppressing warnings in Scala",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2021/01/12/configuring-and-suppressing-warnings.html",
+      "date"     : "2021-01-12 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 3 - Crossing the finish line",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2020/12/15/scala-3-crossing-the-finish-line.html",
+      "date"     : "2020-12-15 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Forward Compatibility for the Scala 3 Transition",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2020/11/19/scala-3-forward-compat.html",
+      "date"     : "2020-11-19 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.4 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.4",
+      "date"     : "2020-11-19 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Explicit term inference with Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2020/11/06/explicit-term-inference-in-scala-3.html",
+      "date"     : "2020-11-06 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Implementing Scala.js Support for Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2020/11/03/scalajs-for-scala-3.html",
+      "date"     : "2020-11-03 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "BSP Support in sbt 1.4",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2020/10/27/bsp-in-sbt.html",
+      "date"     : "2020-10-27 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 3 - A community powered release",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2020/09/15/scala-3-the-community-powered-release.html",
+      "date"     : "2020-09-15 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.12 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.12",
+      "date"     : "2020-07-13 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "One-click install for Scala",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2020/06/29/one-click-install.html",
+      "date"     : "2020-06-29 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.3",
+      "date"     : "2020-06-25 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "The Scala Center stands with Black Lives Matter",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2020/06/22/the-scala-center-stands-with-black-lives-matter.html",
+      "date"     : "2020-06-22 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Import Suggestions in Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2020/05/05/scala-3-import-suggestions.html",
+      "date"     : "2020-05-05 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.2",
+      "date"     : "2020-04-22 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.11 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.11",
+      "date"     : "2020-03-16 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Functional Program (Re)Design",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2020/03/10/functional-program-re-design.html",
+      "date"     : "2020-03-10 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2 community build reaches goals",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2020/02/20/community-build.html",
+      "date"     : "2020-02-20 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2 Roadmap Update: the Road to Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2019/12/18/road-to-scala-3.html",
+      "date"     : "2019-12-18 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Better management of transitive dependencies and conflicts",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2019/10/17/dependency-management.html",
+      "date"     : "2019-10-17 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala Contributors Summit(s)",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2019/09/25/scala-contributors-summit.html",
+      "date"     : "2019-09-25 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.1",
+      "date"     : "2019-09-18 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Kelley Robinson receives community award",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2019/09/13/bagwell-award-2019.html",
+      "date"     : "2019-09-13 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Kenji Yoshida receives community award",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2019/09/13/bagwell-award-2018.html",
+      "date"     : "2019-09-13 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.10 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.10",
+      "date"     : "2019-09-10 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.9 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.9",
+      "date"     : "2019-08-05 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Keep your projects up-to-date with Scala Steward",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2019/07/10/announcing-scala-steward.html",
+      "date"     : "2019-07-10 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.0 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.0",
+      "date"     : "2019-06-11 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.0-RC3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.0-RC3",
+      "date"     : "2019-05-31 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "News from the Scala MOOCs",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2019/05/21/news-from-the-scala-moocs.html",
+      "date"     : "2019-05-21 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.0-RC2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.0-RC2",
+      "date"     : "2019-05-17 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Community and Communication",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2019/05/02/community.html",
+      "date"     : "2019-05-02 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Write Scala in VS Code, Vim, Emacs, Atom and Sublime Text with Metals",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2019/04/16/metals.html",
+      "date"     : "2019-04-16 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.0-RC1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.0-RC1",
+      "date"     : "2019-04-08 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Rob Norris joins Scala Center’s Advisory Board as a new Community Representative",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2019/03/18/announcing-new-community-representative.html",
+      "date"     : "2019-03-18 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Phil Bagwell Nominations",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2019/03/01/phil-bagwell-nominations.html",
+      "date"     : "2019-03-01 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala community build grows, adds Scala 2.13 and JDK 11",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2019/01/18/community-build.html",
+      "date"     : "2019-01-18 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala Days 2019 - Celebrating Collaborative Success",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2019/01/17/scala-days-2019-celebrating-collaborative-success.html",
+      "date"     : "2019-01-17 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "New Course: “Programming Reactive Systems”",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/news/2018/12/20/programming-reactive-systems-course.html",
+      "date"     : "2018-12-20 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.8 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.8",
+      "date"     : "2018-12-04 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Build code analyzers with Scalameta and Scalafix",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2018/11/16/scalafix-scalameta.html",
+      "date"     : "2018-11-16 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Introducing Scaladoc Tables",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/10/04/scaladoc-tables.html",
+      "date"     : "2018-10-04 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.7 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.7",
+      "date"     : "2018-09-27 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.0-M5 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.0-M5",
+      "date"     : "2018-08-30 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala ❤️ Pride 2018",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/06/20/scala-pride.html",
+      "date"     : "2018-06-20 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Announcing the Build Server Protocol v1.0.0",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/06/15/bsp.html",
+      "date"     : "2018-06-15 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Introducing Accessible Scala",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/06/14/accessible-scala.html",
+      "date"     : "2018-06-14 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13’s Collections",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/06/13/scala-213-collections.html",
+      "date"     : "2018-06-13 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13 Collections Feature Freeze",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2018/06/05/collections-feature-freeze.html",
+      "date"     : "2018-06-05 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Speeding Up Compilation Time with scalac-profiling",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/06/04/scalac-profiling.html",
+      "date"     : "2018-06-04 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Announcing the 2018 Scala Developer Survey",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/survey-2018.html",
+      "date"     : "2018-05-15 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.0-M4 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.0-M4",
+      "date"     : "2018-05-15 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Intent to adopt the Apache License 2.0 for Scala",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/license-change.html",
+      "date"     : "2018-05-15 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Macros: the Plan for Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/04/30/in-a-nutshell.html",
+      "date"     : "2018-04-30 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.6 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.6",
+      "date"     : "2018-04-27 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Towards Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/04/19/scala-3.html",
+      "date"     : "2018-04-19 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Accessibility of the Scala Compiler",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/03/19/accessible-scala.html",
+      "date"     : "2018-03-19 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.5 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.5",
+      "date"     : "2018-03-15 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Our MOOCs Now Support The EdX Platform",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/news/2018/02/27/moocs-edx-support.html",
+      "date"     : "2018-02-27 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Towards A Brighter Tooling Future for Scala",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/02/14/tooling.html",
+      "date"     : "2018-02-14 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "New key for signing Scala releases",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/key-transition-2018.html",
+      "date"     : "2018-02-13 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "On Performance of the New Collections",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/02/09/collections-performance.html",
+      "date"     : "2018-02-09 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.0-M3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.13.0-M3",
+      "date"     : "2018-01-31 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala community build grows to 141 projects, 2.8 million lines of code",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2018/01/16/community-build-growth.html",
+      "date"     : "2018-01-16 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Introducing Non-English Chatrooms for Scala Users",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2018/01/09/multilingual-chatrooms.html",
+      "date"     : "2018-01-09 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Announcing Dotty 0.5.0-RC1",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/2017/12/01/fifth-dotty-milestone-release.html",
+      "date"     : "2017-12-01 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Meet bloop, a fast tool to compile and test your project",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/11/30/bloop-release.html",
+      "date"     : "2017-11-30 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Let Them Be Lazy!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/11/28/view-based-collections.html",
+      "date"     : "2017-11-28 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "What&#39;s happening with macros?",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2017/11/27/macros.html",
+      "date"     : "2017-11-27 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Security update: 2.12.4, 2.11.12, 2.10.7 (CVE-2017-15288)",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/security-update-nov17.html",
+      "date"     : "2017-11-13 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Speed up compile times with Zinc 1.0",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/11/03/zinc-blog-1.0.html",
+      "date"     : "2017-11-03 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.4 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.4",
+      "date"     : "2017-10-17 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Announcing Dotty 0.4.0-RC1",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/10/16/fourth-dotty-milestone-release.html",
+      "date"     : "2017-10-16 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Roadmap towards non-experimental macros",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2017/10/09/scalamacros.html",
+      "date"     : "2017-10-09 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Josh Suereth receives community award",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2017/09/25/bagwell-award-2017.html",
+      "date"     : "2017-09-25 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Status of the Collections",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/09/12/collections-status.html",
+      "date"     : "2017-09-12 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Catch bugs with Scalafix v0.5",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2017/09/11/scalafix-v0.5.html",
+      "date"     : "2017-09-11 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Announcing Dotty 0.3.0-RC2, with improved stability and IDE support",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/09/07/third-dotty-milestone-release.html",
+      "date"     : "2017-09-07 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "GSOC - Connecting Contributors with Projects",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/08/28/gsoc-connecting-contributors-with-projects.html",
+      "date"     : "2017-08-28 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13.0-M2 is now available!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/news/2.13.0-M2",
+      "date"     : "2017-08-08 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.3 is now available!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/news/2.12.3",
+      "date"     : "2017-07-26 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Announcing Dotty 0.2.0-RC1, with new optimizations, improved stability and IDE support",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/07/12/second-dotty-milestone-release.html",
+      "date"     : "2017-07-12 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Redesigned collections v0.2.0",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/07/02/collections-0.2.0.html",
+      "date"     : "2017-07-02 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Announcing Dotty 0.1.2-RC1, a major step towards Scala 3",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/05/31/first-dotty-milestone-release.html",
+      "date"     : "2017-05-31 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Tribulations of CanBuildFrom",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/05/30/tribulations-canbuildfrom.html",
+      "date"     : "2017-05-30 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "What&#39;s new with Scala Native?",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/05/26/whats-new-scala-native.html",
+      "date"     : "2017-05-26 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scastie is out of beta and available to everybody!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/05/19/scastie.html",
+      "date"     : "2017-05-19 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.11, 2.12.2 and 2.13.0-M1 now available!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/news/releases-1Q17.html",
+      "date"     : "2017-04-18 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Introducing Skala: A New Vision for Dotty",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/04/01/announcing-skala.html",
+      "date"     : "2017-04-01 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala Native v0.1 is here!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/03/14/scala-native-0.1-is-here.html",
+      "date"     : "2017-03-14 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Spark/Scala MOOC + Capstone Project Now Live on Coursera!",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/blog/2017/03/13/spark-mooc-capstone-live-on-coursera.html",
+      "date"     : "2017-03-13 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13 roadmap",
+      "category" : "",
+      "tags"     : "",
+      "url"      : "/news/roadmap-2.13.html",
+      "date"     : "2017-03-06 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.13 Collections Rework",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2017/02/28/collections-rework.html",
+      "date"     : "2017-02-28 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Refactor with scalafix v0.3",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2017/02/27/scalafix-v0.3.html",
+      "date"     : "2017-02-27 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Google Summer Of Code 2017",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2017/02/22/gsoc-2017.html",
+      "date"     : "2017-02-22 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Introducing Scastie - An interactive playground for Scala.",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2017/02/20/introducing-scastie.html",
+      "date"     : "2017-02-20 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "First Scala Platform meeting",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2017/01/27/first-scala-platform-meeting.html",
+      "date"     : "2017-01-27 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala Center Advisory Board and SIP Meeting Results",
+      "category" : "blog",
+      "tags"     : "scala center, meetings",
+      "url"      : "/blog/2016/12/13/sip-and-advisor-meetings.html",
+      "date"     : "2016-12-13 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Implicit Function Types",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/12/07/implicit-function-types.html",
+      "date"     : "2016-12-07 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.1/",
+      "date"     : "2016-12-05 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Releasing spores 0.4.3",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/11/30/spores-release.html",
+      "date"     : "2016-11-30 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Introducing the Scala Platform Process",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/11/28/spp.html",
+      "date"     : "2016-11-28 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "SPLASH Amsterdam and Higher-kinded Types",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/11/17/splash.html",
+      "date"     : "2016-11-17 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.0 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.0/",
+      "date"     : "2016-11-03 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Erik Osheim receives community award",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2016/10/26/bagwell-award-2016.html",
+      "date"     : "2016-10-26 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Introducing Scalafix: a code migration tool for Scala",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/10/24/scalafix.html",
+      "date"     : "2016-10-24 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Lars Hupel Joins the Scala Center Advisory Board",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/10/24/lars-hupel-joins-sc-board.html",
+      "date"     : "2016-10-24 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Use npm packages in Scala.js with scalajs-bundler",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/10/19/scalajs-bundler.html",
+      "date"     : "2016-10-19 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.0-RC2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.0-RC2/",
+      "date"     : "2016-10-18 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Awesome Error Messages for Dotty",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/10/14/dotty-errors.html",
+      "date"     : "2016-10-14 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.0-RC1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.0-RC1/",
+      "date"     : "2016-09-06 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "August SIP Meeting Results: 2 SIPs Rejected and 2 SIPs Updated",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/08/15/sip-meeting-august-results.html",
+      "date"     : "2016-08-15 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala Library Index Reaches Beta!",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/08/09/the-scala-library-index-reaches-beta.html",
+      "date"     : "2016-08-09 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "SIP Meeting Results: 2 SIPs Numbered and 3 SIPs Updated",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/07/20/sip-summary-minutes.html",
+      "date"     : "2016-07-20 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "A Reformed Scala Improvement Process",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/07/12/a-reformed-scala-improvement-process.html",
+      "date"     : "2016-07-12 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Performance of trait methods",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/07/08/trait-method-performance.html",
+      "date"     : "2016-07-08 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.0-M5 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.0-M5/",
+      "date"     : "2016-06-29 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "The Scala Center Advisory Board",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/05/30/scala-center-advisory-board.html",
+      "date"     : "2016-05-30 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Three Scala courses launched on Coursera!",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/05/23/scala-moocs-specialization-launched.html",
+      "date"     : "2016-05-23 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Multiversal Equality for Scala",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/05/06/multiversal-equality.html",
+      "date"     : "2016-05-06 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala Center Appoints Bill Venners as Community Representative to the Advisory Board",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/04/29/sc-community-representative.html",
+      "date"     : "2016-04-29 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.0-M4 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.0-M4/",
+      "date"     : "2016-04-11 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "47 Degrees Joins the Scala Center Advisory Board!",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/04/05/47deg-joins-scala-center-advisory-board.html",
+      "date"     : "2016-04-05 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Getting into Scaladoc Development",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/03/17/getting-into-scaladoc-dev.html",
+      "date"     : "2016-03-17 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "The Scala Center",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/03/14/announcing-the-scala-center.html",
+      "date"     : "2016-03-14 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.8 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.11.8/",
+      "date"     : "2016-03-08 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scaling DOT to Scala - Soundness",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/02/17/scaling-dot-soundness.html",
+      "date"     : "2016-02-17 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "The Essence of Scala",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/02/03/essence-of-scala.html",
+      "date"     : "2016-02-03 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Minutes from Jan 2016 SIP/SLIP Meeting",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/01/11/minutes-from-jan-2016.html",
+      "date"     : "2016-01-11 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "New Year Resolutions",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2016/01/02/new-year-resolutions.html",
+      "date"     : "2016-01-02 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "2016 Scala Release Schedule update",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2016-schedule.html",
+      "date"     : "2015-12-09 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Minutes from Nov 2015 SIP/SLIP Meeting",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2015/11/16/minutes-from-nov-2015.html",
+      "date"     : "2015-11-16 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Minutes from Oct 2015 SIP/SLIP Meeting",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2015/11/04/minutes-from-oct-2015.html",
+      "date"     : "2015-11-04 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "We got liftoff! The Dotty compiler for Scala bootstraps.",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2015/10/23/dotty-compiler-bootstraps.html",
+      "date"     : "2015-10-23 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Minutes from Sept SIP/SLIP Meeting",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2015/10/07/minutes-from-sept-2015.html",
+      "date"     : "2015-10-07 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.0-M3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.0-M3/",
+      "date"     : "2015-10-06 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.6 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.10.6/",
+      "date"     : "2015-09-18 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Minutes from Aug SIP/SLIP Meeting",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2015/08/25/minutes-from-aug-2015.html",
+      "date"     : "2015-08-25 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "SIP/SLIP Summary, July 27th 2015",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2015/07/26/sip-slip-summary-july-2015.html",
+      "date"     : "2015-07-26 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.0-M2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.0-M2/",
+      "date"     : "2015-07-14 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Bill Venners receives community award",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2015/06/25/bagwell-award-2015.html",
+      "date"     : "2015-06-25 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.7 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.11.7/",
+      "date"     : "2015-06-23 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12.0-M1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12.0-M1/",
+      "date"     : "2015-05-05 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Google Summer of Code 2015",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2015/03/16/GSoC-projects.html",
+      "date"     : "2015-03-16 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.6 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.11.6/",
+      "date"     : "2015-03-05 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.5 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.10.5/",
+      "date"     : "2015-03-05 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala.js no longer experimental",
+      "category" : "blog",
+      "tags"     : "",
+      "url"      : "/blog/2015/02/05/scala-js-no-longer-experimental.html",
+      "date"     : "2015-02-05 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.5 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.11.5/",
+      "date"     : "2015-01-14 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.4 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.11.4/",
+      "date"     : "2014-10-30 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala: Next Steps",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/roadmap-next.html",
+      "date"     : "2014-07-28 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.11.2/",
+      "date"     : "2014-07-24 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.12 roadmap",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.12-roadmap/",
+      "date"     : "2014-06-30 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.11.1/",
+      "date"     : "2014-05-21 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.11.0/",
+      "date"     : "2014-04-21 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0-RC4 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2014/04/08/release-notes-2.11.0-RC4.html",
+      "date"     : "2014-04-08 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.4 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.10.4/",
+      "date"     : "2014-03-24 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0-RC3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2014/03/20/release-notes-2.11.0-RC3.html",
+      "date"     : "2014-03-20 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0-RC1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2014/03/06/release-notes-2.11.0-RC1.html",
+      "date"     : "2014-03-06 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.4-RC3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2014/02/25/release-notes-2.10.4-RC3.html",
+      "date"     : "2014-02-25 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Google Summer of Code 2014",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2014/02/24/scala-team-approved-to-be-gsoc-mentor-organization.html",
+      "date"     : "2014-02-24 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.4-RC2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2014/02/04/release-notes-2.10.4-RC2.html",
+      "date"     : "2014-02-04 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0-M8 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2014/01/28/release-notes-2.11.0-M8.html",
+      "date"     : "2014-01-28 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "10 Years of Scala",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2014/01/22/10-years-of-scala.html",
+      "date"     : "2014-01-22 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.4-RC1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/12/20/release-notes-v2.10.4-RC1.html",
+      "date"     : "2013-12-20 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Announcing Scala.js v0.1",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/11/29/announcing-scala-js-v0.1.html",
+      "date"     : "2013-11-29 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0-M7 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/11/27/release-notes-v2.11.0-M7.html",
+      "date"     : "2013-11-27 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/10/01/release-notes-v2.10.3.html",
+      "date"     : "2013-10-01 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0-M5 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/09/28/release-notes-v2.11.0-M5.html",
+      "date"     : "2013-09-28 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.3-RC3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/09/24/release-notes-v2.10.3-RC3.html",
+      "date"     : "2013-09-24 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.3-RC2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/09/18/release-notes-v2.10.3-RC2.html",
+      "date"     : "2013-09-18 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "New Online Courses",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2013/08/27/coursera-announcements.html",
+      "date"     : "2013-08-27 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0-M4 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/07/11/release-notes-v2.11.0-M4.html",
+      "date"     : "2013-07-11 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/06/06/release-notes-v2.10.2.html",
+      "date"     : "2013-06-06 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.2-RC2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/05/31/release-notes-v2.10.2-RC2.html",
+      "date"     : "2013-05-31 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.11.0-M3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/05/29/release-notes-v2.11.0-M3.html",
+      "date"     : "2013-05-29 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.2-RC1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/05/23/release-notes-v2.10.2-RC1.html",
+      "date"     : "2013-05-23 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala Workshop (Scala2013) Program Announced!",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2013/05/21/scala-workshop-13.html",
+      "date"     : "2013-05-21 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Scala Workshop (Scala2013) Student Talks to be Awarded Full ECOOP Registration!",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2013/04/11/student-talks-sw13.html",
+      "date"     : "2013-04-11 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Prof. Philip Wadler to Keynote at the Scala Workshop (Scala2013)!",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2013/04/11/philip-wadler-sw13.html",
+      "date"     : "2013-04-11 00:00:00 +0200"
+    } ,
+  
+    {
+      "title"    : "Google Summer of Code 2013 Scala Projects",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2013/03/20/gsoc13.html",
+      "date"     : "2013-03-20 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.1 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/03/13/release-notes-v2.10.1.html",
+      "date"     : "2013-03-13 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "4th Scala Days Conference to run in New York City",
+      "category" : "news",
+      "tags"     : "",
+      "url"      : "/news/2013/03/12/scala-days-4.html",
+      "date"     : "2013-03-12 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.1-RC3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/03/06/release-notes-v2.10.1-RC3.html",
+      "date"     : "2013-03-06 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.9.3 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/news/2.9.3/",
+      "date"     : "2013-02-28 00:00:00 +0100"
+    } ,
+  
+    {
+      "title"    : "Scala 2.10.1-RC2 is now available!",
+      "category" : "announcement",
+      "tags"     : "",
+      "url"      : "/announcement/2013/02/28/release-notes-v2.10.1-RC2.html",
+      "date"     : "2013-02-28 00:00:00 +0100"
+    } 
+  
+]

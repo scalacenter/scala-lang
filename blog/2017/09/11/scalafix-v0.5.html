@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Catch bugs with Scalafix v0.5 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Catch bugs with Scalafix v0.5"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2017/09/11/scalafix-v0.5.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Catch bugs with Scalafix v0.5</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 11 September 2017</p>
+						<p>Ólafur Páll Geirsson</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">BLOG</div>
+					<!-- <h2><a href="/blog/2017/09/11/scalafix-v0.5.html">Catch bugs with Scalafix v0.5</a></h2> -->
+					<p>I am excited to announce the release of <a href="https://github.com/scalacenter/scalafix/releases/tag/v0.5.0-RC3">Scalafix v0.5.0-RC3</a>.
+This release introduces new features in addition to several bug fixes and
+integration improvements.</p>
+
+<p>If you are not familiar with Scalafix, Scalafix is a rewrite and linting tool
+for Scala.
+The project is developed at the <a href="https://scala.epfl.ch/">Scala Center</a> with the mission to help
+automate migration between different Scala compiler and library versions.</p>
+
+<blockquote>
+  <p>This is the third post on Scalafix and scalameta.
+You might be interested in reading the previous post
+<a href="https://www.scala-lang.org/blog/2017/02/27/scalafix-v0.3.html">here</a>.</p>
+</blockquote>
+
+<h2 id="linting">Linting</h2>
+
+<p>Scalafix v0.5 supports linters.
+Linters are programs that analyze source code for usages of language constructs that could unwittingly lead to bugs, and emit warnings when these potential issues are found.
+Linters are particularly useful for defining and enforcing coding standards across teams.</p>
+
+<p>Before v0.5, Scalafix rules could only provide rewrite instructions to “fix” code.
+Now, it’s possible to implement Scalafix rules that only report messages instead
+of rewrite instructions.
+Each category of lint messages is attached to a default severity level
+(info/warn/error), which users can override via configuration.</p>
+
+<p>The first Scalafix linter is <a href="https://scalacenter.github.io/scalafix/#NoInfer"><code class="language-plaintext highlighter-rouge">NoInfer</code></a>.
+<code class="language-plaintext highlighter-rouge">NoInfer</code> reports errors when the Scala compiler infers one of the following types:
+<code class="language-plaintext highlighter-rouge">Any</code>, <code class="language-plaintext highlighter-rouge">AnyVal</code>, <code class="language-plaintext highlighter-rouge">Product</code> or <code class="language-plaintext highlighter-rouge">Serializable</code>.
+It’s usually a bad sign when the compiler infers such a generic type.
+In those cases, it’s better to explicitly type annotate the expected type.</p>
+
+<h3 id="building-a-custom-linter">Building a custom linter</h3>
+<p>It’s simple to implement custom Scalafix linters.
+To demonstrate this, let’s implement a <code class="language-plaintext highlighter-rouge">FinalCaseClass</code> linter that reports an error if
+a case class is not marked as final.
+We start our project with the scalacenter/scalafix.g8 template.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt new scalacenter/scalafix.g8 <span class="nt">--rule</span><span class="o">=</span><span class="s2">"FinalCaseClass"</span> <span class="nt">--version</span><span class="o">=</span><span class="s2">"v1.0"</span>
+<span class="nb">cd </span>scalafix
+sbt tests/test
+</code></pre></div></div>
+
+<p>Rules are implemented with Scalafix and Scalameta.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// rules/src/main/scala/fix/FinalCaseClass_v1.scala</span>
+<span class="k">package</span> <span class="nn">fix</span>
+<span class="k">import</span> <span class="nn">scalafix._</span>
+<span class="k">import</span> <span class="nn">scala.meta._</span><span class="o">,</span> <span class="nv">contrib</span><span class="o">.</span><span class="py">_</span>
+
+<span class="k">case</span> <span class="k">object</span> <span class="nc">FinalCaseClass</span> <span class="k">extends</span> <span class="nc">Rule</span><span class="o">(</span><span class="s">"FinalCaseClass"</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="nv">error</span> <span class="k">=</span> <span class="nv">LintCategory</span><span class="o">.</span><span class="py">error</span><span class="o">(</span>
+    <span class="s">"Extending a case classes can have surprising equals/hashCode behavior."</span>
+  <span class="o">)</span>
+  <span class="k">override</span> <span class="k">def</span> <span class="nf">check</span><span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">RuleCtx</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">LintMessage</span><span class="o">]</span> <span class="k">=</span> <span class="nv">ctx</span><span class="o">.</span><span class="py">tree</span><span class="o">.</span><span class="py">collect</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="n">cls</span><span class="k">:</span> <span class="kt">Defn.Class</span> <span class="kt">if</span> <span class="kt">cls.hasMod</span><span class="o">(</span><span class="kt">mod</span><span class="err">"</span><span class="kt">case</span><span class="err">"</span><span class="o">)</span> <span class="kt">&amp;&amp;</span> <span class="kt">!cls.hasMod</span><span class="o">(</span><span class="kt">mod</span><span class="err">"</span><span class="kt">final</span><span class="err">"</span><span class="o">)</span> <span class="o">=&gt;</span>
+      <span class="nv">error</span><span class="o">.</span><span class="py">at</span><span class="o">(</span><span class="n">s</span><span class="s">"case class $name must be final"</span><span class="o">,</span> <span class="nv">cls</span><span class="o">.</span><span class="py">name</span><span class="o">.</span><span class="py">pos</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>When <code class="language-plaintext highlighter-rouge">FinalCaseClass</code> encounters a non-final case class it reports a message like this</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scala</span><span class="o">/</span><span class="n">test</span><span class="o">/</span><span class="nv">FinalCaseClass</span><span class="o">.</span><span class="py">scala</span><span class="k">:</span><span class="err">8</span><span class="kt">:</span> <span class="kt">error:</span> <span class="err">[</span><span class="kt">FinalCaseClass</span><span class="err">]</span> <span class="kt">case</span> <span class="kt">class</span> <span class="kt">Foo</span> <span class="kt">must</span> <span class="kt">be</span> <span class="kt">final</span>
+  <span class="k">case</span> <span class="k">class</span> <span class="nc">Foo</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+             <span class="o">^</span>
+</code></pre></div></div>
+
+<p>We can use scalafix-testkit to make sure our rewrite works as expected.
+The top of the file contains a comment including configuration about
+which rule to run.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*
+rule = "class:fix.FinalCaseClass"
+*/</span>
+<span class="k">class</span> <span class="nc">FinalCaseClass</span> <span class="o">{</span>
+  <span class="k">case</span> <span class="k">class</span> <span class="nc">Foo</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="c1">// assert: FinalCaseClass</span>
+  <span class="k">final</span> <span class="k">case</span> <span class="k">class</span> <span class="nc">Bar</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">// assert: FinalCaseClass</code> comment asserts that a linter message with id “FinalCaseClass” is reported
+on line 7.
+The test fails if</p>
+
+<ul>
+  <li>a message is not reported on that line</li>
+  <li>a message is reported on that line but the category id doesn’t match,</li>
+  <li>a message is reported at a line without an assert</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">FinalCaseClass</code> is ready for a release!
+It is not necessary to fiddle with cross-building or publishing to Maven Central,
+Scalafix can run custom rules from source.
+Our friends can try out <code class="language-plaintext highlighter-rouge">FinalCaseClass</code> by installing <a href="https://scalacenter.github.io/scalafix/#sbt-scalafix">sbt-scalafix</a>
+and execute from the sbt shell</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sbt&gt; scalafix github:olafurpg/FinalCaseClass/v1
+</code></pre></div></div>
+
+<p>The full source code for <code class="language-plaintext highlighter-rouge">FinalCaseClass</code> is available in <a href="https://github.com/olafurpg/FinalCaseClass">olafurpg/FinalCaseClass</a>.
+To learn more about implementing custom rules, refer to our
+<a href="https://scalacenter.github.io/scalafix/#Creatingyourownrule">documentation</a>.</p>
+
+<blockquote>
+  <p>Note. Scalafix has not at all shifted away its focus from rewriting.
+The idea to use Scalafix for linting initially started as a discussion in
+<a href="https://contributors.scala-lang.org/t/whats-the-status-of-abide/609">Scala Contributors</a>.
+It turned out to be simple to add basic linting capabilities with the
+existing Scalafix infrastructure.</p>
+</blockquote>
+
+<h2 id="sbtfix">sbtfix</h2>
+
+<p>Another notable new feature in Scalafix v0.5 is the ability to rewrite sbt build
+sources with access to the semantic API.
+The first available sbt rewrite is <a href="https://scalacenter.github.io/scalafix/#Sbt1"><code class="language-plaintext highlighter-rouge">Sbt1</code></a>, which migrates several deprecated
+sbt “fishy operators” such as <code class="language-plaintext highlighter-rouge">&lt;++=</code> to the recommended <code class="language-plaintext highlighter-rouge">.value</code> DSL.
+To run <code class="language-plaintext highlighter-rouge">Sbt1</code> on your 0.13 build, follow the installation instructions for
+the <a href="https://scalacenter.github.io/scalafix/#sbt-scalafix">sbt-scalafix</a> plugin and execute <code class="language-plaintext highlighter-rouge">&gt; sbtfix Sbt1</code>.</p>
+
+<p>Custom sbtfix rules are implemented just like regular Scalafix rules.
+No custom setup is required from rule authors to fix sbt source files.
+The semantic API to resolve names and symbols signatures is supported, but
+advanced sections such as <code class="language-plaintext highlighter-rouge">Synthetics</code> (which <code class="language-plaintext highlighter-rouge">NoInfer</code> use) are not.
+I am excited to see what the community can build with this new functionality.
+Some ideas that come to my mind include</p>
+
+<ul>
+  <li>update library dependency versions</li>
+  <li>install new library dependencies</li>
+  <li>automatically enforce sbt best-practices</li>
+</ul>
+
+<p>To learn more about how Scalafix supports semantic analysis of sbt 0.13 and
+Scala 2.10 sources, see <a href="https://github.com/scalameta/semanticdb-sbt">semanticdb-sbt</a>.</p>
+
+<blockquote>
+  <p>Note.
+Semantic API support for *.sbt files is still only at a “proof-of-concept”
+stage. The current implementation requires more engineering work to reach
+the same level of coverage as the semantic API for 2.11/2.12 *.scala source
+files.</p>
+</blockquote>
+
+<h2 id="tab-completion">Tab completion</h2>
+
+<p>Scalafix v0.5 improves the sbt-scalafix plugin and scalafix-cli in many ways.
+Most of these bug fixes and improvements involve fairly boring
+behind-the-scenes mechanics.
+However, I believe one small quality-of-life improvement is worth highlighting:
+<em>tab completion of Scalafix rules</em>.</p>
+
+<p><img src="/resources/img/scalafix-tab-completion.gif" alt="Scalafix tab completion" /></p>
+
+<p>Tab completion is supported in sbt-scalafix as well as for scalafix-cli in
+bash and zsh.
+Tab completion makes it easier to discover which rewrites are available and
+help prevents typos when spelling out rewrite names.
+To install completions for scalafix-cli, follow the instructions in <code class="language-plaintext highlighter-rouge">--help</code>.</p>
+
+<h2 id="whats-next">What’s next</h2>
+
+<p>I believe we will soon reach a tipping point for Scala tooling.
+Semantic analysis of Scala programs has traditionally been tricky business,
+requiring intimate familiarity with compiler internals.
+Scalameta and Scalafix involve none of that.
+For example, the core logic of the <code class="language-plaintext highlighter-rouge">NoInfer</code> rule is implemented in
+<a href="https://github.com/scalacenter/scalafix/blob/1cfbfe02bda4946488be4d95ce2507cc362624b1/scalafix-core/shared/src/main/scala/scalafix/internal/rule/NoInfer.scala#L21-L31">10 lines</a> of fairly straightforward, immutable and functional code.</p>
+
+<p>Next steps for Scalafix include:</p>
+
+<ul>
+  <li>more comprehensive understanding of “synthetics” such as inferred implicit
+arguments, <a href="https://github.com/scalacenter/scalafix/issues/266">#266</a>. This is important for Dotty migration rewrites.</li>
+  <li>more linting rules. I would love to unite efforts with Scalastyle and
+Wartremover to offer an extensive set of linting rules in a single tool.
+Scalafix can definitely benefit from their experience in this space.</li>
+  <li>more complete <code class="language-plaintext highlighter-rouge">Sbt1</code> rewrite to accellerate sbt 1.0 migration, see
+<a href="https://github.com/scalacenter/scalafix/labels/sbtfix">sbtfix issues</a>.</li>
+  <li>more polished integrations. Currently, running Scalafix in a large project
+typically results in many spurious errors and warnings.</li>
+</ul>
+
+<p>I encourage everyone to get involved if they want to improve the state of Scala tooling.
+If you are interested in contributing, don’t hesitate to stop by the
+<a href="https://gitter.im/scalacenter/scalafix">Scalafix Gitter channel</a>.</p>
+
+<p>PS. I want to shout out to <a href="https://twitter.com/gabro27">Gabriele Petronella</a>, who made major
+contributions to Scalafix v0.4 and v0.5 via PRs and discussions.
+If you use cats, then you might be interested in his
+<a href="https://github.com/typelevel/cats/blob/master/scalafix/README.md">cats v1.0 migration rewrites</a>.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2017-09-11-scalafix-v0.5.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

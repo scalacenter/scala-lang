@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Scala 2.11.1 is now available! | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Scala 2.11.1 is now available!"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/news/2.11.1/"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Scala 2.11.1 is now available!</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Wednesday 21 May 2014</p>
+						<p></p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag">ANNOUNCEMENT</div>
+					<!-- <h2><a href="/news/2.11.1/">Scala 2.11.1 is now available!</a></h2> -->
+					<p>We are very pleased to announce the release of Scala 2.11.1!</p>
+
+<ul>
+  <li>Get started with the <a href="https://www.lightbend.com/activator/template/hello-scala-2_11">Hello Scala 2.11 template</a> in <a href="https://www.lightbend.com/platform/getstarted">Typesafe Activator</a></li>
+  <li>Download a distribution from <a href="https://scala-lang.org/download/2.11.1.html">scala-lang.org</a></li>
+  <li>Obtain it via <a href="https://search.maven.org/?search%7Cga%7C1%7Cg%3A%22org.scala-lang%22%20AND%20v%3A%222.11.1%22#search%7Cga%7C1%7Cg%3A%22org.scala-lang%22%20AND%20v%3A%222.11.1%22">Maven Central</a></li>
+</ul>
+
+<p>This release contains <a href="https://github.com/scala/scala/pull/3711">an important fix</a> for serialization, which was broken in Scala 2.11.0 (<a href="https://issues.scala-lang.org/browse/SI-8549">SI-8549</a>).
+The fix necessarily breaks serialization compatibility between 2.11.0 and 2.11.1 (this is separate from binary compatibility, which is maintained).</p>
+
+<p>Users of distributed systems that rely on serialization to exchange objects (such as akka) should upgrade to Scala 2.11.1 (and akka 2.3.3) immediately.
+We also strongly recommend that libraries that themselves declare classes with <code class="language-plaintext highlighter-rouge">@SerialVersionUID</code> annotations release a new version and ask their Scala 2.11 users to upgrade.</p>
+
+<p>We apologize for the breakage. We have included a new suite of tests that will ensure stability of serialization for the remainder of the 2.11.x series.</p>
+
+<!--break-->
+
+<p>Compared to 2.11.0, this release fixes <a href="https://issues.scala-lang.org/browse/SI-8549?jql=project%20%3D%20SI%20AND%20fixVersion%20%3D%20%22Scala%202.11.1%22%20AND%20resolution%20%3D%20fixed%20ORDER%20BY%20priority%20DESC">26 issues</a>. We reviewed and merged <a href="https://github.com/scala/scala/issues?milestone=34&amp;state=closed">51 pull requests</a>.</p>
+
+<p>The next minor Scala 2.11 release will be available in at most 2 months, or sooner if prompted by a serious issue.</p>
+
+<p>The remainder of these release notes summarizes the 2.11.x series, and as such is not specific to this minor release.</p>
+
+<h3 id="upgrading">Upgrading</h3>
+<p>Code that compiled on 2.10.x without deprecation warnings should compile on 2.11.x (we do not guarantee this for experimental APIs, such as reflection). If not, <a href="https://issues.scala-lang.org/secure/CreateIssueDetails!init.jspa?pid=10005&amp;issuetype=1&amp;versions=11808&amp;labels=regression">please file a regression</a>. We are working with the community to ensure availability of the core projects of the Scala 2.11.x eco-system, please see below for a list. This release is <em>not</em> binary compatible with the 2.10.x series, to allow us to keep improving the Scala standard library.</p>
+
+<h3 id="required-java-version">Required Java Version</h3>
+<p>The Scala 2.11.x series targets Java 6, with (evolving) experimental support for Java 8. In 2.11.1, Java 8 support is mostly limited to reading Java 8 bytecode and parsing Java 8 source. Stay tuned for more complete (experimental) Java 8 support. The next major release, 2.12, will most likely target Java 8 by default.</p>
+
+<h3 id="new-features-in-the-211-series">New features in the 2.11 series</h3>
+<p>This release contains all of the bug fixes and improvements made in the 2.10 series, as well as:</p>
+
+<ul>
+  <li>Collections
+    <ul>
+      <li>Immutable <code class="language-plaintext highlighter-rouge">HashMap</code>s and <code class="language-plaintext highlighter-rouge">HashSet</code>s perform faster filters, unions, and the like, with improved structural sharing (lower memory usage or churn).</li>
+      <li>Mutable <code class="language-plaintext highlighter-rouge">LongMap</code> and <code class="language-plaintext highlighter-rouge">AnyRefMap</code> have been added to provide improved performance when keys are <code class="language-plaintext highlighter-rouge">Long</code> or <code class="language-plaintext highlighter-rouge">AnyRef</code> (performance enhancement of up to 4x or 2x respectively).</li>
+      <li><code class="language-plaintext highlighter-rouge">BigDecimal</code> is more explicit about rounding and numeric representations, and better handles very large values without exhausting memory (by avoiding unnecessary conversions to <code class="language-plaintext highlighter-rouge">BigInt</code>).</li>
+      <li><code class="language-plaintext highlighter-rouge">List</code> has improved performance on <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">flatMap</code>, and <code class="language-plaintext highlighter-rouge">collect</code>.</li>
+      <li>See also Deprecation above: we have slated many classes and methods to become final, to clarify which classes are not meant to be subclassed and to facilitate future maintenance and performance improvements.</li>
+    </ul>
+  </li>
+  <li>Modularization
+    <ul>
+      <li>The core Scala standard library jar has shed 20% of its bytecode. The modules for xml, parsing, swing as well as the (unsupported) continuations plugin and library are available individually or via <a href="https://search.maven.org/#artifactdetails%7Corg.scala-lang%7Cscala-library-all%7C2.11.1%7Cpom">scala-library-all</a>. Note that this artifact has weaker binary compatibility guarantees than <code class="language-plaintext highlighter-rouge">scala-library</code> – as explained above.</li>
+      <li>The compiler has been modularized internally, to separate the presentation compiler, scaladoc and the REPL. We hope this will make it easier to contribute. In this release, all of these modules are still packaged in scala-compiler.jar. We plan to ship them in separate JARs in 2.12.x.</li>
+    </ul>
+  </li>
+  <li>Reflection, macros and quasiquotes
+    <ul>
+      <li>Please see <a href="https://docs.scala-lang.org/overviews/macros/changelog211.html">this detailed changelog</a> that lists all significant changes and provides advice on forward and backward compatibility.</li>
+      <li>See also this <a href="http://scalamacros.org/news/index.html">summary</a> of the experimental side of the 2.11 development cycle.</li>
+      <li><a href="https://github.com/scala/scala/pull/3321">#3321</a> introduced <a href="https://vladimirnik.github.io/sprinter/">Sprinter</a>, a new AST pretty-printing library! Very useful for tools that deal with source code.</li>
+    </ul>
+  </li>
+  <li>Back-end
+    <ul>
+      <li>The <a href="https://github.com/scala/scala/pull/2620">GenBCode back-end</a> (experimental in 2.11). See <a href="https://magarciaepfl.github.io/scala/">@magarciaepfl’s extensive documentation</a>.</li>
+      <li>A new experimental way of compiling closures, implemented by <a href="https://github.com/JamesIry">@JamesIry</a>. With <code class="language-plaintext highlighter-rouge">-Ydelambdafy:method</code> anonymous functions are compiled faster, with a smaller bytecode footprint. This works by keeping the function body as a private (static, if no <code class="language-plaintext highlighter-rouge">this</code> reference is needed) method of the enclosing class, and at the last moment during compilation emitting a small anonymous class that <code class="language-plaintext highlighter-rouge">extends FunctionN</code> and delegates to it. This sets the scene for a smooth migration to Java 8-style lambdas (not yet implemented).</li>
+      <li>Branch elimination through constant analysis <a href="https://github.com/scala/scala/pull/2214">#2214</a></li>
+      <li><a href="https://www.scala-js.org/">Scala.js</a>, a separate project, provides an experimental JavaScript back-end for Scala 2.11. Note that it is not part of the standard Scala distribution.</li>
+      <li>Be more <a href="https://readytalk.github.io/avian/">Avian</a>- <a href="https://issues.scala-lang.org/issues/?jql=project%20%3D%20SI%20and%20fixVersion%20%3E%3D%20%22Scala%202.11.0-M1%22%20and%20fixVersion%20%3C%3D%20%22Scala%202.11.1%22%20and%20resolution%20%3D%20fixed%20and%20text%20~%20%22avian%22">friendly</a>.</li>
+    </ul>
+  </li>
+  <li>Compiler Performance
+    <ul>
+      <li>Incremental compilation has been improved significantly. To try it out, upgrade to sbt 0.13.2 and add <code class="language-plaintext highlighter-rouge">incOptions := incOptions.value.withNameHashing(true)</code> to your build! Other build tools are also supported. More info at <a href="https://github.com/sbt/sbt/issues/1010">this sbt issue</a> – that’s where most of the work happened. More features are planned, e.g. <a href="https://github.com/sbt/sbt/issues/1104">class-based tracking</a>.</li>
+      <li>We’ve been optimizing the batch compiler’s performance as well, and will continue to work on this during the 2.11.x cycle.</li>
+      <li>Improve performance of reflection <a href="https://issues.scala-lang.org/browse/SI-6638">SI-6638</a></li>
+    </ul>
+  </li>
+  <li>The IDE received <a href="https://issues.scala-lang.org/browse/SI-8085?jql=component%20%3D%20%22Presentation%20Compiler%22%20AND%20project%20%3D%20SI%20AND%20resolution%20%3D%20fixed%20and%20fixVersion%20%3E%3D%20%22Scala%202.11.0-M1%22%20and%20fixVersion%20%3C%3D%20%20%22Scala%202.11.1%22%20ORDER%20BY%20updated%20DESC">numerous bug fixes and improvements!</a></li>
+  <li>REPL
+    <ul>
+      <li>The bytecode decompiler command, :javap, now works with Java 7 <a href="https://issues.scala-lang.org/browse/SI-4936">SI-4936</a> and has sprouted new options <a href="https://issues.scala-lang.org/browse/SI-6894">SI-6894</a> (Thanks, <a href="https://github.com/som-snytt">@som-snytt</a>!)</li>
+      <li>Added command :kind to help to tell ground types from type constructors. <a href="https://github.com/scala/scala/pull/2340">#2340</a> (Thanks, <a href="https://github.com/folone">George Leontiev</a> and <a href="https://github.com/eed3si9n">Eugene Yokota</a>!)</li>
+      <li>The interpreter can now be embedded as a JSR-223 Scripting Engine <a href="https://issues.scala-lang.org/browse/SI-874">SI-874</a>. (Thanks, <a href="https://github.com/rjolly">Raphael Jolly</a>!)</li>
+    </ul>
+  </li>
+  <li>Improved <code class="language-plaintext highlighter-rouge">-Xlint</code> warnings
+    <ul>
+      <li>Warn about unused private / local terms and types, and unused imports.</li>
+      <li>This will even tell you when a local <code class="language-plaintext highlighter-rouge">var</code> could be a <code class="language-plaintext highlighter-rouge">val</code>.</li>
+    </ul>
+  </li>
+  <li>Slimming down the compiler
+    <ul>
+      <li>The experimental .NET backend has been removed from the compiler.</li>
+      <li>Scala 2.10 shipped with new implementations of the Pattern Matcher and the Bytecode Emitter. We have removed the old implementations.</li>
+      <li>Search and destroy mission for ~5000 chunks of dead code. <a href="https://github.com/scala/scala/pull/1648/files">#1648</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>The Scala team and contributors <a href="https://issues.scala-lang.org/issues/?jql=project%20%3D%20SI%20and%20fixVersion%20&gt;%3D%20&quot;Scala%202.11.0-M1&quot;%20and%20fixVersion%20&lt;%3D%20&quot;Scala%202.11.1&quot;%20and%20resolution%20%3D%20fixed">fixed 655 bugs</a> that are exclusive to Scala 2.11! We also backported as many as possible. With the release of 2.11, 2.10 backports will be dialed back.</p>
+
+<p>A big thank you to everyone who’s helped improve Scala by reporting bugs, improving our documentation, participating in mailing lists and other public fora, and – of course – submitting and reviewing pull requests! You are all awesome.</p>
+
+<p>Concretely, according to <code class="language-plaintext highlighter-rouge">git log --no-merges --oneline 2.11.x --not 2.10.x --format='%aN'  | sort | uniq -c | sort -rn</code>, 115 people contributed code, tests, and/or documentation to Scala 2.11.x: Paul Phillips, Jason Zaugg, Eugene Burmako, Adriaan Moors, A. P. Marki, Simon Ochsenreither, Den Shabalin, Miguel Garcia, James Iry, Iain McGinniss, Grzegorz Kossakowski, Rex Kerr, François Garillot, Vladimir Nikolaev, Eugene Vigdorchik, Lukas Rytz, Mirco Dotta, Rüdiger Klaehn, Antoine Gourlay, Raphael Jolly, Simon Schaefer, Kenji Yoshida, Paolo Giarrusso, Luc Bourlier, Hubert Plociniczak, Aleksandar Prokopec, Vlad Ureche, Lex Spoon, Andrew Phillips, Sébastien Doeraene, Josh Suereth, Jean-Remi Desjardins, Vojin Jovanovic, Viktor Klang, Valerian, Prashant Sharma, Pavel Pavlov, Michael Thorpe, Jan Niehusmann, Iulian Dragos, Heejong Lee, George Leontiev, Daniel C. Sobral, Christoffer Sawicki, yllan, rjfwhite, Volkan Yazıcı, Ruslan Shevchenko, Robin Green, Roberto Tyley, Olivier Blanvillain, Mark Harrah, James Ward, Ilya Maykov, Eugene Yokota, Erik Osheim, Dan Hopkins, Chris Hodapp, Antonio Cunei, Andriy Polishchuk, Alexander Clare, 杨博, srinivasreddy, secwall, nermin, martijnhoekstra, kurnevsky, jinfu-leng, folone, Yaroslav Klymko, Xusen Yin, Trent Ogren, Tobias Schlatter, Thomas Geier, Stuart Golodetz, Stefan Zeiger, Scott Carey, Samy Dindane, Sagie Davidovich, Runar Bjarnason, Roland Kuhn, Robert Nix, Robert Ladstätter, Rike-Benjamin Schuppner, Rajiv, Philipp Haller, Nada Amin, Mike Morearty, Michael Bayne, Marcin Kubala, Luke Cycon, Lee Mighdoll, Konstantin Fedorov, Julio Santos, Julien Richard-Foy, Juha Heljoranta, Johannes Rudolph, Jiawei Li, Jentsch, Jason Swartz, James Roper, Heather Miller, Havoc Pennington, Guillaume Martres, Evgeny Kotelnikov, Dmitry Petrashko, Dmitry Bushev, David Hall, Daniel Darabos, Dan Rosen, Cody Allen, Carlo Dapor, Brian McKenna, Andrey Kutejko, Alden Torres.</p>
+
+<p>Thank you all very much.</p>
+
+<p>If you find any errors or omissions in these relates notes, <a href="https://github.com/scala/make-release-notes/blob/2.11.x/hand-written.md">please submit a PR</a>!</p>
+
+<h3 id="reporting-bugs--known-issues">Reporting Bugs / Known Issues</h3>
+<p>Please <a href="https://issues.scala-lang.org/secure/CreateIssueDetails!init.jspa?pid=10005&amp;issuetype=1&amp;versions=11311">file any bugs you encounter</a>. If you’re unsure whether something is a bug, please contact the <a href="https://groups.google.com/forum/?fromgroups#!forum/scala-user">scala-user</a> mailing list.</p>
+
+<p>Before reporting a bug, please have a look at these <a href="https://issues.scala-lang.org/browse/SI-6267?jql=project%20%3D%20SI%20AND%20%28fixVersion%20is%20empty%20or%20fixVersion%20%3E%20%22Scala%202.11.1%22%29%20AND%20affectedVersion%20in%20%28%22Scala%202.11.0%22%2C%20%22Scala%202.11.1%22%29%20%20and%20resolution%20%3D%20unresolved%20ORDER%20BY%20priority%20DESC">known issues</a>.</p>
+
+<h3 id="scala-ide-for-eclipse">Scala IDE for Eclipse</h3>
+<p>The Scala IDE with this release built in is <a href="https://web.archive.org/web/20151026064959/http://download.scala-ide.org/sdk/helium/e38/scala211/stable/site/">available from this update site</a> for <a href="https://www.eclipse.org/downloads/packages/release/Kepler/SR2">Eclipse 4.2/4.3 (Juno/Kepler)</a>. Please have a look at the <a href="http://scala-ide.org/docs/user/gettingstarted.html">getting started guide</a> for more info.</p>
+
+<h3 id="available-projects">Available projects</h3>
+<p>The following Scala projects have already been released against 2.11! See also <a href="https://gist.github.com/jrudolph/7a323f5e2820d8479b18">@jrudolph’s analysis</a> of the availability of 2.11 builds of popular libraries (as well as which ones are missing); updated regularly.</p>
+
+<p>We’d love to include your release in this list as soon as it’s available – please submit a PR to update <a href="https://github.com/scala/make-release-notes/blob/2.11.x/hand-written.md">these release notes</a>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"org.scalacheck"                   %% "scalacheck"                % "1.11.4"
+"org.scalatest"                    %% "scalatest"                 % "2.1.7"
+"org.scalautils"                   %% "scalautils"                % "2.1.7"
+"com.typesafe.akka"                %% "akka-actor"                % "2.3.3"
+"com.typesafe.scala-logging"       %% "scala-logging-slf4j"       % "2.1.2"
+"org.scala-lang.modules"           %% "scala-async"               % "0.9.1"
+"org.scalikejdbc"                  %% "scalikejdbc-interpolation" % "2.0.0"
+"com.softwaremill.scalamacrodebug" %% "macros"                    % "0.4"
+"com.softwaremill.macwire"         %% "macros"                    % "0.6"
+"com.chuusai"                      %% "shapeless"                 % "1.2.4"
+"com.chuusai"                      %% "shapeless"                 % "2.0.0"
+"org.nalloc"                       %% "optional"                  % "0.1.0"
+"org.scalaz"                       %% "scalaz-core"               % "7.0.6"
+"com.assembla.scala-incubator"     %% "graph-core"                % "1.8.1"
+"com.nocandysw"                    %% "platform-executing"        % "0.5.0"
+"com.qifun"                        %% "stateless-future"          % "0.2.2"
+"com.github.scopt"                 %% "scopt"                     % "3.2.0"
+"com.dongxiguo"                    %% "commons-continuations"     % "0.2.2"
+"com.dongxiguo"                    %% "memcontinuationed"         % "0.3.2"
+"com.dongxiguo"                    %% "fastring"                  % "0.2.4"
+"com.dongxiguo"                    %% "zero-log"                  % "0.3.5"
+"com.github.seratch"               %% "ltsv4s"                    % "1.0.0"
+"com.googlecode.kiama"             %% "kiama"                     % "1.6.0"
+"org.scalamock"                    %% "scalamock-scalatest-support" % "3.1.1"
+"org.scalamock"                    %% "scalamock-specs2-support"  % "3.1.1"
+"com.github.nscala-time"           %% "nscala-time"               % "1.0.0"
+"com.github.xuwei-k"               %% "applybuilder70"            % "0.1.3"
+"com.github.xuwei-k"               %% "nobox"                     % "0.1.9"
+"org.typelevel"                    %% "scodec-bits"               % "1.0.0"
+"org.typelevel"                    %% "scodec-core"               % "1.0.0"
+"com.sksamuel.scrimage"            %% "scrimage"                  % "1.3.20"
+"net.databinder"                   %% "dispatch-http"             % "0.8.10"
+"net.databinder"                   %% "unfiltered"                % "0.8.0"
+"net.databinder"                   %% "unfiltered"                % "0.7.1"
+"io.argonaut"                      %% "argonaut"                  % "6.0.4"
+"org.specs2"                       %% "specs2"                    % "2.3.12"
+"com.propensive"                   %% "rapture-core"              % "0.9.0"
+"com.propensive"                   %% "rapture-json"              % "0.9.1"
+"com.propensive"                   %% "rapture-io"                % "0.9.1"
+"org.scala-stm"                    %% "scala-stm"                 % "0.7"
+"org.parboiled"                    %% "parboiled-scala"           % "1.1.6"
+"io.spray"                         %% "spray-json"                % "1.2.6"
+"org.scala-libs"                   %% "scalajpa"                  % "1.5"
+"com.casualmiracles"               %% "treelog"                   % "1.2.3"
+"org.monifu"                       %% "monifu"                    % "0.9.3"
+"org.mongodb"                      %% "casbah"                    % "2.7.2"
+"com.clarifi"                      %% "f0"                        % "1.1.2"
+"org.scalaj"                       %% "scalaj-http"               % "0.3.15"
+</code></pre></div></div>
+
+<p>The following libraries are specific to the 2.11.x minor release you’re using. If you depend on them, you should also cross-version fully!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"org.scalamacros"                   % "paradise"                  % "2.0.0" cross CrossVersion.full
+</code></pre></div></div>
+
+<h3 id="cross-building-with-sbt-013">Cross-building with sbt 0.13</h3>
+<p>When cross-building between Scala versions, you often need to vary the versions of your dependencies. In particular, the new scala modules (such as scala-xml) are no longer included in scala-library, so you’ll have to add an explicit dependency on it to use Scala’s xml support.</p>
+
+<p>Here’s how we recommend handling this in sbt 0.13. For the full build and Maven build, see <a href="https://github.com/scala/scala-module-dependency-sample">example</a>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scalaVersion        := "2.11.1"
+
+crossScalaVersions  := Seq("2.11.1", "2.10.3")
+
+// add scala-xml dependency when needed (for Scala 2.11 and newer)
+// this mechanism supports cross-version publishing
+libraryDependencies := {
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, scalaMajor)) if scalaMajor &gt;= 11 =&gt;
+      libraryDependencies.value :+ "org.scala-lang.modules" %% "scala-xml" % "1.0.1"
+    case _ =&gt;
+      libraryDependencies.value
+  }
+}
+</code></pre></div></div>
+
+<h3 id="important-changes">Important changes</h3>
+<p>For most cases, code that compiled under 2.10.x without deprecation warnings should not be affected. We’ve verified this by <a href="https://scala-ci.typesafe.com/job/scala-2.11.x-jdk8-integrate-community-build/">compiling</a> a sizeable number of open source projects in the Scala community build.</p>
+
+<p>Changes to the reflection API may cause breakages, but these breakages can be easily fixed in a manner that is source-compatible with Scala 2.10.x. Follow our reflection/macro changelog for <a href="https://docs.scala-lang.org/overviews/macros/changelog211.html#how_to_make_your_210x_macros_work_in_2110">detailed instructions</a>.</p>
+
+<p>We’ve decided to fix the following more obscure deviations from specified behavior without deprecating them first.</p>
+
+<ul>
+  <li><a href="https://issues.scala-lang.org/browse/SI-4577">SI-4577</a> Compile <code class="language-plaintext highlighter-rouge">x match { case _ : Foo.type =&gt; }</code> to <code class="language-plaintext highlighter-rouge">Foo eq x</code>, as specified. It used to be <code class="language-plaintext highlighter-rouge">Foo == x</code> (without warning). If that’s what you meant, write <code class="language-plaintext highlighter-rouge">case Foo =&gt;</code>.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7475">SI-7475</a> Improvements to access checks, aligned with the spec (see also the linked issues). Most importantly, private members are no longer inherited. Thus, this does not type check: <code class="language-plaintext highlighter-rouge">class Foo[T] { private val bar: T = ???; new Foo[String] { bar: String } }</code>, as the <code class="language-plaintext highlighter-rouge">bar</code> in <code class="language-plaintext highlighter-rouge">bar: String</code> refers to the <code class="language-plaintext highlighter-rouge">bar</code> with type <code class="language-plaintext highlighter-rouge">T</code>. The <code class="language-plaintext highlighter-rouge">Foo[String]</code>’s <code class="language-plaintext highlighter-rouge">bar</code> is not inherited, and thus not in scope, in the refinement. (Example from <a href="https://issues.scala-lang.org/browse/SI-8371">SI-8371</a>, see also <a href="https://issues.scala-lang.org/browse/SI-8426">SI-8426</a>.)</li>
+</ul>
+
+<p>The following changes were made after a deprecation cycle (Thank you, <a href="https://github.com/soc">@soc</a>, for leading the deprecation effort!)</p>
+
+<ul>
+  <li><a href="https://issues.scala-lang.org/browse/SI-6809">SI-6809</a> Case classes without a parameter list are no longer allowed.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7618">SI-7618</a> Octal number literals no longer supported.</li>
+</ul>
+
+<p>Finally, some notable improvements and bug fixes:</p>
+
+<ul>
+  <li><a href="https://issues.scala-lang.org/browse/SI-8549">SI-8549</a> Fix bad regression: no <code class="language-plaintext highlighter-rouge">serialVersionUID</code> field for classes annotated with <code class="language-plaintext highlighter-rouge">@SerialVersionUID</code>. The Scala standard library itself was a victim of this bug. As such, collections serialized in 2.11.0 will not be able to be deserialized in 2.11.1. This regression occurred in a failed <a href="https://github.com/scala/scala/pull/1673">attempt</a> to fix a related bug in 2.10.x, <a href="https://issues.scala-lang.org/browse/SI-6988">SI-6988</a>, whereby classes annotated with non literal UIDS, e.g. <code class="language-plaintext highlighter-rouge">0L - 123L</code>, had no field generated.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7296">SI-7296</a> Case classes with &gt; 22 parameters are now allowed.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-3346">SI-3346</a> Implicit arguments of implicit conversions now guide type inference.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-6240">SI-6240</a> Thread safety of reflection API.</li>
+  <li><a href="https://github.com/scala/scala/pull/3037">#3037</a> Experimental support for SAM synthesis.</li>
+  <li><a href="https://github.com/scala/scala/pull/2848">#2848</a> Name-based pattern-matching.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-6169">SI-6169</a> Infer bounds of Java-defined existential types.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-6566">SI-6566</a> Right-hand sides of type aliases are now considered invariant for variance checking.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-5917">SI-5917</a> Improve public AST creation facilities.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-8063">SI-8063</a> Expose much needed methods in public reflection/macro API.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-8126">SI-8126</a> Add -Xsource option (make 2.11 type checker behave like 2.10 where possible).</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-8157">SI-8157</a> Polymorphic methods also subject to restriction: only one overload may define default arguments</li>
+</ul>
+
+<p>To catch future changes like this early, you can run the compiler under -Xfuture, which makes it behave like the next major version, where possible, to alert you to upcoming breaking changes.</p>
+
+<h3 id="deprecations">Deprecations</h3>
+<p>Deprecation is essential to two of the 2.11.x series’ three themes (<a href="https://dzone.com/articles/state-scala-2013">faster/smaller/stabler</a>). They make the language and the libraries smaller, and thus easier to use and maintain, which ultimately improves stability. We are very proud of Scala’s first decade, which brought us to where we are, and we are actively working on minimizing the downsides of this legacy, as exemplified by 2.11.x’s focus on deprecation, modularization and infrastructure work.</p>
+
+<p>The following language “warts” have been deprecated:</p>
+
+<ul>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7605">SI-7605</a> Procedure syntax (only under -Xfuture).</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-5479">SI-5479</a> DelayedInit. We will continue support for the important <code class="language-plaintext highlighter-rouge">extends App</code> idiom. We won’t drop <code class="language-plaintext highlighter-rouge">DelayedInit</code> until there’s a replacement for important use cases. (<a href="https://issues.scala-lang.org/browse/SI-4330?jql=labels%20%3D%20delayedinit%20AND%20resolution%20%3D%20unresolved">More details and a proposed alternative.</a>)</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-6455">SI-6455</a> Rewrite of <code class="language-plaintext highlighter-rouge">.withFilter</code> to <code class="language-plaintext highlighter-rouge">.filter</code>: you must implement <code class="language-plaintext highlighter-rouge">withFilter</code> to be compatible with for-comprehensions.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-8035">SI-8035</a> Automatic insertion of <code class="language-plaintext highlighter-rouge">()</code> on missing argument lists.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-6675">SI-6675</a> Auto-tupling in patterns.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7247">SI-7247</a> NotNull, which was never fully implemented – slated for removal in 2.12.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-1503">SI-1503</a> Unsound type assumption for stable identifier and literal patterns.</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7629">SI-7629</a> View bounds (<em>under -Xfuture</em>).</li>
+</ul>
+
+<p>We’d like to emphasize the following library deprecations:</p>
+
+<ul>
+  <li><a href="https://github.com/scala/scala/pull/3103">#3103</a>, <a href="https://github.com/scala/scala/pull/3191">#3191</a>, <a href="https://github.com/scala/scala/pull/3582">#3582</a> Collection classes and methods that are (very) difficult to extend safely have been slated for being marked <code class="language-plaintext highlighter-rouge">final</code>. Proxies and wrappers that were not adequately implemented or kept up-to-date have been deprecated, along with other minor inconsistencies.</li>
+  <li>scala-actors is now deprecated and will be removed in 2.12;</li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-7958">SI-7958</a> Deprecate <code class="language-plaintext highlighter-rouge">scala.concurrent.future</code> and <code class="language-plaintext highlighter-rouge">scala.concurrent.promise</code></li>
+  <li><a href="https://issues.scala-lang.org/browse/SI-3235">SI-3235</a> Deprecate <code class="language-plaintext highlighter-rouge">round</code> on <code class="language-plaintext highlighter-rouge">Int</code> and <code class="language-plaintext highlighter-rouge">Long</code> (<a href="https://github.com/scala/scala/pull/3581">#3581</a>).</li>
+  <li>We are looking for maintainers to take over the following modules: <a href="https://github.com/scala/scala-swing">scala-swing</a>, <a href="https://github.com/scala/scala-continuations">scala-continuations</a>. 2.12 will not include them if no new maintainer is found.
+We will likely keep maintaining the other modules (scala-xml, scala-parser-combinators), but help is still greatly appreciated.</li>
+</ul>
+
+<p>Deprecation is closely linked to source and binary compatibility. We say two versions are source compatible when they compile the same programs with the same results. Deprecation requires qualifying this statement: “assuming there are no deprecation warnings”. This is what allows us to evolve the Scala platform and keep it healthy. We move slowly to guarantee smooth upgrades, but we want to keep improving as well!</p>
+
+<h3 id="binary-compatibility">Binary Compatibility</h3>
+<p>When two versions of Scala are binary compatible, it is safe to compile your project on one Scala version and link against another Scala version at run time. Safe run-time linkage (only!) means that the JVM does not throw a (subclass of) <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/LinkageError.html"><code class="language-plaintext highlighter-rouge">LinkageError</code></a> when executing your program in the mixed scenario, assuming that none arise when compiling and running on the same version of Scala. Concretely, this means you may have external dependencies on your run-time classpath that use a different version of Scala than the one you’re compiling with, as long as they’re binary compatibile. In other words, separate compilation on different binary compatible versions does not introduce problems compared to compiling and running everything on the same version of Scala.</p>
+
+<p>We check binary compatibility automatically with <a href="https://github.com/typesafehub/migration-manager">MiMa</a>. We strive to maintain a similar invariant for the <code class="language-plaintext highlighter-rouge">behavior</code> (as opposed to just linkage) of the standard library, but this is not checked mechanically (Scala is not a proof assistant so this is out of reach for its type system).</p>
+
+<h4 id="forwards-and-back">Forwards and Back</h4>
+<p>We distinguish forwards and backwards compatibility (think of these as properties of a sequence of versions, not of an individual version). Maintaining backwards compatibility means code compiled on an older version will link with code compiled with newer ones. Forwards compatibility allows you to compile on new versions and run on older ones.</p>
+
+<p>Thus, backwards compatibility precludes the removal of (non-private) methods, as older versions could call them, not knowing they would be removed, whereas forwards compatibility disallows adding new (non-private) methods, because newer programs may come to depend on them, which would prevent them from running on older versions (private methods are exempted here as well, as their definition and call sites must be in the same compilation unit).</p>
+
+<p>These are strict constraints, but they have worked well for us in the Scala 2.10.x series. They didn’t stop us from fixing <a href="https://issues.scala-lang.org/issues/?jql=project%20%3D%20&quot;SI&quot;%20AND%20resolution%3D&quot;fixed&quot;%20and%20fixVersion%20&gt;%20&quot;Scala%202.10.0&quot;%20and%20fixVersion%20&lt;%3D%20&quot;Scala%202.10.4&quot;">372 issues</a> in the 2.10.x series post 2.10.0. The advantages are clear, so we will maintain this policy in the 2.11.x series, and are looking (but not yet commiting!) to extend it to include major versions in the future.</p>
+
+<h4 id="meta">Meta</h4>
+<p>Note that so far we’ve only talked about the jars generated by scalac for the standard library and reflection.
+Our policies do not extend to the meta-issue: ensuring binary compatibility for bytecode generated from identical sources, by different version of scalac? (The same problem exists for compiling on different JDKs.) While we strive to achieve this, it’s not something we can test in general. Notable examples where we know meta-binary compatibility is hard to achieve: specialisation and the optimizer.</p>
+
+<p>In short, if binary compatibility of your library is important to you, use <a href="https://github.com/typesafehub/migration-manager">MiMa</a> to verify compatibility before releasing.
+Compiling identical sources with different versions of the scala compiler (or on different JVM versions!) could result in binary incompatible bytecode. This is rare, and we try to avoid it, but we can’t guarantee it will never happen.</p>
+
+<h4 id="concretely">Concretely</h4>
+<p>Just like the 2.10.x series, we guarantee forwards and backwards compatibility of the <code class="language-plaintext highlighter-rouge">"org.scala-lang" % "scala-library" % "2.11.x"</code> and <code class="language-plaintext highlighter-rouge">"org.scala-lang" % "scala-reflect" % "2.11.x"</code> artifacts, except for anything under the <code class="language-plaintext highlighter-rouge">scala.reflect.internal</code> package, as scala-reflect is still experimental. We also strongly discourage relying on the stability of <code class="language-plaintext highlighter-rouge">scala.concurrent.impl</code> and <code class="language-plaintext highlighter-rouge">scala.reflect.runtime</code>, though we will only break compatibility for severe bugs here.</p>
+
+<p>Note that we will only enforce <em>backwards</em> binary compatibility for the new modules (artifacts under the groupId <code class="language-plaintext highlighter-rouge">org.scala-lang.modules</code>). As they are opt-in, it’s less of a burden to require having the latest version on the classpath. (Without forward compatibility, the latest version of the artifact must be on the run-time classpath to avoid linkage errors.)</p>
+
+<p>Finally, Scala 2.11 introduces <code class="language-plaintext highlighter-rouge">scala-library-all</code> to aggregate the modules that constitute a Scala release. Note that this means it does not provide forward binary compatibility, whereas the core <code class="language-plaintext highlighter-rouge">scala-library</code> artifact does. We consider the versions of the modules that <code class="language-plaintext highlighter-rouge">"scala-library-all" % "2.11.x"</code> depends on to be the canonical ones, that are part of the official Scala distribution. (The distribution itself is defined by the new <code class="language-plaintext highlighter-rouge">scala-dist</code> maven artifact.)</p>
+
+<h3 id="license-clarification">License clarification</h3>
+<p>Scala is now distributed under the standard 3-clause BSD license. Originally, the same 3-clause BSD license was adopted, but slightly reworded over the years, and the “Scala License” was born. We’re now back to the standard formulation to avoid confusion.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2014-05-21-release-notes-2.11.1.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

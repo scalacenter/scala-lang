@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Introducing Accessible Scala | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Introducing Accessible Scala"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2018/06/14/accessible-scala.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Introducing Accessible Scala</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Thursday 14 June 2018</p>
+						<p>Guillaume Massé</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2018/06/14/accessible-scala.html">Introducing Accessible Scala</a></h2> -->
+					<p>Scala is proudly a welcoming environment for all. The Scala Center is demonstrating this by supporting 
+the development of Accessible Scala, a tool for blind and partially-sighted developers (see <a href="https://github.com/scalacenter/advisoryboard/blob/master/proposals/016-verbal-descriptions.md">SCP-016</a> by Sam Halliday).
+One of its goals is to remove the noise introduced by various delimiters. The current solution with
+text-to-speech engine, would read</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">foo</span><span class="o">[</span><span class="kt">A:</span> <span class="kt">Wibble</span><span class="o">](</span><span class="n">s</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Wobble</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre></div></div>
+
+<p>as</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def space foo open square bracket capital a colon space
+wibble close square bracket open bracket s colon space
+string comma space b colon space wobble open square bracket
+capital a close square bracket close bracket colon
+space Int space equals space ...
+</code></pre></div></div>
+
+<p>Indeed such a description is necessary to enable precision editing.</p>
+
+<p>However, the following would convey the same information more efficiently:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def foo parameterized with: A context bounded by: Wibble. s String, b Wobble of A returns: Int
+</code></pre></div></div>
+
+<p>Since there is more than one way to pronounce Scala source code, we are open to the community proposition. You can find an extensive test case
+here: <a href="https://github.com/scalacenter/accessible-scala/blob/master/tests/unit/src/test/scala/ch.epfl.scala.accessible/DescribeTest.scala">DescribeTest.scala</a>. If you find that descriptions could be improved, send us a pull request with the 
+expected form.</p>
+
+<p>Reading Scala out loud makes some of its syntactic elements less intimidating for beginners. There is no more 
+need to mentally associate the syntax <code class="language-plaintext highlighter-rouge">+T</code> with its concept <code class="language-plaintext highlighter-rouge">co-variant</code>. It can also help sighted developers to describe Scala orally, for example in the context of pair programming. However, notice in the example above, how the type parameter delimiters: <code class="language-plaintext highlighter-rouge">[</code> and <code class="language-plaintext highlighter-rouge">]</code> are absent from the verbal description. When expressions get more complex, the audible form can become ambiguous or difficult to decipher.</p>
+
+<p>To overcome the limitation of verbal description, we created a technique called the Cursor. The idea is simple:
+from your cursor location, you can navigate the abstract syntax tree of the source code. From a node, you can
+navigate to the parent node, to the siblings (left or right) or the first child. As you navigate the code,
+it’s described verbally and selected. Here is an illustrated example, the arrows (→ exp ←) represents the highlighted text and <kbd>Alt</kbd> + <kbd>Arrow</kbd> the keyboard shortcut applied to navigate.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+→ private ← class A { // speaks: "private"
+  val a = 1
+}
+</code></pre></div></div>
+
+<p><kbd>Alt</kbd> + <kbd>Right</kbd></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private class → A ← { // speaks: "A"
+  val a = 1
+}
+</code></pre></div></div>
+
+<p><kbd>Alt</kbd> + <kbd>Down</kbd></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>private class A {
+  → val a = 1 ← // speaks: "val a equals 1"
+}
+</code></pre></div></div>
+
+<p>We created an online demo (adjust your volume!) to let you try the cursor 
+technique and hear the descriptions.</p>
+
+<h2 id="want-to-try-it">Want to try it?</h2>
+
+<p>You can try it now on your web browser via your <a href="https://scalacenter.github.io/accessible-scala-demo/">online demo</a>! (Tip: It works best on Google Chrome! )</p>
+
+<p>We also created a <a href="https://marketplace.visualstudio.com/items?itemName=scala-center.accessible-scala">vscode extension</a>, so you can try on your project. Search for <code class="language-plaintext highlighter-rouge">Accessible Scala</code> in the 
+extension manager</p>
+
+<div style="margin: 20px auto; width: 560px;">
+  <iframe style="margin: 20px auto; display: block;" width="560" height="315" src="https://www.youtube.com/embed/Y7xz0-KkBOU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+  <i>Hello world demo</i>
+
+  <iframe style="margin: 20px auto; display: block;" width="560" height="315" src="https://www.youtube.com/embed/Up2ytnrsX6s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+  <i>Coverage demo</i>
+</div>
+
+<h2 id="whats-next">What’s next?</h2>
+
+<p>We hope you are excited as we are by the online demo. We would like to hear your feedback on the verbal 
+descriptions. We would like to invite the Scala community to improve the quality of the project and join the
+effort by improving the descriptions. You can create a PR against <a href="https://github.com/scalacenter/accessible-scala/blob/master/tests/unit/src/test/scala/ch.epfl.scala.accessible/DescribeTest.scala">DescribeTest.scala</a>. Another area where we would need help is to create an integration with <a href="https://github.com/tvraman/emacspeak">Emacspeak</a>. It’s an emacs plugin widely used by blind developers. If you
+know emacs lisp well and want to participate, please reach out to us!</p>
+
+<h2 id="talk-to-us">Talk to us!</h2>
+
+<p>Thoughts or opinions about Accessible Scala? Join us over on <a href="https://contributors.scala-lang.org/t/introducing-accessible-scala/1987">Scala Contributors</a> to contribute to the discussion.
+We also have a <a href="https://gitter.im/scalacenter/accessible-scala">gitter</a> channel.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2018-06-14-accessible-scala.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Explicit term inference with Scala 3 | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Explicit term inference with Scala 3"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/2020/11/06/explicit-term-inference-in-scala-3.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" >Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Explicit term inference with Scala 3</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Friday 6 November 2020</p>
+						<p>Meriam Lachkar, Vincenzo Bazzucchi, Scala Center</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/2020/11/06/explicit-term-inference-in-scala-3.html">Explicit term inference with Scala 3</a></h2> -->
+					<h1 id="explicit-term-inference-with-scala-3">Explicit term inference with Scala 3</h1>
+
+<p>One of the most striking changes for developers adopting Scala 3 is the introduction
+of a new syntax to replace the implicit mechanism used in previous Scala versions.</p>
+
+<p>The motivation behind the new syntax is that the same <code class="language-plaintext highlighter-rouge">implicit</code> keyword was
+used for different purposes and patterns and thus it became a way to express <em>how</em> to implement
+patterns. This means that when encountering this ambiguous incantation, users need to decipher what
+the intent of the developer was: is this a conversion? Does this avoid parameter repetition?
+Is this an extension of a type? Is this a typeclass? How do I import this?</p>
+
+<p>Seeing how pervasive implicits became in libraries and projects, Scala 3 aims at reducing confusion and cognitive load by using new keywords that convey the intent of the developer.</p>
+
+<p>This post briefly introduces the new syntax and semantics available to Scala 3 programmers by analysing the
+most common use cases and patterns: extension methods, implicit parameters, implicit conversions and typeclasses.</p>
+
+<h2 id="compatibility-disclaimer">Compatibility disclaimer</h2>
+
+<p>While we believe that the new syntax represents an improvement, it is very important to highlight
+that older code using <code class="language-plaintext highlighter-rouge">implicit</code> is still perfectly valid for the Scala 3.0 compiler, even if it will be deprecated in future releases.
+You do not need to port your codebase right away, it can be an incremental and gradual process.</p>
+
+<h2 id="extension-methods">Extension methods</h2>
+
+<p>When you do not have control over a type but you need to extend its capabilities with a new method,
+Scala 3 allows you to define an <em>extension method</em>.</p>
+
+<p>Assume that you are working with <code class="language-plaintext highlighter-rouge">List[Try[String]]</code> and that you often need to retrieve
+the elements for which the computation succeeded.</p>
+
+<p>Then you can extend this type to have a <code class="language-plaintext highlighter-rouge">collectSucceded</code> method:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ListTryOps.scala</span>
+
+<span class="k">import</span> <span class="nn">scala.util.</span><span class="o">{</span><span class="nc">Try</span><span class="o">,</span> <span class="nc">Success</span><span class="o">}</span>
+
+<span class="nf">extension</span> <span class="o">(</span><span class="n">ls</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Try</span><span class="o">[</span><span class="kt">String</span><span class="o">]])</span> <span class="k">def</span> <span class="nf">collectSucceeded</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">ls</span><span class="o">.</span><span class="py">collect</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">Success</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">}</span>
+</code></pre></div></div>
+<p>To remember the syntax, notice how <code class="language-plaintext highlighter-rouge">collectSucceeded</code> follows the object on which it will be available: <code class="language-plaintext highlighter-rouge">ls.collectSucceeded</code>.
+Extension methods can have type parameters as well:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extension</span> <span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">(</span><span class="n">ls</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Try</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span> <span class="k">def</span> <span class="nf">collectSucceeded</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">ls</span><span class="o">.</span><span class="py">collect</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">Success</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">}</span>
+</code></pre></div></div>
+
+<p>Finally, you can add several methods without repeating the <code class="language-plaintext highlighter-rouge">extension</code> declaration:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">extension</span> <span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">(</span><span class="n">ls</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Try</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span>
+  <span class="k">def</span> <span class="nf">collectSucceeded</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">ls</span><span class="o">.</span><span class="py">collect</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">Success</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">}</span>
+  <span class="k">def</span> <span class="nf">getIndexOfFirstFailure</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">ls</span><span class="o">.</span><span class="py">zipWithIndex</span><span class="o">.</span><span class="py">find</span><span class="o">((</span><span class="n">t</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">t</span><span class="o">.</span><span class="py">isFailure</span><span class="o">)</span>
+      <span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">_2</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Extensions can be imported by name or using the <code class="language-plaintext highlighter-rouge">_</code> wildcard:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Main.scala</span>
+<span class="k">import</span> <span class="nn">scala.util.Try</span>
+<span class="c1">// import ListTryOps._ // Using wildcard</span>
+<span class="k">import</span> <span class="nn">ListTryOps.collectSucceeded</span>
+
+<span class="k">def</span> <span class="nf">getLastTweet</span><span class="o">(</span><span class="n">username</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Try</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+
+<span class="nd">@main</span> <span class="k">def</span> <span class="nf">main</span> <span class="k">=</span>
+  <span class="k">val</span> <span class="nv">niceTweets</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nf">getLastTweet</span><span class="o">(</span><span class="s">"scala_lang"</span><span class="o">),</span> <span class="nf">getLastTweet</span><span class="o">(</span><span class="s">"odersky"</span><span class="o">)).</span><span class="py">collectSucceeded</span>
+  <span class="nf">println</span><span class="o">(</span><span class="n">niceTweets</span><span class="o">)</span>
+</code></pre></div></div>
+
+<h3 id="how-was-this-done-in-scala-2">How was this done in Scala 2?</h3>
+
+<p>This pattern was particularly cumbersome to implement prior to Scala 3.
+A typical approach would be the following:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">class</span> <span class="nc">ListTryExtension</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="k">private</span> <span class="k">val</span> <span class="nv">ls</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Try</span><span class="o">[</span><span class="kt">A</span><span class="o">]])</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">collectSucceeded</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="nv">ls</span><span class="o">.</span><span class="py">collect</span> <span class="o">{</span> <span class="k">case</span> <span class="nc">Success</span><span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">a</span> <span class="o">}</span>
+  <span class="k">def</span> <span class="nf">getIndexOfFirstFailure</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">ls</span><span class="o">.</span><span class="py">zipWithIndex</span><span class="o">.</span><span class="py">find</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="n">t</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nv">t</span><span class="o">.</span><span class="py">isFailure</span> <span class="o">}</span>
+      <span class="o">.</span><span class="py">map</span> <span class="o">{</span> <span class="nf">case</span> <span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="n">index</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">index</span> <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>Note that you need to define a name for the class, even if this is probably never going to be used besides the import statement.
+You also need to understand what <code class="language-plaintext highlighter-rouge">AnyVal</code> is, why it is good practice to extend it and
+what its limitations are.</p>
+
+<p>Some experience is required when reading this code to understand that its only goal is to
+add a couple of methods to <code class="language-plaintext highlighter-rouge">List[Try[A]]</code>.</p>
+
+<h3 id="find-out-more">Find out more</h3>
+
+<p>You can find more information about extension methods on <a href="https://dotty.epfl.ch/docs/reference/contextual/extension-methods.html">the dedicated documentation page</a>.
+We also suggest that you read how they complement another new Scala 3 feature: <a href="https://dotty.epfl.ch/docs/reference/other-new-features/opaques.html">opaque types</a>.
+Later in this post we will see how they simplify a very common pattern: typeclasses.</p>
+
+<h2 id="avoiding-repetition-with-contextual-parameters">Avoiding repetition with contextual parameters</h2>
+
+<p>Similarly to other programming languages, Scala allows you to omit the type of a variable as the
+compiler can perform <em>type inference</em>. For example we can write</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span> <span class="k">=</span> <span class="mi">3</span>
+<span class="k">val</span> <span class="nv">y</span> <span class="k">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+<p>instead of</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="nv">x</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">val</span> <span class="nv">y</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>In this case we declared the value and the compiler inferred the corresponding type.
+One of the distinctive features of Scala is being able to infer values when the type is specified.</p>
+
+<p>Consider the <code class="language-plaintext highlighter-rouge">Future</code> abstraction in the standard library. Each time you create a <code class="language-plaintext highlighter-rouge">Future</code> by
+providing a computation, you need to specify on which <code class="language-plaintext highlighter-rouge">ExecutionContext</code> the computation will
+be evaluated:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">scala.concurrent._</span>
+
+<span class="k">def</span> <span class="nf">factorial</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">???</span>
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">???</span>
+
+<span class="nd">@main</span> <span class="k">def</span> <span class="nf">main</span> <span class="k">=</span>
+  <span class="k">val</span> <span class="nv">executor</span><span class="k">:</span> <span class="kt">ExecutionContext</span> <span class="o">=</span> <span class="nv">ExecutionContext</span><span class="o">.</span><span class="py">global</span>
+
+  <span class="k">val</span> <span class="nv">fact100</span> <span class="k">=</span> <span class="nc">Future</span><span class="o">(</span><span class="nf">factorial</span><span class="o">(</span><span class="mi">100</span><span class="o">))(</span><span class="n">executor</span><span class="o">)</span>
+  <span class="k">val</span> <span class="nv">fibo100</span> <span class="k">=</span> <span class="nc">Future</span><span class="o">(</span><span class="nf">fibonacci</span><span class="o">(</span><span class="mi">100</span><span class="o">))(</span><span class="n">executor</span><span class="o">)</span>
+  <span class="c1">// ...</span>
+</code></pre></div></div>
+
+<p>As you can see, the repetition of <code class="language-plaintext highlighter-rouge">executor</code> quickly becomes a tedious task.
+We can declare that this parameter is common to the current context and avoid its repetition:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@main</span> <span class="k">def</span> <span class="nf">main</span> <span class="k">=</span>
+  <span class="n">given</span> <span class="n">executor</span> <span class="n">as</span> <span class="nc">ExecutionContext</span> <span class="k">=</span> <span class="nv">ExecutionContext</span><span class="o">.</span><span class="py">global</span>
+  <span class="k">val</span> <span class="nv">fact100</span> <span class="k">=</span> <span class="nc">Future</span><span class="o">(</span><span class="nf">factorial</span><span class="o">(</span><span class="mi">100</span><span class="o">))</span>
+  <span class="k">val</span> <span class="nv">fibo100</span> <span class="k">=</span> <span class="nc">Future</span><span class="o">(</span><span class="nf">fibonacci</span><span class="o">(</span><span class="mi">100</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>This works because the <code class="language-plaintext highlighter-rouge">apply</code> method of future could be declared as follows:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// scala.concurrent.Future.scala</span>
+<span class="k">object</span> <span class="nc">Future</span> <span class="o">{</span>
+    <span class="c1">// ..</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">body</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="n">T</span><span class="o">)(</span><span class="n">using</span> <span class="n">executor</span><span class="k">:</span> <span class="kt">ExecutionContext</span><span class="o">)</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>We see here the other half of the syntax: if we declare a parameter as <code class="language-plaintext highlighter-rouge">using</code>, the compiler
+will search the current scope at call sites for <code class="language-plaintext highlighter-rouge">given</code> values with a compatible type.</p>
+
+<p>Note that the <code class="language-plaintext highlighter-rouge">executor</code> identifier is never used, so we can omit it:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">given</span> <span class="nc">ExecutionContext</span> <span class="k">=</span> <span class="nv">ExecutionContext</span><span class="o">.</span><span class="py">global</span>
+</code></pre></div></div>
+<p>the same is possible for the <code class="language-plaintext highlighter-rouge">using</code> parameter:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">body</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="n">T</span><span class="o">)(</span><span class="n">using</span> <span class="nc">ExecutionContext</span><span class="o">)</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="c1">// ...</span>
+</code></pre></div></div>
+<p>Note that in Scala 3 the type of a <code class="language-plaintext highlighter-rouge">given</code> definition must be explicit.</p>
+
+<p>Another important aspect is how we import these values. For example, if you had a
+more involved definition for the <code class="language-plaintext highlighter-rouge">ExecutionContext</code> that is used in multiple
+files, you could refactor it into a different file:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Context.scala</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.ExecutionContext</span>
+<span class="k">import</span> <span class="nn">java.util.concurrent.Executors</span>
+
+<span class="k">object</span> <span class="nc">Context</span><span class="k">:</span>
+  <span class="kt">given</span> <span class="kt">ExecutionContext</span> <span class="o">=</span>
+    <span class="nv">ExecutionContext</span><span class="o">.</span><span class="py">fromExecutor</span><span class="o">(</span><span class="nv">Executors</span><span class="o">.</span><span class="py">newFixedThreadPool</span><span class="o">(</span><span class="mi">5</span><span class="o">))</span>
+</code></pre></div></div>
+
+<p>Then you can import it using a wildcard:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">Context.given</span>
+</code></pre></div></div>
+<p>Or by making the type that you are bringing in scope explicit:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">Context.</span><span class="o">{</span><span class="n">given</span> <span class="nc">ExecutionContext</span><span class="o">}</span>
+</code></pre></div></div>
+<p>This allows you to have more control over imports without relying on instance names.</p>
+
+<h3 id="find-out-more-1">Find out more</h3>
+
+<p>You can learn more about <code class="language-plaintext highlighter-rouge">using</code> / <code class="language-plaintext highlighter-rouge">given</code> and about the rules of resolution in
+<a href="https://docs.scala-lang.org/scala3/reference/contextual.html">the documentation</a>.</p>
+
+<h3 id="how-was-this-done-in-scala-2-1">How was this done in Scala 2?</h3>
+
+<p>In Scala 2 this pattern was achieved by marking both the value and the parameter with the
+<code class="language-plaintext highlighter-rouge">implicit</code> keyword. The previous example would look like this:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Main.scala</span>
+<span class="k">import</span> <span class="nn">scala.concurrent._</span>
+<span class="k">object</span> <span class="nc">Main</span> <span class="k">extends</span> <span class="nc">App</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">ec</span><span class="k">:</span> <span class="kt">ExecutionContext</span> <span class="o">=</span> <span class="nv">ExecutionContext</span><span class="o">.</span><span class="py">global</span>
+  <span class="nc">Future</span><span class="o">(</span><span class="nf">println</span><span class="o">(</span><span class="s">"Hello World"</span><span class="o">))</span>
+<span class="o">}</span>
+
+<span class="c1">// scala.concurrent.Future.scala</span>
+<span class="k">object</span> <span class="nc">Future</span> <span class="o">{</span>
+    <span class="c1">// ..</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">body</span><span class="k">:</span> <span class="o">=&gt;</span> <span class="n">T</span><span class="o">)(</span><span class="k">implicit</span> <span class="n">executor</span><span class="k">:</span> <span class="kt">ExecutionContext</span><span class="o">)</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>We note again that we had to provide a name which might not be used for the variable. The <code class="language-plaintext highlighter-rouge">implicitly</code> function from Scala 2 is renamed to <code class="language-plaintext highlighter-rouge">summon</code> in Scala 3.</p>
+
+<p>Finally the special import syntax allows users to explicitly import <code class="language-plaintext highlighter-rouge">given</code> instances by type rather than by name. This makes more sense since we usually refer to them by type as well.</p>
+
+<p>The context bound syntax remains unchanged.</p>
+
+<h2 id="automatically-converting-values-between-types">Automatically converting values between types</h2>
+
+<p>The implicit conversion feature is dangerous. For this reason, in Scala 3, the compiler
+will warn you every time it is used. You can disable the warning at your own risk by
+explicitly importing the feature into the current scope.</p>
+
+<p>The Java standard library provides an <code class="language-plaintext highlighter-rouge">Optional</code> type which is very similar to <code class="language-plaintext highlighter-rouge">Option</code>.
+If you are working with a Java library which produces a lot of objects with this type,
+but you also have many <code class="language-plaintext highlighter-rouge">Option</code>s around, you might want to define an automatic conversion.</p>
+
+<p>This is done by extending a new trait defined in the standard library:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Conversion</span><span class="o">[</span><span class="kt">-T</span>, <span class="kt">+U</span><span class="o">]</span> <span class="nc">extends</span> <span class="o">(</span><span class="n">T</span> <span class="k">=&gt;</span> <span class="n">U</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>In Scala 3 you can define it in this way:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// OptionalConversion.scala</span>
+<span class="k">import</span> <span class="nn">java.util.Optional</span>
+
+<span class="k">object</span> <span class="nc">OptionalConversion</span><span class="k">:</span>
+
+  <span class="kt">given</span> <span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span> <span class="kt">Conversion</span><span class="o">[</span><span class="kt">Optional</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span>, <span class="kt">Option</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">with</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="o">(</span><span class="n">in</span><span class="k">:</span> <span class="kt">Optional</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+      <span class="k">if</span> <span class="nv">in</span><span class="o">.</span><span class="py">isPresent</span> <span class="n">then</span> <span class="nc">Some</span><span class="o">(</span><span class="nv">in</span><span class="o">.</span><span class="py">get</span><span class="o">())</span>
+      <span class="k">else</span> <span class="nc">None</span>
+</code></pre></div></div>
+
+<p>You can then use the syntax described above for the import:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.Optional</span>
+<span class="k">import</span> <span class="nn">OptionalConversion.given</span>
+
+<span class="nd">@main</span> <span class="k">def</span> <span class="nf">main</span> <span class="k">=</span>
+  <span class="k">val</span> <span class="nv">opt</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Optional</span><span class="o">.</span><span class="py">empty</span><span class="o">[</span><span class="kt">Int</span><span class="o">]()</span>
+</code></pre></div></div>
+
+<p>As mentioned above, the compiler will warn you about this dangerous feature:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Use of implicit conversion class given_Conversion_Optional_Option in object OptionalConversion should be enabled
+by adding the import clause 'import scala.language.implicitConversions'
+or by setting the compiler option -language:implicitConversions.
+See the Scala docs for value scala.language.implicitConversions for a discussion
+why the feature should be explicitly enabled.
+</code></pre></div></div>
+<p>The warning can be silenced by adding <code class="language-plaintext highlighter-rouge">import scala.language.implicitConversions</code>, as
+the message suggests.</p>
+
+<h3 id="find-out-more-2">Find out more</h3>
+
+<p>You can learn more about this feature in the <a href="https://dotty.epfl.ch/docs/reference/contextual/conversions.html">documentation</a>.</p>
+
+<h3 id="how-was-this-done-in-scala-2-2">How was this done in Scala 2?</h3>
+
+<p>Scala 2 relied on <code class="language-plaintext highlighter-rouge">implicit</code> defs and <code class="language-plaintext highlighter-rouge">implicit</code> function values to implement this pattern:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">java.util.Optional</span>
+
+<span class="k">object</span> <span class="nc">OptionalConversion</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">optionalToOption</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">in</span><span class="k">:</span> <span class="kt">Optional</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nf">if</span> <span class="o">(</span><span class="nv">in</span><span class="o">.</span><span class="py">isPresent</span><span class="o">)</span> <span class="nc">Some</span><span class="o">(</span><span class="nv">in</span><span class="o">.</span><span class="py">get</span><span class="o">())</span>
+    <span class="k">else</span> <span class="nc">None</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>which could then be imported:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">OptionalConversion._</span>
+</code></pre></div></div>
+
+<p>Note that at a glance, it is not clear that the definition is intended as an automatic conversion to an expected type:</p>
+<ul>
+  <li>the name of the method can be a hint, but this is merely a convention that
+other developers might not share</li>
+  <li>the implicit def may be intended give you extension methods on its parameter type, depending on its result</li>
+  <li>there is not straightforward way to verify that this function will not be used as implicit
+argument for a function with an implicit parameter list</li>
+</ul>
+
+<p>The <code class="language-plaintext highlighter-rouge">Conversion</code> trait makes the definition explicit and more readable.</p>
+
+<h2 id="a-common-pattern-revisited-in-scala-3-typeclasses">A common pattern revisited in Scala 3: Typeclasses</h2>
+
+<p>This pattern is fundamental to Scala functional programming libraries such as <a href="https://typelevel.org/cats/">Cats</a>. In Scala 2 we used to heavily rely on <code class="language-plaintext highlighter-rouge">implicit</code> conversions to add methods
+and on <code class="language-plaintext highlighter-rouge">implicit</code> parameters to propagate instances, which was a bit cryptic to beginners who were maybe already struggling with new concepts in functional programming.</p>
+
+<p>In Scala 3, this pattern becomes simpler thanks to the new syntax.
+Let’s consider a simple typeclass such as <code class="language-plaintext highlighter-rouge">Show</code> which describes the capability of types to have a <code class="language-plaintext highlighter-rouge">String</code> representation.</p>
+
+<p>We first describe the interface that all instances of this typeclass should implement:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Show.scala</span>
+<span class="k">trait</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="nc">:</span>
+  <span class="nf">extension</span> <span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span> <span class="k">def</span> <span class="nf">show</span><span class="k">:</span> <span class="kt">String</span>
+</code></pre></div></div>
+<p>We can then add a companion object to provide a couple of auxiliary methods and instances
+that make instance creation less tedious:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Show.scala</span>
+<span class="k">object</span> <span class="nc">Show</span><span class="k">:</span>
+  <span class="kt">def</span> <span class="kt">from</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span><span class="k">:</span>
+    <span class="kt">extension</span> <span class="o">(</span><span class="kt">a:</span> <span class="kt">A</span><span class="o">)</span> <span class="kt">def</span> <span class="kt">show:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nf">f</span><span class="o">(</span><span class="n">a</span><span class="o">)</span>
+
+  <span class="n">given</span><span class="o">[</span><span class="kt">A:</span> <span class="kt">Show</span><span class="o">]</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]]</span> <span class="k">with</span>
+    <span class="nf">extension</span> <span class="o">(</span><span class="n">ls</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span> <span class="k">def</span> <span class="nf">show</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nv">ls</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">_</span><span class="o">.</span><span class="py">show</span><span class="o">).</span><span class="py">mkString</span><span class="o">(</span><span class="s">", "</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>To use it we need to import the interface and define an instance:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Main.scala</span>
+<span class="k">import</span> <span class="nn">Show.</span><span class="o">{</span><span class="k">_</span><span class="o">,</span> <span class="n">given</span><span class="o">}</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Mountain</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">height</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+
+<span class="n">given</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">Mountain</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">Show</span><span class="o">.</span><span class="py">from</span><span class="o">((</span><span class="n">m</span><span class="k">:</span> <span class="kt">Mountain</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">s</span><span class="s">"${m.name} is ${m.height} meters high"</span><span class="o">)</span>
+
+<span class="nd">@main</span> <span class="k">def</span> <span class="nf">main</span> <span class="k">=</span>
+  <span class="k">val</span> <span class="nv">mountains</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nc">Mountain</span><span class="o">(</span><span class="s">"Mont Blanc"</span><span class="o">,</span> <span class="mi">4808</span><span class="o">),</span> <span class="nc">Mountain</span><span class="o">(</span><span class="s">"Matterhorn"</span><span class="o">,</span> <span class="mi">4478</span><span class="o">))</span>
+  <span class="nf">println</span><span class="o">(</span><span class="nv">mountains</span><span class="o">.</span><span class="py">show</span><span class="o">)</span>
+</code></pre></div></div>
+<p>As the extension method is defined inside the trait, there is no additional import statement required contrarily to what used to happen in Scala 2, as you will see in the following section.</p>
+
+<h3 id="how-was-this-done-in-scala-2-3">How was this done in Scala 2?</h3>
+
+<p>In Scala 2 there was more boilerplate code involved. It all starts with defining the interface:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Show.scala</span>
+<span class="k">trait</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>The second step was to define the extension method which relies on two implicits:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ShowOps.scala</span>
+<span class="k">object</span> <span class="nc">ShowOps</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">class</span> <span class="nc">showOps</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">in</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">AnyVal</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="k">implicit</span> <span class="n">instance</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span>
+      <span class="nv">instance</span><span class="o">.</span><span class="py">show</span><span class="o">(</span><span class="n">in</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>And finally we can define the auxiliary methods in the companion object:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Show.scala</span>
+<span class="k">object</span> <span class="nc">Show</span> <span class="o">{</span>
+  <span class="k">def</span> <span class="nf">from</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">f</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">String</span><span class="o">)</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Show</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span>
+    <span class="k">def</span> <span class="nf">show</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">A</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="nf">f</span><span class="o">(</span><span class="n">a</span><span class="o">)</span>
+  <span class="o">}</span>
+
+  <span class="c1">// Either this or import ShowOps and use context bound</span>
+  <span class="k">implicit</span> <span class="k">def</span> <span class="nf">showList</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">ls</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])(</span><span class="k">implicit</span> <span class="n">instance</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span> <span class="k">=</span>
+    <span class="nv">ls</span><span class="o">.</span><span class="py">map</span><span class="o">(</span><span class="nv">instance</span><span class="o">.</span><span class="py">show</span><span class="o">).</span><span class="py">mkList</span><span class="o">(</span><span class="s">","</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>which brings us to the main definition:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Main.scala</span>
+<span class="k">import</span> <span class="nn">Show._</span>
+<span class="k">import</span> <span class="nn">ShowOps._</span>
+
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Mountain</span><span class="o">(</span><span class="n">name</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> <span class="n">height</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span>
+
+<span class="k">object</span> <span class="nc">Main</span> <span class="k">extends</span> <span class="nc">App</span> <span class="o">{</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">mountainShow</span><span class="k">:</span> <span class="kt">Show</span><span class="o">[</span><span class="kt">Mountain</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">Show</span><span class="o">.</span><span class="py">fromFunction</span><span class="o">((</span><span class="n">m</span><span class="k">:</span> <span class="kt">Mountain</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">s</span><span class="s">"The ${m.name} is ${m.height} meters high"</span><span class="o">)</span>
+
+  <span class="k">val</span> <span class="nv">mountains</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="nc">Mountain</span><span class="o">(</span><span class="s">"Mont Blanc"</span><span class="o">,</span> <span class="mi">4808</span><span class="o">),</span> <span class="nc">Mountain</span><span class="o">(</span><span class="s">"Matterhon"</span><span class="o">,</span> <span class="mi">4478</span><span class="o">))</span>
+  <span class="nf">println</span><span class="o">(</span><span class="nv">mountains</span><span class="o">.</span><span class="py">show</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>We believe that this example shows how <code class="language-plaintext highlighter-rouge">implicit</code> was used to achieve different goals
+and, in doing so, used to be more confusing:</p>
+<ul>
+  <li>if you need to add methods, use <code class="language-plaintext highlighter-rouge">extension</code> rather than an implicit class</li>
+  <li>If you need an implicit parameters, use <code class="language-plaintext highlighter-rouge">using</code> to declare what you will need</li>
+  <li>If you are providing an implicit instance, use <code class="language-plaintext highlighter-rouge">given</code> to declare that the value is now available</li>
+  <li>If you need an implicit conversion, make it explicit for future readers</li>
+  <li>If you are never going to refer to a value by its name, do not provide one</li>
+</ul>
+
+<h3 id="find-out-more-3">Find out more</h3>
+
+<p>Read more about typeclass implementation in Scala 3 in the <a href="https://dotty.epfl.ch/docs/reference/contextual/type-classes.html">documentation</a>.</p>
+
+<p>Another extremely interesting, yet more advanced, feature in Scala 3 related to contextual abstractions are <a href="https://dotty.epfl.ch/docs/reference/contextual/context-functions.html">Context Functions</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We went over the main use cases of <code class="language-plaintext highlighter-rouge">implicit</code> in Scala 2 and offered a quick glance of what
+they would look like in Scala 3. While the final result is almost the same, code is more
+explicit and readable so that you can focus on solving your business problems rather than on
+syntax.</p>
+
+<p>This is part of a larger set of usability and ergonomy improvements for Scala 3 that we believe
+will make the language easier and more fun to use and we are very excited to see what the
+community will create with them.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/_posts/2020-11-06-explicit-term-inference-in-scala-3.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Speeding Up Compilation Time with scalac-profiling | The Scala Programming Language</title>
+    
+    <meta property="og:title" content="Speeding Up Compilation Time with scalac-profiling"/>
+    
+    
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:site" content="@scala_lang"/>
+    <meta name="twitter:creator" content="@scala_lang"/>
+    
+    <meta property="og:url" content="http://localhost:4000/blog/2018/06/04/scalac-profiling.html"/>
+    
+    <meta property="og:image" content="http://localhost:4000/resources/img/scala-spiral-3d-2-toned-down.png"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="/resources/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/resources/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/resources/favicon-16x16.png">
+    <link rel="manifest" href="/resources/site.webmanifest">
+    <link rel="mask-icon" href="/resources/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#15a9ce">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Custom stylesheet -->
+    <link href="/resources/css/unslider-dots.css" rel="stylesheet" type="text/css">
+    <link href="/resources/css/unslider.css" rel="stylesheet" type="text/css">
+    
+    <link rel="stylesheet" href="/resources/css/highlightjs.css" type="text/css" />
+    
+    <link rel="stylesheet" href="/resources/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/codemirror.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/vendor/monokai.css" type="text/css" />
+    <link rel="stylesheet" href="/resources/css/monospace.css" type="text/css" />
+
+    <!-- Typekit (should stay at top of page, do not move to footer)-->
+    <!--<script type="text/javascript" src="//use.typekit.net/abh3wgk.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+
+    <!-- Atom feeds -->
+    <link rel="alternate" type="application/atom+xml" title="News Feed" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="Blog Feed" href="/feed/blog.xml" />
+
+
+  </head>
+  <body>
+
+<div class="navigation-fade-screen"></div>
+
+<header id="site-header">
+	<div class="wrap">
+		<nav class="navigation" role="menu">
+			<a href="/" class="navigation-bdand">
+				<img src="/resources/img/frontpage/scala-logo-white@2x.png" alt="">
+			</a>
+			<div class="navigation-panel-button">
+				<i class="fa fa-bars"></i>
+			</div>
+			<ul class="navigation-menu">
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://docs.scala-lang.org" >Learn</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/download/" >Install</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://scastie.scala-lang.org" >Playground</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="https://index.scala-lang.org" >Find a Library</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/community/" >Community</a>
+				    </li>
+				
+				    <li class="navigation-menu-item">
+                    <a href="/blog/" class="active">Blog</a>
+				    </li>
+				
+			</ul>
+		</nav>
+	</div>
+</header>
+
+
+<main id="inner-main">
+
+	<!-- Title -->
+	<section class="title-page">
+		<div class="wrap">
+			<h1>Speeding Up Compilation Time with scalac-profiling</h1>
+		</div>
+	</section>
+
+	
+	<!-- Main content -->
+<section class="content">
+	<div class="wrap">
+		<div class="content-primary">
+			<div class="inner-box">
+				<div class="blog-detail-head">
+					<div>
+						<p>Monday 4 June 2018</p>
+						<p>Jorge Vicente Cantero</p>
+					</div>
+					
+					<ul class="tag-list">
+						
+					</ul>
+					
+					</div>
+					<div class="filter-tag"></div>
+					<!-- <h2><a href="/blog/2018/06/04/scalac-profiling.html">Speeding Up Compilation Time with scalac-profiling</a></h2> -->
+					<p>In this blog article, I’d like to introduce you to a new tool that we’ve
+developed at the Scala Center called scalac-profiling, which aims to help you
+better understand what is slowing down compilation in your project.</p>
+
+<p>It turns out that the use of Scala’s implicits as well as macros can greatly
+increase compilation times, depending on how they are used and how your
+codebase is organized. Codebases that make use of libraries like <a href="https://github.com/milessabin/shapeless">Shapeless</a>,
+or which rely on typeclass derivation, may be particularly prone to these
+slow-downs. As of Scala 2.12, typeclass derivation is based on
+implicitly-triggered macro expansions.</p>
+
+<p>The goal of this blog post is to help you understand when these things are
+happening in your code, so you can remove code that triggers unnecessary
+implicit searches or macro expansions.</p>
+
+<p>In this blog post, I walk you through how to reduce these compile times with
+scalac-profiling. scalac-profiling is a new Scala Center compiler plugin to
+complement my recent work on the compiler statistics infrastructure merged in
+2.12.5. I use the plugin to speed up the compile times of a
+<a href="https://scalacenter.github.io/bloop/">Bloop</a> module by <strong>8x</strong>.</p>
+
+<p>The analysis and optimizations here presented can be migrated to any other
+Scala project that makes heavy use of typeclass deriving code, implicits,
+and/or macros.</p>
+
+<p>After reading the blog post, you should understand:</p>
+
+<ul>
+  <li>How to use <code class="language-plaintext highlighter-rouge">scalac-profiling</code> to analyze the impact of implicits and macros
+on compile times.</li>
+  <li>Why typeclass deriving or Shapeless-based code is prone to slow compilation
+times if not used with care.</li>
+  <li>How implicit search and macros interact in unexpected ways that can hurt
+developer productivity and how you can optimize their interaction.</li>
+</ul>
+
+<p>The most important take-away from this guide is that <strong>you should not take
+slow Scala compile times for granted</strong>. It’s worth investigating why slow
+compiles happens as as it is often possible to fix our projects to compile
+faster!</p>
+
+<h3 id="pointers-to-read-the-article">Pointers to read the article</h3>
+
+<p>If you want to apply the same technique in your Scala projects or you have no
+previous knowledge of the reasons why automatic typeclass derivation is slow,
+reading the whole blog post is <strong>highly recommended</strong>.</p>
+
+<p>If you’re already familiar with the source of inefficiencies or you don’t
+have much time, jump directly to the
+<a href="#the-quest-for-optimization">detective work</a> that digs into
+the profiling data.</p>
+
+<p>This is a long blog post. Put on your profiling hat and let’s get our hands
+dirty!</p>
+
+<h2 id="the-codebase">The codebase</h2>
+
+<p><a href="https://github.com/scalacenter/bloop">Bloop</a> is a <em>build-tool-agnostic</em>
+compilation server with a focus on developer productivity that I developed at
+the Scala Center together with <a href="https://github.com/Duhemm">Martin Duhem</a>.
+It is a compilation server that integrates with sbt and gives you about
+~20-25% faster compilation times than sbt.</p>
+
+<p>At around ~10000 lines of Scala code, it has three main submodules:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">jsonConfig</code>: the module that defines the JSON schema of the configuration files.</li>
+  <li><code class="language-plaintext highlighter-rouge">backend</code>: the module that defines the compiler-specific data structures and integrations.</li>
+  <li><code class="language-plaintext highlighter-rouge">frontend</code>: the high level code that defines the internal task engine and nailgun integration.</li>
+</ol>
+
+<p>The two first modules are lightweight and fast to compile. In a hot compiler,
+their batch compilations take 2 or 3 seconds. However, compiling <code class="language-plaintext highlighter-rouge">frontend</code>
+is more than 20x slower. This slowness is surprising given that <code class="language-plaintext highlighter-rouge">frontend</code> is
+only about 6000 LOC, so <a href="https://developer.lightbend.com/blog/2017-06-12-faster-scala-compiler/">in
+theory</a>
+it should compile in ~4 seconds.</p>
+
+<p><code class="language-plaintext highlighter-rouge">frontend</code> depends on
+<a href="https://github.com/alexarchambault/case-app/"><code class="language-plaintext highlighter-rouge">case-app</code></a>, a command-line
+parsing library for Scala that uses
+<a href="https://github.com/milessabin/shapeless">Shapeless</a>. This library is
+excellent, but slows our compilation down to 30 seconds.</p>
+
+<p>Waiting 30 seconds for a change to take effect (even under incremental
+compilation) is a no-go. It may not seem much, but this kind of wait kills
+productivity and gets me out of the zone. That affects my decision-making
+process a big deal.</p>
+
+<p>In the past, I’ve also noticed that a slow workflow discourages me from
+adding complete test suites (the more tests I add the more I need to wait to
+compile) or making experiments in the code. That has rendered my experience
+as a Scala developer less pleasant.</p>
+
+<p>And that deserves putting some time aside to find out how we can make Bloop
+compile times faster.</p>
+
+<h2 id="the-setup-and-workflow">The setup and workflow</h2>
+
+<p>To profile Bloop compilation times, we use Bloop itself to make sure that we
+preserve hot compilers across all runs. You should be able to replicate the results
+with sbt too, but make sure that every time you <code class="language-plaintext highlighter-rouge">reload</code> the build you warm
+up the compiler at least 10 times.</p>
+
+<p>To set up Bloop as a user, follow the installation instructions in <a href="https://scalacenter.github.io/bloop/">our
+website</a>. You only need to install
+Bloop and start the server. You then clone the Bloop codebase and generate
+the configuration files.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/scalacenter/bloop
+<span class="nb">cd </span>bloop
+git checkout v1.0.0-M10
+git submodule update <span class="nt">--init</span>
+sbt bloopInstall
+</code></pre></div></div>
+
+<p>After that, run <code class="language-plaintext highlighter-rouge">bloop projects</code> in the base directory to check the projects
+in your build.</p>
+
+<h3 id="compiling-the-codebase">Compiling the codebase</h3>
+
+<p>All we’ll do in the next sections is to compile the codebase several times
+and see how the compilation times behave after applying our changes.</p>
+
+<p>I recommend cleaning and compiling <code class="language-plaintext highlighter-rouge">frontend</code> sequentially at least 10 times
+to get a stable hot compiler. Every change we’ll do to the codebase from now
+on will require a full compile (running <code class="language-plaintext highlighter-rouge">clean</code> before <code class="language-plaintext highlighter-rouge">compile</code>) to get
+stable implicit search and performance results. This methodology will
+simplify reading and interpreting the results without taking into account
+what incremental compilation is doing.</p>
+
+<h4 id="warm-up-the-compiler">Warm up the compiler</h4>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>i <span class="k">in</span> <span class="o">{</span>1..10<span class="o">}</span><span class="p">;</span> <span class="k">do
+  </span><span class="nb">echo</span> <span class="s2">"Warming up the compiler; iteration </span><span class="nv">$i</span><span class="s2">"</span>
+  bloop clean frontend
+  bloop compile frontend
+<span class="k">done</span>
+</code></pre></div></div>
+
+<h2 id="the-profiling-toolkit-and-theory">The profiling toolkit and theory</h2>
+
+<p>The first step to analyze your compilation times is that you set your
+intuitions aside. We’re going to look at the raw compiler data with fresh
+eyes and see where that leads us.</p>
+
+<p>If you try to validate previously-formed assumptions, it’s likely you’ll be
+misled by the data. I’ve been there, so don’t fall into the same trap.</p>
+
+<p>Profiling compilation times requires dedicated tools. There isn’t much we can
+get from using profilers like Yourkit or Java Flight Recorder because they show
+the result of the inefficiencies, not the cause.</p>
+
+<p>There are cases when knowing the hot methods, inspecting the heap or studying
+GC statistics is useful. I’ve used this data in the past to find and fix
+inefficiencies in the compiler. However, this guide is only concerned about
+the misuse of language features, and so we need to take a higher-level
+profiling approach.</p>
+
+<h3 id="compiler-statistics">Compiler statistics</h3>
+
+<p>The compiler has built-in support for statistics <em>from 2.12.5 on</em>. This work
+resulted from <a href="https://github.com/scalacenter/advisoryboard/blob/master/proposals/010-compiler-profiling.md">a Scala Center Advisory Board
+proposal</a>
+about compiler profiling. Morgan Stanley, the creator of the document,
+proposed the Scala Center to develop tools to help diagnose compilation
+bottlenecks.</p>
+
+<p>I was interested in this topic and so the proposal was assigned to me. My
+work on the compiler revolved around fixing the broken implementation of
+statistics in 2.11.x, creating better profiling tools and reducing the
+instrumentation overhead in the statistics engine.</p>
+
+<p>Compiler statistics have both timers and counters that record data about
+expensive compiler operations like subtype checks, finding members, implicit
+searches, macro expansion, class file loading, et cetera. This data is the
+perfect starting point to have a high-level idea of what’s going on.</p>
+
+<h4 id="setting-statistics-up">Setting statistics up</h4>
+
+<p>Enable compiler statistics by adding the <code class="language-plaintext highlighter-rouge">-Ystatistics</code> compiler flag to the
+project you want to benchmark.</p>
+
+<p><em>Note that you need to use Scala 2.12.5 or
+above</em>. I <strong>highly</strong> recommend using the latest version. At the moment of
+this writing, that’s <code class="language-plaintext highlighter-rouge">2.12.6</code>.</p>
+
+<p>Add the compiler flag to the field <code class="language-plaintext highlighter-rouge">options</code> inside the
+<code class="language-plaintext highlighter-rouge">.bloop/frontend.json</code> json configuration file. When you save, Bloop will
+automatically pick up your changes and add the compiler option without the
+need of a <code class="language-plaintext highlighter-rouge">reload</code>.</p>
+
+<p>If you use sbt, add <code class="language-plaintext highlighter-rouge">scalacOptions in Compile += "-Ystatistics"</code> to your
+project settings. If you want to profile tests scope it to <code class="language-plaintext highlighter-rouge">Test</code> instead of
+<code class="language-plaintext highlighter-rouge">Compile</code>.</p>
+
+<p>Run <code class="language-plaintext highlighter-rouge">bloop compile frontend -w --reporter scalac</code> (we use the default scalac
+reporter for clarity) and have a look at the data. The output of the
+compilation will be <a href="/resources/img/blog/bloop-compile-0.txt">similar to this log</a>.
+Check the end of it. You should see a report of compilation time spent per
+phase.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*** Cumulative timers for phases
+#total compile time      : 1 spans, ()32545.975ms
+  parser                 : 1 spans, ()65.017ms (0.2%)
+  namer                  : 1 spans, ()42.827ms (0.1%)
+  packageobjects         : 1 spans, ()0.187ms (0.0%)
+  typer                  : 1 spans, ()27432.596ms (84.3%)
+  patmat                 : 1 spans, ()1169.028ms (3.6%)
+  superaccessors         : 1 spans, ()36.02ms (0.1%)
+  extmethods             : 1 spans, ()3.548ms (0.0%)
+  pickler                : 1 spans, ()9.449ms (0.0%)
+  xsbt-api               : 1 spans, ()159.278ms (0.5%)
+  xsbt-dependency        : 1 spans, ()94.846ms (0.3%)
+  refchecks              : 1 spans, ()627.633ms (1.9%)
+  uncurry                : 1 spans, ()408.305ms (1.3%)
+  fields                 : 1 spans, ()414.151ms (1.3%)
+  tailcalls              : 1 spans, ()38.455ms (0.1%)
+  specialize             : 1 spans, ()184.562ms (0.6%)
+  explicitouter          : 1 spans, ()80.488ms (0.2%)
+  erasure                : 1 spans, ()624.472ms (1.9%)
+  posterasure            : 1 spans, ()63.249ms (0.2%)
+  lambdalift             : 1 spans, ()125.944ms (0.4%)
+  constructors           : 1 spans, ()47.109ms (0.1%)
+  flatten                : 1 spans, ()46.527ms (0.1%)
+  mixin                  : 1 spans, ()59.808ms (0.2%)
+  cleanup                : 1 spans, ()42.336ms (0.1%)
+  delambdafy             : 1 spans, ()47.771ms (0.1%)
+  jvm                    : 1 spans, ()714.008ms (2.2%)
+  xsbt-analyzer          : 1 spans, ()5.175ms (0.0%)
+</code></pre></div></div>
+
+<p>The report suggests that about <strong>84.3% of the compilation time</strong> is spent on
+typer. This is an unusual high value. Typechecking a normal project is
+expected to take around 50-70% of the whole compilation time.</p>
+
+<p>If you have a higher number than the average, then it most likely means
+you’re pushing the typechecker hard in some unexpected way, and you should
+keep on the exploration.</p>
+
+<h3 id="walking-into-the-lions-den">Walking into the lion’s den</h3>
+
+<p>Now that the data signals a bottleneck in typer, let’s keep our statistics
+log short and enable <code class="language-plaintext highlighter-rouge">-Ystatistics:typer</code>. That will report only statistics
+produced during typing.</p>
+
+<p>We then run compilation again. The logs contain information about timers and
+counters of several places in the typechecker. These timers and counters help
+you know how you’re stressing the compiler.</p>
+
+<p>If the compilation of your program requires an unusual amount of subtype
+checks, <code class="language-plaintext highlighter-rouge">time spent in &lt;:&lt;</code> will be high. There are no normal values for
+subtype checks –the time spent here depends on a lot of factors– but an
+abnormal value would be anything above 15% of the whole typechecking time.</p>
+
+<p>The first thing we notice when studying the logs is that typechecking
+<code class="language-plaintext highlighter-rouge">frontend</code> takes 28 seconds. We also see some unusual values for the
+following counters:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">#class</span><span class="w"> </span><span class="err">symbols</span><span class="w">             </span><span class="err">:</span><span class="w"> </span><span class="mi">1842246</span><span class="w">
+</span><span class="err">#typechecked</span><span class="w"> </span><span class="err">identifiers</span><span class="w">   </span><span class="err">:</span><span class="w"> </span><span class="mi">134734</span><span class="w">
+</span><span class="err">#typechecked</span><span class="w"> </span><span class="err">selections</span><span class="w">    </span><span class="err">:</span><span class="w"> </span><span class="mi">225020</span><span class="w">
+</span><span class="err">#typechecked</span><span class="w"> </span><span class="err">applications</span><span class="w">  </span><span class="err">:</span><span class="w"> </span><span class="mi">82421</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The Scala compiler creates almost two million class symbols (!) and
+typechecks 134734 identifiers, almost double the selections and half of the
+applications. Those are pretty high values. That begs the question: why are
+we creating so many classes?</p>
+
+<p>Next, we check time spent in common typechecking operations:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>time spent in lubs         : 67 spans, ()63.194ms (0.2%) aggregate, 16.29ms (0.1%) specific
+time spent in &lt;:&lt;          : 1548620 spans, ()1791.068ms (6.5%) aggregate, 1583.94ms (5.8%) specific
+time spent in findmember   : 873498 spans, ()638.792ms (2.3%) aggregate, 592.663ms (2.2%) specific
+time spent in findmembers  : 0 spans, ()0.0ms (0.0%) aggregate, 0.0ms (0.0%) specific
+time spent in asSeenFrom   : 2541823 spans, ()1299.199ms (4.7%) aggregate, 1238.814ms (4.5%) specific
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">time spent in lubs</code> should be high whenever you use lots of pattern matching
+or if expressions, and the compiler needs to lub (find the common type of a
+sequence of types – also called finding “least upper bound” among some
+types). Eugene Yokota explains it well <a href="https://eed3si9n.com/stricter-scala-with-ynolub">in this well-aged blog
+post</a>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">time spent in findmember</code> and its sister <code class="language-plaintext highlighter-rouge">time spent in findmembers</code> should
+be up in the profiles whenever you have deep class hierarchies and lots of
+overridden methods.</p>
+
+<p><code class="language-plaintext highlighter-rouge">time spent in asSeenFrom</code> is high whenever your code makes a heavy use of
+dependent types, type projections or abstract types in a more general way.</p>
+
+<p>In the case of <code class="language-plaintext highlighter-rouge">frontend</code>, the durations of all these operations are
+reasonable, which hints us that the inefficiency is elsewhere.</p>
+
+<p>For most of the cases, these timers are unlikely to be high when typechecking
+your program. If they are, try to figure out why and file a ticket in
+<a href="https://github.com/scala/bug/">Scala compiler’s issue tracker</a> so that either I or the Scala team can look into it.</p>
+
+<h3 id="the-troublemaker">The troublemaker</h3>
+
+<p>Most of the projects that suffer from compilation times abuse or misuse
+either macros (for example, inefficient macro implementations that do a lot
+of <code class="language-plaintext highlighter-rouge">typecheck</code>/<code class="language-plaintext highlighter-rouge">untypecheck</code>), implicit searches (for example, misplaced
+implicit instances that take too long to find) or a combination of both.</p>
+
+<p>It’s difficult to miss how long macro expansion and implicit searches take in
+the compilation of <code class="language-plaintext highlighter-rouge">frontend</code>, and how the values seem to be highly
+correlated.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>time spent implicits   : 33609 spans, ()26808.491ms (97.7%)
+  successful in scope  : 346 spans, ()71.931ms (0.3%)
+  failed in scope      : 33263 spans, ()3195.452ms (11.6%)
+  successful of type   : 18286 spans, ()26730.255ms (97.4%)
+  failed of type       : 14977 spans, ()17370.235ms (63.3%)
+  assembling parts     : 18647 spans, ()374.562ms (1.4%)
+  matchesPT            : 136322 spans, ()505.763ms (1.8%)
+time spent macroExpand : 44445 spans, ()26451.132ms (96.4%)
+</code></pre></div></div>
+
+<p>This is a red flag. We expand around 44500 macro expansions (!) and spend
+almost the totality of the macro expansion time searching for implicits.
+We have our troublemaker.</p>
+
+<h3 id="an-initial-exploration-of-the-data">An initial exploration of the data</h3>
+
+<p>How do we know which implicit searches are the most expensive? What are the
+macro expansions that dominate the compile time?</p>
+
+<p>The data we get from <code class="language-plaintext highlighter-rouge">-Ystatistics</code> doesn’t help us answer these questions,
+even though they are fundamental to our analysis. As users, we treat macros
+as blackboxes —mere building blocks of our library or application— and
+now we need to unravel them.</p>
+
+<h4 id="a-profiling-plugin-for-scalac">A profiling plugin for <code class="language-plaintext highlighter-rouge">scalac</code></h4>
+
+<p>To answer the previous questions, we’re going to use
+<a href="https://github.com/scalacenter/scalac-profiling">scalac-profiling</a>, a
+compiler plugin that exposes more profiling data to Scala developers.</p>
+
+<p>I wrote the plugin with three goals in mind:</p>
+
+<ul>
+  <li>Expose a common file format that encapsulates all the compilation profiling
+data, called <code class="language-plaintext highlighter-rouge">profiledb</code>.</li>
+  <li>Use visual tools to ease analysis of the data (e.g. flamegraphs).</li>
+  <li>Allow third parties to develop tooling to integrate this data in IDEs and editors.
+There is a rough <code class="language-plaintext highlighter-rouge">vscode</code> prototype working.</li>
+</ul>
+
+<p>The compiler plugin hooks into several parts of the compiler to extract
+information related to implicit search and macro expansion. This data will
+prove instrumental to understand the interaction between both features.</p>
+
+<p>Install <code class="language-plaintext highlighter-rouge">scalac-profiling</code> by fetching the <code class="language-plaintext highlighter-rouge">1.0.0</code> release.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span> <span class="nv">$ </span>coursier fetch <span class="nt">--intransitive</span> ch.epfl.scala:scalac-profiling_2.12:1.0.0
+https://repo1.maven.org/maven2/ch/epfl/scala/scalac-profiling_2.12/6cac8b23/scalac-profiling_2.12-6cac8b23.jar
+  100.0% <span class="o">[</span><span class="c">##########] 4.1 MiB (2.1 MiB / s)</span>
+/home/jvican/.coursier/cache/v1/https/oss.sonatype.org/content/repositories/staging/ch/epfl/scala/scalac-profiling_2.12/1.0.0/scalac-profiling_2.12-1.0.0.jar
+</code></pre></div></div>
+
+<p>Then open the <code class="language-plaintext highlighter-rouge">frontend</code>’s bloop configuration file and add the following
+compiler options in the <code class="language-plaintext highlighter-rouge">options</code> field. Note that <code class="language-plaintext highlighter-rouge">-Xplugin</code> contains the
+<code class="language-plaintext highlighter-rouge">$PATH_TO_PLUGIN_JAR</code> variable which you must replace with the resolved
+artifact from coursier. Replace <code class="language-plaintext highlighter-rouge">$BLOOP_CODEBASE_DIRECTORY</code> by the base
+directory of the cloned bloop repository.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">  </span><span class="s2">"-Ystatistics"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"-Ycache-plugin-class-loader:last-modified"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"-Xplugin:$PATH_TO_PLUGIN_JAR"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"-P:scalac-profiling:no-profiledb"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"-P:scalac-profiling:show-profiles"</span><span class="err">,</span><span class="w">
+  </span><span class="s2">"-P:scalac-profiling:sourceroot:$BLOOP_CODEBASE_DIRECTORY"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The first two flags set up the compiler plugin.</p>
+
+<p>The flag <code class="language-plaintext highlighter-rouge">-P:scalac-profiling:no-profiledb</code> disables the generation of
+<code class="language-plaintext highlighter-rouge">profiledb</code>s and <code class="language-plaintext highlighter-rouge">-P:scalac-profiling:sourceroot</code> tells the plugin the base
+directory of the project. The profiledb is only required when we process the
+data with other tools, so by disabling it we keep the overhead of the plugin
+to the bare minimum.</p>
+
+<p>The flag <code class="language-plaintext highlighter-rouge">-P:scalac-profiling:show-profiles</code> displays the following data in
+the compilation logs:</p>
+
+<ul>
+  <li>Implicit searches by position. Useful to know how many implicit searches were
+triggered per position.</li>
+  <li>Implicit searches by type. Essential data to know how many implicit searches
+were performed for a given type and how much time they took.</li>
+  <li>Repeated macro expansions. An optimistic counter that tells us how many of
+the macros returned the same stringified AST nodes and could therefore be
+cached across all use-sites (in the macro implementation).</li>
+  <li>Macro data in total, per file and per call-site. The macro data contains how
+many invocations of a macro were performed, how many AST nodes were
+synthesized by the macro and how long it took to perform all the macro
+expansions.</li>
+</ul>
+
+<p>The profiling logs will be large, so make sure the buffer of your terminal is
+big enough so that you can browse through them.</p>
+
+<p>When you’ve added all the compile options to the configuration file and
+saved it, the next compilation will output a log <a href="/resources/img/blog/bloop-compile-0.txt">similar to this
+one</a>. This is the profiling data we’re going to dig
+into.</p>
+
+<h4 id="the-first-visual">The first visual</h4>
+
+<p>First thing you notice from the data: compilation time has gone up. Don’t
+worry, you haven’t done anything wrong.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#total compile time   : 1 spans, ()46169.708ms
+</code></pre></div></div>
+
+<p>Compiler plugins add overhead so the increased compilation time is expected.
+In particular, the cost of <code class="language-plaintext highlighter-rouge">scalac-profiling</code> is high since it instruments
+key parts of typer via compiler hooks. Remember that the cost will disappear
+as soon as you remove the plugin from the bloop configuration file.</p>
+
+<p>The first thing we need is to get a visual of the implicit searches. To do
+that, we’re going to create an implicit search flamegraph. Grep for the line
+“Writing graph to” in the logs to find the <code class="language-plaintext highlighter-rouge">.flamegraph</code> file containing the
+data.</p>
+
+<hr />
+
+<p>To generate a flamegraph, clone
+<a href="https://github.com/scalacenter/scalac-profiling">scalacenter/scalac-profiling</a>,
+<code class="language-plaintext highlighter-rouge">cd</code> into <code class="language-plaintext highlighter-rouge">FlameGraph</code>, <code class="language-plaintext highlighter-rouge">git submodule update --init</code> (note that this command will require you to have <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">ssh authentication configured with your GitHub account</a>) and run the following
+script in the repository:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./flamegraph.pl <span class="se">\</span>
+    <span class="nt">--hash</span> <span class="nt">--countname</span><span class="o">=</span><span class="s2">"μs"</span> <span class="se">\</span>
+    <span class="nt">--color</span><span class="o">=</span>scala-compilation <span class="se">\</span>
+    <span class="nv">$PATH_TO_FLAMEGRAPH_DATA</span> <span class="o">&gt;</span> bloop-profile-initial.svg
+</code></pre></div></div>
+
+<p>You can then visualize it with <code class="language-plaintext highlighter-rouge">$BROWSER bloop-profile-initial.svg</code>.</p>
+
+<hr />
+
+<p>After we’re all set up, we’ll then get an <code class="language-plaintext highlighter-rouge">svg</code> file that looks like this:</p>
+
+<p><a href="/resources/img/blog/bloop-profile-0.svg"><img src="/resources/img/blog/bloop-profile-0.png" alt="Initial flamegraph of implicit search in `frontend`" /></a></p>
+
+<p>(The flamegraph in the blog post is a png image. You can check the svg by
+opening the image in a new tab. Svg images allow you to hover on every stack,
+search through the stack entries and check the compilation times of every box.)</p>
+
+<p>We finally have a visual of all the implicit searches our program is doing,
+and how their dependencies look like. But before we keep finding out what the
+graph represents, let’s take a slight detour and learn about common implicit
+and macro usage patterns and in which context they are used.</p>
+
+<p>This background information will help us read the flamegraph.</p>
+
+<h4 id="typeclass-derivation-for-the-win">Typeclass derivation for the win</h4>
+
+<p>Typeclass derivation is a process that synthesizes
+<a href="https://en.wikipedia.org/wiki/Type_class">typeclasses</a> from other types. The
+process can be manual (you define an <code class="language-plaintext highlighter-rouge">Encoder</code> for every node of your GADT)
+or automatic (the <code class="language-plaintext highlighter-rouge">Encoder</code> derivation happens at compile time, i.e. the
+compiler generates the code for you).</p>
+
+<p>There are two families of automatic typeclass derivation:</p>
+
+<ul>
+  <li>Automatic: to derive a typeclass for a given type <code class="language-plaintext highlighter-rouge">T</code>, the compiler will
+materialize any typeclass type <code class="language-plaintext highlighter-rouge">T</code> needs if it’s not in scope.</li>
+  <li>Semi-automatic: to derive a typeclass for a given type <code class="language-plaintext highlighter-rouge">T</code>, all the types <code class="language-plaintext highlighter-rouge">T</code>
+depends on have to have a derived typeclass in scope.</li>
+</ul>
+
+<p>Typeclass derivation is popular in the Scala community. A few libraries (for
+example, <code class="language-plaintext highlighter-rouge">scalatest</code>) define their own macros to synthesize type classes. The
+most common approach, though, is to use Shapeless to guide the type
+derivation on the library side, which removes the need for extra macros.</p>
+
+<p>Shapeless is a generic programming library that defines some basic building
+blocks (macros) to enable typelevel computations. These computations are
+driven by implicit search and happen at compilation time. Shapeless is
+popular library for automatic typeclass derivation because it can find out
+the generic representation of any <code class="language-plaintext highlighter-rouge">sealed trait</code>/<code class="language-plaintext highlighter-rouge">case class</code> you have in
+your program. So when the implicit search needs an instance that doesn’t
+exist in the scope, macros materialize it.</p>
+
+<p>The compilation of <code class="language-plaintext highlighter-rouge">frontend</code> does automatic typeclass derivation via
+<code class="language-plaintext highlighter-rouge">case-app</code>, which depends on Shapeless. <code class="language-plaintext highlighter-rouge">case-app</code> derives a
+<code class="language-plaintext highlighter-rouge">caseapp.core.Parser</code> for a GADT defining the commands and parameters that
+your command line interface accepts. This derivation relies on the <code class="language-plaintext highlighter-rouge">Lazy</code>,
+<code class="language-plaintext highlighter-rouge">Strict</code>, <code class="language-plaintext highlighter-rouge">Tagged</code> and <code class="language-plaintext highlighter-rouge">LabelledGeneric</code> macros, as well as other Shapeless
+data structures like <code class="language-plaintext highlighter-rouge">Coproduct</code> and <code class="language-plaintext highlighter-rouge">HList</code>.</p>
+
+<p>These are normal dependencies of any library that uses Shapeless to guide
+typeclass derivation.</p>
+
+<h4 id="the-cost-of-implicit-macros">The cost of implicit macros</h4>
+
+<p>Automatic and semi-automatic typeclass derivation use macro definitions
+defined as <code class="language-plaintext highlighter-rouge">implicit</code> to guide the typeclass derivation at compile-time. For
+example, every time you derive an encoder for an <code class="language-plaintext highlighter-rouge">HList</code>, say <code class="language-plaintext highlighter-rouge">Encoder</code>, you
+derive it inductively for every element of its generic representation
+(<code class="language-plaintext highlighter-rouge">HList</code> or <code class="language-plaintext highlighter-rouge">Coproduct</code>).</p>
+
+<p>But how can macro definitions be <code class="language-plaintext highlighter-rouge">implicit</code> and what are the consequences of
+that?</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">def</span> <span class="nf">foo</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="n">p</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">Foo</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="n">macro</span> <span class="n">fooImpl</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+
+<span class="c1">// Undefined macro implementation for simplicity</span>
+<span class="k">def</span> <span class="nf">fooImpl</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">ctx.WeakTypeTag</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">ctx</span><span class="k">:</span> <span class="kt">blackbox.Context</span><span class="o">)(</span><span class="n">p</span><span class="k">:</span> <span class="kt">ctx.Tree</span><span class="o">)</span><span class="k">:</span> <span class="kt">ctx.Tree</span> <span class="o">=</span> <span class="o">???</span>
+</code></pre></div></div>
+
+<p>The code above defines an implicit def that synthesizes a type <code class="language-plaintext highlighter-rouge">Foo</code> for the
+type <code class="language-plaintext highlighter-rouge">T</code>. The code generation only depends on <code class="language-plaintext highlighter-rouge">p</code> and the type <code class="language-plaintext highlighter-rouge">T</code> so there
+are no functional dependencies. It is a dummy blackbox macro.</p>
+
+<p>When macros like <code class="language-plaintext highlighter-rouge">foo</code> are defined in a library and they are eligible for an
+implicit search of type <code class="language-plaintext highlighter-rouge">T</code>, the compiler goes through the list of all
+candidates based on the priority of implicit search and gets the first
+non-ambiguous match. If the match is a macro like <code class="language-plaintext highlighter-rouge">foo</code>, the macro is
+expanded and the code inlined at the call-site.</p>
+
+<p>This algorithm is correct but problematic for macros. The compiler will
+always expand macros that are eligible to the implicit search even if the
+resulting trees are thrown away.</p>
+
+<p>On top of that, if several macros are candidates to an implicit search in the
+same implicit scope, all of them will be expanded because the compiler needs
+to check for ambiguity of implicit instances.</p>
+
+<p>The efficiency of this process worsens when whitebox macros are used. For the
+sake of this blog post, let’s think of a whitebox macro as a blackbox macro
+that can redefine the type of its enclosing definition.</p>
+
+<p>Whitebox macros are powerful and that makes them more expensive than blackbox
+macros: <a href="https://github.com/scala/scala/pull/3236">they are typechecked three times by the Scala macro engine</a>.</p>
+
+<p>All kinds of macros eligible for implicit search pose a threat to compile
+times and so they need to be used with care.</p>
+
+<h4 id="the-world-of-shapeless">The world of shapeless</h4>
+
+<p>Shapeless defines <strong>28 whitebox macros</strong>. The most common whitebox Shapeless
+macros are <code class="language-plaintext highlighter-rouge">Generic</code>, <code class="language-plaintext highlighter-rouge">Lazy</code>, <code class="language-plaintext highlighter-rouge">Nat</code>, <code class="language-plaintext highlighter-rouge">Default</code> and polymorphic function
+values <code class="language-plaintext highlighter-rouge">Poly</code>. These are heavyweight macros that are common in many Scala
+projects.</p>
+
+<p>The main problem with these macros is that their use is heavy in automatic
+typeclass derivation. When used in that context, it is common that the compiler
+repeats the materialization of implicit instances. This is the main source of
+inefficiencies.</p>
+
+<p>Travis Brown explains these inefficiencies well in a more high-level manner in
+<a href="https://meta.plasm.us/slides/scalaworld/#65">this talk about Generic
+Derivation</a> at Scalaworld.</p>
+
+<p>Once a macro is triggered because an implicit doesn’t exist in the scope of
+the call-site, the implicit search needs to materialize all the functional
+dependencies (all the implicits that are required for another implicit to be
+eligible) together with the implicits in scope.</p>
+
+<p>All these materialized instances <strong>cannot be shared</strong> across different
+implicit searches since they don’t exist in the call-site. Once the macro is
+triggered, the code is expanded and typechecked and nothing can be re-used as
+the macro code doesn’t have access to the previous expansions.</p>
+
+<h4 id="quick-derivation-example">Quick derivation example</h4>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">sealed</span> <span class="k">trait</span> <span class="nc">Base</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Foo</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">Base</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">Bar</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> <span class="n">i</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">Base</span>
+
+<span class="n">implicitly</span><span class="o">[</span><span class="kt">Encoder</span><span class="o">[</span><span class="kt">Foo</span><span class="o">]]</span>
+<span class="n">implicitly</span><span class="o">[</span><span class="kt">Encoder</span><span class="o">[</span><span class="kt">Bar</span><span class="o">]]</span>
+</code></pre></div></div>
+
+<p>For example, the code above illustrates how a hypothetical <code class="language-plaintext highlighter-rouge">Encoder</code> typeclass
+would need to materialize <code class="language-plaintext highlighter-rouge">List[String]</code> <strong>twice</strong> since its type appears in
+both definitions. The second call cannot detect that the first one
+synthesizes <code class="language-plaintext highlighter-rouge">Encoder[List[String]]</code> because for all purposes there isn’t an
+implicit instance in scope.</p>
+
+<p>The same happens in nested implicit searches and it worsens as more and more
+functional dependencies generated by macros and nested types are used and
+required in every step of the inductive process.</p>
+
+<p>Remember that <code class="language-plaintext highlighter-rouge">frontend</code> was expanding 44500 macros and how intense
+typechecking was? Well, now we have a faint idea why.</p>
+
+<h2 id="the-quest-for-optimization">The quest for optimization</h2>
+
+<p>We now have a clearer idea what we’re after. <code class="language-plaintext highlighter-rouge">caseapp.core.Parser</code> is just an
+standard typeclass that is automatically materialized by Shapeless
+recursively.</p>
+
+<p>The profiling data reveals us that the majority of the time is spent in
+macro expansion and implicit searches, so it’s likely we should see some of
+the repeated materialized instances we discussed about in the previous
+section.</p>
+
+<p>Let’s look at the profiling data again.</p>
+
+<p>“Implicit searches by position” and “Macro data per file” tell us that almost
+all of the work happens in a file called <code class="language-plaintext highlighter-rouge">CliParsers</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">object</span> <span class="nc">CliParsers</span> <span class="o">{</span>
+  <span class="c1">// Stubs to simplify reading the code</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">inputStreamRead</span><span class="k">:</span> <span class="kt">ArgParser</span><span class="o">[</span><span class="kt">InputStream</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">printStreamRead</span><span class="k">:</span> <span class="kt">ArgParser</span><span class="o">[</span><span class="kt">PrintStream</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">pathParser</span><span class="k">:</span> <span class="kt">ArgParser</span><span class="o">[</span><span class="kt">Path</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">completionFormatRead</span><span class="k">:</span> <span class="kt">ArgParser</span><span class="o">[</span><span class="kt">Format</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+  <span class="k">implicit</span> <span class="k">val</span> <span class="nv">propParser</span><span class="k">:</span> <span class="kt">ArgParser</span><span class="o">[</span><span class="kt">PrettyProperties</span><span class="o">]</span> <span class="k">=</span> <span class="o">???</span>
+
+  <span class="k">import</span> <span class="nn">caseapp.core.</span><span class="o">{</span><span class="nc">Messages</span><span class="o">,</span> <span class="nc">Parser</span><span class="o">}</span>
+  <span class="k">val</span> <span class="nv">BaseMessages</span><span class="k">:</span> <span class="kt">Messages</span><span class="o">[</span><span class="kt">DefaultBaseCommand</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nc">Messages</span><span class="o">[</span><span class="kt">DefaultBaseCommand</span><span class="o">]</span>
+  <span class="k">val</span> <span class="nv">OptionsParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">CliOptions</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">Parser</span><span class="o">.</span><span class="py">apply</span><span class="o">[</span><span class="kt">CliOptions</span><span class="o">]</span>
+
+  <span class="k">import</span> <span class="nn">caseapp.core.</span><span class="o">{</span><span class="nc">CommandsMessages</span><span class="o">,</span> <span class="nc">CommandParser</span><span class="o">}</span>
+  <span class="k">val</span> <span class="nv">CommandsMessages</span><span class="k">:</span> <span class="kt">CommandsMessages</span><span class="o">[</span><span class="kt">RawCommand</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nc">CommandsMessages</span><span class="o">[</span><span class="kt">RawCommand</span><span class="o">]</span>
+  <span class="k">val</span> <span class="nv">CommandsParser</span><span class="k">:</span> <span class="kt">CommandParser</span><span class="o">[</span><span class="kt">RawCommand</span><span class="o">]</span> <span class="k">=</span>
+    <span class="nv">CommandParser</span><span class="o">.</span><span class="py">apply</span><span class="o">[</span><span class="kt">RawCommand</span><span class="o">]</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The file defines specific parsers for data structures that <code class="language-plaintext highlighter-rouge">frontend</code>
+defines, creates an instance of <code class="language-plaintext highlighter-rouge">caseapp.core.Messages</code>, a parser for cli
+options, and then two instances of <code class="language-plaintext highlighter-rouge">CommandsMessages</code> and <code class="language-plaintext highlighter-rouge">CommandsParser</code>.</p>
+
+<p>The two lines that define <code class="language-plaintext highlighter-rouge">CommandsMessages</code> and <code class="language-plaintext highlighter-rouge">CommandsParser</code> are the
+ones that dominate the compilation time.</p>
+
+<p><code class="language-plaintext highlighter-rouge">CommandsParser</code> is creating a parser for all the commands defined in the
+<code class="language-plaintext highlighter-rouge">RawCommand</code> GADT, which you can find in <a href="https://github.com/scalacenter/bloop/blob/v1.0.0-M10/frontend/src/main/scala/bloop/cli/Commands.scala#L28">this source
+file</a>.
+<code class="language-plaintext highlighter-rouge">RawCommand</code> has eight subclasses (commands) that specify the inputs required
+for every CLI invocation. Each of this commands defines a <code class="language-plaintext highlighter-rouge">@Recurse</code>
+field that allows Shapeless to reuse the parser for <code class="language-plaintext highlighter-rouge">CliOptions</code>.
+<code class="language-plaintext highlighter-rouge">CliOptions</code> in turn requires the parser of <code class="language-plaintext highlighter-rouge">CommonOptions</code> in the same
+fashion. Materializing this parser takes almost 14 seconds.</p>
+
+<p><code class="language-plaintext highlighter-rouge">CommandsMessages</code> does a similar thing but instead of materializing a parser
+it materializes a class with a map of all the commands and information about
+the parameters (fields) it takes. The materialization of <code class="language-plaintext highlighter-rouge">Messages</code> takes
+around 13 seconds.</p>
+
+<p>Let’s come back to the flamegraph. We’re now ready to continue our
+exploration.</p>
+
+<h4 id="reading-the-implicit-search-flamegraph">Reading the implicit search flamegraph</h4>
+
+<p><a href="/resources/img/blog/bloop-profile-0.svg"><img src="/resources/img/blog/bloop-profile-0.png" alt="Initial flamegraph of implicit search in `frontend`" /></a></p>
+
+<p>The flamegraph has three colors. Every color has a meaning.</p>
+
+<ol>
+  <li>Green: a successful implicit search whose result didn’t come from a macro (the normal case).</li>
+  <li>Blue (aqua): a successful implicit search whose result came from a macro.</li>
+  <li>Red: a failed implicit search that triggered at least one macro.</li>
+</ol>
+
+<p>Every implicit search in the graph has some metadata at the end of the title.
+Depending on the color, we can find:</p>
+
+<ol>
+  <li>Implicit search id: a number to identify an implicit search and inspect
+its result tree via <code class="language-plaintext highlighter-rouge">-P:scalac-profiling:print-search-result:$SEARCH_ID</code>.</li>
+  <li>The number of macro expansions triggered by an implicit search. This number
+only covers the direct macro expansions (not the transitive ones).</li>
+  <li>If the result tree comes from a macro, the macro location that expanded it.</li>
+</ol>
+
+<p>Example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shapeless.Strict[caseapp.core.Parser[bloop.cli.Commands.Run]] (id 12121) (expanded macros 3) (tree from `shapeless.LazyMacrosRef.mkStrictImpl`)  (417,117 μs, 3.28%)
+</code></pre></div></div>
+
+<p>On every stack trace, you have also the information about the timing. The
+unit of time is microseconds. So one million μs is one second. We use
+microseconds because flamegraphs cannot display decimal values and we want
+to lose as litle time precision as possible.</p>
+
+<p>Beware that an implicit search may not appear in the flamegraph even if it’s
+performed by <code class="language-plaintext highlighter-rouge">scalac</code>. There could be implicit searches that are so fast to
+do that they take less than 0 μs. Flamegraphs do not show entries whose value
+is under 0.</p>
+
+<p>We’re not going to use all of this information in the blog post, but it may
+turn handy whenever you research on your own. Check the rest of the supported
+compiler plugin flags <a href="https://github.com/scalacenter/scalac-profiling/blob/master/plugin/src/main/scala/ch/epfl/scala/ProfilingPlugin.scala#L33-L40">in the code</a>.</p>
+
+<p>After this short intro, let’s delve into the data. The first thing that
+struck me is how similar all the towers of implicits look (both in shape and
+duration). If we hover over all the chunks, the repetition will be obvious;
+most bite-sized chunks materialize either <code class="language-plaintext highlighter-rouge">Parser[CommonOptions]</code> or
+<code class="language-plaintext highlighter-rouge">Parser[CliOptions]</code>, depending at the height of the implicit branch we look
+at.</p>
+
+<p>This makes sense. After all, we’re not caching these implicits in the call
+sites. Let’s cache them before the materialization of <code class="language-plaintext highlighter-rouge">CommandsMessages</code> and
+<code class="language-plaintext highlighter-rouge">CommandsParser</code>.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">val</span> <span class="nv">coParser</span><span class="k">:</span> <span class="kt">Parser.Aux</span><span class="o">[</span><span class="kt">CommonOptions</span>, <span class="k">_</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">cliParser</span><span class="k">:</span> <span class="kt">Parser.Aux</span><span class="o">[</span><span class="kt">CliOptions</span>, <span class="k">_</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+</code></pre></div></div>
+
+<p>The code above calls the materialization entrypoints from <code class="language-plaintext highlighter-rouge">caseapp.Parser</code>
+directly. Type inference and implicit search will figure out the type
+parameters that <code class="language-plaintext highlighter-rouge">Parser.generic</code> needs from the return type we specify
+explicitly in the cached implicits.</p>
+
+<hr />
+
+<p>A word of caution when caching implicits: make sure the rhs of the implicit
+definition doesn’t depend on the implicit you’re caching.</p>
+
+<p>It is common that <code class="language-plaintext highlighter-rouge">scalac</code> detects <code class="language-plaintext highlighter-rouge">coParser</code> as the candidate for the
+implicit search on its rhs. This creates a recursive call that causes a null
+pointer exception at runtime. We can reproduce the issue if we redefine
+<code class="language-plaintext highlighter-rouge">coParser</code> as <code class="language-plaintext highlighter-rouge">implicitly[Parser[CommonOptions]]</code> or
+<code class="language-plaintext highlighter-rouge">the[Parser[CommonOptions]]</code>.</p>
+
+<hr />
+
+<p>Great! Well, let’s check the compile time and flamegraphs now.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#total compile time  : 1 spans, ()19060.196ms
+  typer              : 1 spans, ()13625.005ms (71.5%)
+</code></pre></div></div>
+
+<p><a href="/resources/img/blog/bloop-profile-1.svg"><img src="/resources/img/blog/bloop-profile-1.png" alt="Flamegraph after cached implicits" /></a></p>
+
+<p>The compile time is 2.5x faster. Not bad for a two line change. The duration
+of implicit search accounts for 13 seconds, roughly ~95% of typer.</p>
+
+<p>The flamegraph has slimmed down and doesn’t contain the successful implicit
+searches for <code class="language-plaintext highlighter-rouge">Parser[CommonOptions]</code> and <code class="language-plaintext highlighter-rouge">Parser[CliOptions]</code>. However, there
+seems to be quite a few of failed implicit searches that trigger unnecessary
+macro expansions that are afterwards discarded because their type doesn’t
+match the predicate type of the implicit search.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>caseapp.core.Parser[bloop.cli.CliOptions]{type D = HD} (expanded macros 0)   (278,828 μs, 2.19%)
+caseapp.core.Parser[bloop.cli.CommonOptions]{type D = HD} (expanded macros 0)   (189,414 μs, 1.49%)
+</code></pre></div></div>
+
+<p>It looks like the implicit search doesn’t immediately reuse our cached
+parsers for <code class="language-plaintext highlighter-rouge">CommonOptions</code> and <code class="language-plaintext highlighter-rouge">CliOptions</code> and first tries to pass in a
+explicit refinement type <code class="language-plaintext highlighter-rouge">D</code> that fails the search. The error seems to happen
+when finding an implicit for <code class="language-plaintext highlighter-rouge">HListParser</code> (which takes type parameters
+<a href="https://github.com/alexarchambault/case-app/blob/v1.2.0/core/shared/src/main/scala/caseapp/core/Parser.scala#L77-L84">inferred from its other functional
+dependencies</a>).</p>
+
+<p>Let’s further debug this by adding <code class="language-plaintext highlighter-rouge">-Xlog-implicits</code> to the scalac
+options of the bloop configuration file.</p>
+
+<p>This is a good moment to try to minimize the problem. <code class="language-plaintext highlighter-rouge">-Xlog-implicits</code> will
+log a lot of failed searches and we want to be able to see through the noise.
+I did minimise the issue
+<a href="https://github.com/scalacenter/scalac-profiling/pull/23/commits/dbcb8d480e9b402899d21620055bc555b2841382">here</a>.
+Doing <code class="language-plaintext highlighter-rouge">implicitly[Parser[CliOptions]]</code> also reproduces it.</p>
+
+<p>Among all the logs, this is the one that attracts my attention the most.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/data/rw/code/scala/loop/frontend/src/main/scala/bloop/cli/CliParsers.scala:48:37: shapeless.this.Generic.materialize is not a valid implicit value for shapeless.Generic.Aux[bloop.cli.CommonOptions,V] because:
+type parameters weren't correctly instantiated outside of the implicit tree: inferred type arguments [String :: java.io.PrintStream :: java.io.InputStream :: java.io.PrintStream :: java.io.PrintStream :: java.io.PrintStream :: bloop.cli.CommonOptions.PrettyProperties :: Int :: shapeless.HNil,Nothing] do not conform to method materializeCoproduct's type parameter bounds [V &lt;: shapeless.Coproduct,R &lt;: shapeless.Coproduct]
+    caseapp.core.CommandParser.apply[Commands.RawCommand]
+                                    ^
+</code></pre></div></div>
+
+<p>The compiler infers <code class="language-plaintext highlighter-rouge">R</code> to be <code class="language-plaintext highlighter-rouge">Nothing</code>, which of course cannot be a
+<code class="language-plaintext highlighter-rouge">Coproduct</code>, but that doesn’t prevent the macro in <code class="language-plaintext highlighter-rouge">materializeCoproduct</code> to
+materialize and suck up some of our compile times. After all, the implicit
+search needs to have the exact return type of the macro.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Generic</code> is required by <code class="language-plaintext highlighter-rouge">case-app</code> via <code class="language-plaintext highlighter-rouge">LabelledGeneric</code>, which is required
+by <code class="language-plaintext highlighter-rouge">HListParser</code>. However, why is <code class="language-plaintext highlighter-rouge">materializeCoproduct</code> eligible in this
+context if all we want is to derive parsers for all the products of <code class="language-plaintext highlighter-rouge">Command</code>
+(e.g. all the subclasses that extend the <code class="language-plaintext highlighter-rouge">Command</code> GADT)?</p>
+
+<p>It seems this is bringing us to uncharted territory. We now need to
+investigate what the <code class="language-plaintext highlighter-rouge">Generic</code> macro is doing in the Shapeless codebase.</p>
+
+<h4 id="a-tour-through-shapelesss-generic">A tour through Shapeless’s <code class="language-plaintext highlighter-rouge">Generic</code></h4>
+
+<p><code class="language-plaintext highlighter-rouge">Generic</code> is a macro that will derive the generic representation of a given
+product, a type that aggregates other types. A <code class="language-plaintext highlighter-rouge">case class Foo(i: Int, s:
+String)</code> aggregates <code class="language-plaintext highlighter-rouge">Int</code> and <code class="language-plaintext highlighter-rouge">String</code> types, whereas a <code class="language-plaintext highlighter-rouge">sealed trait Bar</code> is
+either of all its subclasses.</p>
+
+<p>The source code of <code class="language-plaintext highlighter-rouge">Generic</code> has two implicit candidates that materialize the
+instance depending if the candidate type is a <code class="language-plaintext highlighter-rouge">Product</code> or a <code class="language-plaintext highlighter-rouge">Coproduct</code>:
+<a href="https://github.com/milessabin/shapeless/blob/a42cd4c1c99e4a7be36e0239d3ee944a6355e321/core/src/main/scala/shapeless/generic.scala#L218-L230"><code class="language-plaintext highlighter-rouge">materializeProduct</code></a>
+and
+<a href="Xhttps://github.com/milessabin/shapeless/blob/a42cd4c1c99e4a7be36e0239d3ee944a6355e321/core/src/main/scala/shapeless/generic.scala#L232-L245"><code class="language-plaintext highlighter-rouge">materializeCoproduct</code></a>.</p>
+
+<p>The problem of incorrect instantiated type arguments we saw before seems
+specific to the way the compiler carries out the implicit search. Fixing it
+requires most likely changes to the implicit search algorithm, as <a href="https://github.com/scala/bug/issues/10528">a similar
+Scala compiler issue</a> did. I tried porting
+these changes to 2.12.x and use <code class="language-plaintext highlighter-rouge">-Xsource:2.13</code> but the failed macro
+expansions didn’t go away.</p>
+
+<p>So we need to find a way to fix this in userspace if we want to make the logs
+disappear. The root of the issue is that both <code class="language-plaintext highlighter-rouge">materializeProduct</code> and
+<code class="language-plaintext highlighter-rouge">materializeCoproduct</code> are candidates of the implicit search and both are
+tried. The compiler considers both eligible even though
+<code class="language-plaintext highlighter-rouge">materializeCoproduct</code> should be discarded. As this isn’t the case, the
+compiler then forces the expansion of all candidates to check for ambiguous
+ambiguous implicits in the same scope).</p>
+
+<p>Let’s try a trick. Let’s move the definition of <code class="language-plaintext highlighter-rouge">materializeCoproduct</code> to a
+trait of low priority implicits that the <code class="language-plaintext highlighter-rouge">Generic</code> companion extends. This
+way, <code class="language-plaintext highlighter-rouge">materializeProduct</code> (the most common materializer) will always be the
+first one to be tried.</p>
+
+<p>Only if that search fails the implicit search will try <code class="language-plaintext highlighter-rouge">materializeCoproduct</code>
+in the lower priority scope that is any super class of the <code class="language-plaintext highlighter-rouge">Generic</code>
+companion class.</p>
+
+<p>After <a href="https://github.com/jvican/shapeless/commit/9a6d70cbda92849ff2a9b3d99f2aa4d5d82bf21f">making the
+change</a>
+in the Shapeless codebase, we <code class="language-plaintext highlighter-rouge">coreJVM/package</code> in the shapeless build and
+replace the jar of shapeless 2.3.3 in the classpath by the one we just
+created with <code class="language-plaintext highlighter-rouge">package</code>. We also remove <code class="language-plaintext highlighter-rouge">-Xlog-implicits</code> and compile.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#total compile time  : 1 spans, ()16869.585ms
+  typer              : 1 spans, ()13011.067ms (77.1%)
+#implicit searches          : 13515
+  #plausibly compatible     : 15415 (114.1%)
+  #matching                 : 15415 (114.1%)
+  #typed                    : 15381 (113.8%)
+  #found                    : 8082 (59.8%)
+  #implicit improves tests  : 3673 (27.2%)
+  #implicit improves cached : 2614 (19.3%)
+  #implicit inscope hits    : 348 (2.6%)
+  #implicit oftype hits     : 7400 (54.8%)
+  from macros               : 12851 (95.1%)
+time spent in implicits   : 13515 spans, ()12409.099ms (95.4%)
+  successful in scope     : 348 spans, ()78.224ms (0.6%)
+  failed in scope         : 13167 spans, ()1363.491ms (10.5%)
+  successful of type      : 7400 spans, ()12287.668ms (94.4%)
+  failed of type          : 5767 spans, ()8322.049ms (64.0%)
+  assembling parts        : 8033 spans, ()237.456ms (1.8%)
+  matchesPT               : 79854 spans, ()566.231ms (4.4%)
+time spent in macroExpand : 17175 spans, ()11974.695ms (92.0%)
+</code></pre></div></div>
+
+<p><a href="/resources/img/blog/bloop-profile-2.svg"><img src="/resources/img/blog/bloop-profile-2.png" alt="Implicit flamegraph after shapeless change" /></a></p>
+
+<p>The change had a mild positive effect – we gained two seconds. This change
+seems to have removed the log we saw before and some of the failed implicit
+searches from the flamegraph, but most of the other ones still persist.</p>
+
+<p>What is really going on? Our modification fixed the unnecessary expansion for
+<code class="language-plaintext highlighter-rouge">Generic</code>, but there seems to be a more fundamental issue at play.</p>
+
+<h4 id="the-strict-lazy-macro-doesnt-like-the-aux-pattern">The Strict-Lazy macro doesn’t like the aux pattern</h4>
+
+<p>It took me a while to find out what was happening, though I couldn’t come up
+with a fix in the compiler (where I think the real issue is – though it’s
+still to be determined). However, I did come up with a fix in the library
+side.</p>
+
+<hr />
+
+<p>After looking at the new output of <code class="language-plaintext highlighter-rouge">-Xlog-implicits</code>, I realized that the
+compiler must find a mismatch in the refinement types that are inferred
+previously to the search and materialized after the expansion.</p>
+
+<p>The <a href="https://github.com/milessabin/shapeless/blob/a42cd4c1c99e4a7be36e0239d3ee944a6355e321/core/src/main/scala/shapeless/generic.scala#L120-L148"><code class="language-plaintext highlighter-rouge">Aux</code>
+pattern</a>,
+a common technique used when declaring typeclasses, relies heavily on
+refinement types and all the failed implicit searches seem to be related in
+some way or another to the aux pattern of either <code class="language-plaintext highlighter-rouge">HListParser</code> or <code class="language-plaintext highlighter-rouge">Strict</code>.</p>
+
+<p>We can have a look at the definition of <code class="language-plaintext highlighter-rouge">Parser</code> again, which requires the
+materialization of <code class="language-plaintext highlighter-rouge">HListParser</code>. I intuited that the <code class="language-plaintext highlighter-rouge">Strict</code> macro may be
+doing something weird under the hood and causing the type mismatch.</p>
+
+<p>I expanded and pretty-printed some of the implicit logs I found:</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">shapeless</span><span class="o">.</span><span class="py">Strict</span><span class="o">[</span>
+  <span class="kt">caseapp.core.HListParser.Aux</span><span class="o">[</span>
+    <span class="kt">shapeless.labelled.FieldType</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">with</span> <span class="kt">shapeless.tag.Tagged</span><span class="o">[</span><span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">workingDirectory</span><span class="err">"</span><span class="o">)]</span>,<span class="kt">String</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">java.io.PrintStream</span> <span class="kt">with</span> <span class="kt">shapeless.labelled.KeyTag</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">with</span> <span class="kt">shapeless.tag.Tagged</span><span class="o">[</span><span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">out</span><span class="err">"</span><span class="o">)]</span>,<span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">java.io.InputStream</span> <span class="kt">with</span> <span class="kt">shapeless.labelled.KeyTag</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">with</span> <span class="kt">shapeless.tag.Tagged</span><span class="o">[</span><span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">in</span><span class="err">"</span><span class="o">)]</span>,<span class="kt">java.io.InputStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">java.io.PrintStream</span> <span class="kt">with</span> <span class="kt">shapeless.labelled.KeyTag</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">with</span> <span class="kt">shapeless.tag.Tagged</span><span class="o">[</span><span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">err</span><span class="err">"</span><span class="o">)]</span>,<span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">java.io.PrintStream</span> <span class="kt">with</span> <span class="kt">shapeless.labelled.KeyTag</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">with</span> <span class="kt">shapeless.tag.Tagged</span><span class="o">[</span><span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">ngout</span><span class="err">"</span><span class="o">)]</span>,<span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">java.io.PrintStream</span> <span class="kt">with</span> <span class="kt">shapeless.labelled.KeyTag</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">with</span> <span class="kt">shapeless.tag.Tagged</span><span class="o">[</span><span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">ngerr</span><span class="err">"</span><span class="o">)]</span>,<span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.InputStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">List</span><span class="o">[</span><span class="kt">caseapp.Name</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">Option</span><span class="o">[</span><span class="kt">caseapp.ValueDescription</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">Option</span><span class="o">[</span><span class="kt">caseapp.HelpMessage</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">Option</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">this.P</span>
+  <span class="o">]</span>
+<span class="o">]</span>
+
+<span class="n">does</span> <span class="n">not</span> <span class="k">match</span> <span class="n">expected</span> <span class="k">type</span>
+
+<span class="kt">shapeless.Strict</span><span class="o">[</span>
+  <span class="kt">caseapp.core.HListParser.Aux</span><span class="o">[</span>
+    <span class="kt">shapeless.labelled.FieldType</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">@@</span> <span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">workingDirectory</span><span class="err">"</span><span class="o">)</span>,<span class="kt">String</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.labelled.FieldType</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">@@</span> <span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">out</span><span class="err">"</span><span class="o">)</span>,<span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.labelled.FieldType</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">@@</span> <span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">in</span><span class="err">"</span><span class="o">)</span>,<span class="kt">java.io.InputStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.labelled.FieldType</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">@@</span> <span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">err</span><span class="err">"</span><span class="o">)</span>,<span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.labelled.FieldType</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">@@</span> <span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">ngout</span><span class="err">"</span><span class="o">)</span>,<span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.labelled.FieldType</span><span class="o">[</span><span class="kt">Symbol</span> <span class="kt">@@</span> <span class="kt">String</span><span class="o">(</span><span class="err">"</span><span class="kt">ngerr</span><span class="err">"</span><span class="o">)</span>,<span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.ops.hlist.ZipWithKeys.hnilZipWithKeys.Out</span>,
+    <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.InputStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">java.io.PrintStream</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">scala.collection.immutable.Nil.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">Some</span><span class="o">[</span><span class="kt">caseapp.Hidden</span><span class="o">]</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">None.</span><span class="k">type</span> <span class="kt">::</span> <span class="kt">shapeless.HNil</span>,
+    <span class="kt">HD</span>
+  <span class="o">]</span>
+<span class="o">]</span>
+</code></pre></div></div>
+
+<p>And inspect the generated code by the macro expansion by using
+<code class="language-plaintext highlighter-rouge">-P:scalac-profiling:print-search-result:_</code> and
+<code class="language-plaintext highlighter-rouge">-Ymacro-debug-lite</code>/<code class="language-plaintext highlighter-rouge">-Ymacro-debug-verbose</code> (which dumps all macro related
+logs). That extra inspection gave me some hints.</p>
+
+<p>The issue seems to be in the refinement of <code class="language-plaintext highlighter-rouge">HListParser</code>. In the previous log the last type parameter of <code class="language-plaintext highlighter-rouge">HListParser.Aux</code> (the refinement type) was <code class="language-plaintext highlighter-rouge">HD</code>, an abstract type used
+<a href="https://github.com/alexarchambault/case-app/blob/v1.2.0/core/shared/src/main/scala/caseapp/core/HListParser.scala#L131-L159">here</a>,
+and the returned refinement type from the macro was <code class="language-plaintext highlighter-rouge">Option[String] ::
+this.P</code>.</p>
+
+<p>We can try to debug and expand all type parameters, see what we get and
+continue the exploration from there. But whenever we find such a mysterious
+open-ended error, it’s difficult to pinpoint what the real problem and fix
+should be.</p>
+
+<p>Myself, I had a gut feeling that the <code class="language-plaintext highlighter-rouge">Strict</code> macro was interacting weirdly
+with the aux pattern and followed that hint. The way we can test this hypothesis
+is by going to <a href="https://github.com/alexarchambault/case-app/blob/v1.2.0/core/shared/src/main/scala/caseapp/core/Parser.scala#L84">the definition of
+<code class="language-plaintext highlighter-rouge">Parser</code></a>
+where we remove the <code class="language-plaintext highlighter-rouge">Strict</code> wrapping <code class="language-plaintext highlighter-rouge">HListParser</code>, <code class="language-plaintext highlighter-rouge">++2.12.6
+coreJVM/package</code> in the sbt build and replace the new jar by the classpath
+entry for case-app core we’re using in <code class="language-plaintext highlighter-rouge">frontend.json</code>. Afterwards we compile.</p>
+
+<p>This change may cause errors since the use of <code class="language-plaintext highlighter-rouge">Strict</code> and <code class="language-plaintext highlighter-rouge">Lazy</code> disable the
+implicit divergence checks of the compiler, which can give false positives
+when working with Shapeless data structures (this is the short story).</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/data/rw/code/scala/loop/frontend/src/main/scala/bloop/Bloop.scala:22:22:could not find implicit value for parameter parser: caseapp.Parser[bloop.cli.CliOptions]
+object Bloop extends CaseApp[CliOptions] {
+                     ^
+/data/rw/code/scala/loop/frontend/src/main/scala/bloop/Bloop.scala:22:22:not enough arguments for constructor CaseApp: (implicit parser: caseapp.Parser[bloop.cli.CliOptions], implicit messages: caseapp.core.Messages[bloop.cli.CliOptions]) caseapp.CaseApp[bloop.cli.CliOptions].
+Unspecified value parameters parser, messages.
+object Bloop extends CaseApp[CliOptions] {
+                     ^
+</code></pre></div></div>
+
+<p>The error can be fixed by importing <code class="language-plaintext highlighter-rouge">coParser</code> and <code class="language-plaintext highlighter-rouge">cliParser</code> from
+<code class="language-plaintext highlighter-rouge">CliParsers</code> in the <code class="language-plaintext highlighter-rouge">Bloop.scala</code> source file. But doing so would change our
+baseline (because we’re caching <code class="language-plaintext highlighter-rouge">Parser[CliOptions]</code> in another call-site
+that isn’t our initial <code class="language-plaintext highlighter-rouge">CliParsers</code>). So let’s remove the new case-app
+classpath entry, compile with the old case-app, and then compile again with
+the changed version.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#total compile time  : 1 spans, ()15972.609ms
+  typer              : 1 spans, ()11360.512ms (71.1%)
+</code></pre></div></div>
+
+<p><a href="/resources/img/blog/bloop-profile-3.svg"><img src="/resources/img/blog/bloop-profile-3.png" alt="New flamegraph baseline" /></a></p>
+
+<p>The new caching only shaves around ~600ms of compile times. Let’s check
+compiling with our new case-app now.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#total compile time  : 1 spans, ()7432.332ms
+  typer              : 1 spans, ()5074.836ms (68.3%)
+</code></pre></div></div>
+
+<p><a href="/resources/img/blog/bloop-profile-4.svg"><img src="/resources/img/blog/bloop-profile-4.png" alt="Flamegraph after case-app change" /></a></p>
+
+<p>Bingo! Most of the time-consuming failed implicit searches are gone and
+compilation time has halved. Our hypothesis is confirmed: the <code class="language-plaintext highlighter-rouge">Strict</code> macro
+is doing something suspicious.</p>
+
+<p>We could try to find out what that is, but that would require us to
+investigate how the <code class="language-plaintext highlighter-rouge">Strict</code> macro works and spot why it doesn’t behave
+correctly.</p>
+
+<p>We’re short of time, so our best call is to file a ticket and let others more
+experienced with the codebase have a look at it. If we’re lucky, someone will
+fix this issue upstream soon and we’ll benefit from this speed up when we
+upgrade.</p>
+
+<p>After discussing this issue with the author of Shapeless, <a href="https://github.com/milessabin/">Miles Sabin</a>, we
+both agree the strict/lazy macro is not handling refinement types correctly
+and that this performance penalty is a bug. This bug will most likely be fixed
+in a future version of Shapeless after 2.3.3 for all its users. Some of these
+performance implications will be gone with Scala 2.13, that adds by-name
+implicits to the compiler.</p>
+
+<h4 id="deduplicating-more-expansions">Deduplicating more expansions</h4>
+
+<p>There are still too many repeated tower of implicits in our flamegraph. 
+<code class="language-plaintext highlighter-rouge">CommandsParser</code> and <code class="language-plaintext highlighter-rouge">CommandsMessages</code> are deriving <code class="language-plaintext highlighter-rouge">Parser</code>s for every type
+in our <code class="language-plaintext highlighter-rouge">Command</code> GADT twice. Let’s cache those too.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">implicit</span> <span class="k">val</span> <span class="nv">autocompleteParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Autocomplete</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">aboutParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.About</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">bspParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Bsp</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">cleanParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Clean</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">compileParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Compile</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">configureParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Configure</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">helpParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Help</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">projectsParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Projects</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">runParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Run</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">testParser</span><span class="k">:</span> <span class="kt">Parser</span><span class="o">[</span><span class="kt">Commands.Test</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Parser</span><span class="o">.</span><span class="py">generic</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#total compile time  : 1 spans, ()10154.603ms
+  typer              : 1 spans, ()7925.156ms (78.0%)
+</code></pre></div></div>
+
+<p><a href="/resources/img/blog/bloop-profile-5.svg"><img src="/resources/img/blog/bloop-profile-5.png" alt="Flamegraph after more cached parsers" /></a></p>
+
+<p>We’re in the right direction, but there doesn’t seem to be any
+straightforward way of decreasing that compilation time anymore.</p>
+
+<p>The flamegraph may not make obvious how many repeated expansions are
+happening in every branch, so let’s have a look at the data emitted by
+<code class="language-plaintext highlighter-rouge">-P:scalac-profiling:show-profiles</code>.</p>
+
+<p>The “Macro expansions by type” and “Implicit searches by type” tells us
+how many repeated macros and implicit searches we have per type.</p>
+
+<p>For example, let’s look at the most important entries from from the “Implicit
+searches by type” section.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  "caseapp.util.Implicit[caseapp.core.Default[String] :: shapeless.HNil]" -&gt; 20,
+  "caseapp.core.Default[String] :: shapeless.HNil" -&gt; 20,
+  "caseapp.util.Implicit[Some[caseapp.core.Default[String]] :+: None.type :+: shapeless.CNil]" -&gt; 20,
+  "caseapp.core.Default[String]" -&gt; 20,
+  "Some[caseapp.core.Default[String]] :+: None.type :+: shapeless.CNil" -&gt; 20,
+  "caseapp.util.Implicit[Option[caseapp.core.Default[String]]]" -&gt; 20,
+  "caseapp.core.ArgParser[String]" -&gt; 20,
+  "caseapp.util.Implicit[Some[caseapp.core.Default[String]]]" -&gt; 20,
+  "Option[caseapp.core.Default[String]]" -&gt; 20,
+  "shapeless.HNil" -&gt; 21,
+  "Some[caseapp.core.Default[Boolean]] :+: None.type :+: shapeless.CNil" -&gt; 35,
+  "caseapp.core.Default[Boolean]" -&gt; 35,
+  "caseapp.util.Implicit[Some[caseapp.core.Default[Boolean]] :+: None.type :+: shapeless.CNil]" -&gt; 35,
+  "caseapp.util.Implicit[caseapp.core.Default[Boolean]]" -&gt; 35,
+  "shapeless.Strict[caseapp.core.ArgParser[Boolean]]" -&gt; 35,
+  "caseapp.core.Default[Boolean] :: shapeless.HNil" -&gt; 35,
+  "caseapp.util.Implicit[Some[caseapp.core.Default[Boolean]]]" -&gt; 35,
+  "caseapp.util.Implicit[Option[caseapp.core.Default[Boolean]]]" -&gt; 35,
+  "Some[caseapp.core.Default[Boolean]]" -&gt; 35,
+  "Option[caseapp.core.Default[Boolean]]" -&gt; 35,
+  "caseapp.util.Implicit[caseapp.core.Default[Boolean] :: shapeless.HNil]" -&gt; 35,
+  "caseapp.util.Implicit[Option[caseapp.core.Default[java.io.PrintStream]]]" -&gt; 56,
+  "caseapp.util.Implicit[Some[caseapp.core.Default[java.io.PrintStream]] :+: None.type :+: shapeless.CNil]" -&gt; 56,
+  "Some[caseapp.core.Default[java.io.PrintStream]] :+: None.type :+: shapeless.CNil" -&gt; 56,
+  "shapeless.Strict[caseapp.core.ArgParser[java.io.PrintStream]]" -&gt; 56,
+  "Option[caseapp.core.Default[java.io.PrintStream]]" -&gt; 56,
+  "caseapp.core.Default[java.io.PrintStream]" -&gt; 56,
+  "caseapp.util.Implicit[caseapp.core.Default[java.io.PrintStream]]" -&gt; 56,
+  "Some[caseapp.core.Default[java.io.PrintStream]]" -&gt; 56,
+  "caseapp.util.Implicit[caseapp.core.Default[java.io.PrintStream] :: shapeless.HNil]" -&gt; 56,
+  "caseapp.core.Default[java.io.PrintStream] :: shapeless.HNil" -&gt; 56,
+  "caseapp.util.Implicit[Some[caseapp.core.Default[java.io.PrintStream]]]" -&gt; 56,
+  "None.type" -&gt; 153,
+  "caseapp.util.Implicit[None.type]" -&gt; 153,
+  "caseapp.util.Implicit[None.type :+: shapeless.CNil]" -&gt; 153,
+  "caseapp.util.Implicit[shapeless.HNil]" -&gt; 185
+</code></pre></div></div>
+
+<p>Let’s cache some more implicits from here, especially the ones we see are
+most expensive.</p>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">shapeless.</span><span class="o">{</span><span class="nc">HNil</span><span class="o">,</span> <span class="nc">CNil</span><span class="o">,</span> <span class="o">:+:,</span> <span class="o">::,</span> <span class="nc">Coproduct</span><span class="o">}</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitHNil</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">HNil</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Implicit</span><span class="o">.</span><span class="py">hnil</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitNone</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">None.</span><span class="k">type</span><span class="o">]</span> <span class="k">=</span> <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nc">None</span><span class="o">)</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitNoneCnil</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">None.</span><span class="k">type</span> <span class="kt">:+:</span> <span class="kt">CNil</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nc">Coproduct</span><span class="o">(</span><span class="nc">None</span><span class="o">))</span>
+
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitOptionDefaultString</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Default</span><span class="o">[</span><span class="kt">String</span><span class="o">]]]</span> <span class="k">=</span>
+  <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="nv">caseapp</span><span class="o">.</span><span class="py">core</span><span class="o">.</span><span class="py">Defaults</span><span class="o">.</span><span class="py">string</span><span class="o">))</span>
+
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitOptionDefaultInt</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Default</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]]</span> <span class="k">=</span>
+  <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="nv">caseapp</span><span class="o">.</span><span class="py">core</span><span class="o">.</span><span class="py">Defaults</span><span class="o">.</span><span class="py">int</span><span class="o">))</span>
+
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitOptionDefaultBoolean</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Default</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">]]]</span> <span class="k">=</span>
+  <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="nv">caseapp</span><span class="o">.</span><span class="py">core</span><span class="o">.</span><span class="py">Defaults</span><span class="o">.</span><span class="py">boolean</span><span class="o">))</span>
+
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitDefaultBoolean</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">Default</span><span class="o">[</span><span class="kt">Boolean</span><span class="o">]]</span> <span class="k">=</span>
+  <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nv">caseapp</span><span class="o">.</span><span class="py">core</span><span class="o">.</span><span class="py">Defaults</span><span class="o">.</span><span class="py">boolean</span><span class="o">)</span>
+
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitOptionDefaultOptionPath</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Default</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Path</span><span class="o">]]]]</span> <span class="k">=</span>
+  <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nc">None</span><span class="o">)</span>
+
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitOptionDefaultPrintStream</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Default</span><span class="o">[</span><span class="kt">PrintStream</span><span class="o">]]]</span> <span class="k">=</span>
+  <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="nv">Default</span><span class="o">.</span><span class="py">instance</span><span class="o">[</span><span class="kt">PrintStream</span><span class="o">](</span><span class="nv">System</span><span class="o">.</span><span class="py">out</span><span class="o">)))</span>
+
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">implicitOptionDefaultInputStream</span><span class="k">:</span> <span class="kt">Implicit</span><span class="o">[</span><span class="kt">Option</span><span class="o">[</span><span class="kt">Default</span><span class="o">[</span><span class="kt">InputStream</span><span class="o">]]]</span> <span class="k">=</span>
+  <span class="nv">Implicit</span><span class="o">.</span><span class="py">instance</span><span class="o">(</span><span class="nc">Some</span><span class="o">(</span><span class="nv">Default</span><span class="o">.</span><span class="py">instance</span><span class="o">[</span><span class="kt">InputStream</span><span class="o">](</span><span class="nv">System</span><span class="o">.</span><span class="py">in</span><span class="o">)))</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">labelledGenericCommonOptions</span><span class="k">:</span> <span class="kt">LabelledGeneric.Aux</span><span class="o">[</span><span class="kt">CommonOptions</span>, <span class="k">_</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">LabelledGeneric</span><span class="o">.</span><span class="py">materializeProduct</span>
+<span class="k">implicit</span> <span class="k">val</span> <span class="nv">labelledGenericCliOptions</span><span class="k">:</span> <span class="kt">LabelledGeneric.Aux</span><span class="o">[</span><span class="kt">CliOptions</span>, <span class="k">_</span><span class="o">]</span> <span class="k">=</span>
+  <span class="nv">LabelledGeneric</span><span class="o">.</span><span class="py">materializeProduct</span>
+</code></pre></div></div>
+
+<p>And now let’s check the compilation time.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#total compile time  : 1 spans, ()7285.771ms
+  typer              : 1 spans, ()5435.895ms (74.6%)
+</code></pre></div></div>
+
+<p><a href="/resources/img/blog/bloop-profile-6.svg"><img src="/resources/img/blog/bloop-profile-6.png" alt="Flamegraph after all cached implicits" /></a></p>
+
+<p>Great, that reduced compile times by 3 more seconds. You can continue the
+same strategy over and over. This is where we stop; we have already cached the
+most expensive implicits, so other additions won’t have such a big impact.</p>
+
+<p>You get the general idea of the process: read the profiles and optimize
+according to what the data shows and your understanding of the codebase is.</p>
+
+<p>We only have one left assignment: removing all those failed implicit searches
+in our flamegraph. We saw that wrapping the implicit in <code class="language-plaintext highlighter-rouge">Strict</code> was
+problematic, can we do something about it in our end instead of waiting for a
+fix upstream?</p>
+
+<p>The answer is yes. <code class="language-plaintext highlighter-rouge">Strict</code> or <code class="language-plaintext highlighter-rouge">Lazy</code> are only required when:</p>
+
+<ol>
+  <li>We have recursive GADTs.</li>
+  <li>We use an automatic typeclass derivation scheme that increases the number
+of type parameters to be determined by implicit search and thus “diverge” the
+search.</li>
+</ol>
+
+<p>Good, we don’t have a recursive GADT (and it’s unlikely you will in a CLI
+application). But we do have an automatic typeclass derivation process that
+meets the previous criteria. We experienced the implicit search failure
+before when we removed the <code class="language-plaintext highlighter-rouge">Strict</code> typeclass from <code class="language-plaintext highlighter-rouge">case-app</code> and
+<code class="language-plaintext highlighter-rouge">Bloop.scala</code> failed to compile.</p>
+
+<p>Such automatic typeclass derivation, though, doesn’t diverge after we cached
+the implicits! The divergence only happens when we derive typeclasses for
+types transitively (and the transitive typeclasses don’t exist). For example,
+if the parser for <code class="language-plaintext highlighter-rouge">CliOptions</code> isn’t present in scope and we derive a
+<code class="language-plaintext highlighter-rouge">Parser[Compile]</code>, which has <code class="language-plaintext highlighter-rouge">CliOptions</code> as a parameter type, it will fail.</p>
+
+<p>So we can remove the uses of <code class="language-plaintext highlighter-rouge">Strict</code> from <code class="language-plaintext highlighter-rouge">case-app</code>. Once we cache these
+intermediary derivations, the divergence won’t happen.</p>
+
+<p>Aside from the change proposed in the previous section, we also remove the
+appearance of <code class="language-plaintext highlighter-rouge">Strict</code> in <code class="language-plaintext highlighter-rouge">HListParser.hconsRecursive</code>. These changes can be
+found in <a href="https://github.com/jvican/case-app/commit/148ffb0a20226a6224ab53f87a8f7411036cdd3f">this <code class="language-plaintext highlighter-rouge">case-app</code>
+diff</a>.</p>
+
+<p>It’s worth noting what we’re doing here explicitly: we’re trading compile
+times by ergonomics. Whenever we add a parameter that doesn’t have a cached
+<code class="language-plaintext highlighter-rouge">Parser</code> for it in <code class="language-plaintext highlighter-rouge">CliParser</code>, the implicit search will fail with a <code class="language-plaintext highlighter-rouge">"Not
+found implicit instance"</code> error.</p>
+
+<p>This is a judgement call. Personally, I prefer having faster compile times
+than ergonomics, and even more so if the part of the code (the cli) doesn’t
+change often as it is the case. Let’s try out the new change!</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#total compile time  : 1 spans, ()4511.197ms
+  typer              : 1 spans, ()2887.031ms (64.0%)
+</code></pre></div></div>
+
+<p><a href="/resources/img/blog/bloop-profile-7.svg"><img src="/resources/img/blog/bloop-profile-7.png" alt="Flamegraph after caching + case-app changes" /></a></p>
+
+<p>Great! We now have a compile time under 5 seconds for an application that
+still uses a powerful derivation mechanism, it’s easy to maintain and it’s
+over 6000 LOC.</p>
+
+<p>In the flamegraph, we observe that we have removed the most expensive failed
+implicit searches, while some negligible searches remain. We can live with
+those.</p>
+
+<p>The duration of the typechecker is back to normal levels: 64%, a reasonable
+value for the codebase we’re working on. We now need to remove the
+instrumentation overhead to see what’s the final speedup we get.</p>
+
+<h4 id="getting-the-final-results">Getting the final results</h4>
+
+<p>Let’s remove the <code class="language-plaintext highlighter-rouge">scalac-profiling</code> plugin and all its flags from
+<code class="language-plaintext highlighter-rouge">frontend.json</code>. Run compilation two or three times to get stable results.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*** Cumulative timers for phases
+#total compile time           : 1 spans, ()4098.49ms
+  parser                      : 1 spans, ()18.775ms (0.5%)
+  namer                       : 1 spans, ()12.408ms (0.3%)
+  packageobjects              : 1 spans, ()0.074ms (0.0%)
+  typer                       : 1 spans, ()2612.532ms (63.7%)
+  patmat                      : 1 spans, ()286.802ms (7.0%)
+  superaccessors              : 1 spans, ()12.026ms (0.3%)
+  extmethods                  : 1 spans, ()3.201ms (0.1%)
+  pickler                     : 1 spans, ()6.389ms (0.2%)
+  xsbt-api                    : 1 spans, ()75.191ms (1.8%)
+  xsbt-dependency             : 1 spans, ()54.559ms (1.3%)
+  refchecks                   : 1 spans, ()122.441ms (3.0%)
+  uncurry                     : 1 spans, ()130.194ms (3.2%)
+  fields                      : 1 spans, ()57.397ms (1.4%)
+  tailcalls                   : 1 spans, ()13.512ms (0.3%)
+  specialize                  : 1 spans, ()105.903ms (2.6%)
+  explicitouter               : 1 spans, ()26.837ms (0.7%)
+  erasure                     : 1 spans, ()193.214ms (4.7%)
+  posterasure                 : 1 spans, ()16.83ms (0.4%)
+  lambdalift                  : 1 spans, ()41.906ms (1.0%)
+  constructors                : 1 spans, ()11.108ms (0.3%)
+  flatten                     : 1 spans, ()14.379ms (0.4%)
+  mixin                       : 1 spans, ()15.936ms (0.4%)
+  cleanup                     : 1 spans, ()11.516ms (0.3%)
+  delambdafy                  : 1 spans, ()26.534ms (0.6%)
+  jvm                         : 1 spans, ()224.115ms (5.5%)
+  xsbt-analyzer               : 1 spans, ()1.376ms (0.0%)
+Done compiling.
+</code></pre></div></div>
+
+<p>It is safe to say it out loud now: we have reduced compilation time from 32.5
+seconds to 4 seconds. That’s an <strong>8x reduction in our compile time</strong>.</p>
+
+<p>A great result taking into account that we’ve only <a href="https://github.com/scalacenter/bloop/pull/509">modified around 30 lines
+of code in Bloop</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Shapeless is a great library that enables use cases that before were too
+difficult for the majority of Scala developers. These use cases save a lot of
+boilerplate.</p>
+
+<p>Shapeless has relieved these users from learning macros and getting familiar
+with the internals of the compiler to do both basic generic and advanced
+typelevel programming in Scala.</p>
+
+<p>However, the techniques used in Shapeless cause slow compilation times and
+may give an impression that the Scala compiler is terribly slow. These
+techniques are not specific to Shapeless and may happen in other libraries
+that use a lot of implicits and macros.</p>
+
+<p>In all these use cases, the slowness is most likely to be caused by a
+unintentional misuse of the APIs provided by these frameworks. In this guide,
+we have tried to identify what those issues are and how we can get the best
+of Shapeless and the compiler without compromising our productivity.</p>
+
+<p>We have learned that automatic typeclass derivation, while powerful and
+user-friendly, is likely to materialize implicits for the same type lots of
+times.</p>
+
+<p>We have used a new Scala Center tool (<code class="language-plaintext highlighter-rouge">scalac-profiling</code>) to profile
+implicits and macros to reduce the compile times of
+<a href="https://scalacenter.github.io/bloop/">Bloop</a> by <strong>8x</strong>.</p>
+
+<p>Finally, we have gotten a little bit more familiar about the way automatic
+typeclass derivation interacts with macro and implicit searches. It is
+generally agreed that we need to find a better way to bake generation into
+the language to alleviate some of the pitfalls here described.</p>
+
+<p>There’s some activity in this area. <a href="https://github.com/scala/scala-dev/issues/445">Adriaan opened a ticket about it several
+months ago</a>, and Miles is
+backporting the heavy machinery from Shapeless properly into the compiler
+(like <a href="https://docs.scala-lang.org/sips/byname-implicits.html">by-name
+implicits</a>). I
+applaud these efforts.</p>
+
+<p>I believe we still need to find solutions to some of the fundamental problems
+of implicit searches and macros. In particular, being more aggressive in
+caching macro generated trees and baking into the compiler all the required
+knowledge to invalidate caching depending on the kind of macro and call-site.</p>
+
+<p>There’s a bright future ahead of us and we are working hard to get there.</p>
+
+<p>In the meanwhile, this blog post aims to provide all the possible data to
+alleviate the compile times of users that leverage automatic typeclass
+derivation. I hope this blog post helps make your team more productive with
+Scala.</p>
+
+
+				</div>
+			</div>
+			<!-- TOC -->
+			
+<div class="content-nav">
+	<div class="inner-box sidebar-toc-wrapper" style="">
+		<h5>Contents</h5>
+		<div class="inner-toc" id="sidebar-toc">
+
+		</div>
+		<hr>
+		<div class="help-us"><a href="https://github.com/scala/scala-lang/blob/master/blog/_posts/2018-06-04-scalac-profiling.md" data-proofer-ignore><i class="fa fa-pencil" aria-hidden="true"></i> Problem with this page?<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Please help us fix it!</a></div>
+	</div>
+</div>
+
+
+		</div>
+	</div>
+</section>
+
+
+</main>
+
+<footer id="site-footer">
+    <div class="wrap">
+      <div class="site-footer-top">
+        
+          <ul class="documentation">
+            <li><h3>Documentation</h3></li>
+            
+              
+                <li><a href="https://docs.scala-lang.org/getting-started.html">Getting Started</a></li>
+              
+            
+              
+                <li><a href="https://www.scala-lang.org/api/current/index.html">API</a></li>
+              
+            
+              
+                <li><a href="https://docs.scala-lang.org/overviews">Overviews/Guides</a></li>
+              
+            
+              
+                <li><a href="https://scala-lang.org/files/archive/spec/2.13/">Language Specification</a></li>
+              
+            
+          </ul>
+        
+          <ul class="download">
+            <li><h3>Download</h3></li>
+            
+              
+                <li><a href="/download/">Current Version</a></li>
+              
+            
+              
+                <li><a href="/download/all.html">All versions</a></li>
+              
+            
+          </ul>
+        
+          <ul class="community">
+            <li><h3>Community</h3></li>
+            
+              
+                <li><a href="/community/">Community</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#forums">Forums</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#chat-rooms">Chat</a></li>
+              
+            
+              
+                <li><a href="/community/index.html#community-libraries-and-tools">Libraries and Tools</a></li>
+              
+            
+              
+                <li><a href="https://scala.epfl.ch/">The Scala Center</a></li>
+              
+            
+          </ul>
+        
+          <ul class="contribute">
+            <li><h3>Contribute</h3></li>
+            
+              
+                <li><a href="/contribute/">How to help</a></li>
+              
+            
+              
+                <li><a href="/contribute/bug-reporting-guide.html">Report an Issue</a></li>
+              
+            
+          </ul>
+        
+          <ul class="scala">
+            <li><h3>Scala</h3></li>
+            
+              
+                <li><a href="/blog/">Blog</a></li>
+              
+            
+              
+                <li><a href="/conduct.html">Code of Conduct</a></li>
+              
+            
+              
+                <li><a href="/license/">License</a></li>
+              
+            
+          </ul>
+        
+          <ul class="social">
+            <li><h3>Social</h3></li>
+            
+              
+                <li><a href="https://github.com/scala">GitHub</a></li>
+              
+            
+              
+                 <!-- special case Manstodon to validate with rel="me" -->
+                <li><a rel="me" href="https://fosstodon.org/@scala_lang">Mastodon</a></li>
+              
+            
+              
+                <li><a href="https://twitter.com/scala_lang">Twitter</a></li>
+              
+            
+              
+                <li><a href="https://discord.com/invite/scala">Discord</a></li>
+              
+            
+              
+                <li><a href="https://www.linkedin.com/company/scala-center/">LinkedIn</a></li>
+              
+            
+          </ul>
+        
+      </div>
+      <div class="site-footer-bottom">
+        <p>Copyright © 2002-2023 École Polytechnique Fédérale <br>Lausanne (EPFL) Lausanne, Switzerland</p>
+        <img src="/resources/img/frontpage/scala-logo-white.png" alt="">
+      </div>
+    </div>
+  </footer>
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/resources/js/vendor/jquery.autocomplete.js" type="text/javascript" ></script>
+
+    <!-- tweet feed -->
+    <script src="/resources/js/tweetMachine-update.js" type="text/javascript" ></script>
+
+    <!-- prettify js -->
+    <script src="/resources/js/vendor/prettify/prettify.js" type="text/javascript" ></script>
+    <script src="/resources/js/vendor/prettify/lang-scala.js" type="text/javascript" ></script>
+
+    <!-- unslider js -->
+    <script src="/resources/js/vendor/unslider.js" type="text/javascript" ></script>
+
+    <!-- Highlight -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/scala.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/java.min.js" type="text/javascript"></script>
+
+    <!-- Custom Syntax Highlight -->
+    <script src="/resources/js/hljs-scala3.js" type="text/javascript"></script>
+
+    <!-- CodeMirror -->
+    <script src="/resources/js/vendor/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="/resources/js/vendor/codemirror/clike.js" type="text/javascript"></script>
+
+    <!-- TOC -->
+    
+      <script src="/resources/js/vendor/jquery.sticky.js" type="text/javascript" ></script>
+      <script src="/resources/js/vendor/toc.js" type="text/javascript" ></script>
+    
+
+    <!-- Blog search -->
+    <script src="/resources/js/vendor/jekyll.search.min.js" type="text/javascript"></script>
+
+    <!-- Custom javascript -->
+    <script src="/resources/js/functions.js" type="text/javascript"></script>
+    <script defer data-domain="scala-lang.org" src="https://plausible.scala-lang.org/js/script.js"></script>
+  </body>
+</html>
