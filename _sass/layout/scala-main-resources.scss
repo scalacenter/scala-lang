@@ -11,46 +11,25 @@
         .button {
             font-size: $font-size-logo-btn;
             display: block;
-            @include border-top-radius(200px);
-            @include border-right-radius(0);
-            @include border-bottom-radius(0);
-            @include border-left-radius(200px);
+            @include border-radius(200px);
+            text-align: center;
             padding: $padding-medium $padding-mlarge;
+            width: 100%;
+            background: $brand-tertiary;
+            &:active,
+            &:focus,
+            &:hover {
+                background: $brand-secondary;
+            }
         }
 
         .get-started {
             @include span-columns(4.2);
             @include shift(1.8);
-
-            .button {
-
-              background: $brand-tertiary;
-              &:active,
-              &:focus,
-              &:hover {
-                background: $brand-secondary;
-              }
-            }
         }
 
         .learn-scala {
             @include span-columns(4.2);
-
-            .button {
-                text-align: right;
-                @include border-top-radius(0);
-                @include border-right-radius(200px);
-                @include border-bottom-radius(200px);
-                @include border-left-radius(0);
-
-                background: $brand-tertiary;
-
-                &:active,
-                &:focus,
-                &:hover {
-                  background: $brand-secondary;
-                }
-            }
         }
         @include bp(large) {
             .get-started {
@@ -66,6 +45,9 @@
 
         .learn-scala,
         .get-started {
+            @include display(flex);
+            @include align-items(center);
+            @include flex-direction(column);
             margin-top: -48px;
 
             ul {
@@ -99,17 +81,17 @@
             }
         }
 
-        .get-started {
-            .sublinks {
-                max-width: 220px;
-            }
-        }
+        // .get-started {
+        //     .sublinks {
+        //         max-width: 220px;
+        //     }
+        // }
 
-        .learn-scala {
-            .sublinks {
-                float: right;
-            }
-        }
+        // .learn-scala {
+        //     .sublinks {
+        //         float: right;
+        //     }
+        // }
 
         .scala-brand-circle {
             width: 190px;
